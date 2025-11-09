@@ -1,0 +1,13 @@
+D:\gitee\LzqNet\src\Contracts\LzqNet.Contracts.Msm\obj\Debug\net9.0\LzqNet.Contracts.Msm.csproj.AssemblyReference.cache
+D:\gitee\LzqNet\src\Contracts\LzqNet.Contracts.Msm\obj\Debug\net9.0\LzqNet.Contracts.Msm.GeneratedMSBuildEditorConfig.editorconfig
+D:\gitee\LzqNet\src\Contracts\LzqNet.Contracts.Msm\obj\Debug\net9.0\LzqNet.Contracts.Msm.AssemblyInfoInputs.cache
+D:\gitee\LzqNet\src\Contracts\LzqNet.Contracts.Msm\obj\Debug\net9.0\LzqNet.Contracts.Msm.AssemblyInfo.cs
+D:\gitee\LzqNet\src\Contracts\LzqNet.Contracts.Msm\obj\Debug\net9.0\LzqNet.Contracts.Msm.csproj.CoreCompileInputs.cache
+D:\gitee\LzqNet\src\Contracts\LzqNet.Contracts.Msm\obj\Debug\net9.0\LzqNet.Contracts.Msm.sourcelink.json
+D:\gitee\LzqNet\src\Contracts\LzqNet.Contracts.Msm\bin\Debug\net9.0\LzqNet.Contracts.Msm.deps.json
+D:\gitee\LzqNet\src\Contracts\LzqNet.Contracts.Msm\bin\Debug\net9.0\LzqNet.Contracts.Msm.dll
+D:\gitee\LzqNet\src\Contracts\LzqNet.Contracts.Msm\bin\Debug\net9.0\LzqNet.Contracts.Msm.pdb
+D:\gitee\LzqNet\src\Contracts\LzqNet.Contracts.Msm\obj\Debug\net9.0\LzqNet.Contracts.Msm.dll
+D:\gitee\LzqNet\src\Contracts\LzqNet.Contracts.Msm\obj\Debug\net9.0\refint\LzqNet.Contracts.Msm.dll
+D:\gitee\LzqNet\src\Contracts\LzqNet.Contracts.Msm\obj\Debug\net9.0\LzqNet.Contracts.Msm.pdb
+D:\gitee\LzqNet\src\Contracts\LzqNet.Contracts.Msm\obj\Debug\net9.0\ref\LzqNet.Contracts.Msm.dll

@@ -1,0 +1,1 @@
+﻿public record UserRegisterDto(string UserName, string Password, string Email);

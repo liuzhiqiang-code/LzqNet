@@ -1,0 +1,13 @@
+D:\gitee\LzqNet\src\Callers\LzqNet.Caller\bin\Debug\net9.0\LzqNet.Caller.deps.json
+D:\gitee\LzqNet\src\Callers\LzqNet.Caller\bin\Debug\net9.0\LzqNet.Caller.dll
+D:\gitee\LzqNet\src\Callers\LzqNet.Caller\bin\Debug\net9.0\LzqNet.Caller.pdb
+D:\gitee\LzqNet\src\Callers\LzqNet.Caller\obj\Debug\net9.0\LzqNet.Caller.csproj.AssemblyReference.cache
+D:\gitee\LzqNet\src\Callers\LzqNet.Caller\obj\Debug\net9.0\LzqNet.Caller.GeneratedMSBuildEditorConfig.editorconfig
+D:\gitee\LzqNet\src\Callers\LzqNet.Caller\obj\Debug\net9.0\LzqNet.Caller.AssemblyInfoInputs.cache
+D:\gitee\LzqNet\src\Callers\LzqNet.Caller\obj\Debug\net9.0\LzqNet.Caller.AssemblyInfo.cs
+D:\gitee\LzqNet\src\Callers\LzqNet.Caller\obj\Debug\net9.0\LzqNet.Caller.csproj.CoreCompileInputs.cache
+D:\gitee\LzqNet\src\Callers\LzqNet.Caller\obj\Debug\net9.0\LzqNet.Caller.sourcelink.json
+D:\gitee\LzqNet\src\Callers\LzqNet.Caller\obj\Debug\net9.0\LzqNet.Caller.dll
+D:\gitee\LzqNet\src\Callers\LzqNet.Caller\obj\Debug\net9.0\refint\LzqNet.Caller.dll
+D:\gitee\LzqNet\src\Callers\LzqNet.Caller\obj\Debug\net9.0\LzqNet.Caller.pdb
+D:\gitee\LzqNet\src\Callers\LzqNet.Caller\obj\Debug\net9.0\ref\LzqNet.Caller.dll

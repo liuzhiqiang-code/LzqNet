@@ -1,0 +1,309 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\gitee\\LzqNet\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D35B3579-220A-CA5E-EF9B-70F6AE153007}|src\\BusinessServices\\LzqNet.Services.Msm\\LzqNet.Services.Msm.csproj|d:\\gitee\\lzqnet\\src\\businessservices\\lzqnet.services.msm\\application\\queryhandlers\\sysconfigqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D35B3579-220A-CA5E-EF9B-70F6AE153007}|src\\BusinessServices\\LzqNet.Services.Msm\\LzqNet.Services.Msm.csproj|solutionrelative:src\\businessservices\\lzqnet.services.msm\\application\\queryhandlers\\sysconfigqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91A4718-E6F9-4BB6-6AA9-6215FF6291A9}|src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.swaggerui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D91A4718-E6F9-4BB6-6AA9-6215FF6291A9}|src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.swaggerui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91A4718-E6F9-4BB6-6AA9-6215FF6291A9}|src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.swaggerui\\lzqnet.swaggerui.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{D91A4718-E6F9-4BB6-6AA9-6215FF6291A9}|src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.swaggerui\\lzqnet.swaggerui.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91A4718-E6F9-4BB6-6AA9-6215FF6291A9}|src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.swaggerui\\lzqnet.swaggerui.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{D91A4718-E6F9-4BB6-6AA9-6215FF6291A9}|src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.swaggerui\\lzqnet.swaggerui.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91A4718-E6F9-4BB6-6AA9-6215FF6291A9}|src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.swaggerui\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{D91A4718-E6F9-4BB6-6AA9-6215FF6291A9}|src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.swaggerui\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BF75E98-4A89-A6C4-E74F-D387793AA39F}|src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.healthcheckui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9BF75E98-4A89-A6C4-E74F-D387793AA39F}|src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.healthcheckui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BF75E98-4A89-A6C4-E74F-D387793AA39F}|src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.healthcheckui\\lzqnet.healthcheckui.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{9BF75E98-4A89-A6C4-E74F-D387793AA39F}|src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.healthcheckui\\lzqnet.healthcheckui.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BF75E98-4A89-A6C4-E74F-D387793AA39F}|src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.healthcheckui\\lzqnet.healthcheckui.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{9BF75E98-4A89-A6C4-E74F-D387793AA39F}|src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.healthcheckui\\lzqnet.healthcheckui.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BF75E98-4A89-A6C4-E74F-D387793AA39F}|src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.healthcheckui\\dockerfile.original||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{9BF75E98-4A89-A6C4-E74F-D387793AA39F}|src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.healthcheckui\\dockerfile.original||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9BF75E98-4A89-A6C4-E74F-D387793AA39F}|src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.healthcheckui\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{9BF75E98-4A89-A6C4-E74F-D387793AA39F}|src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.healthcheckui\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C401660-1D15-4F7A-9808-8D2F973C2F40}|src\\InfrastructureServices\\LzqNet.Extensions\\LzqNet.Extensions.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.extensions\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3C401660-1D15-4F7A-9808-8D2F973C2F40}|src\\InfrastructureServices\\LzqNet.Extensions\\LzqNet.Extensions.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.extensions\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C401660-1D15-4F7A-9808-8D2F973C2F40}|src\\InfrastructureServices\\LzqNet.Extensions\\LzqNet.Extensions.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.extensions\\lzqnet.extensions.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{3C401660-1D15-4F7A-9808-8D2F973C2F40}|src\\InfrastructureServices\\LzqNet.Extensions\\LzqNet.Extensions.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.extensions\\lzqnet.extensions.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C401660-1D15-4F7A-9808-8D2F973C2F40}|src\\InfrastructureServices\\LzqNet.Extensions\\LzqNet.Extensions.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.extensions\\auth\\authenticationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C401660-1D15-4F7A-9808-8D2F973C2F40}|src\\InfrastructureServices\\LzqNet.Extensions\\LzqNet.Extensions.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.extensions\\auth\\authenticationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95418F65-F249-5BEB-03F1-AEAFE565D953}|src\\InfrastructureServices\\LzqNet.DCC\\LzqNet.DCC.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.dcc\\configuration\\swagger.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{95418F65-F249-5BEB-03F1-AEAFE565D953}|src\\InfrastructureServices\\LzqNet.DCC\\LzqNet.DCC.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.dcc\\configuration\\swagger.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95418F65-F249-5BEB-03F1-AEAFE565D953}|src\\InfrastructureServices\\LzqNet.DCC\\LzqNet.DCC.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.dcc\\configuration\\reverseproxy.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{95418F65-F249-5BEB-03F1-AEAFE565D953}|src\\InfrastructureServices\\LzqNet.DCC\\LzqNet.DCC.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.dcc\\configuration\\reverseproxy.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95418F65-F249-5BEB-03F1-AEAFE565D953}|src\\InfrastructureServices\\LzqNet.DCC\\LzqNet.DCC.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.dcc\\configuration\\jwt.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{95418F65-F249-5BEB-03F1-AEAFE565D953}|src\\InfrastructureServices\\LzqNet.DCC\\LzqNet.DCC.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.dcc\\configuration\\jwt.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95418F65-F249-5BEB-03F1-AEAFE565D953}|src\\InfrastructureServices\\LzqNet.DCC\\LzqNet.DCC.csproj|d:\\gitee\\lzqnet\\src\\infrastructureservices\\lzqnet.dcc\\configuration\\healthchecksui.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{95418F65-F249-5BEB-03F1-AEAFE565D953}|src\\InfrastructureServices\\LzqNet.DCC\\LzqNet.DCC.csproj|solutionrelative:src\\infrastructureservices\\lzqnet.dcc\\configuration\\healthchecksui.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SysConfigQueryHandler.cs",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\BusinessServices\\LzqNet.Services.Msm\\Application\\QueryHandlers\\SysConfigQueryHandler.cs",
+              "RelativeDocumentMoniker": "src\\BusinessServices\\LzqNet.Services.Msm\\Application\\QueryHandlers\\SysConfigQueryHandler.cs",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\BusinessServices\\LzqNet.Services.Msm\\Application\\QueryHandlers\\SysConfigQueryHandler.cs",
+              "RelativeToolTip": "src\\BusinessServices\\LzqNet.Services.Msm\\Application\\QueryHandlers\\SysConfigQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T14:04:35.938Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.SwaggerUI\\Program.cs",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.SwaggerUI\\Program.cs",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.SwaggerUI\\Program.cs",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.SwaggerUI\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T14:03:46.105Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LzqNet.SwaggerUI.http",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.http",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.http",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.http",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-11-09T14:03:41.701Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LzqNet.SwaggerUI",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.csproj",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.csproj",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.csproj",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.SwaggerUI\\LzqNet.SwaggerUI.csproj",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBEAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-09T14:03:33.316Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.SwaggerUI\\Dockerfile",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.SwaggerUI\\Dockerfile",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.SwaggerUI\\Dockerfile",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.SwaggerUI\\Dockerfile",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAwB4AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-09T14:03:13.18Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.HealthCheckUI\\Program.cs",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.HealthCheckUI\\Program.cs",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.HealthCheckUI\\Program.cs",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.HealthCheckUI\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T14:03:08.517Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "LzqNet.HealthCheckUI.http",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.http",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.http",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.http",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-11-09T14:03:04.239Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LzqNet.HealthCheckUI",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.csproj",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.csproj",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.csproj",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.HealthCheckUI\\LzqNet.HealthCheckUI.csproj",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAcwBQAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-09T14:03:00.29Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Dockerfile.original",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.HealthCheckUI\\Dockerfile.original",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.HealthCheckUI\\Dockerfile.original",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.HealthCheckUI\\Dockerfile.original",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.HealthCheckUI\\Dockerfile.original",
+              "ViewState": "AgIAABQAAAAAAAAAAAAcwB4AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-09T14:02:41.179Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.HealthCheckUI\\Dockerfile",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.HealthCheckUI\\Dockerfile",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.HealthCheckUI\\Dockerfile",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.HealthCheckUI\\Dockerfile",
+              "ViewState": "AgIAABUAAAAAAAAAAAAcwB8AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-09T14:02:22.142Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.Extensions\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.Extensions\\Properties\\launchSettings.json",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.Extensions\\Properties\\launchSettings.json",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.Extensions\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-09T14:02:18.192Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "LzqNet.Extensions",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.Extensions\\LzqNet.Extensions.csproj",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.Extensions\\LzqNet.Extensions.csproj",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.Extensions\\LzqNet.Extensions.csproj",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.Extensions\\LzqNet.Extensions.csproj",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAawBcAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-09T14:02:14.258Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AuthenticationExtensions.cs",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.Extensions\\Auth\\AuthenticationExtensions.cs",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.Extensions\\Auth\\AuthenticationExtensions.cs",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.Extensions\\Auth\\AuthenticationExtensions.cs",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.Extensions\\Auth\\AuthenticationExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T14:02:07.969Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Swagger.json",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\Swagger.json",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\Swagger.json",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\Swagger.json",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\Swagger.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-09T14:02:04.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ReverseProxy.json",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\ReverseProxy.json",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\ReverseProxy.json",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\ReverseProxy.json",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\ReverseProxy.json",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAWwCcAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-09T14:02:00.675Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Jwt.json",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\Jwt.json",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\Jwt.json",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\Jwt.json",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\Jwt.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-09T14:01:57.852Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "HealthChecksUI.json",
+              "DocumentMoniker": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\HealthChecksUI.json",
+              "RelativeDocumentMoniker": "src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\HealthChecksUI.json",
+              "ToolTip": "D:\\gitee\\LzqNet\\src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\HealthChecksUI.json",
+              "RelativeToolTip": "src\\InfrastructureServices\\LzqNet.DCC\\Configuration\\HealthChecksUI.json",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAUwA4AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-09T14:01:43.197Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

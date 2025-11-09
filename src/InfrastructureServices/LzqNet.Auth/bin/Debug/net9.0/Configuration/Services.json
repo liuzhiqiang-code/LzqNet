@@ -1,0 +1,10 @@
+{
+  // 还未使用
+  "Services": [
+    {
+      "ServiceName": "MsmService",
+      "ServiceUrl": "http://localhost:5010",
+      "HealthCheckUri": "http://localhost:5010/health"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "DefaultAccounts": [
+    {
+      "UserName": "admin",
+      "Password": "123456",
+      "Role": "admin",
+      "Email": "admin@example.com"
+    }
+  ]
+}

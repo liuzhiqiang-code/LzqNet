@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s    # 每15秒抓取一次指标
+  evaluation_interval: 15s # 每15秒评估一次规则
+
+scrape_configs:
+  # 监控Prometheus自身
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # 监控应用服务（示例）
+  - job_name: 'masa-services'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['lzqnet.services.msm:8080']

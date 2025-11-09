@@ -1,0 +1,180 @@
+services:
+  lzqnet.healthcheckui:
+    image: lzqnethealthcheckui
+    build:
+      context: .
+      dockerfile: src/InfrastructureServices/LzqNet.HealthCheckUI/Dockerfile
+      
+  lzqnet.apigateway:
+    image: lzqnetapigateway
+    build:
+      context: .
+      dockerfile: src/InfrastructureServices/LzqNet.ApiGateway/Dockerfile
+      
+  lzqnet.auth:
+    image: lzqnetauth
+    build:
+      context: .
+      dockerfile: src/InfrastructureServices/LzqNet.Auth/Dockerfile
+      
+  lzqnet.swaggerui:
+    image: lzqnetswaggerui
+    build:
+      context: .
+      dockerfile: src/InfrastructureServices/LzqNet.SwaggerUI/Dockerfile
+      
+  lzqnet.services.msm:
+    image: lzqnetservicesmsm
+    build:
+      context: .
+      dockerfile: src/BusinessServices/LzqNet.Services.Msm/Dockerfile
+
+
+  postgres:
+    image: postgres:alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_USER: msm_user
+      POSTGRES_DB: msm_db
+    ports:
+      - "25432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    command: redis-server  --requirepass 123456  # 设置密码
+    ports:
+      - "6379"
+    volumes:
+      - redis_data:/data
+
+  consul:
+    image: consul:1.15.4
+    restart: unless-stopped
+    ports:
+      - "28500:8500"  # Web UI端口
+      - "28600:8600"  # DNS端口
+      - "28300:8300"  # Server RPC
+      - "28301:8301"  # Serf LAN
+      - "28302:8302"  # Serf WAN
+    volumes:
+      - consul_data:/consul/data
+    command: agent -server -ui -node=consul-server -bootstrap-expect=1 -client=0.0.0.0
+
+
+
+  # redis-commander:
+  #   image: rediscommander/redis-commander:latest
+  #   restart: unless-stopped
+  #   environment:
+  #     - REDIS_HOSTS=local:redis:6379:0:123456  # 格式：别名:host:port:密码
+  #     - HTTP_USER=admin  # Web界面登录用户名（可选）
+  #     - HTTP_PASSWORD=admin123  # Web界面登录密码（可选）
+  #   ports:
+  #     - "28081:8081"
+  #   depends_on:
+  #     - redis
+
+
+  # jaeger:
+  #   image: jaegertracing/all-in-one:latest
+  #   restart: unless-stopped
+  #   ports:
+  #     - "16686:16686"  # Jaeger UI
+  #     - "14268:14268"  # Jaeger接收器
+  #     - "6831:6831/udp"  # Jaeger Agent UDP
+  #   environment:
+  #     - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+  #   # depends_on:
+  #   #   - redis  # 可选，如果使用Redis作为存储
+
+
+  # loki:
+  #   image: grafana/loki:latest
+  #   restart: unless-stopped
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 1G  # 硬性内存上限
+  #         cpus: "0.5" # 可选CPU限制
+  #       reservations:
+  #         memory: 512M # 保证最小内存
+  #   ports:
+  #     - "23100:3100"
+  #   volumes:
+  #     - ./dockercompose/loki:/etc/loki
+  #     - loki_data:/loki
+  #   command: 
+  #     - --config.file=/etc/loki/loki.yml
+
+
+  # promtail:
+  #   image: grafana/promtail:latest
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./dockercompose/promtail:/etc/promtail
+  #     - /var/log:/var/log
+  #     - /var/run/docker.sock:/var/run/docker.sock 
+  #   command: -config.file=/etc/promtail/promtail.yml
+  #   depends_on:
+  #     - loki
+
+
+  # prometheus:   # 镜像占资源500MB  暂时不用
+  #   image: prom/prometheus:latest
+  #   restart: unless-stopped
+  #   ports:
+  #     - "29090:9090"
+  #   volumes:
+  #     - ./dockercompose/prometheus:/etc/prometheus
+  #     - prometheus_data:/prometheus
+  #   command:
+  #     - '--web.enable-lifecycle'  # 添加热重载支持
+  #     - '--config.file=/etc/prometheus/prometheus.yml'
+  #   depends_on:
+  #     - loki
+
+
+  # grafana:   # 镜像占资源1000MB  暂时不用
+  #   image: grafana/grafana:latest
+  #   restart: unless-stopped
+  #   environment:
+  #     # - GF_INSTALL_PLUGINS=grafana-loki-datasource  # 自动安装Loki插件
+  #     - GF_SECURITY_ADMIN_USER=admin
+  #     - GF_SECURITY_ADMIN_PASSWORD=123456
+  #     # - GF_AUTH_DISABLE_LOGIN_FORM=false
+  #   ports:
+  #     - "23000:3000"
+  #   volumes:
+  #     - grafana_data:/var/lib/grafana
+  #   #   - ./dockercompose/grafana/provisioning:/etc/grafana/provisioning
+  #   depends_on:
+  #     - loki
+
+
+  # nginx:
+  #   image: nginx:alpine
+  #   restart: unless-stopped
+  #   ports:
+  #     - "20443:443"   # HTTPS 端口
+  #     - "20080:80"     # HTTP 端口（可选，用于重定向到 HTTPS）
+  #     - "8080:8080"
+  #   volumes:
+  #     - ./dockercompose/nginx/conf.d:/etc/nginx/conf.d   # Nginx 配置目录
+  #     - ./dockercompose/ssl_certs:/etc/nginx/ssl         # 存放 SSL 证书的目录
+  #   depends_on:
+  #     - lzqnet.healthcheckui
+      
+
+volumes:
+  postgres_data:
+  redis_data:
+  consul_data:
+  # loki_data:  
+  # grafana_data:  
+  # prometheus_data:
+

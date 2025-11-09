@@ -1,0 +1,13 @@
+{
+  "Swagger": {
+    "GatewayUrl": "http://localhost:25502", //网关外网地址 , swagger调试路径走的地址
+    "Endpoints": [
+      {
+        "Key": "msm-service", //服务名 网关代理后缀
+        "Title": "MSM服务",
+        "Version ": "v1",
+        "Url": "http://lzqnet.apigateway:8080/msm-service/openapi/v1.json" //OpenApi文档地址写网关内网地址
+      }
+    ]
+  }
+}

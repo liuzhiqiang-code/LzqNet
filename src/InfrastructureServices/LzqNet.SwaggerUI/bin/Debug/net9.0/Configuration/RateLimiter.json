@@ -1,0 +1,11 @@
+{
+  "RateLimiter": [
+    {
+      "policyName": "customPolicy",
+      "PermitLimit": 1,
+      "WindowInSeconds": 2,
+      "QueueProcessingOrder": "OldestFirst",
+      "QueueLimit": 2
+    }
+  ]
+}

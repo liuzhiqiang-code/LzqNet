@@ -1,0 +1,44 @@
+{
+  // HealthChecks UI 标准配置
+  "HealthChecksUI": {
+    "HealthChecks": [
+      {
+        "Name": "API Gateway",
+        "Uri": "https://localhost:7001/health"
+      },
+      {
+        "Name": "Identity Service",
+        "Uri": "https://localhost:7002/health"
+      },
+      {
+        "Name": "Product Service",
+        "Uri": "https://localhost:7003/health"
+      },
+      {
+        "Name": "Order Service",
+        "Uri": "https://localhost:7004/health"
+      },
+      {
+        "Name": "Inventory Service",
+        "Uri": "https://localhost:7005/health"
+      },
+      {
+        "Name": "Payment Service",
+        "Uri": "https://localhost:7006/health"
+      }
+    ],
+    "EvaluationTimeInSeconds": 60,
+    "MinimumSecondsBetweenFailureNotifications": 60,
+
+    // Webhook 通知配置
+    "Webhooks": [
+      {
+        //自定义api通知
+        "Name": "Custom API",
+        "Uri": "https://your-api.com/notifications",
+        "Payload": "{\"type\": \"failure\", \"service\": \"{{service}}\", \"failure\": \"{{failure}}\", \"description\": \"{{description}}\", \"timestamp\": \"{{now}}\"}",
+        "RestorePayload": "{\"type\": \"restored\", \"service\": \"{{service}}\", \"timestamp\": \"{{now}}\"}"
+      }
+    ]
+  }
+}

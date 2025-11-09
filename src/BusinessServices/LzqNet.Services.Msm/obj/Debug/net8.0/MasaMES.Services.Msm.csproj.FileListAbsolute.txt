@@ -1,0 +1,8 @@
+D:\gitee\MASA.Study\MasaMES.NET\src\BusinessServices\MasaMES.Services.Msm\obj\Debug\net8.0\MasaMES.Services.Msm.csproj.AssemblyReference.cache
+D:\gitee\MASA.Study\MasaMES.NET\src\BusinessServices\MasaMES.Services.Msm\obj\Debug\net8.0\rpswa.dswa.cache.json
+D:\gitee\MASA.Study\MasaMES.NET\src\BusinessServices\MasaMES.Services.Msm\obj\Debug\net8.0\MasaMES.Services.Msm.GeneratedMSBuildEditorConfig.editorconfig
+D:\gitee\MASA.Study\MasaMES.NET\src\BusinessServices\MasaMES.Services.Msm\obj\Debug\net8.0\MasaMES.Services.Msm.AssemblyInfoInputs.cache
+D:\gitee\MASA.Study\MasaMES.NET\src\BusinessServices\MasaMES.Services.Msm\obj\Debug\net8.0\MasaMES.Services.Msm.AssemblyInfo.cs
+D:\gitee\MASA.Study\MasaMES.NET\src\BusinessServices\MasaMES.Services.Msm\obj\Debug\net8.0\MasaMES.Services.Msm.csproj.CoreCompileInputs.cache
+D:\gitee\MASA.Study\MasaMES.NET\src\BusinessServices\MasaMES.Services.Msm\obj\Debug\net8.0\MasaMES.Services.Msm.MvcApplicationPartsAssemblyInfo.cs
+D:\gitee\MASA.Study\MasaMES.NET\src\BusinessServices\MasaMES.Services.Msm\obj\Debug\net8.0\MasaMES.Services.Msm.MvcApplicationPartsAssemblyInfo.cache

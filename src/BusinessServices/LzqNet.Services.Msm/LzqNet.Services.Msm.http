@@ -1,0 +1,6 @@
+@LzqNet.Services.Msm_HostAddress = http://localhost:5215
+
+GET {{LzqNet.Services.Msm_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

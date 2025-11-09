@@ -1,0 +1,6 @@
+@LzqNet.ApiGateway_HostAddress = http://localhost:5058
+
+GET {{LzqNet.ApiGateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

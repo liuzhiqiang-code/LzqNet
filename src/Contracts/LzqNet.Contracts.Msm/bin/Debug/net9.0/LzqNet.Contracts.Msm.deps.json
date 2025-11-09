@@ -1,0 +1,309 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "LzqNet.Contracts.Msm/1.0.0": {
+        "dependencies": {
+          "Masa.BuildingBlocks.Ddd.Domain": "1.2.0-preview.10",
+          "Masa.Utils.Extensions.Validations.FluentValidation": "1.2.0-preview.10",
+          "Masa.Utils.Models.Config": "1.2.0-preview.10"
+        },
+        "runtime": {
+          "LzqNet.Contracts.Msm.dll": {}
+        }
+      },
+      "FluentValidation/11.1.0": {
+        "runtime": {
+          "lib/net6.0/FluentValidation.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.1.0.0"
+          }
+        }
+      },
+      "Masa.BuildingBlocks.Data/1.2.0-preview.10": {
+        "dependencies": {
+          "Masa.BuildingBlocks.Data.Contracts": "1.2.0-preview.10",
+          "Masa.Utils.Caching.Memory": "1.2.0-preview.10",
+          "Masa.Utils.Extensions.DotNet": "1.2.0-preview.10",
+          "Microsoft.Extensions.DependencyInjection": "9.0.8"
+        },
+        "runtime": {
+          "lib/net9.0/Masa.BuildingBlocks.Data.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Masa.BuildingBlocks.Data.Contracts/1.2.0-preview.10": {
+        "dependencies": {
+          "Masa.Utils.Models.Config": "1.2.0-preview.10",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.8",
+          "Microsoft.Extensions.Options": "9.0.8"
+        },
+        "runtime": {
+          "lib/net9.0/Masa.BuildingBlocks.Data.Contracts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Masa.BuildingBlocks.Data.UoW/1.2.0-preview.10": {
+        "dependencies": {
+          "Masa.BuildingBlocks.Data": "1.2.0-preview.10"
+        },
+        "runtime": {
+          "lib/net9.0/Masa.BuildingBlocks.Data.UoW.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Masa.BuildingBlocks.Ddd.Domain/1.2.0-preview.10": {
+        "dependencies": {
+          "Masa.BuildingBlocks.Data.Contracts": "1.2.0-preview.10",
+          "Masa.BuildingBlocks.Data.UoW": "1.2.0-preview.10",
+          "Masa.BuildingBlocks.Dispatcher.IntegrationEvents": "1.2.0-preview.10",
+          "Masa.BuildingBlocks.ReadWriteSplitting.Cqrs": "1.2.0-preview.10"
+        },
+        "runtime": {
+          "lib/net9.0/Masa.BuildingBlocks.Ddd.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Masa.BuildingBlocks.Dispatcher.Events/1.2.0-preview.10": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.8"
+        },
+        "runtime": {
+          "lib/net9.0/Masa.BuildingBlocks.Dispatcher.Events.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Masa.BuildingBlocks.Dispatcher.IntegrationEvents/1.2.0-preview.10": {
+        "dependencies": {
+          "Masa.BuildingBlocks.Data.UoW": "1.2.0-preview.10",
+          "Masa.BuildingBlocks.Dispatcher.Events": "1.2.0-preview.10"
+        },
+        "runtime": {
+          "lib/net9.0/Masa.BuildingBlocks.Dispatcher.IntegrationEvents.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Masa.BuildingBlocks.ReadWriteSplitting.Cqrs/1.2.0-preview.10": {
+        "dependencies": {
+          "Masa.BuildingBlocks.Data.UoW": "1.2.0-preview.10",
+          "Masa.BuildingBlocks.Dispatcher.Events": "1.2.0-preview.10"
+        },
+        "runtime": {
+          "lib/net9.0/Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Masa.Utils.Caching.Memory/1.2.0-preview.10": {
+        "runtime": {
+          "lib/net9.0/Masa.Utils.Caching.Memory.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Masa.Utils.Extensions.DotNet/1.2.0-preview.10": {
+        "runtime": {
+          "lib/net9.0/Masa.Utils.Extensions.DotNet.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Masa.Utils.Extensions.Validations.FluentValidation/1.2.0-preview.10": {
+        "dependencies": {
+          "FluentValidation": "11.1.0"
+        },
+        "runtime": {
+          "lib/net9.0/Masa.Utils.Extensions.Validations.FluentValidation.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Masa.Utils.Models.Config/1.2.0-preview.10": {
+        "runtime": {
+          "lib/net9.0/Masa.Utils.Models.Config.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection/9.0.8": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.8"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.DependencyInjection.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.825.36511"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.8": {
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.825.36511"
+          }
+        }
+      },
+      "Microsoft.Extensions.Options/9.0.8": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.8",
+          "Microsoft.Extensions.Primitives": "9.0.8"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.Options.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.825.36511"
+          }
+        }
+      },
+      "Microsoft.Extensions.Primitives/9.0.8": {
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.Primitives.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.825.36511"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "LzqNet.Contracts.Msm/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FluentValidation/11.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ld7w+2jOmnhQqFkngEGuEWTRa5j6u4Xzli7jKxRtbA5PtuHHcpin01qxvxYL0LomeJuzRMGAOURu2rKONdjKQA==",
+      "path": "fluentvalidation/11.1.0",
+      "hashPath": "fluentvalidation.11.1.0.nupkg.sha512"
+    },
+    "Masa.BuildingBlocks.Data/1.2.0-preview.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tWug8fTJotWKttvha1g1ZEmy/FcLmWDKDLuHMTMktjgISJRw/EOHjLRRzvKwK0FIbzo7fQIBTchdMHh++nK25w==",
+      "path": "masa.buildingblocks.data/1.2.0-preview.10",
+      "hashPath": "masa.buildingblocks.data.1.2.0-preview.10.nupkg.sha512"
+    },
+    "Masa.BuildingBlocks.Data.Contracts/1.2.0-preview.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-m7tI1FwV073FfL5H5Ee6l2+Wq5errGriSI3y03JexVF9t3ecYLXeiw3vigcwofSv/jFJJb021nLqz86C6XL/uw==",
+      "path": "masa.buildingblocks.data.contracts/1.2.0-preview.10",
+      "hashPath": "masa.buildingblocks.data.contracts.1.2.0-preview.10.nupkg.sha512"
+    },
+    "Masa.BuildingBlocks.Data.UoW/1.2.0-preview.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cuSNfqlB1WM1ac2/PzUNsTJ0yz29a1tWD4GQCyLZmjGZ8Nq0Jp6jWbGD+4PwsQrQ8EGKj+fr+d1qk7CDMlZV6w==",
+      "path": "masa.buildingblocks.data.uow/1.2.0-preview.10",
+      "hashPath": "masa.buildingblocks.data.uow.1.2.0-preview.10.nupkg.sha512"
+    },
+    "Masa.BuildingBlocks.Ddd.Domain/1.2.0-preview.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NHnGLsCcaoZe9XdZcLkSaMEFqXvnL7fEhVpsFfO/7o7jo10AsTLJAGBvElpKsrpOaHSZSLFz5vi7pxUZl7Iv2Q==",
+      "path": "masa.buildingblocks.ddd.domain/1.2.0-preview.10",
+      "hashPath": "masa.buildingblocks.ddd.domain.1.2.0-preview.10.nupkg.sha512"
+    },
+    "Masa.BuildingBlocks.Dispatcher.Events/1.2.0-preview.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fZkqDSdYh4t2QB8+wVxptg3992y3/w6v1fj6vn8+OFuk3AR1B160mIloQ0U2WycVlsWIbfu/4CJELvHkZ3fdHQ==",
+      "path": "masa.buildingblocks.dispatcher.events/1.2.0-preview.10",
+      "hashPath": "masa.buildingblocks.dispatcher.events.1.2.0-preview.10.nupkg.sha512"
+    },
+    "Masa.BuildingBlocks.Dispatcher.IntegrationEvents/1.2.0-preview.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Qq/xNnYlqMVsnpbzptGOYd5tiYLkfohNirWwPq6BzUMzL2oqGXhAXfOjZ0nYPQB9FfZzz0OIvfj7T4PjDLxd2w==",
+      "path": "masa.buildingblocks.dispatcher.integrationevents/1.2.0-preview.10",
+      "hashPath": "masa.buildingblocks.dispatcher.integrationevents.1.2.0-preview.10.nupkg.sha512"
+    },
+    "Masa.BuildingBlocks.ReadWriteSplitting.Cqrs/1.2.0-preview.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QHlQIro+RB3/Z5T2i38SijDbNhTiFVAxoG53SE1AXhXCNBu02iyaA9qOcrlWfjqr4/oJPyZZNIYDPEfsDGD2Tg==",
+      "path": "masa.buildingblocks.readwritesplitting.cqrs/1.2.0-preview.10",
+      "hashPath": "masa.buildingblocks.readwritesplitting.cqrs.1.2.0-preview.10.nupkg.sha512"
+    },
+    "Masa.Utils.Caching.Memory/1.2.0-preview.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zpE6V1CzNgzXzHpJVjJowTNs5A7bF5E3RJ+JsZ4/YDLYj52D+h1G8Qz41z8pK/sDdJANI2hiXCAjqaLWHlwX1Q==",
+      "path": "masa.utils.caching.memory/1.2.0-preview.10",
+      "hashPath": "masa.utils.caching.memory.1.2.0-preview.10.nupkg.sha512"
+    },
+    "Masa.Utils.Extensions.DotNet/1.2.0-preview.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8H6g8V8oHWQwGjDgi5CpM5ObI4xBfBzziQEvK4cgBq81us4oqP1QqKktAF4YUCr9Ld7aA0W4cwys49t/TUJy7w==",
+      "path": "masa.utils.extensions.dotnet/1.2.0-preview.10",
+      "hashPath": "masa.utils.extensions.dotnet.1.2.0-preview.10.nupkg.sha512"
+    },
+    "Masa.Utils.Extensions.Validations.FluentValidation/1.2.0-preview.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3j+d8OUFx440vOSmzi13SOeLvlzgNXdlmsBpd+5/YECGTHxlB3W1lSQlhBkaTSjAUzLe+RohcGGvA8Z58FQ7/A==",
+      "path": "masa.utils.extensions.validations.fluentvalidation/1.2.0-preview.10",
+      "hashPath": "masa.utils.extensions.validations.fluentvalidation.1.2.0-preview.10.nupkg.sha512"
+    },
+    "Masa.Utils.Models.Config/1.2.0-preview.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MIjltbUH6sBov06Y3+WWBeYKjBZSPiiWjeaVOKyYBn5uWeEhSEYJenSHUKnSPZYTI7d3HDWRjJ9AD0aagbj4bg==",
+      "path": "masa.utils.models.config/1.2.0-preview.10",
+      "hashPath": "masa.utils.models.config.1.2.0-preview.10.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection/9.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JJjI2Fa+QtZcUyuNjbKn04OjIUX5IgFGFu/Xc+qvzh1rXdZHLcnqqVXhR4093bGirTwacRlHiVg1XYI9xum6QQ==",
+      "path": "microsoft.extensions.dependencyinjection/9.0.8",
+      "hashPath": "microsoft.extensions.dependencyinjection.9.0.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xY3lTjj4+ZYmiKIkyWitddrp1uL5uYiweQjqo4BKBw01ZC4HhcfgLghDpPZcUlppgWAFqFy9SgkiYWOMx365pw==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/9.0.8",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.9.0.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Options/9.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OmTaQ0v4gxGQkehpwWIqPoEiwsPuG/u4HUsbOFoWGx4DKET2AXzopnFe/fE608FIhzc/kcg2p8JdyMRCCUzitQ==",
+      "path": "microsoft.extensions.options/9.0.8",
+      "hashPath": "microsoft.extensions.options.9.0.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Primitives/9.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tizSIOEsIgSNSSh+hKeUVPK7xmTIjR8s+mJWOu1KXV3htvNQiPMFRMO17OdI1y/4ZApdBVk49u/08QGC9yvLug==",
+      "path": "microsoft.extensions.primitives/9.0.8",
+      "hashPath": "microsoft.extensions.primitives.9.0.8.nupkg.sha512"
+    }
+  }
+}

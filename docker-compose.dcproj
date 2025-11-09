@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" Sdk="Microsoft.Docker.Sdk">
+  <PropertyGroup Label="Globals">
+    <ProjectVersion>2.1</ProjectVersion>
+    <DockerTargetOS>Linux</DockerTargetOS>
+    <DockerPublishLocally>False</DockerPublishLocally>
+    <ProjectGuid>81dded9d-158b-e303-5f62-77a2896d2a5a</ProjectGuid>
+    <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
+    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/weatherforecast</DockerServiceUrl>
+    <DockerServiceName>lzqnet.services.msm</DockerServiceName>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="docker-compose.override.yml">
+      <DependentUpon>docker-compose.yml</DependentUpon>
+    </None>
+    <None Include="docker-compose.yml" />
+    <None Include=".dockerignore" />
+    <None Include="dockercompose\dapr\components\pubsub.yml" />
+    <None Include="dockercompose\dapr\components\statestore.yml" />
+    <None Include="dockercompose\grafana\grafana.yml" />
+    <None Include="dockercompose\grafana\provisioning\dashboards.yml" />
+    <None Include="dockercompose\grafana\provisioning\datasources\loki.yml" />
+    <None Include="dockercompose\jaeger\jaeger.yml" />
+    <None Include="dockercompose\loki\loki.yml" />
+    <None Include="dockercompose\nginx\conf.d\apigateway.conf" />
+    <None Include="dockercompose\nginx\conf.d\healthcheckui.conf" />
+    <None Include="dockercompose\prometheus\prometheus.yml" />
+    <None Include="dockercompose\promtail\promtail.yml" />
+    <None Include="dockercompose\ssl_certs\cert.pem" />
+    <None Include="dockercompose\ssl_certs\key.pem" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="dockercompose\grafana\provisioning\dashboards\" />
+  </ItemGroup>
+</Project>
