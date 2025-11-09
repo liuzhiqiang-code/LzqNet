@@ -1,40 +1,261 @@
-# Build and Release Folders
+# =================================
+# 构建和发布目录
+# =================================
+
+# 调试和发布输出目录
 bin-debug/
 bin-release/
-[Oo]bj/
 [Bb]in/
+[Oo]bj/
+dist/
+publish/
 
-# Other files and folders
-.settings/
+# =================================
+# 依赖项目录
+# =================================
 
-# Executables
+# Node.js 依赖
+node_modules/
+
+# .NET NuGet 包目录
+packages/
+
+# =================================
+# IDE 和编辑器文件
+# =================================
+
+# Visual Studio
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+*.userprefs
+
+# JetBrains Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# 编辑器临时文件
+*.swp
+*.swo
+*~
+
+# =================================
+# 操作系统生成文件
+# =================================
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+ehthumbs.db
+Thumbs.db
+
+# =================================
+# 项目特定文件
+# =================================
+
+# 可执行文件和库
 *.swf
 *.air
 *.ipa
 *.apk
-*.csproj.user
-*.cache
 *.dll
 *.pdb
 *.exe
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# 数据库文件
+*.db-journal
+*.db
+*.sqlite3
+
+# 缓存文件
+*.cache
+*.csproj.user
+
+# =================================
+# 日志文件
+# =================================
+
+logs/
+*.log
+npminstall-debug.log
+
+# =================================
+# 配置文件（排除本地配置）
+# =================================
+
+/Web/public/config.js
+appsettings.Development.json
+appsettings.Local.json
+
+# =================================
+# 临时文件
+# =================================
+
+*.tmp
+*.temp
+
+# =================================
+# ASP.NET Core 相关
+# =================================
+
+wwwroot/js/dist/
+wwwroot/css/dist/
+
+# =================================
+# 前端构建产物
+# =================================
+
+/Web/stats.html
+/Web/package-lock.json
+
+# =================================
+# 上传目录
+# =================================
+
+*/[Uu]pload/
+*/publish/
+
+# =================================
+# .NET 构建结果
+# =================================
+
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Ll]og/
+[Ll]ogs/
+
+# =================================
+# 测试相关文件
+# =================================
+
+# MSTest 测试结果
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# 代码覆盖率工具
+*.coverage
+*.coveragexml
+.dotCover
+.axoCover/*
+!.axoCover/settings.json
+
+# =================================
+# NuGet 包管理
+# =================================
+
+[Nn]uget/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# =================================
+# 发布相关文件
+# =================================
+
+*.[Pp]ublish.xml
+*.azurePubxml
+*.pubxml
+*.publishproj
+PublishScripts/
+
+# =================================
+# Azure 相关文件
+# =================================
+
+csx/
+*.build.csdef
+ecf/
+rcf/
+
+# =================================
+# 其他开发工具文件
+# =================================
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# TeamCity
+_TeamCity*
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+nCrunchTemp_*
+
+# StyleCop
+StyleCopReport.xml
+
+# Cake 构建工具
+# tools/**
+# !tools/packages.config
+
+# =================================
+# 移动应用包文件
+# =================================
+
+AppPackages/
+BundleArtifacts/
+Package.StoreAssociation.xml
+_pkginfo.txt
+*.appx
+*.appxbundle
+*.appxupload
+
+# =================================
+# Python 相关（如使用 Python 工具）
+# =================================
+
+__pycache__/
+*.pyc
+
+# =================================
+# 构建日志和缓存
+# =================================
+
+*.binlog
+*.[Cc]ache
+!?*.[Cc]ache/
+
+# =================================
+# 项目特定路径（根据您的项目结构）
+# =================================
+
 /LzqNet/.vs
 /LzqNet/packages
 /LzqNet/*/[Uu]pload
 /LzqNet/*/publish
 /LzqNet/*/logs
-
-# folders
-dist/
-node_modules/
-/Web/package-lock.json
-/Web/public/config.js
-/Web/stats.html
-/Web/npminstall-debug.log
-.vs
-.idea
-.DS_Store
 /LzqNet/LzqNet.Web.Entry/LzqNet.db-journal
+
+# =================================
+# 本地历史记录
+# =================================
+
+.localhistory/
+
+# =================================
+# 迁移备份
+# =================================
+
+MigrationBackup/
