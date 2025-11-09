@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LzqNet.Caller")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e12636a1d81217daf4ac9d0b375983fec07c095c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b35e955d8d5b646e5ba379a59d14d9dbd393f50")]
 [assembly: System.Reflection.AssemblyProductAttribute("LzqNet.Caller")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LzqNet.Caller")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

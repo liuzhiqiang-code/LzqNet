@@ -255,3 +255,4 @@ D:\gitee\LZQ.Microservice\src\InfrastructureServices\MasaMES.Extensions\obj\Debu
 D:\gitee\LZQ.Microservice\src\InfrastructureServices\MasaMES.Extensions\obj\Debug\net9.0\staticwebassets.build.json
 D:\gitee\LZQ.Microservice\src\InfrastructureServices\MasaMES.Extensions\obj\Debug\net9.0\staticwebassets.build.json
 D:\gitee\LzqNet\src\InfrastructureServices\LzqNet.Extensions\obj\Debug\net9.0\staticwebassets.build.json
+D:\gitee\LzqNet\src\InfrastructureServices\LzqNet.Extensions\obj\Debug\net9.0\staticwebassets.build.json
