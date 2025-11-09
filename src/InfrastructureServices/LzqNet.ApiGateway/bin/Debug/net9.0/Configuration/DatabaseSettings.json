@@ -1,8 +1,0 @@
-﻿{
-  "DatabaseSettings": {
-    "EnableDetailedErrors": true,
-    "EnableSensitiveDataLogging": false,
-    "MaxRetryCount": 3,
-    "MaxRetryDelay": 5
-  }
-}
