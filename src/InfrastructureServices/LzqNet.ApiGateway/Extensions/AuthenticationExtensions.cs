@@ -1,5 +1,4 @@
-﻿using LzqNet.DCC.Option;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Serilog;
 
 namespace LzqNet.ApiGateway.Extensions;

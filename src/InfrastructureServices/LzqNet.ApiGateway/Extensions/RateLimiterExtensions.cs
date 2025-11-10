@@ -1,5 +1,4 @@
-﻿using LzqNet.DCC.Option;
-using Microsoft.AspNetCore.RateLimiting;
+﻿using Microsoft.AspNetCore.RateLimiting;
 using System.Threading.RateLimiting;
 
 namespace LzqNet.ApiGateway.Extensions;

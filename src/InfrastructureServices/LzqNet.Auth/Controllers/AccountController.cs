@@ -1,11 +1,10 @@
 ﻿using LzqNet.Auth.Infrastructure;
 using LzqNet.Auth.Models;
-using LzqNet.DCC.Option;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Options;
+using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
 namespace LzqNet.Auth.Controllers;
@@ -14,18 +13,18 @@ namespace LzqNet.Auth.Controllers;
 [ApiController]
 public class AccountController : ControllerBase
 {
-    private readonly Option<JwtOption> _option;
+    private readonly JwtOption _jwtOption;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IHttpClientFactory _httpClientFactory;
 
     public AccountController(
-        Option<JwtOption> option,
+        IOptions<JwtOption> option,
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
         IHttpClientFactory httpClientFactory)
     {
-        _option = option;
+        _jwtOption = option.Value;
         _userManager = userManager;
         _signInManager = signInManager;
         _httpClientFactory = httpClientFactory;
@@ -71,7 +70,7 @@ public class AccountController : ControllerBase
         }
 
         var client = _httpClientFactory.CreateClient();
-        client.BaseAddress = new Uri(_option.DefaultValue.Authority);
+        client.BaseAddress = new Uri(_jwtOption.Authority);
         var tokenEndpoint = "/connect/token"; // IdentityServer Token 端点
 
         var requestContent = new FormUrlEncodedContent(new Dictionary<string, string>
@@ -112,7 +111,7 @@ public class AccountController : ControllerBase
     public async Task<IActionResult> GetClientToken()
     {
         var client = _httpClientFactory.CreateClient();
-        client.BaseAddress = new Uri(_option.DefaultValue.Authority);
+        client.BaseAddress = new Uri(_jwtOption.Authority);
         var tokenEndpoint = "/connect/token"; // IdentityServer Token 端点
 
         var requestContent = new FormUrlEncodedContent(new Dictionary<string, string>

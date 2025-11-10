@@ -3,7 +3,6 @@ using Duende.IdentityServer.Validation;
 using LzqNet.Auth.Identity;
 using LzqNet.Auth.Infrastructure;
 using LzqNet.DCC;
-using LzqNet.DCC.Option;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +11,11 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddApplicationConfiguration();
+builder.Services.AddOptions<JwtOption>().BindConfiguration("Jwt")
+    .Validate(setting =>
+        !string.IsNullOrWhiteSpace(setting.Audience) &&
+        !string.IsNullOrWhiteSpace(setting.Authority),
+        "Jwt配置有误");
 
 var services = builder.Services;
 var configuration = builder.Configuration;
@@ -22,10 +26,12 @@ services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Auth API", Version = "v1" });
 });
 
+var connectionString = builder.Configuration.GetConnectionString("AuthConnection")
+    ?? throw new InvalidOperationException($"未找到配置项:ConnectionStrings:AuthConnection");
 services.AddDbContext<ApplicationDbContext>(options =>
 {
     // 配置上下文使用SQLite
-    options.UseSqlite($"Filename={Path.Combine(Path.GetTempPath(), "openiddict-hollastin-server.sqlite3")}");
+    options.UseSqlite(connectionString);
 });
 
 // 注册Identity服务

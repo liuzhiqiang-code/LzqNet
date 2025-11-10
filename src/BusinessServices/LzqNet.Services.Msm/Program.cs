@@ -10,6 +10,7 @@ using LzqNet.Extensions.Serilog;
 using LzqNet.Services.Msm.Application.CommandHandlers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,11 +18,11 @@ builder.AddCustomSerilog();
 builder.AddApplicationConfiguration();
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("PostgresConnection")
-    ?? throw new InvalidOperationException($"未找到配置项:ConnectionStrings:PostgresConnection");
+var connectionString = builder.Configuration.GetConnectionString("MsmConnection")
+    ?? throw new InvalidOperationException($"未找到配置项:ConnectionStrings:MsmConnection");
 builder.Services.AddMasaDbContext<ExampleDbContext>(opt =>
 {
-    opt.UseNpgsql(connectionString);
+    opt.UseSqlite(connectionString);
 });
 builder.AddApplicationServices();
 
@@ -79,5 +80,4 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapGet("/",[Authorize] () => { return "msm-service"; });
-
 app.Run();

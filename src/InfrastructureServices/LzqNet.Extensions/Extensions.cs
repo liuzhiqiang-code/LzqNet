@@ -1,6 +1,9 @@
-﻿using LzqNet.Extensions.Auth;
+﻿using HealthChecks.UI.Client;
+using LzqNet.Extensions.Auth;
 using LzqNet.Extensions.HealthCheck;
 using LzqNet.Extensions.OAuth;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 
 namespace LzqNet.Extensions;
@@ -38,5 +41,55 @@ public static class Extensions
         app.UseCustomAuthorization();
         app.MapOpenApi();
         app.MapCustomHealthChecks();
+        app.MapConfigurationApi();
+    }
+
+    public static void MapConfigurationApi(this WebApplication app)
+    {
+        app.MapGet("/configuration", [Authorize] (HttpContext context, IConfiguration configuration, string key) =>
+        {
+            var section = configuration.GetSection(key);
+
+            if (!section.Exists())
+            {
+                return Results.NotFound($"配置节点 {key} 不存在");
+            }
+
+            // 递归构建配置树，确保所有子节点格式正确
+            object BuildConfigTree(IConfigurationSection currentSection)
+            {
+                if (currentSection.Value != null)
+                {
+                    return currentSection.Value; // 叶子节点直接返回值
+                }
+
+                var children = currentSection.GetChildren().ToList();
+                if (!children.Any())
+                {
+                    return null; // 空节点返回 null
+                }
+
+                // 处理数组格式（如 Endpoints:0:Key）
+                if (children.All(c => int.TryParse(c.Key, out _)))
+                {
+                    return children.Select(BuildConfigTree).ToList();
+                }
+
+                // 处理对象格式
+                var dict = new Dictionary<string, object>();
+                foreach (var child in children)
+                {
+                    var childValue = BuildConfigTree(child);
+                    if (childValue != null)
+                    {
+                        dict[child.Key] = childValue;
+                    }
+                }
+                return dict;
+            }
+
+            var configTree = BuildConfigTree(section);
+            return Results.Ok(new Dictionary<string, object> { [key] = configTree });
+        });
     }
 }

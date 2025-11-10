@@ -1,0 +1,6 @@
+{
+  "Services": {
+    "msm-service": "http://lzqnet.services.msm:8080",
+    "auth": "http://lzqnet.auth:8080"
+  }
+}

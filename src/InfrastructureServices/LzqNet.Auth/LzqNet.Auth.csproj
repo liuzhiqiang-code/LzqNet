@@ -24,4 +24,8 @@
 	  <ProjectReference Include="..\LzqNet.DCC\LzqNet.DCC.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="data\" />
+	</ItemGroup>
+
 </Project>

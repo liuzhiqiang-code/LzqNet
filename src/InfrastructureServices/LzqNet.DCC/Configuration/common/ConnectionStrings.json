@@ -1,0 +1,8 @@
+﻿{
+  "ConnectionStrings": {
+    //"MsmConnection": "Host=postgres;Port=5432;Database=msm_db;Username=msm_user;Password=123456;Timeout=30;CommandTimeout=30;Pooling=true;Maximum Pool Size=20",
+    "MsmConnection": "Data Source=data/msm-service.db",
+    "AuthConnection": "Data Source=data/auth.db",
+    "RedisConnection": "localhost:redis,password=123456,defaultDatabase=0"
+  }
+}

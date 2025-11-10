@@ -30,19 +30,6 @@ services:
       dockerfile: src/BusinessServices/LzqNet.Services.Msm/Dockerfile
 
 
-  postgres:
-    image: postgres:alpine
-    restart: unless-stopped
-    environment:
-      POSTGRES_PASSWORD: 123456
-      POSTGRES_USER: msm_user
-      POSTGRES_DB: msm_db
-    ports:
-      - "25432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-
   redis:
     image: redis:alpine
     restart: unless-stopped
@@ -50,7 +37,7 @@ services:
     ports:
       - "6379"
     volumes:
-      - redis_data:/data
+      - ./dockercompose/redis/data:/data
 
   consul:
     image: consul:1.15.4
@@ -62,10 +49,21 @@ services:
       - "28301:8301"  # Serf LAN
       - "28302:8302"  # Serf WAN
     volumes:
-      - consul_data:/consul/data
+      - ./dockercompose/consul/data:/consul/data
     command: agent -server -ui -node=consul-server -bootstrap-expect=1 -client=0.0.0.0
 
 
+  # postgres:
+  #   image: postgres:alpine
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_PASSWORD: 123456
+  #     POSTGRES_USER: msm_user
+  #     POSTGRES_DB: msm_db
+  #   ports:
+  #     - "25432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
 
   # redis-commander:
   #   image: rediscommander/redis-commander:latest
@@ -170,10 +168,10 @@ services:
   #     - lzqnet.healthcheckui
       
 
-volumes:
-  postgres_data:
-  redis_data:
-  consul_data:
+#volumes:
+  #redis_data:
+  #consul_data:
+  # postgres_data:
   # loki_data:  
   # grafana_data:  
   # prometheus_data:

@@ -1,5 +1,4 @@
-﻿using LzqNet.DCC.Option;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace LzqNet.Auth.Infrastructure;
 

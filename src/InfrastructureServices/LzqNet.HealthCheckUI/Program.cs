@@ -1,6 +1,5 @@
 using HealthChecks.UI.Client;
 using LzqNet.DCC;
-using LzqNet.DCC.Option;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 

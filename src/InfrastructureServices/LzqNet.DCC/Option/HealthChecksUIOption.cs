@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LzqNet.DCC.Option;
-public class HealthChecksUIOption
+﻿public class HealthChecksUIOption
 {
     public List<HealthCheckSettings> HealthChecks { get; set; } = new();
     public List<WebhookSettings> Webhooks { get; set; } = new();

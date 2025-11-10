@@ -1,7 +1,4 @@
-﻿using LzqNet.DCC.Option;
-using Microsoft.AspNetCore.RateLimiting;
-using Microsoft.Extensions.DependencyInjection;
-using Yarp.ReverseProxy.Configuration;
+﻿using Yarp.ReverseProxy.Configuration;
 using Yarp.ReverseProxy.Health;
 
 namespace LzqNet.ApiGateway.Extensions;

@@ -1,8 +1,5 @@
-﻿using LzqNet.DCC.Option;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Serilog;
-using System.Text;
 
 namespace LzqNet.Extensions.Auth;
 

@@ -1,0 +1,5 @@
+{
+  "Consul": {
+    "Url": "http://consul:8500"
+  }
+}

@@ -8,7 +8,7 @@
         "lzqnet.apigateway": "StartDebugging",
         //"jaeger": "StartWithoutDebugging",
         //"loki": "StartWithoutDebugging",
-        "postgres": "StartWithoutDebugging",
+        //"postgres": "StartWithoutDebugging",
         //"promtail": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
         //"redis-commander": "StartWithoutDebugging",

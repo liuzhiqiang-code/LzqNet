@@ -1,6 +1,5 @@
-using LzqNet.Caller.Identity;
+using LzqNet.Caller.Auth;
 using LzqNet.DCC;
-using LzqNet.DCC.Option;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using System.Net.Http.Headers;
@@ -14,7 +13,7 @@ builder.AddApplicationConfiguration();
 builder.Services.AddHttpClient();
 builder.Services.AddAutoRegistrationCaller(
     typeof(Program).Assembly,
-    typeof(IdentityCaller).Assembly
+    typeof(AuthCaller).Assembly
     );
 
 var swaggerOptions = builder.Configuration.GetSection("Swagger").Get<SwaggerOption>() ??
@@ -39,7 +38,7 @@ var app = builder.Build();
 // 在 app.Run() 前添加代理中间件
 app.MapGet("/swagger-proxy", async ([FromQuery(Name = "url")] string url,
     [FromQuery(Name = "key")] string key,
-    HttpClient httpClient, IdentityCaller identityCaller) =>
+    HttpClient httpClient, AuthCaller authCaller) =>
 {
     if (string.IsNullOrWhiteSpace(url))
         return Results.BadRequest("缺少参数 'url'");
@@ -49,12 +48,12 @@ app.MapGet("/swagger-proxy", async ([FromQuery(Name = "url")] string url,
             builder.Configuration.GetSection("DefaultAccounts").Get<List<DefaultAccountOption>>() ?? [];
         if (defaultAccountOptions.Count > 0)
         {
-            var loginInfo = await identityCaller.Login(new UserLoginDto(defaultAccountOptions[0].UserName, defaultAccountOptions[0].Password));
+            var loginInfo = await authCaller.Login(new UserLoginDto(defaultAccountOptions[0].UserName, defaultAccountOptions[0].Password));
             if (loginInfo != null)
             {
                 // 2. 将Token添加到请求头
                 httpClient.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", loginInfo.Token);
+                    new AuthenticationHeaderValue("Bearer", loginInfo.AccessToken);
             }
         }
         var response = await httpClient.GetAsync(url);
