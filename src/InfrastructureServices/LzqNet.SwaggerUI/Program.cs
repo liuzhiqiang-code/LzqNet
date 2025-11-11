@@ -1,5 +1,6 @@
 using LzqNet.Caller.Auth;
 using LzqNet.DCC;
+using LzqNet.SwaggerUI.Extensions.HealthCheck;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using System.Net.Http.Headers;
@@ -8,6 +9,8 @@ using System.Text.Json;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddApplicationConfiguration();
+
+builder.AddCustomHealthChecks();
 
 // 添加 HttpClient 服务
 builder.Services.AddHttpClient();
@@ -34,6 +37,8 @@ builder.Services.ConfigureSwaggerGen(c =>
 });
 
 var app = builder.Build();
+
+app.MapCustomHealthChecks();
 
 // 在 app.Run() 前添加代理中间件
 app.MapGet("/swagger-proxy", async ([FromQuery(Name = "url")] string url,

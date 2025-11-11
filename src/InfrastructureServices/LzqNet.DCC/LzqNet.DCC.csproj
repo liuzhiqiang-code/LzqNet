@@ -19,15 +19,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="configuration\common\Consul.json" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Content Include="configuration\common\ConnectionStrings.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Include="configuration\common\Consul.json">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="configuration\common\DatabaseSettings.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -1,5 +1,6 @@
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Validation;
+using LzqNet.Auth.Extensions.HealthCheck;
 using LzqNet.Auth.Identity;
 using LzqNet.Auth.Infrastructure;
 using LzqNet.DCC;
@@ -19,6 +20,8 @@ builder.Services.AddOptions<JwtOption>().BindConfiguration("Jwt")
 
 var services = builder.Services;
 var configuration = builder.Configuration;
+
+builder.AddCustomHealthChecks();
 
 // 添加Swagger服务
 services.AddSwaggerGen(c =>
@@ -129,6 +132,7 @@ app.UseIdentityServer();
 //app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapCustomHealthChecks();
 app.MapControllers();
 
 app.Run();

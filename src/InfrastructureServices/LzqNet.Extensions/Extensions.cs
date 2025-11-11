@@ -1,9 +1,7 @@
-﻿using HealthChecks.UI.Client;
-using LzqNet.Extensions.Auth;
+﻿using LzqNet.Extensions.Auth;
 using LzqNet.Extensions.HealthCheck;
 using LzqNet.Extensions.OAuth;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 
 namespace LzqNet.Extensions;

@@ -1,5 +1,6 @@
 using LzqNet.ApiGateway;
 using LzqNet.ApiGateway.Extensions;
+using LzqNet.ApiGateway.Extensions.HealthCheck;
 using LzqNet.DCC;
 using Yarp.ReverseProxy.Configuration;
 
@@ -10,6 +11,7 @@ builder.AddCustomSerilog();
 builder.AddApplicationConfiguration();
 
 // Add services to the container.
+builder.AddCustomHealthChecks();
 
 // 全局限流中间件配置
 builder.AddCustomRateLimiter("customPolicy");
@@ -31,6 +33,8 @@ app.UseRouting();
 app.UseCustomResponseCaching();// 使用响应缓存中间件
 app.UseCustomAuthentication();
 app.UseCustomAuthorization();
+
+app.MapCustomHealthChecks();
 // 全局限流中间件
 app.UseRateLimiter();
 // 2. 启用YARP中间件

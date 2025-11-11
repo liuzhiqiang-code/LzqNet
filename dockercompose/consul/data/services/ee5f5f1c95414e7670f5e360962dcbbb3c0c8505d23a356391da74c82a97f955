@@ -1,0 +1,1 @@
+{"Token":"","Service":{"ID":"d065bc1f-e035-438b-9dd3-4738a4d220c9","Service":"auth","Tags":["urlprefix-/auth"],"Address":"lzqnet.auth","Meta":{"Weight":"1"},"Port":8080,"Weights":{"Passing":1,"Warning":1},"EnableTagOverride":false,"Proxy":{"Mode":"","MeshGateway":{},"Expose":{}},"Connect":{},"PeerName":"","CreateIndex":0,"ModifyIndex":0},"Source":"remote"}
