@@ -2,8 +2,6 @@
 using LzqNet.Contracts.Msm.SysConfig;
 using LzqNet.Contracts.Msm.SysConfig.Commands;
 using LzqNet.Contracts.Msm.SysConfig.Queries;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 
 namespace LzqNet.Services.Msm.Services;
