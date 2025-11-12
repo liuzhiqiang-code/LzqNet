@@ -71,7 +71,10 @@ app.MapGet("/swagger-proxy", async ([FromQuery(Name = "url")] string url,
         var servers = root["servers"].AsArray();
         foreach (var server in servers)
         {
-            server["url"] = $"{swaggerOptions.GatewayUrl}/{key}";
+            if (key.TrimStart("/").IsNullOrEmpty())
+                server["url"] = $"{swaggerOptions.GatewayUrl}";//网关自己的服务api
+            else
+                server["url"] = $"{swaggerOptions.GatewayUrl}/{key}";
         }
         string modifiedJson = root?.ToJsonString() ?? string.Empty;
         return Results.Content(modifiedJson, response.Content.Headers.ContentType?.ToString() ?? "application/json");

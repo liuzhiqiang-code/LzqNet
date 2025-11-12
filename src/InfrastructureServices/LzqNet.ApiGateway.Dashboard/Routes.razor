@@ -1,0 +1,16 @@
+﻿<Router AppAssembly="typeof(Program).Assembly">
+    <Found Context="routeData">
+        <CascadingValue Value="routeData">
+            <RouteView RouteData="routeData" DefaultLayout="typeof(LzqNet.ApiGateway.Dashboard.Layouts.BasicLayout)" />
+        </CascadingValue>
+        <FocusOnNavigate RouteData="routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <p>页面未找到</p>
+        @* <LayoutView Layout="@typeof(LzqNet.ApiGateway.Dashboard.Layouts.BasicLayout)">
+            <p>页面未找到</p>
+        </LayoutView> *@
+    </NotFound>
+</Router>
+
+<AntContainer />

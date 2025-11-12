@@ -18,7 +18,6 @@
     "Clusters": {
       "msm-service-cluster": {
         "ClusterId": "msm-service-cluster",
-        "AvailableDestinationsPolicy": "HealthyOrPanic",
         "HealthCheck": {
           "Active": { //主动健康检查示例  定时访问 /health 端点
             "Enabled": "true",
@@ -31,6 +30,7 @@
             "Enabled": "true",
             "Policy": "CustomPassiveHealthCheckPolicy" //只有一个实现可不写
           }
+          //"AvailableDestinationsPolicy": "HealthyOrPanic",
         },
         "Metadata": {
           "ConsecutiveFailuresHealthPolicy.Threshold": "3" //失败阈值超过3次标记不健康

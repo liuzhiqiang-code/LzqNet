@@ -6,14 +6,10 @@
       "serviceActions": {
         "lzqnet.healthcheckui": "StartDebugging",
         "lzqnet.apigateway": "StartDebugging",
-        //"jaeger": "StartWithoutDebugging",
-        //"loki": "StartWithoutDebugging",
-        //"postgres": "StartWithoutDebugging",
-        //"promtail": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
-        //"redis-commander": "StartWithoutDebugging",
         "lzqnet.services.msm": "StartDebugging",
-        "lzqnet.swaggerui": "StartDebugging"
+        "lzqnet.swaggerui": "StartDebugging",
+        "lzqnet.apigateway.dashboard": "StartDebugging"
       }
     }
   }

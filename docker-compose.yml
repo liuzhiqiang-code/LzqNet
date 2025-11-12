@@ -28,6 +28,14 @@ services:
     build:
       context: .
       dockerfile: src/BusinessServices/LzqNet.Services.Msm/Dockerfile
+      
+  lzqnet.apigateway.dashboard:
+    image: lzqnetapigatewaydashboard
+    build:
+      context: .
+      dockerfile: src/InfrastructureServices/LzqNet.ApiGateway.Dashboard/Dockerfile
+
+
 
 
   redis:
@@ -175,4 +183,3 @@ services:
   # loki_data:  
   # grafana_data:  
   # prometheus_data:
-

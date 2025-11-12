@@ -1,0 +1,51 @@
+﻿@page "/proxyConfig"
+@using AntDesign.TableModels
+@using LzqNet.Caller.ApiGateway.Contracts
+
+<GridContent>
+    <Card>
+        @* 表格区域 *@
+        <Table @ref="_table" TItem="RouteConfigModel" DataSource="_pageList" @bind-SelectedRows="_selectedRows" OnChange="OnChange" Loading="_tableLoading" AutoHeight Style="min-height:500px;">
+            <TitleTemplate>
+                @* 查询区域 *@ 
+                <Form Layout="@FormLayout.Inline"
+                      Model="@queryData"
+                      OnFinish="OnFinish"
+                      OnFinishFailed="OnFinishFailed">
+                    <FormItem Label="模板名">
+                        <Input @bind-Value="@queryData.RouteId" />
+                    </FormItem>
+                    <FormItem>
+                        <Button Type="ButtonType.Primary" HtmlType="submit" @onclick="HandleSearch">
+                            查询
+                        </Button>
+                    </FormItem>
+                    <FormItem>
+                        <InputFile id="fileInput" title="111" OnChange="UploadFiles" hidden multiple accept=".btw" />
+                        <Upload FileList="fileList">
+                            <label class="ant-btn" for="fileInput">
+                                <Icon Type="@IconType.Outline.Upload" />
+                                上传模板
+                            </label>
+                        </Upload>
+                    </FormItem>
+                </Form>
+            </TitleTemplate>
+            <ColumnDefinitions Context="row">
+                <Selection Width="50" />
+                <PropertyColumn Width="100" Title="模板名称" Property="c=>c.RouteId" />
+                <ActionColumn Width="100" Title="Action" Fixed="ColumnFixPlacement.Right">
+                    <a @onclick="() => Delete(row)">删除</a>
+                </ActionColumn>
+            </ColumnDefinitions>
+        </Table>
+    </Card>
+</GridContent>
+
+@code {
+    ITable _table;
+    RouteConfigModel queryData = new RouteConfigModel();
+    List<RouteConfigModel> _pageList;
+    IEnumerable<RouteConfigModel> _selectedRows = [];
+    bool _tableLoading = false;
+}
