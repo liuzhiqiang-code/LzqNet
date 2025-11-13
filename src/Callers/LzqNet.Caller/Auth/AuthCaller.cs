@@ -14,9 +14,15 @@ public class AuthCaller : HttpClientCallerBase
         BaseAddress = configuration.GetSection("Services:auth")
             .Get<string>() ?? throw new InvalidOperationException($"未找到配置项:Services:auth");
     }
-    public async Task<UserLoginViewDto?> Login(UserLoginDto dto)
+    public async Task<TokenViewDto?> Login(UserLoginDto dto)
     {
-        var result = await Caller.PostAsync<UserLoginViewDto>($"/api/Account/Login", dto);
+        var result = await Caller.PostAsync<TokenViewDto>($"/api/Account/Login", dto);
+        return result;
+    }
+
+    public async Task<TokenViewDto?> GetClientToken(JwtClientOption option)
+    {
+        var result = await Caller.PostAsync<TokenViewDto>($"/api/Account/ClientToken", option);
         return result;
     }
 }

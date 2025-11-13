@@ -32,7 +32,7 @@ public class IdentityConfig
             // 客户端模式（Client Credentials）
             new Client
             {
-                ClientId = "client",
+                ClientId = "apigateway",
                 ClientName = "客户端模式",
                 AllowedGrantTypes = GrantTypes.ClientCredentials, // 客户端凭证模式
                 ClientSecrets =

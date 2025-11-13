@@ -12,6 +12,8 @@ public static class Extensions
     {
         Log.Information("Start AddApplicationServices");
 
+        builder.Services.AddAutoInject();
+
         builder.AddCustomHealthChecks();
         builder.Services.AddOpenApi();
 

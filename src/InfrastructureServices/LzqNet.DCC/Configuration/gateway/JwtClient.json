@@ -1,0 +1,6 @@
+{
+  "JwtClient": {
+    "ClientId": "apigateway",
+    "ClientSecret": "secret"
+  }
+}

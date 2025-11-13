@@ -1,4 +1,6 @@
 ﻿using LzqNet.Caller.ApiGateway.Contracts;
+using LzqNet.Caller.Common;
+using Masa.BuildingBlocks.Service.Caller;
 using Masa.Contrib.Service.Caller.HttpClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,6 +9,15 @@ namespace LzqNet.Caller.Auth;
 public class ApiGatewayCaller : HttpClientCallerBase
 {
     protected override string BaseAddress { get; set; }
+    /// <summary>
+    /// 重写UseHttpClientPost方法，使用认证
+    /// </summary>
+    /// <param name="masaHttpClientBuilder"></param>
+    protected override void UseHttpClientPost(MasaHttpClientBuilder masaHttpClientBuilder)
+    {
+        masaHttpClientBuilder.UseAuthentication(serviceProvider => 
+            new ClientAuthenticationService(serviceProvider));
+    }
 
     public ApiGatewayCaller(IServiceProvider serviceProvider) : base(serviceProvider)
     {
@@ -14,6 +25,7 @@ public class ApiGatewayCaller : HttpClientCallerBase
         BaseAddress = configuration.GetSection("Services:apigateway")
             .Get<string>() ?? throw new InvalidOperationException($"未找到配置项:Services:apigateway");
     }
+
     public async Task<ProxyConfigModel?> GetConfig()
     {
         var result = await Caller.GetAsync<ProxyConfigModel>($"/api/config");

@@ -1,5 +1,6 @@
 ﻿using AntDesign.ProLayout;
 using LzqNet.Caller.Auth;
+using LzqNet.Caller.Extensions;
 
 namespace LzqNet.ApiGateway.Dashboard.Extensions;
 
@@ -9,11 +10,8 @@ public static class YarpDashboardExtensions
     {
         // 添加 HttpClient 服务
         builder.Services.AddHttpClient();
-        builder.Services.AddAutoRegistrationCaller(
-            typeof(Program).Assembly,
-            typeof(AuthCaller).Assembly,
-            typeof(ApiGatewayCaller).Assembly
-            );
+        builder.Services.AddAutoInject();
+        builder.AddCustomCaller();
 
         // Add services to the container.
         builder.Services.AddRazorPages();

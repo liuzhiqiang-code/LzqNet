@@ -7,6 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+
+		<PackageReference Include="Masa.Utils.Extensions.DependencyInjection" Version="$(MASAFrameworkVersion)" />
+		<PackageReference Include="Masa.Contrib.Caching.Distributed.StackExchangeRedis" Version="$(MASAFrameworkVersion)" />
+
 		<!--<PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="$(MicrosoftPackageVersion)" />-->
 		<PackageReference Include="AspNetCore.HealthChecks.Redis" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="$(MicrosoftPackageVersion)" />

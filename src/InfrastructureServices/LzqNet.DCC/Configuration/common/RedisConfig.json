@@ -1,0 +1,12 @@
+{
+  "RedisConfig": {
+    "Servers": [
+      {
+        "Host": "redis",
+        "Port": 6379
+      }
+    ],
+    "DefaultDatabase": 3,
+    "Password": "123456"
+  }
+}

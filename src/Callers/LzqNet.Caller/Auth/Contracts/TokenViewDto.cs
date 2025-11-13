@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
 namespace LzqNet.Caller.Auth.Contracts;
-public class UserLoginViewDto
+public class TokenViewDto
 {
     [JsonPropertyName("access_token")]
     public string AccessToken { get; set; }

@@ -4,11 +4,11 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "lzqnet.healthcheckui": "StartDebugging",
+        "lzqnet.healthcheckui": "StartWithoutDebugging",
         "lzqnet.apigateway": "StartDebugging",
         "redis": "StartWithoutDebugging",
-        "lzqnet.services.msm": "StartDebugging",
-        "lzqnet.swaggerui": "StartDebugging",
+        "lzqnet.services.msm": "StartWithoutDebugging",
+        "lzqnet.swaggerui": "StartWithoutDebugging",
         "lzqnet.apigateway.dashboard": "StartDebugging"
       }
     }

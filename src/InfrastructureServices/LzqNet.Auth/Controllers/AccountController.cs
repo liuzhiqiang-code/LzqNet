@@ -108,7 +108,7 @@ public class AccountController : ControllerBase
     /// 获取客户端凭证模式的 Token
     /// </summary>
     [HttpPost("ClientToken")]
-    public async Task<IActionResult> GetClientToken()
+    public async Task<IActionResult> GetClientToken(ClientModel model)
     {
         var client = _httpClientFactory.CreateClient();
         client.BaseAddress = new Uri(_jwtOption.Authority);
@@ -116,8 +116,8 @@ public class AccountController : ControllerBase
 
         var requestContent = new FormUrlEncodedContent(new Dictionary<string, string>
             {
-                { "client_id", "client" },
-                { "client_secret", "secret_aeduys" },
+                { "client_id", model.ClientId },
+                { "client_secret", model.ClientSecret },
                 { "grant_type", "client_credentials" },
                 { "scope", "common" }
             });
@@ -129,7 +129,7 @@ public class AccountController : ControllerBase
         }
 
         var tokenResponse = await response.Content.ReadAsStringAsync();
-        return Ok(new { token = tokenResponse });
+        return Ok(tokenResponse);
     }
 
     /// <summary>
