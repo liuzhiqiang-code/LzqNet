@@ -33,10 +33,3 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
     ports:
       - "25300:8080"
-
-  lzqnet.apigateway.dashboard:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8080
-    ports:
-      - "25400:8080"

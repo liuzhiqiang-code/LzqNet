@@ -1,10 +1,8 @@
-using LzqNet.ApiGateway;
+using Daily.Carp.Extension;
 using LzqNet.ApiGateway.Extensions;
 using LzqNet.ApiGateway.Extensions.HealthCheck;
-using LzqNet.ApiGateway.Services;
 using LzqNet.DCC;
 using LzqNet.DCC.Const;
-using Yarp.ReverseProxy.Configuration;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,13 +25,13 @@ builder.Services.AddCors(options =>
 
 // 全局限流中间件配置
 builder.AddCustomRateLimiter("customPolicy");
-builder.AddCustomYarp();
+builder.AddCustomCarp();
 builder.Services.AddHttpContextAccessor();
 builder.AddCustomMetrics();// 配置遥测中间件
 builder.AddCustomResponseCaching();// 配置响应缓存中间件
 
 builder.AddCustomAuthentication();
-builder.AddCustomAuthorization("customPolicy");
+builder.AddCustomAuthorization();
 
 var app = builder.Build();
 
@@ -52,10 +50,9 @@ app.MapCustomHealthChecks();
 // 全局限流中间件
 app.UseRateLimiter();
 // 2. 启用YARP中间件
-app.MapReverseProxy(); // 必须放在路由映射之后
+app.UseCarp(); // 必须放在路由映射之后
 
 // 3. 基础路由示例
 app.MapGet("/", () => "网关运行中 (YARP)").AllowAnonymous();
 
-app.MapYarpApi();
 app.Run();

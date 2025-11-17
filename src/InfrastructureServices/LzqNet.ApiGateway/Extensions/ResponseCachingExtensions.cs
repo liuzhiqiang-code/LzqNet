@@ -5,7 +5,7 @@ namespace LzqNet.ApiGateway.Extensions;
 public static class ResponseCachingExtensions
 {
     /// <summary>
-    /// 客制化授权策略
+    /// 响应缓存中间件
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="policyName"></param>

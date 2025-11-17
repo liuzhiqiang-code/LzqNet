@@ -29,6 +29,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Carp.Gateway-main\Daily.Carp\Daily.Carp.csproj" />
+		<ProjectReference Include="..\Carp.Gateway-main\Providers\Daily.Carp.Provider.Consul\Daily.Carp.Provider.Consul.csproj" />
 		<ProjectReference Include="..\LzqNet.DCC\LzqNet.DCC.csproj" />
 	</ItemGroup>
 
