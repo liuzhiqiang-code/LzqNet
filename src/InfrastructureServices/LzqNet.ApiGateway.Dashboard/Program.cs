@@ -1,5 +1,4 @@
 using AntDesign.ProLayout;
-using LzqNet.ApiGateway.Dashboard.Extensions;
 using LzqNet.Caller.Extensions;
 using LzqNet.DCC;
 using LzqNet.DCC.Const;
