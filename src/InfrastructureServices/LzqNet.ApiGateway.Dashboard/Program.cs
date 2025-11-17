@@ -1,4 +1,6 @@
+using AntDesign.ProLayout;
 using LzqNet.ApiGateway.Dashboard.Extensions;
+using LzqNet.Caller.Extensions;
 using LzqNet.DCC;
 using LzqNet.DCC.Const;
 
@@ -11,10 +13,29 @@ builder.Services.AddOptions<JwtClientOption>().BindConfiguration("JwtClient")
         !string.IsNullOrWhiteSpace(setting.ClientSecret),
         "JwtClient配置有误");
 
-builder.AddYarpDashboard();
+// 添加 HttpClient 服务
+builder.Services.AddHttpClient();
+builder.Services.AddAutoInject();
+builder.AddCustomCaller();
+
+// Add services to the container.
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
+builder.Services.AddAntDesign();
+builder.Services.Configure<ProSettings>(builder.Configuration.GetSection("ProSettings"));
+builder.Services.AddLocalization();
 
 var app = builder.Build();
 
-app.MapYarpDashboard();
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+}
+app.UseStaticFiles();
+app.UseRouting();
+
+app.MapBlazorHub();
+app.MapFallbackToPage("/_Host");
 
 app.Run();

@@ -3,13 +3,14 @@ using LzqNet.ApiGateway.Extensions;
 using LzqNet.ApiGateway.Extensions.HealthCheck;
 using LzqNet.ApiGateway.Services;
 using LzqNet.DCC;
+using LzqNet.DCC.Const;
 using Yarp.ReverseProxy.Configuration;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddCustomSerilog();
-builder.AddApplicationConfiguration();
+builder.AddApplicationConfiguration(DCCPathConst.COMMON,DCCPathConst.GATEWAY);
 
 builder.Services.AddMapster();
 

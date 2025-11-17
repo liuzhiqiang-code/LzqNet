@@ -12,7 +12,7 @@
                       Model="@queryData"
                       OnFinish="OnFinish"
                       OnFinishFailed="OnFinishFailed">
-                    <FormItem Label="模板名">
+                    <FormItem Label="路由">
                         <Input @bind-Value="@queryData.RouteId" />
                     </FormItem>
                     <FormItem>
@@ -20,26 +20,34 @@
                             查询
                         </Button>
                     </FormItem>
-                    <FormItem>
-                        <InputFile id="fileInput" title="111" OnChange="UploadFiles" hidden multiple accept=".btw" />
-                        <Upload FileList="fileList">
-                            <label class="ant-btn" for="fileInput">
-                                <Icon Type="@IconType.Outline.Upload" />
-                                上传模板
-                            </label>
-                        </Upload>
-                    </FormItem>
                 </Form>
             </TitleTemplate>
             <ColumnDefinitions Context="row">
                 <Selection Width="50" />
-                <PropertyColumn Width="100" Title="模板名称" Property="c=>c.RouteId" />
+                <PropertyColumn Width="100" Title="路由" Property="c => c.RouteId" />
+                <PropertyColumn Width="100" Title="集群" Property="c => c.ClusterId" />
+                <PropertyColumn Width="100" Title="优先级" Property="c => c.Order" />
+                @* <PropertyColumn Width="100" Title="限流策略" Property="c => c.RateLimiterPolicy" /> *@
+                <ActionColumn Width="100" Title="Action" Fixed="ColumnFixPlacement.Right">
+                    <a @onclick="() => EditRoute(row)">编辑路由</a>
+                </ActionColumn>
+                <ActionColumn Width="100" Title="Action" Fixed="ColumnFixPlacement.Right">
+                    <a @onclick="() => EditCluster(row)">编辑集群</a>
+                </ActionColumn>
                 <ActionColumn Width="100" Title="Action" Fixed="ColumnFixPlacement.Right">
                     <a @onclick="() => Delete(row)">删除</a>
                 </ActionColumn>
             </ColumnDefinitions>
         </Table>
     </Card>
+
+    <RouteConfigModal @bind-Visible="_routeVisible" FormData="CurrentRouteConfig"
+                      ProxyConfigModel="_proxyConfigModel"
+                      DataChanged="HandleRouteDataChangedAsync" />
+
+    <ClusterConfigModal @bind-Visible="_clusterVisible" FormData="CurrentClusterConfig"
+                      ProxyConfigModel="_proxyConfigModel"
+                        DataChanged="HandleClusterDataChangedAsync" />
 </GridContent>
 
 @code {
@@ -48,4 +56,13 @@
     List<RouteConfigModel> _pageList;
     IEnumerable<RouteConfigModel> _selectedRows = [];
     bool _tableLoading = false;
+
+
+    bool _routeVisible = false;
+    private RouteConfigModel CurrentRouteConfig = new RouteConfigModel();
+
+    bool _clusterVisible = false;
+    private ClusterConfigModel CurrentClusterConfig = new ClusterConfigModel();
+
+    private ProxyConfigModel _proxyConfigModel;
 }
