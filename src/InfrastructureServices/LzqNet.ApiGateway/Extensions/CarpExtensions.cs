@@ -1,7 +1,5 @@
 ﻿using Daily.Carp;
 using Daily.Carp.Extension;
-using Yarp.ReverseProxy.Configuration;
-using Yarp.ReverseProxy.Health;
 
 namespace LzqNet.ApiGateway.Extensions;
 

@@ -4,7 +4,7 @@
     {
         public Kubernetes Kubernetes { get; set; } = new Kubernetes();
 
-        public Consul Consul { get; set; } = new Consul();
+        public Consul Consul { get; set; }
 
         public bool ShowLogInformation { get; set; } = true;
 
@@ -30,13 +30,13 @@
     /// </summary>
     public class Consul
     {
-        public string Protocol { get; }
+        public string Protocol { get; set; }
 
-        public string Host { get; }
+        public string Host { get; set; }
 
-        public int Port { get; }
+        public int Port { get; set; }
 
-        public string Token { get; }
+        public string Token { get; set; }
 
         /// <summary>
         /// 轮询读取更新Consul Service信息，默认3秒

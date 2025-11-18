@@ -12,10 +12,10 @@
         "Descriptions": "msm-service",
         "ServiceName": "msm-service",
         "PathTemplate": "/msm-service/{**catch-all}", //客户端请求路由
-        "LoadBalancerOptions": "PowerOfTwoChoices", //轮询配置
+        "LoadBalancerOptions": "RoundRobin", //轮询配置
         "TransmitPathTemplate": "{**catch-all}", //下游转发路由
-        "DownstreamScheme": "http",
-        "DownstreamHostAndPorts": [ "http://lzqnet.services.msm:8080" ],
+        //"DownstreamScheme": "http",
+        //"DownstreamHostAndPorts": [ "http://lzqnet.services.msm:8080" ],
         //"IpWhiteList": [ "192.168.1.11", "192.168.1.12" ], //白名单
         "RetryPolicy": { //重试策略
           "RetryCount": 2, //默认3次，重试次数

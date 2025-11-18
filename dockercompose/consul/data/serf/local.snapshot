@@ -56,3 +56,11 @@ alive: consul-server 172.18.0.3:8301
 event-clock: 28
 alive: consul-server 172.18.0.8:8301
 event-clock: 29
+alive: consul-server 172.18.0.3:8301
+event-clock: 30
+alive: consul-server 172.18.0.3:8301
+event-clock: 31
+alive: consul-server 172.18.0.8:8301
+event-clock: 32
+alive: consul-server 172.18.0.3:8301
+event-clock: 33
