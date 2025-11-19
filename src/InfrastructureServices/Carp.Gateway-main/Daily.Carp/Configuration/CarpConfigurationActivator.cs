@@ -83,8 +83,8 @@ namespace Daily.Carp.Configuration
                             {
                                 Address = serviceString
                             };
-
-                            destinations.Add($"{item}", destinationConfig);
+                            if(!destinations.ContainsKey($"{item}"))
+                                destinations.Add($"{item}", destinationConfig);
                         }
                     }
                     else //兼容普通模式
@@ -95,7 +95,8 @@ namespace Daily.Carp.Configuration
                             {
                                 Address = item
                             };
-                            destinations.Add($"{item}", destinationConfig);
+                            if (!destinations.ContainsKey($"{item}"))
+                                destinations.Add($"{item}", destinationConfig);
                         }
                     }
 
@@ -155,8 +156,9 @@ namespace Daily.Carp.Configuration
                         routeConfigs.Add(routeConfig);
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
+                    CarpApp.LogError("构建Yarp配置异常，原因是" + ex.Message);
                     continue;
                 }
 
