@@ -1,1 +1,0 @@
-{"Token":"","Service":{"ID":"e0f1aa72-0976-41e0-b63a-11e6fa2e5f30","Service":"swaggerui","Tags":["urlprefix-/swaggerui"],"Address":"lzqnet.swaggerui","Meta":{"Weight":"1"},"Port":8080,"Weights":{"Passing":1,"Warning":1},"EnableTagOverride":false,"Proxy":{"Mode":"","MeshGateway":{},"Expose":{}},"Connect":{},"PeerName":"","CreateIndex":0,"ModifyIndex":0},"Source":"remote"}
