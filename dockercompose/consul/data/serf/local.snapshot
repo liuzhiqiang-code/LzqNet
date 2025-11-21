@@ -68,3 +68,38 @@ alive: consul-server 172.18.0.8:8301
 event-clock: 34
 alive: consul-server 172.18.0.3:8301
 event-clock: 35
+alive: consul-server 172.18.0.4:8301
+alive: consul-server 172.18.0.3:8301
+event-clock: 36
+alive: consul-server 172.18.0.8:8301
+event-clock: 37
+alive: consul-server 172.18.0.3:8301
+event-clock: 38
+alive: consul-server 172.18.0.3:8301
+event-clock: 39
+alive: consul-server 172.18.0.3:8301
+event-clock: 40
+alive: consul-server 172.18.0.3:8301
+event-clock: 41
+alive: consul-server 172.18.0.4:8301
+event-clock: 42
+alive: consul-server 172.18.0.4:8301
+event-clock: 43
+alive: consul-server 172.18.0.9:8301
+event-clock: 44
+alive: consul-server 172.18.0.9:8301
+event-clock: 45
+alive: consul-server 172.18.0.2:8301
+event-clock: 46
+alive: consul-server 172.18.0.10:8301
+event-clock: 47
+alive: consul-server 172.18.0.2:8301
+event-clock: 48
+alive: consul-server 172.18.0.10:8301
+event-clock: 49
+alive: consul-server 172.18.0.2:8301
+event-clock: 50
+alive: consul-server 172.18.0.10:8301
+event-clock: 51
+alive: consul-server 172.18.0.7:8301
+event-clock: 52

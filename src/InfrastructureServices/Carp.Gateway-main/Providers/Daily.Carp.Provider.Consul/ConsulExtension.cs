@@ -1,9 +1,10 @@
 ﻿using Daily.Carp.Configuration;
-using Daily.Carp.Provider.Consul;
+using Daily.Carp.Extension;
+using Daily.Carp.Feature;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Daily.Carp.Extension
+namespace Daily.Carp.Provider.Consul
 {
     public static class ConsulExtension
     {

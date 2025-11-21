@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Serilog;
 using Serilog.Core;
 
-namespace LzqNet.Extensions.OAuth;
+namespace LzqNet.Extensions.RedisCache;
 
 public static class RedisCacheExtensions
 {

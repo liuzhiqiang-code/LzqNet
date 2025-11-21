@@ -2,6 +2,7 @@
 using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Compact;
+using Serilog.Sinks.Grafana.Loki;
 
 namespace LzqNet.Extensions.Serilog;
 
@@ -20,13 +21,21 @@ public static class SerilogExtensions
             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
             .Enrich.FromLogContext()
-            .Enrich.With<ActivityTraceIdEnricher>();
+            .Enrich.With<ActivityTraceIdEnricher>()
+            .Enrich.With<HttpRequestEnricher>();
 
         // 开发环境配置
         if (builder.Environment.IsDevelopment())
         {
             loggerConfig.WriteTo.Console(
                 outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [TraceId:{TraceId}] {Message:lj}{NewLine}{Exception}");
+
+            var lokiUrl = builder.Configuration.GetValue<string>("GrafanaLoki:LokiUrl")
+                ?? throw new InvalidOperationException($"未找到配置项:GrafanaLoki:LokiUrl");
+            var serviceName = builder.Configuration.GetValue<string>("GrafanaLoki:ServiceName");
+
+            loggerConfig.WriteTo.GrafanaLoki(lokiUrl,
+                labels: [new LokiLabel { Key = "service_name", Value = serviceName ?? "unknown_service" }]);
         }
         else
         {

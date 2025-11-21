@@ -1,4 +1,5 @@
-﻿using LzqNet.Caller.Auth;
+﻿using LzqNet.Caller.ApiGateway;
+using LzqNet.Caller.Auth;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;

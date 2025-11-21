@@ -13,6 +13,12 @@
         "Title": "MSM服务",
         "Version ": "v1",
         "Url": "http://lzqnet.apigateway:8080/msm-service/openapi/v1.json" //OpenApi文档地址写网关内网地址
+      },
+      {
+        "Key": "notify-service", //服务名 网关代理后缀
+        "Title": "Notify服务",
+        "Version ": "v1",
+        "Url": "http://lzqnet.apigateway:8080/notify-service/openapi/v1.json" //OpenApi文档地址写网关内网地址
       }
     ]
   }

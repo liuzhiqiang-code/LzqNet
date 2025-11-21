@@ -1,12 +1,11 @@
 ﻿using System.Collections.Concurrent;
 using Daily.Carp.Configuration;
-using Daily.Carp.Feature;
 using Daily.Carp.Yarp;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Daily.Carp
+namespace Daily.Carp.Feature
 {
     /// <summary>
     /// CarpApp

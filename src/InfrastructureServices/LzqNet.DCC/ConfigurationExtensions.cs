@@ -1,4 +1,4 @@
-﻿using LzqNet.Consul.DCC;
+﻿using LzqNet.Consul.Register;
 using LzqNet.DCC.Const;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +30,7 @@ public static class ConfigurationExtensions
         }
 
         // 引入Consul配置中心的配置
-        builder.AddConsulConfiguration(configurationKeys);
+        //builder.AddConsulConfiguration(configurationKeys);
         // 注册Consul服务发现
         builder.AddConsulRegister();
     }

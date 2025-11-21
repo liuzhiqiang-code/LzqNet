@@ -8,7 +8,8 @@
         "lzqnet.apigateway": "StartDebugging",
         "redis": "StartWithoutDebugging",
         "lzqnet.services.msm": "StartWithoutDebugging",
-        "lzqnet.swaggerui": "StartWithoutDebugging"
+        "lzqnet.swaggerui": "StartWithoutDebugging",
+        "lzqnet.services.notify": "StartDebugging"
       }
     }
   }

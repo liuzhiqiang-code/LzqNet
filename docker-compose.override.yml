@@ -33,3 +33,11 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
     ports:
       - "25300:8080"
+
+  lzqnet.services.notify:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "8080"
+

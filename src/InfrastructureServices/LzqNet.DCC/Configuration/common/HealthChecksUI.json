@@ -3,16 +3,20 @@
   "HealthChecksUI": {
     "HealthChecks": [
       {
-        "Name": "ApiGateway",
+        "Name": "apigateway",
         "Uri": "http://lzqnet.apigateway:8080/health"
       },
       {
-        "Name": "Auth",
+        "Name": "auth",
         "Uri": "http://lzqnet.auth:8080/health"
       },
       {
-        "Name": "Msm Service",
+        "Name": "msm-service",
         "Uri": "http://lzqnet.services.msm:8080/health"
+      },
+      {
+        "Name": "notify-service",
+        "Uri": "http://lzqnet.services.notify:8080/health"
       }
     ],
     "EvaluationTimeInSeconds": 60,
@@ -23,7 +27,7 @@
       {
         //自定义api通知
         "Name": "Custom API",
-        "Uri": "https://your-api.com/notifications",
+        "Uri": "http://lzqnet.services.notify:8080/mail/send",
         "Payload": "{\"type\": \"failure\", \"service\": \"{{service}}\", \"failure\": \"{{failure}}\", \"description\": \"{{description}}\", \"timestamp\": \"{{now}}\"}",
         "RestorePayload": "{\"type\": \"restored\", \"service\": \"{{service}}\", \"timestamp\": \"{{now}}\"}"
       }

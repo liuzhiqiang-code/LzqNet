@@ -17,11 +17,8 @@
     <None Include=".dockerignore" />
     <None Include="dockercompose\dapr\components\pubsub.yml" />
     <None Include="dockercompose\dapr\components\statestore.yml" />
-    <None Include="dockercompose\grafana\grafana.yml" />
-    <None Include="dockercompose\grafana\provisioning\dashboards.yml" />
-    <None Include="dockercompose\grafana\provisioning\datasources\loki.yml" />
     <None Include="dockercompose\jaeger\jaeger.yml" />
-    <None Include="dockercompose\loki\loki.yml" />
+    <None Include="dockercompose\loki\config\loki.yml" />
     <None Include="dockercompose\nginx\conf.d\apigateway.conf" />
     <None Include="dockercompose\nginx\conf.d\healthcheckui.conf" />
     <None Include="dockercompose\prometheus\prometheus.yml" />
@@ -30,6 +27,6 @@
     <None Include="dockercompose\ssl_certs\key.pem" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="dockercompose\grafana\provisioning\dashboards\" />
+    <Folder Include="dockercompose\grafana\" />
   </ItemGroup>
 </Project>

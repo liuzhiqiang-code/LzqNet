@@ -1,11 +1,12 @@
 ﻿using Consul;
 using Consul.AspNetCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Winton.Extensions.Configuration.Consul;
 using Winton.Extensions.Configuration.Consul.Parsers;
 
-namespace LzqNet.Consul.DCC;
+namespace LzqNet.Consul.Register;
 
 public static class ConsulRegisterExtensions
 {
@@ -30,15 +31,23 @@ public static class ConsulRegisterExtensions
         };
 
         // Register service with consul
+        var serviceId = Guid.NewGuid().ToString();
         builder.Services.AddConsulServiceRegistration(options =>
         {
             options.Checks = new[] { httpCheck };
-            options.ID = Guid.NewGuid().ToString();
+            options.ID = serviceId;
             options.Name = consulOptions.ServiceName;
             options.Address = consulOptions.IP;
             options.Port = consulOptions.Port;
             options.Meta = new Dictionary<string, string>() { { "Weight", consulOptions.Weight.HasValue ? consulOptions.Weight.Value.ToString() : "1" } };
             options.Tags = new[] { $"urlprefix-/{consulOptions.ServiceName}" }; //添加
         });
+
+        // 在Program.cs或启动类中添加
+        builder.Services.AddHostedService(provider =>
+            new ConsulDeregisterService(
+                provider.GetRequiredService<IConsulClient>(),
+                serviceId
+            ));
     }
 }

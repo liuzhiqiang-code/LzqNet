@@ -1,5 +1,4 @@
 using LzqNet.Services.Msm.Infrastructure;
-using Masa.BuildingBlocks.Data;
 using Masa.BuildingBlocks.Data.UoW;
 using Masa.BuildingBlocks.Ddd.Domain.Repositories;
 using Masa.BuildingBlocks.Dispatcher.Events;
@@ -7,15 +6,13 @@ using LzqNet.Contracts.Msm.SysConfig.Commands;
 using LzqNet.DCC;
 using LzqNet.Extensions;
 using LzqNet.Extensions.Serilog;
-using LzqNet.Services.Msm.Application.CommandHandlers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using LzqNet.DCC.Const;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.AddApplicationConfiguration(DCCPathConst.COMMON, DCCPathConst.MSM_SERVICE);
 builder.AddCustomSerilog();
-builder.AddApplicationConfiguration();
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("MsmConnection")
@@ -29,8 +26,8 @@ builder.AddApplicationServices();
 //注册Masa相关服务
 var assemblies = new[]
 {
+    typeof(Program).Assembly,
     typeof(SysConfigCreateCommand).Assembly,
-    typeof(SysConfigCommandHandler).Assembly
 };
 builder.Services
    .AddMapster()
@@ -64,6 +61,7 @@ app.UseMasaExceptionHandler(options =>
     };
 });
 
+app.UseMiddleware<HttpLoggingMiddleware>();
 app.MapApplicationServices();
 
 app.MapMasaMinimalAPIs();
@@ -79,5 +77,5 @@ if (app.Environment.IsDevelopment())
     #endregion
 }
 
-app.MapGet("/",[Authorize] () => { return "msm-service"; });
+app.MapGet("/", [Authorize] () => { return "msm-service"; });
 app.Run();

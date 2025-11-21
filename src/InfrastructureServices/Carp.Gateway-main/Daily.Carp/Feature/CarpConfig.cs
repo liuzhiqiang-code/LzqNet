@@ -1,4 +1,4 @@
-﻿namespace Daily.Carp
+﻿namespace Daily.Carp.Feature
 {
     public class CarpConfig
     {

@@ -5,7 +5,7 @@ using Masa.Contrib.Service.Caller.HttpClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LzqNet.Caller.Auth;
+namespace LzqNet.Caller.ApiGateway;
 public class ApiGatewayCaller : HttpClientCallerBase
 {
     protected override string BaseAddress { get; set; }

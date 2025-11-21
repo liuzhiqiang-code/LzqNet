@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LzqNet.DCC.Const;
+﻿namespace LzqNet.DCC.Const;
 
 public class DCCPathConst
 {
     public const string COMMON = "common";
     public const string GATEWAY = "gateway";
+    public const string MSM_SERVICE = "msm-service";
 }

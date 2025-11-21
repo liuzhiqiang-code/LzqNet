@@ -1,12 +1,12 @@
-﻿using Daily.Carp;
-using Daily.Carp.Extension;
+﻿using Daily.Carp.Extension;
+using Daily.Carp.Feature;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Text;
 
-namespace Daily.LinkTracking
+namespace Daily.Carp.Authentication
 {
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     internal class CarpAuthenticationMiddleware

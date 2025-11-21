@@ -1,0 +1,6 @@
+{
+  "GrafanaLoki": {
+    "LokiUrl": "http://loki:3100",
+    "ServiceName": "msm-service"
+  }
+}

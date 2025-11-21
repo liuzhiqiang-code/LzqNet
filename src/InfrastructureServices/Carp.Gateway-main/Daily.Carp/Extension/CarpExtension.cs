@@ -1,4 +1,5 @@
 ﻿using Daily.Carp.Configuration;
+using Daily.Carp.Feature;
 using Daily.Carp.Internal;
 using Daily.Carp.Yarp;
 using Microsoft.Extensions.DependencyInjection;
