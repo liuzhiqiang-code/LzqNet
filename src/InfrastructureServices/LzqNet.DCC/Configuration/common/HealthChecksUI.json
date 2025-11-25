@@ -20,14 +20,14 @@
       }
     ],
     "EvaluationTimeInSeconds": 60,
-    "MinimumSecondsBetweenFailureNotifications": 60,
+    "MinimumSecondsBetweenFailureNotifications": 1,
 
     // Webhook 通知配置
     "Webhooks": [
       {
         //自定义api通知
         "Name": "Custom API",
-        "Uri": "http://lzqnet.services.notify:8080/mail/send",
+        "Uri": "http://lzqnet.healthcheckui:8080/send",
         "Payload": "{\"type\": \"failure\", \"service\": \"{{service}}\", \"failure\": \"{{failure}}\", \"description\": \"{{description}}\", \"timestamp\": \"{{now}}\"}",
         "RestorePayload": "{\"type\": \"restored\", \"service\": \"{{service}}\", \"timestamp\": \"{{now}}\"}"
       }

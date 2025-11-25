@@ -9,6 +9,7 @@ using LzqNet.Extensions.Serilog;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using LzqNet.DCC.Const;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddApplicationConfiguration(DCCPathConst.COMMON, DCCPathConst.MSM_SERVICE);
@@ -32,7 +33,8 @@ var assemblies = new[]
 builder.Services
    .AddMapster()
    .AddAutoInject()
-   .AddEventBus(assemblies)
+   .AddValidatorsFromAssemblies(assemblies)
+   .AddEventBus(assemblies, eventBusBuilder => eventBusBuilder.UseMiddleware(typeof(ValidatorEventMiddleware<>)))
    .AddDomainEventBus(options =>
    {
        options.UseEventBus();

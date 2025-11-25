@@ -1,3 +1,4 @@
+using FluentValidation;
 using LzqNet.Contracts.Notify.QQMail.Commands;
 using LzqNet.DCC;
 using LzqNet.DCC.Const;
@@ -8,7 +9,6 @@ using Masa.BuildingBlocks.Data.UoW;
 using Masa.BuildingBlocks.Ddd.Domain.Repositories;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,7 +33,8 @@ var assemblies = new[]
 builder.Services
    .AddMapster()
    .AddAutoInject()
-   .AddEventBus(assemblies)
+   .AddValidatorsFromAssemblies(assemblies)
+   .AddEventBus(assemblies,eventBusBuilder => eventBusBuilder.UseMiddleware(typeof(ValidatorEventMiddleware<>)))
    .AddDomainEventBus(options =>
    {
        options.UseEventBus();
@@ -79,12 +80,4 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapGet("/", [Authorize] () => { return "notify-service"; });
-app.MapPost("/api/v1/Mails/QQMailSend", async ([FromServices] IEventBus eventBus, HttpRequest request) =>
-{
-    var form = await request.ReadFormAsync();
-    await eventBus.PublishAsync(new QQMailSendCommand { 
-        
-    
-    });
-}).DisableAntiforgery();
 app.Run();

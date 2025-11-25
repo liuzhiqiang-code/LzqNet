@@ -1,24 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>8b247f8e-f1f8-4b26-b4f0-31e591b4968d</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..\..</DockerfileContext>
-    <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>8b247f8e-f1f8-4b26-b4f0-31e591b4968d</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..\..</DockerfileContext>
+		<DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+	</PropertyGroup>
 
-  <ItemGroup>
-	<PackageReference Include="AspNetCore.HealthChecks.UI" Version="$(MicrosoftPackageVersion)" />
-	<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="$(MicrosoftPackageVersion)" />
-	<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="$(MicrosoftPackageVersion)" />
-	<PackageReference Include="AspNetCore.HealthChecks.Uris" Version="$(MicrosoftPackageVersion)" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Masa.Contrib.Service.MinimalAPIs" Version="$(MASAFrameworkVersion)" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="AspNetCore.HealthChecks.Uris" Version="$(MicrosoftPackageVersion)" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LzqNet.DCC\LzqNet.DCC.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\LzqNet.DCC\LzqNet.DCC.csproj" />
+	</ItemGroup>
 
 </Project>

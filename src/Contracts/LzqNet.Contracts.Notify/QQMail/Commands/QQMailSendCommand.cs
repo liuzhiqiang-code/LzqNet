@@ -11,7 +11,7 @@ public record QQMailSendCommand : Command
     public bool IsHtml { get; set; }
     public List<string> Tos { get; set; }
     public List<string>? Ccs { get; set; }
-    public List<IFormFile>? Attachments { get; set; }
+    public IFormFileCollection Attachments { get; set; }
 }
 public class QQMailSendCommandValidator : MasaAbstractValidator<QQMailSendCommand>
 {

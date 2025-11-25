@@ -11,6 +11,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.0" />
 		<!--<PackageReference Include="Masa.Contrib.Data.EFCore.PostgreSql" Version="$(MASAFrameworkVersion)" />-->
 		<PackageReference Include="Masa.Contrib.Data.EFCore.Sqlite" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Data.UoW.EFCore" Version="$(MASAFrameworkVersion)" />
