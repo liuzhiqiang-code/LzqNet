@@ -1,1 +1,0 @@
-{"Token":"","Service":{"ID":"6a811c8e-74b9-4186-9f5a-6b8506dde3b9","Service":"apigateway","Tags":["urlprefix-/apigateway"],"Address":"lzqnet.apigateway","Meta":{"Weight":"1"},"Port":8080,"Weights":{"Passing":1,"Warning":1},"EnableTagOverride":false,"Proxy":{"Mode":"","MeshGateway":{},"Expose":{}},"Connect":{},"PeerName":"","CreateIndex":0,"ModifyIndex":0},"Source":"remote"}

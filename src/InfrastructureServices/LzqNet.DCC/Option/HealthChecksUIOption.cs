@@ -1,7 +1,6 @@
 ﻿public class HealthChecksUIOption
 {
     public List<HealthCheckSettings> HealthChecks { get; set; } = new();
-    public List<WebhookSettings> Webhooks { get; set; } = new();
 
     /// <summary>
     /// 每60秒检查一次
@@ -30,12 +29,4 @@ public class HealthCheckSettings
 {
     public string Name { get; set; } = string.Empty;
     public string Uri { get; set; } = string.Empty;
-}
-
-public class WebhookSettings
-{
-    public string Name { get; set; } = string.Empty;
-    public string Uri { get; set; } = string.Empty;
-    public string Payload { get; set; } = string.Empty;
-    public string RestorePayload { get; set; } = string.Empty;
 }

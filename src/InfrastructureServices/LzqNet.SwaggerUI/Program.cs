@@ -49,11 +49,11 @@ app.MapGet("/swagger-proxy", async ([FromQuery(Name = "url")] string url,
         return Results.BadRequest("缺少参数 'url'");
     try
     {
-        List<DefaultAccountOption> defaultAccountOptions =
-            builder.Configuration.GetSection("DefaultAccounts").Get<List<DefaultAccountOption>>() ?? [];
-        if (defaultAccountOptions.Count > 0)
+        JwtClientOption? jwtClientOption =
+            builder.Configuration.GetSection("JwtClient").Get<JwtClientOption>();
+        if (jwtClientOption != null)
         {
-            var loginInfo = await authCaller.Login(new UserLoginDto(defaultAccountOptions[0].UserName, defaultAccountOptions[0].Password));
+            var loginInfo = await authCaller.GetClientToken(jwtClientOption);
             if (loginInfo != null)
             {
                 // 2. 将Token添加到请求头
@@ -68,7 +68,14 @@ app.MapGet("/swagger-proxy", async ([FromQuery(Name = "url")] string url,
         var root = JsonSerializer.SerializeToNode(doc.RootElement); // 转为可修改对象
 
         // 仅修改servers数组中的url
-        var servers = root["servers"].AsArray();
+        var servers = root["servers"]?.AsArray() ?? [];
+        if (servers.Count == 0)
+        {
+            // 显式指定匿名类型
+            var serverNode = JsonSerializer.SerializeToNode(new { url = $"{swaggerOptions.GatewayUrl}/{key}" }, new JsonSerializerOptions());
+            // 显式指定数组类型
+            root["servers"] = JsonSerializer.SerializeToNode(new[] { serverNode }, new JsonSerializerOptions());
+        }
         foreach (var server in servers)
         {
             if (key.TrimStart("/").IsNullOrEmpty())

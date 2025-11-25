@@ -1,9 +1,6 @@
 ﻿using LzqNet.Consul.Register;
-using LzqNet.DCC.Const;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Winton.Extensions.Configuration.Consul;
 
 namespace LzqNet.DCC;
 
@@ -16,7 +13,11 @@ public static class ConfigurationExtensions
         // 引入环境相关的 appsettings.{Environment}.json 文件（如 appsettings.Development.json）
         builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
-        configurationKeys.Add(DCCPathConst.COMMON);
+        var settingKeys = builder.Configuration.GetSection("ConfigurationKeys").Get<List<string>>() ?? [];
+        foreach (var key in settingKeys)
+            if(!configurationKeys.Contains(key))
+                configurationKeys.Add(key);
+
         foreach (var configurationKey in configurationKeys)
         {
             //引入Configuration文件夹所有.json文件，后面可替换成dapr或其他分布式配置中心

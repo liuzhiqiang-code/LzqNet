@@ -41,6 +41,18 @@ public class IdentityConfig
                 },
                 AllowedScopes = { "common" } // 允许的 API 访问范围
             },
+            // 客户端模式（Client Credentials）
+            new Client
+            {
+                ClientId = "swaggerui",
+                ClientName = "客户端模式",
+                AllowedGrantTypes = GrantTypes.ClientCredentials, // 客户端凭证模式
+                ClientSecrets =
+                {
+                    new Secret("secret".Sha256()) // 客户端密钥
+                },
+                AllowedScopes = { "common" } // 允许的 API 访问范围
+            },
  
             // 资源所有者密码模式（Resource Owner Password）
             new Client

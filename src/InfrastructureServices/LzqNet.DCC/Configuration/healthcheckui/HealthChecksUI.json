@@ -1,0 +1,25 @@
+{
+  // HealthChecks UI 标准配置
+  "HealthChecksUI": {
+    "HealthChecks": [
+      {
+        "Name": "apigateway",
+        "Uri": "http://lzqnet.apigateway:8080/health"
+      },
+      {
+        "Name": "auth",
+        "Uri": "http://lzqnet.auth:8080/health"
+      },
+      {
+        "Name": "msm-service",
+        "Uri": "http://lzqnet.services.msm:8080/health"
+      },
+      {
+        "Name": "notify-service",
+        "Uri": "http://lzqnet.services.notify:8080/health"
+      }
+    ],
+    "EvaluationTimeInSeconds": 60,
+    "MinimumSecondsBetweenFailureNotifications": 1
+  }
+}
