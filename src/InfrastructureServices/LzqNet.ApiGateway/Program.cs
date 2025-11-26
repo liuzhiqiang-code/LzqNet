@@ -38,12 +38,10 @@ var app = builder.Build();
 app.MapOpenApi();
 app.UseCustomMetrics();// 使用遥测中间件
 
-// 使用 CORS 中间件时，必须在 UseResponseCaching 之前调用 UseCors。
-// app.UseCors();
+app.UseCors("AllowAll");
 app.UseRouting();
 // 全局限流中间件
 app.UseRateLimiter();
-app.UseCors("AllowAll");
 //app.UseCustomAuthentication();
 //app.UseCustomAuthorization();
 app.UseCustomResponseCaching();// 使用响应缓存中间件

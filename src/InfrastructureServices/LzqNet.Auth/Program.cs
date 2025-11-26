@@ -28,6 +28,13 @@ services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Auth API", Version = "v1" });
 });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader());
+});
 
 var connectionString = builder.Configuration.GetConnectionString("AuthConnection")
     ?? throw new InvalidOperationException($"未找到配置项:ConnectionStrings:AuthConnection");
@@ -126,6 +133,7 @@ if (app.Environment.IsDevelopment())
     #endregion
 }
 
+app.UseCors("AllowAll");
 app.UseRouting();
 
 app.UseIdentityServer();

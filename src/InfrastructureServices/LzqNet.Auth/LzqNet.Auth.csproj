@@ -23,6 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\LzqNet.Core\LzqNet.Core.csproj" />
 	  <ProjectReference Include="..\LzqNet.DCC\LzqNet.DCC.csproj" />
 	</ItemGroup>
 

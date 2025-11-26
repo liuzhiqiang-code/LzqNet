@@ -1,10 +1,13 @@
-﻿using LzqNet.Auth.Infrastructure;
+﻿using Duende.IdentityModel.Client;
+using LzqNet.Auth.Infrastructure;
 using LzqNet.Auth.Models;
+using LzqNet.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System.Security.Claims;
 
 namespace LzqNet.Auth.Controllers;
@@ -89,8 +92,8 @@ public class AccountController : ControllerBase
             return BadRequest(new { message = "Failed to obtain token from IdentityServer" });
         }
 
-        var tokenResponse = await response.Content.ReadAsStringAsync();
-        return Ok(tokenResponse);
+        var tokenResponse = await response.Content.ReadFromJsonAsync<TokenViewModel>();
+        return Ok(AdminResult.Success(tokenResponse));
     }
 
     /// <summary>
@@ -128,8 +131,8 @@ public class AccountController : ControllerBase
             return BadRequest(new { message = "Failed to obtain token from IdentityServer" });
         }
 
-        var tokenResponse = await response.Content.ReadAsStringAsync();
-        return Ok(tokenResponse);
+        var tokenResponse = await response.Content.ReadFromJsonAsync<TokenViewModel>();
+        return Ok(AdminResult.Success(tokenResponse));
     }
 
     /// <summary>
@@ -142,11 +145,18 @@ public class AccountController : ControllerBase
     {
         // 从 Claim 中获取用户ID（需确保 Token 包含 sub Claim）
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+        string[] roles = User.FindFirstValue(ClaimTypes.Role)?.Split(",") ?? [];
 
         // 通过 UserManager 查询用户
         var user = await _userManager.FindByIdAsync(userId);
         if (user == null) return NotFound();
 
-        return Ok(new { user.UserName, user.Email });
+        return Ok(AdminResult.Success(new {
+            user.Id,
+            RealName = user.UserName,
+            user.UserName,
+            user.Email,
+            Roles = roles
+        }));
     }
 }

@@ -1,6 +1,12 @@
 {
   "DefaultAccounts": [
     {
+      "UserName": "super",
+      "Password": "123456",
+      "Role": "super",
+      "Email": "superAdmin@example.com"
+    },
+    {
       "UserName": "admin",
       "Password": "123456",
       "Role": "admin",

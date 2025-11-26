@@ -1,4 +1,5 @@
 ﻿using LzqNet.Caller.Auth.Contracts;
+using LzqNet.Core;
 using Masa.Contrib.Service.Caller.HttpClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,13 +17,13 @@ public class AuthCaller : HttpClientCallerBase
     }
     public async Task<TokenViewDto?> Login(UserLoginDto dto)
     {
-        var result = await Caller.PostAsync<TokenViewDto>($"/api/Account/Login", dto);
-        return result;
+        var result = await Caller.PostAsync<AdminResult<TokenViewDto>>($"/api/Account/Login", dto);
+        return result?.Data;
     }
 
     public async Task<TokenViewDto?> GetClientToken(JwtClientOption option)
     {
-        var result = await Caller.PostAsync<TokenViewDto>($"/api/Account/ClientToken", option);
-        return result;
+        var result = await Caller.PostAsync<AdminResult<TokenViewDto>>($"/api/Account/ClientToken", option);
+        return result?.Data;
     }
 }

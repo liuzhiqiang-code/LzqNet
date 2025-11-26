@@ -22,13 +22,15 @@ public class ProfileService : IProfileService
         var userId = context.Subject.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
         ArgumentNullException.ThrowIfNull(userId);
         var user = await _userManager.FindByIdAsync(userId);
+        var roles = await _userManager.GetRolesAsync(user!);
         ArgumentNullException.ThrowIfNull(user);
 
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id!),
             new Claim(ClaimTypes.Name, user.UserName!),
-            new Claim(ClaimTypes.Email, user.Email ?? "")
+            new Claim(ClaimTypes.Email, user.Email ?? ""),
+            new Claim(ClaimTypes.Role, string.Join(",",roles))
         };
 
         context.IssuedClaims.AddRange(claims);

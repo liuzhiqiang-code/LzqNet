@@ -14,4 +14,8 @@
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftPackageVersion)" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\InfrastructureServices\LzqNet.Core\LzqNet.Core.csproj" />
+	</ItemGroup>
+
 </Project>
