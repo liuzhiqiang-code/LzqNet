@@ -1,7 +1,7 @@
 ﻿using Masa.Contrib.Dispatcher.Events;
-using LzqNet.Contracts.Msm.SysConfig.Commands;
 using LzqNet.Services.Msm.Domain.Entities;
 using LzqNet.Services.Msm.Domain.Repositories;
+using LzqNet.Caller.Msm.Contracts.SysConfig.Commands;
 
 namespace LzqNet.Services.Msm.Application.CommandHandlers;
 

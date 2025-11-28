@@ -2,12 +2,11 @@ using Daily.Carp.Extension;
 using LzqNet.ApiGateway.Extensions;
 using LzqNet.ApiGateway.Extensions.HealthCheck;
 using LzqNet.DCC;
-using LzqNet.DCC.Const;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddApplicationConfiguration(DCCPathConst.COMMON,DCCPathConst.GATEWAY);
+builder.AddApplicationConfiguration();
 builder.AddCustomSerilog();
 
 builder.Services.AddMapster();

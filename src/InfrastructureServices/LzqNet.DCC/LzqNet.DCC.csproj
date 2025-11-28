@@ -29,8 +29,4 @@
 		<ProjectReference Include="..\LzqNet.Consul\LzqNet.Consul.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="configuration\notify-service\" />
-	</ItemGroup>
-
 </Project>

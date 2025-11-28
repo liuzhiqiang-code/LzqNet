@@ -29,11 +29,11 @@ services:
       context: .
       dockerfile: src/BusinessServices/LzqNet.Services.Msm/Dockerfile
 
-  lzqnet.services.notify:
-    image: lzqnetservicesnotify
-    build:
-      context: .
-      dockerfile: src/BusinessServices/LzqNet.Services.Notify/Dockerfile
+  # lzqnet.services.notify:
+  #   image: lzqnetservicesnotify
+  #   build:
+  #     context: .
+  #     dockerfile: src/BusinessServices/LzqNet.Services.Notify/Dockerfile
 
 
   redis:
@@ -181,4 +181,3 @@ services:
   # loki_data:  
   # grafana_data:  
   # prometheus_data:
-

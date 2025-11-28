@@ -16,6 +16,7 @@
 		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="AspNetCore.HealthChecks.Uris" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
 	</ItemGroup>
 
 	<ItemGroup>

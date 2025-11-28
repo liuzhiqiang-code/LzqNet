@@ -17,10 +17,14 @@ public class HttpLoggingMiddleware
         try
         {
             await _next(context);
-            _logger.LogInformation("HTTP {Method} {Path} responded {StatusCode}",
+
+            if (context.Request.Path.StartsWithSegments("/api"))
+            {
+                _logger.LogInformation("HTTP {Method} {Path} responded {StatusCode}",
                 context.Request.Method,
                 context.Request.Path,
                 context.Response.StatusCode);
+            }
         }
         catch (Exception ex)
         {

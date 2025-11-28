@@ -11,6 +11,17 @@
 		<PackageReference Include="Masa.Utils.Extensions.DependencyInjection" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Caching.Distributed.StackExchangeRedis" Version="$(MASAFrameworkVersion)" />
 
+		<PackageReference Include="Masa.Contrib.Data.Mapping.Mapster" Version="$(MASAFrameworkVersion)" />
+		<PackageReference Include="Masa.BuildingBlocks.Data.MappingExtensions" Version="$(MASAFrameworkVersion)" />
+
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.0" />
+		<PackageReference Include="Masa.Contrib.Dispatcher.Events" Version="$(MASAFrameworkVersion)" />
+		<PackageReference Include="Masa.Contrib.Dispatcher.Events.FluentValidation" Version="$(MASAFrameworkVersion)" />
+
+
+		<PackageReference Include="Masa.Contrib.Service.MinimalAPIs" Version="$(MASAFrameworkVersion)" />
+
+		<PackageReference Include="Masa.Contrib.Exceptions" Version="$(MASAFrameworkVersion)" />
 		<!--<PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="$(MicrosoftPackageVersion)" />-->
 		<PackageReference Include="AspNetCore.HealthChecks.Redis" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="$(MicrosoftPackageVersion)" />
@@ -26,6 +37,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Callers\LzqNet.Caller\LzqNet.Caller.csproj" />
 	  <ProjectReference Include="..\LzqNet.DCC\LzqNet.DCC.csproj" />
 	</ItemGroup>
 

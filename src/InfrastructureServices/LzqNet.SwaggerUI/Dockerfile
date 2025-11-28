@@ -13,7 +13,9 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Directory.Build.props", "."]
 COPY ["src/InfrastructureServices/LzqNet.SwaggerUI/LzqNet.SwaggerUI.csproj", "src/InfrastructureServices/LzqNet.SwaggerUI/"]
+COPY ["src/Callers/LzqNet.Caller/LzqNet.Caller.csproj", "src/Callers/LzqNet.Caller/"]
 COPY ["src/InfrastructureServices/LzqNet.DCC/LzqNet.DCC.csproj", "src/InfrastructureServices/LzqNet.DCC/"]
+COPY ["src/InfrastructureServices/LzqNet.Consul/LzqNet.Consul.csproj", "src/InfrastructureServices/LzqNet.Consul/"]
 RUN dotnet restore "./src/InfrastructureServices/LzqNet.SwaggerUI/LzqNet.SwaggerUI.csproj"
 COPY . .
 WORKDIR "/src/src/InfrastructureServices/LzqNet.SwaggerUI"

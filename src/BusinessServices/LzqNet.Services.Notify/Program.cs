@@ -1,7 +1,4 @@
-using FluentValidation;
-using LzqNet.Contracts.Notify.QQMail.Commands;
 using LzqNet.DCC;
-using LzqNet.DCC.Const;
 using LzqNet.Extensions;
 using LzqNet.Extensions.Serilog;
 using LzqNet.Services.Notify.Infrastructure;
@@ -12,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.AddApplicationConfiguration(DCCPathConst.COMMON, DCCPathConst.MSM_SERVICE);
+builder.AddApplicationConfiguration();
 builder.AddCustomSerilog();
 
 // Add services to the container.
@@ -25,16 +22,7 @@ builder.Services.AddMasaDbContext<ExampleDbContext>(opt =>
 builder.AddApplicationServices();
 
 //注册Masa相关服务
-var assemblies = new[]
-{    
-    typeof(Program).Assembly,
-    typeof(QQMailSendCommand).Assembly,
-};
 builder.Services
-   .AddMapster()
-   .AddAutoInject()
-   .AddValidatorsFromAssemblies(assemblies)
-   .AddEventBus(assemblies,eventBusBuilder => eventBusBuilder.UseMiddleware(typeof(ValidatorEventMiddleware<>)))
    .AddDomainEventBus(options =>
    {
        options.UseEventBus();
@@ -45,28 +33,7 @@ builder.Services
 
 var app = builder.Build();
 
-app.UseMasaExceptionHandler(options =>
-{
-    var exceptionStatusMap = new Dictionary<Type, int>
-    {
-        [typeof(ArgumentNullException)] = 299,
-        [typeof(MasaArgumentException)] = 400,
-        // 可继续添加其他异常类型
-    };
-    //处理自定义异常
-    options.ExceptionHandler = context =>
-    {
-        var statusCode = exceptionStatusMap.TryGetValue(context.Exception.GetType(), out var code)
-        ? code
-        : 500;
-        context.ToResult(context.Exception.Message, statusCode);
-    };
-});
-
-app.UseMiddleware<HttpLoggingMiddleware>();
 app.MapApplicationServices();
-
-app.MapMasaMinimalAPIs();
 
 if (app.Environment.IsDevelopment())
 {

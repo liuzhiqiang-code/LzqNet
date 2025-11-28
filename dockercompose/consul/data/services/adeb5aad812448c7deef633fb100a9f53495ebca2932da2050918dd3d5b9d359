@@ -1,0 +1,1 @@
+{"Token":"","Service":{"ID":"d4e26c31-d21d-4ede-adee-d19c3cee82b9","Service":"msm-service","Tags":["urlprefix-/msm-service"],"Address":"lzqnet.services.msm","Meta":{"Weight":"1"},"Port":8080,"Weights":{"Passing":1,"Warning":1},"EnableTagOverride":false,"Proxy":{"Mode":"","MeshGateway":{},"Expose":{}},"Connect":{},"PeerName":"","CreateIndex":0,"ModifyIndex":0},"Source":"remote"}

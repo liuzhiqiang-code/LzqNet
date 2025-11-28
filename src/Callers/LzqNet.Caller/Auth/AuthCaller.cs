@@ -1,5 +1,4 @@
 ﻿using LzqNet.Caller.Auth.Contracts;
-using LzqNet.Core;
 using Masa.Contrib.Service.Caller.HttpClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

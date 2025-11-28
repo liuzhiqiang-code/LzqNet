@@ -1,8 +1,8 @@
 ﻿using Masa.BuildingBlocks.Ddd.Domain.Repositories;
 using Masa.Contrib.Dispatcher.Events;
 using Masa.Utils.Models;
-using LzqNet.Contracts.Msm.SysConfig;
-using LzqNet.Contracts.Msm.SysConfig.Queries;
+using LzqNet.Caller.Msm.Contracts.SysConfig;
+using LzqNet.Caller.Msm.Contracts.SysConfig.Queries;
 using LzqNet.Services.Msm.Domain.Repositories;
 
 namespace LzqNet.Services.Msm.Application.QueryHandlers;

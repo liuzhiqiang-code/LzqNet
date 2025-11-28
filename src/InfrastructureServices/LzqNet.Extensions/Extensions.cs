@@ -1,6 +1,7 @@
 ﻿using LzqNet.Extensions.Auth;
 using LzqNet.Extensions.HealthCheck;
 using LzqNet.Extensions.OAuth;
+using LzqNet.Extensions.Serilog;
 using Microsoft.AspNetCore.Authorization;
 using Serilog;
 
@@ -27,6 +28,8 @@ public static class Extensions
 
         builder.AddCustomAuthentication();
         builder.AddCustomAuthorization();
+
+        builder.AddCustomMasa();
     }
 
     public static void MapApplicationServices(this WebApplication app)
@@ -37,11 +40,16 @@ public static class Extensions
 
         app.UseCors("AllowAll");
 
+        app.UseCustomMasaExceptionHandler();
+
+        app.UseMiddleware<HttpLoggingMiddleware>();
+
         app.UseCustomAuthentication();
         app.UseCustomAuthorization();
         app.MapOpenApi();
         app.MapCustomHealthChecks();
         app.MapConfigurationApi();
+        app.MapMasaMinimalAPIs();
     }
 
     public static void MapConfigurationApi(this WebApplication app)

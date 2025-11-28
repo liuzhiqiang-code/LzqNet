@@ -1,7 +1,7 @@
-﻿using Masa.BuildingBlocks.Dispatcher.Events;
-using LzqNet.Contracts.Msm.SysConfig;
-using LzqNet.Contracts.Msm.SysConfig.Commands;
-using LzqNet.Contracts.Msm.SysConfig.Queries;
+﻿using LzqNet.Caller.Msm.Contracts.SysConfig;
+using LzqNet.Caller.Msm.Contracts.SysConfig.Commands;
+using LzqNet.Caller.Msm.Contracts.SysConfig.Queries;
+using Masa.BuildingBlocks.Dispatcher.Events;
 using System.ComponentModel;
 
 namespace LzqNet.Services.Msm.Services;

@@ -11,23 +11,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.0" />
 		<!--<PackageReference Include="Masa.Contrib.Data.EFCore.PostgreSql" Version="$(MASAFrameworkVersion)" />-->
 		<PackageReference Include="Masa.Contrib.Data.EFCore.Sqlite" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Data.UoW.EFCore" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.Contrib.Data.Mapping.Mapster" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.BuildingBlocks.Data.MappingExtensions" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Ddd.Domain" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Ddd.Domain.Repository.EFCore" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.Contrib.Dispatcher.Events" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.Contrib.Dispatcher.Events.FluentValidation" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.Contrib.Exceptions" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.Contrib.Service.MinimalAPIs" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Contracts\LzqNet.Contracts.Msm\LzqNet.Contracts.Msm.csproj" />
 		<ProjectReference Include="..\..\InfrastructureServices\LzqNet.DCC\LzqNet.DCC.csproj" />
 		<ProjectReference Include="..\..\InfrastructureServices\LzqNet.Extensions\LzqNet.Extensions.csproj" />
 	</ItemGroup>

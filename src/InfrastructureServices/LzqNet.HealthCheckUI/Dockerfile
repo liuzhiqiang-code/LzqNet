@@ -15,6 +15,7 @@ WORKDIR /src
 COPY ["Directory.Build.props", "."]
 COPY ["src/InfrastructureServices/LzqNet.HealthCheckUI/LzqNet.HealthCheckUI.csproj", "src/InfrastructureServices/LzqNet.HealthCheckUI/"]
 COPY ["src/InfrastructureServices/LzqNet.DCC/LzqNet.DCC.csproj", "src/InfrastructureServices/LzqNet.DCC/"]
+COPY ["src/InfrastructureServices/LzqNet.Consul/LzqNet.Consul.csproj", "src/InfrastructureServices/LzqNet.Consul/"]
 RUN dotnet restore "./src/InfrastructureServices/LzqNet.HealthCheckUI/LzqNet.HealthCheckUI.csproj"
 COPY . .
 WORKDIR "/src/src/InfrastructureServices/LzqNet.HealthCheckUI"

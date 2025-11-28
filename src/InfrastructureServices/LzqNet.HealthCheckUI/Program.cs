@@ -1,6 +1,5 @@
 using HealthChecks.UI.Client;
 using LzqNet.DCC;
-using LzqNet.DCC.Const;
 using LzqNet.HealthCheckUI.Services;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +7,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddApplicationConfiguration(DCCPathConst.COMMON, DCCPathConst.HEALTHCHECK_UI);
+builder.AddApplicationConfiguration();
 
 // 添加健康检查服务
 builder.Services.AddHealthChecks()

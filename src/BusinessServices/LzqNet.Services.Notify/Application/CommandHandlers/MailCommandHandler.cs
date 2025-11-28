@@ -1,7 +1,6 @@
-﻿using LzqNet.Contracts.Notify.QQMail.Commands;
+﻿using LzqNet.Caller.Notify.Contracts.QQMail.Commands;
 using LzqNet.Services.Notify.Domain.Repositories;
 using Masa.Contrib.Dispatcher.Events;
-using System.Net;
 using System.Net.Mail;
 using System.Text;
 

@@ -1,13 +1,10 @@
-﻿using Duende.IdentityModel.Client;
-using LzqNet.Auth.Infrastructure;
+﻿using LzqNet.Auth.Infrastructure;
 using LzqNet.Auth.Models;
-using LzqNet.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System.Security.Claims;
 
 namespace LzqNet.Auth.Controllers;

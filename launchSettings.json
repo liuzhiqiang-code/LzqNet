@@ -5,10 +5,10 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "lzqnet.healthcheckui": "StartWithoutDebugging",
-        "lzqnet.apigateway": "StartDebugging",
+        "lzqnet.apigateway": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
-        "lzqnet.services.msm": "StartWithoutDebugging",
         "lzqnet.swaggerui": "StartWithoutDebugging",
+        "lzqnet.services.msm": "StartDebugging",
         "lzqnet.services.notify": "StartDebugging"
       }
     }

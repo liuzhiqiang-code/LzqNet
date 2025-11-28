@@ -1,8 +1,6 @@
-﻿using LzqNet.Contracts.Notify.QQMail.Commands;
+﻿using LzqNet.Caller.Notify.Contracts.QQMail.Commands;
 using Masa.BuildingBlocks.Dispatcher.Events;
-using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
-using System.Net.Mail;
 
 namespace LzqNet.Services.Notify.Services;
 
@@ -16,7 +14,7 @@ public class MailService : ServiceBase
     /// <param name="input"></param>
     /// <returns></returns>
     [DisplayName("QQ邮箱 发送邮件")]
-    public async Task<IResult> QQMailSend(HttpRequest request)
+    public async Task<AdminResult> QQMailSend(HttpRequest request)
     {
         var form = await request.ReadFormAsync();
         await EventBus.PublishAsync(new QQMailSendCommand
@@ -30,6 +28,6 @@ public class MailService : ServiceBase
                 : null,
             Attachments = form.Files
         });
-        return Results.Ok();
+        return AdminResult.Success("发送成功");
     }
 }
