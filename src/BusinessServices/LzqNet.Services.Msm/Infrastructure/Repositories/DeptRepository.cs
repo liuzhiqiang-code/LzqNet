@@ -5,7 +5,7 @@ using LzqNet.Services.Msm.Domain.Repositories;
 
 namespace LzqNet.Services.Msm.Infrastructure.Repositories;
 
-public class SysConfigRepository(ExampleDbContext context, IUnitOfWork unitOfWork)
-    : Repository<ExampleDbContext, SysConfigEntity, long>(context, unitOfWork), ISysConfigRepository
+public class DeptRepository(ExampleDbContext context, IUnitOfWork unitOfWork)
+    : Repository<ExampleDbContext, DeptEntity, long>(context, unitOfWork), IDeptRepository
 {
 }

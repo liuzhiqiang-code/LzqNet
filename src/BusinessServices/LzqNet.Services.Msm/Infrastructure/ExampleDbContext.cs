@@ -17,10 +17,7 @@ public class ExampleDbContext : MasaDbContext
 
     private static void ConfigEntities(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<SysConfigEntity>(entity =>
-        {
-            // 配置表名
-            entity.ToTable("sys_config");
-        });
+        modelBuilder.Entity<SysConfigEntity>().ToTable("sys_config");
+        modelBuilder.Entity<DeptEntity>().ToTable("msm_Dept");
     }
 }
