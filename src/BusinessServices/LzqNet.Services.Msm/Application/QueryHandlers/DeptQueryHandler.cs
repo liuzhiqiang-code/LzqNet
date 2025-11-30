@@ -12,7 +12,7 @@ public class DeptQueryHandler(IDeptRepository deptRepository)
     private readonly IDeptRepository _deptRepository = deptRepository;
 
     [EventHandler]
-    public async Task GetTreeListHandleAsync(DeptGetTreeListQuery query)
+    public async Task GetListHandleAsync(DeptGetListQuery query)
     {
         // 获取所有部门数据
         var allDepts = (await _deptRepository.GetListAsync())
@@ -32,7 +32,7 @@ public class DeptQueryHandler(IDeptRepository deptRepository)
             {
                 Id = d.Id,
                 Pid = d.Pid,
-                DeptName = d.DeptName,
+                Name = d.Name,
                 Status = d.Status,
                 Remark = d.Remark,
                 Children = BuildDeptTree(allDepts, d.Id) // 递归处理子节点

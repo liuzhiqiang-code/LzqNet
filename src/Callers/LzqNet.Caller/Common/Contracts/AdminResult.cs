@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿using System.Text.Json.Serialization;
+
+/// <summary>
 /// 基础响应结果 (仅包含状态码和消息，不包含数据)
 /// 用于失败响应或不需要返回数据的成功响应
 /// </summary>
@@ -7,16 +9,19 @@ public class AdminResult
     /// <summary>
     /// 是否成功
     /// </summary>
-    public bool IsSuccess { get; set; } = true;
+    [JsonPropertyName("isSuccess")]
+    public bool IsSuccess => Code == 0 ;
 
     /// <summary>
     /// 状态码 0 成功  其他 失败
     /// </summary>
+    [JsonPropertyName("code")]
     public int Code { get; set; }
 
     /// <summary>
     /// 消息
     /// </summary>
+    [JsonPropertyName("message")]
     public string Message { get; set; }
 
     // 【关键修改】基类中移除 Data 属性，彻底消除二义性。
@@ -46,7 +51,7 @@ public class AdminResult
     /// </summary>
     public static AdminResult Fail(string message, int code = 1)
     {
-        return new AdminResult { IsSuccess = false, Code = code, Message = message };
+        return new AdminResult { Code = code, Message = message };
     }
 
     /// <summary>
@@ -55,7 +60,7 @@ public class AdminResult
     /// </summary>
     public static AdminResult<T> Fail<T>(string message, int code = 1)
     {
-        return new AdminResult<T> { IsSuccess = false, Code = code, Message = message, Data = default };
+        return new AdminResult<T> { Code = code, Message = message, Data = default };
     }
 }
 
@@ -69,5 +74,6 @@ public class AdminResult<T> : AdminResult
     /// 数据载荷
     /// 这里是唯一的 Data 定义，没有任何隐藏或重写，干净纯粹
     /// </summary>
+    [JsonPropertyName("data")]
     public T Data { get; set; }
 }

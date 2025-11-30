@@ -1,4 +1,4 @@
-import { baseRequestClient, requestClient } from '#/api/request';
+import { baseAuthRequestClient, authRequestClient } from '#/api/request';
 
 export namespace AuthApi {
   /** 登录接口参数 */
@@ -24,14 +24,14 @@ export namespace AuthApi {
  */
 export async function loginApi(data: AuthApi.LoginParams) {
   data.userName = data.username;
-  return await requestClient.post<AuthApi.LoginResult>('/Account/Login', data);
+  return await authRequestClient.post<AuthApi.LoginResult>('/Account/Login', data);
 }
 
 /**
  * 刷新accessToken
  */
 export async function refreshTokenApi() {
-  return baseRequestClient.post<AuthApi.RefreshTokenResult>('/auth/refresh', {
+  return baseAuthRequestClient.post<AuthApi.RefreshTokenResult>('/auth/refresh', {
     withCredentials: true,
   });
 }
@@ -40,7 +40,7 @@ export async function refreshTokenApi() {
  * 退出登录
  */
 export async function logoutApi() {
-  return requestClient.post('/Account/Logout', {
+  return authRequestClient.post('/Account/Logout', {
     withCredentials: true,
   });
 }
@@ -50,5 +50,5 @@ export async function logoutApi() {
  */
 export async function getAccessCodesApi() {
   return [];
-  //return requestClient.get<string[]>('/auth/codes');
+  //return msmRequestClient.get<string[]>('/auth/codes');
 }

@@ -6,7 +6,7 @@ import type {
 import { generateAccessible } from '@vben/access';
 import { preferences } from '@vben/preferences';
 
-import { ElMessage } from 'element-plus';
+import { message } from 'ant-design-vue';
 
 import { getAllMenusApi } from '#/api';
 import { BasicLayout, IFrameView } from '#/layouts';
@@ -25,9 +25,9 @@ async function generateAccess(options: GenerateMenuAndRoutesOptions) {
   return await generateAccessible(preferences.app.accessMode, {
     ...options,
     fetchMenuListAsync: async () => {
-      ElMessage({
-        duration: 1500,
-        message: `${$t('common.loadingMenu')}...`,
+      message.loading({
+        content: `${$t('common.loadingMenu')}...`,
+        duration: 1.5,
       });
       return await getAllMenusApi();
     },

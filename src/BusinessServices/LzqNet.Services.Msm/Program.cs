@@ -17,7 +17,7 @@ var connectionString = builder.Configuration.GetConnectionString("MsmConnection"
     ?? throw new InvalidOperationException($"未找到配置项:ConnectionStrings:MsmConnection");
 builder.Services.AddMasaDbContext<ExampleDbContext>(opt =>
 {
-    opt.UseSqlite(connectionString);
+    opt.UseMySQL(connectionString);
 });
 builder.AddApplicationServices();
 

@@ -7,7 +7,7 @@ import { LOGIN_PATH } from '@vben/constants';
 import { preferences } from '@vben/preferences';
 import { resetAllStores, useAccessStore, useUserStore } from '@vben/stores';
 
-import { ElNotification } from 'element-plus';
+import { notification } from 'ant-design-vue';
 import { defineStore } from 'pinia';
 
 import { getAccessCodesApi, getUserInfoApi, loginApi, logoutApi } from '#/api';
@@ -37,7 +37,6 @@ export const useAuthStore = defineStore('auth', () => {
 
       // 如果成功获取到 accessToken
       if (access_token) {
-        // 将 accessToken 存储到 accessStore 中
         accessStore.setAccessToken(access_token);
 
         // 获取用户信息并存储到 accessStore 中
@@ -62,10 +61,10 @@ export const useAuthStore = defineStore('auth', () => {
         }
 
         if (userInfo?.realName) {
-          ElNotification({
-            message: `${$t('authentication.loginSuccessDesc')}:${userInfo?.realName}`,
-            title: $t('authentication.loginSuccess'),
-            type: 'success',
+          notification.success({
+            description: `${$t('authentication.loginSuccessDesc')}:${userInfo?.realName}`,
+            duration: 3,
+            message: $t('authentication.loginSuccess'),
           });
         }
       }

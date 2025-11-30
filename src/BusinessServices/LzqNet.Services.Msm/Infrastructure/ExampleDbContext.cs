@@ -18,6 +18,6 @@ public class ExampleDbContext : MasaDbContext
     private static void ConfigEntities(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<SysConfigEntity>().ToTable("sys_config");
-        modelBuilder.Entity<DeptEntity>().ToTable("msm_Dept");
+        modelBuilder.Entity<DeptEntity>().ToTable("msm_dept");
     }
 }

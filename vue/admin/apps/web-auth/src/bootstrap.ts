@@ -1,14 +1,13 @@
 import { createApp, watchEffect } from 'vue';
 
 import { registerAccessDirective } from '@vben/access';
-import { registerLoadingDirective } from '@vben/common-ui';
+import { registerLoadingDirective } from '@vben/common-ui/es/loading';
 import { preferences } from '@vben/preferences';
 import { initStores } from '@vben/stores';
 import '@vben/styles';
-import '@vben/styles/ele';
+import '@vben/styles/antd';
 
 import { useTitle } from '@vueuse/core';
-import { ElLoading } from 'element-plus';
 
 import { $t, setupI18n } from '#/locales';
 
@@ -30,16 +29,14 @@ async function bootstrap(namespace: string) {
   // });
   // // 设置抽屉的默认配置
   // setDefaultDrawerProps({
-  //   zIndex: 2000,
+  //   zIndex: 1020,
   // });
+
   const app = createApp(App);
 
-  // 注册Element Plus提供的v-loading指令
-  app.directive('loading', ElLoading.directive);
-
-  // 注册Vben提供的v-loading和v-spinning指令
+  // 注册v-loading指令
   registerLoadingDirective(app, {
-    loading: false, // Vben提供的v-loading指令和Element Plus提供的v-loading指令二选一即可，此处false表示不注册Vben提供的v-loading指令
+    loading: 'loading', // 在这里可以自定义指令名称，也可以明确提供false表示不注册这个指令
     spinning: 'spinning',
   });
 

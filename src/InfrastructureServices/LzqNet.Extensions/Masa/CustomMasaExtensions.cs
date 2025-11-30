@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Masa.BuildingBlocks.Caching;
 using Masa.BuildingBlocks.Dispatcher.Events;
+using Microsoft.Extensions.Options;
 using System.Reflection;
 
 public static class CustomMasaExtensions
@@ -14,7 +15,7 @@ public static class CustomMasaExtensions
             loadedEventBusAssemblies.Add(Assembly.Load(assembly));
 
         var callerAssemblyNames = builder.Configuration.GetSection("Masa:CallerAssemblyNames").Get<string[]>() ?? [];
-        var loadedCallerAssemblies = new List<Assembly>{ entryAssembly };
+        var loadedCallerAssemblies = new List<Assembly> { entryAssembly };
         foreach (var assembly in callerAssemblyNames)
             loadedCallerAssemblies.Add(Assembly.Load(assembly));
 
@@ -30,7 +31,11 @@ public static class CustomMasaExtensions
                 distributedCacheOptions.UseStackExchangeRedisCache();//使用分布式 Redis 缓存，默认使用本地 `RedisConfig` 节点的配置
             })
             .AddAutoRegistrationCaller(loadedCallerAssemblies)
-            .AddMasaMinimalAPIs(option => option.MapHttpMethodsForUnmatched = ["Post"]);
+            .AddMasaMinimalAPIs(options =>
+            {
+                options.DisableTrimMethodPrefix = true;//禁用移除方法前缀(上方 `Get`、`Post`、`Put`、`Delete` 请求的前缀)
+                options.MapHttpMethodsForUnmatched = ["Post"];//当前服务禁用自动注册路由
+            });
     }
 
     public static void UseCustomMasaExceptionHandler(this WebApplication app)
@@ -41,6 +46,7 @@ public static class CustomMasaExtensions
             {
                 [typeof(ArgumentNullException)] = 299,
                 [typeof(MasaArgumentException)] = 400,
+                [typeof(MasaValidatorException)] = 400,
                 // 可继续添加其他异常类型
             };
             //处理自定义异常
@@ -49,7 +55,7 @@ public static class CustomMasaExtensions
                 var statusCode = exceptionStatusMap.TryGetValue(context.Exception.GetType(), out var code)
                 ? code
                 : 500;
-                context.ToResult(context.Exception.Message, statusCode);
+                context.ToResult(AdminResult.Fail(context.Exception.Message, statusCode).ToJson(),statusCode);
             };
         });
     }

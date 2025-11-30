@@ -13,13 +13,13 @@ import {
 } from '@vben/request';
 import { useAccessStore } from '@vben/stores';
 
-import { ElMessage } from 'element-plus';
+import { message } from 'ant-design-vue';
 
 import { useAuthStore } from '#/store';
 
 import { refreshTokenApi } from './core';
 
-const { apiURL } = useAppConfig(import.meta.env, import.meta.env.PROD);
+const { apiURL,authApiURL,msmApiURL } = useAppConfig(import.meta.env, import.meta.env.PROD);
 
 function createRequestClient(baseURL: string, options?: RequestClientOptions) {
   const client = new RequestClient({
@@ -99,15 +99,25 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
       const responseData = error?.response?.data ?? {};
       const errorMessage = responseData?.error ?? responseData?.message ?? '';
       // 如果没有错误信息，则会根据状态码进行提示
-      ElMessage.error(errorMessage || msg);
+      message.error(errorMessage || msg);
     }),
   );
 
   return client;
 }
 
+
 export const requestClient = createRequestClient(apiURL, {
   responseReturn: 'data',
 });
-
 export const baseRequestClient = new RequestClient({ baseURL: apiURL });
+
+export const authRequestClient = createRequestClient(authApiURL, {
+  responseReturn: 'data',
+});
+export const baseAuthRequestClient = new RequestClient({ baseURL: authApiURL });
+
+export const msmRequestClient = createRequestClient(msmApiURL, {
+  responseReturn: 'data',
+});
+export const baseMsmRequestClient = new RequestClient({ baseURL: msmApiURL });

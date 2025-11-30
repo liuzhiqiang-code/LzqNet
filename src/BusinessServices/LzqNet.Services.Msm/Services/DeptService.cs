@@ -2,12 +2,15 @@
 using LzqNet.Caller.Msm.Contracts.Dept.Commands;
 using LzqNet.Caller.Msm.Contracts.Dept.Queries;
 using Masa.BuildingBlocks.Dispatcher.Events;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 
 namespace LzqNet.Services.Msm.Services;
 
 public class DeptService : ServiceBase
 {
+    public DeptService() : base("/api/v1/dept") { }
+
     private IEventBus EventBus => GetRequiredService<IEventBus>();
 
     /// <summary>
@@ -16,7 +19,8 @@ public class DeptService : ServiceBase
     /// <param name="input"></param>
     /// <returns></returns>
     [DisplayName("获取参数配置分页列表")]
-    public async Task<IResult> Page(DeptSearchDto input)
+    [RoutePattern(pattern: "page", true)]
+    public async Task<IResult> PageAsync([FromBody] DeptPageSearchDto input)
     {
         var DeptPageQuery = new DeptPageQuery(input);
         await EventBus.PublishAsync(DeptPageQuery);
@@ -28,11 +32,12 @@ public class DeptService : ServiceBase
     /// </summary>
     /// <returns></returns>
     [DisplayName("获取参数配置列表")]
-    public async Task<IResult> TreeList(DeptSearchDto input)
+    [RoutePattern(pattern: "list", true)]
+    public async Task<IResult> ListAsync([FromBody] DeptSearchDto? input)
     {
-        var DeptPageQuery = new DeptGetTreeListQuery(input);
+        var DeptPageQuery = new DeptGetListQuery(input);
         await EventBus.PublishAsync(DeptPageQuery);
-        return Results.Ok(DeptPageQuery.Result);
+        return Results.Ok(AdminResult.Success(DeptPageQuery.Result));
     }
 
     /// <summary>
@@ -41,9 +46,11 @@ public class DeptService : ServiceBase
     /// <param name="input"></param>
     /// <returns></returns>
     [DisplayName("增加参数配置")]
-    public async Task AddConfig(DeptCreateCommand command)
+    [RoutePattern(pattern: "create", true)]
+    public async Task<AdminResult> CreateAsync([FromBody] DeptCreateCommand command)
     {
         await EventBus.PublishAsync(command);
+        return AdminResult.Success();
     }
 
     /// <summary>
@@ -52,9 +59,11 @@ public class DeptService : ServiceBase
     /// <param name="input"></param>
     /// <returns></returns>
     [DisplayName("更新参数配置")]
-    public async Task UpdateConfig(DeptUpdateCommand command)
+    [RoutePattern(pattern: "update", true)]
+    public async Task<AdminResult> UpdateAsync([FromBody] DeptUpdateCommand command)
     {
         await EventBus.PublishAsync(command);
+        return AdminResult.Success();
     }
 
     /// <summary>
@@ -63,10 +72,12 @@ public class DeptService : ServiceBase
     /// <param name="input"></param>
     /// <returns></returns>
     [DisplayName("删除参数配置")]
-    public async Task DeleteConfig(long id)
+    [RoutePattern(pattern: "delete/{id}", true)]
+    public async Task<AdminResult> DeleteAsync(long id)
     {
         var command = new DeptDeleteCommand([id]);
         await EventBus.PublishAsync(command);
+        return AdminResult.Success();
     }
 
     /// <summary>
@@ -75,10 +86,12 @@ public class DeptService : ServiceBase
     /// <param name="ids"></param>
     /// <returns></returns>
     [DisplayName("批量删除参数配置")]
-    public async Task BatchDeleteConfig(List<long> ids)
+    [RoutePattern(pattern: "batchDelete", true, HttpMethod = "Delete")]
+    public async Task<AdminResult> BatchDeleteAsync([FromBody] List<long> ids)
     {
         var command = new DeptDeleteCommand(ids);
         await EventBus.PublishAsync(command);
+        return AdminResult.Success();
     }
 
     ///// <summary>
