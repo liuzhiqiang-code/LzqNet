@@ -2,7 +2,6 @@
 using Duende.IdentityServer.Services;
 using LzqNet.Auth.Infrastructure;
 using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 

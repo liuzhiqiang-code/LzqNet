@@ -1,112 +1,112 @@
-﻿using LzqNet.Caller.Msm.Contracts.Dept;
-using LzqNet.Caller.Msm.Contracts.Dept.Commands;
-using LzqNet.Caller.Msm.Contracts.Dept.Queries;
+﻿using LzqNet.Caller.Msm.Contracts.Role;
+using LzqNet.Caller.Msm.Contracts.Role.Commands;
+using LzqNet.Caller.Msm.Contracts.Role.Queries;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 
 namespace LzqNet.Services.Msm.Services;
 
-public class DeptService : ServiceBase
+public class RoleService : ServiceBase
 {
-    public DeptService() : base("/api/v1/dept") { }
+    public RoleService() : base("/api/v1/role") { }
 
     private IEventBus EventBus => GetRequiredService<IEventBus>();
 
     /// <summary>
-    /// 获取部门分页列表 🔖
+    /// 获取角色分页列表 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取部门分页列表")]
+    [DisplayName("获取角色分页列表")]
     [RoutePattern(pattern: "page", true)]
-    public async Task<IResult> PageAsync([FromBody] DeptPageSearchDto input)
+    public async Task<IResult> PageAsync([FromBody] RolePageSearchDto input)
     {
-        var query = new DeptPageQuery(input);
+        var query = new RolePageQuery(input);
         await EventBus.PublishAsync(query);
         return Results.Ok(query.Result);
     }
 
     /// <summary>
-    /// 获取部门列表 🔖
+    /// 获取角色列表 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取部门列表")]
+    [DisplayName("获取角色列表")]
     [RoutePattern(pattern: "list", true)]
-    public async Task<IResult> ListAsync([FromBody] DeptSearchDto? input)
+    public async Task<IResult> ListAsync([FromBody] RoleSearchDto? input)
     {
-        var query = new DeptGetListQuery(input);
+        var query = new RoleGetListQuery(input);
         await EventBus.PublishAsync(query);
         return Results.Ok(AdminResult.Success(query.Result));
     }
 
     /// <summary>
-    /// 增加部门 🔖
+    /// 增加角色 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("增加部门")]
+    [DisplayName("增加角色")]
     [RoutePattern(pattern: "create", true)]
-    public async Task<AdminResult> CreateAsync([FromBody] DeptCreateCommand command)
+    public async Task<AdminResult> CreateAsync([FromBody] RoleCreateCommand command)
     {
         await EventBus.PublishAsync(command);
         return AdminResult.Success();
     }
 
     /// <summary>
-    /// 更新部门 🔖
+    /// 更新角色 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("更新部门")]
+    [DisplayName("更新角色")]
     [RoutePattern(pattern: "update", true)]
-    public async Task<AdminResult> UpdateAsync([FromBody] DeptUpdateCommand command)
+    public async Task<AdminResult> UpdateAsync([FromBody] RoleUpdateCommand command)
     {
         await EventBus.PublishAsync(command);
         return AdminResult.Success();
     }
 
     /// <summary>
-    /// 删除部门 🔖
+    /// 删除角色 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("删除部门")]
+    [DisplayName("删除角色")]
     [RoutePattern(pattern: "delete/{id}", true)]
     public async Task<AdminResult> DeleteAsync(long id)
     {
-        var command = new DeptDeleteCommand([id]);
+        var command = new RoleDeleteCommand([id]);
         await EventBus.PublishAsync(command);
         return AdminResult.Success();
     }
 
     /// <summary>
-    /// 批量删除部门 🔖
+    /// 批量删除角色 🔖
     /// </summary>
     /// <param name="ids"></param>
     /// <returns></returns>
-    [DisplayName("批量删除部门")]
+    [DisplayName("批量删除角色")]
     [RoutePattern(pattern: "batchDelete", true, HttpMethod = "Delete")]
     public async Task<AdminResult> BatchDeleteAsync([FromBody] List<long> ids)
     {
-        var command = new DeptDeleteCommand(ids);
+        var command = new RoleDeleteCommand(ids);
         await EventBus.PublishAsync(command);
         return AdminResult.Success();
     }
 
     ///// <summary>
-    ///// 获取部门详情 🔖
+    ///// 获取角色详情 🔖
     ///// </summary>
     ///// <param name="input"></param>
     ///// <returns></returns>
-    //[DisplayName("获取部门详情")]
-    //public async Task<DeptViewDto> GetDetail([FromQuery] DeptSearchDto input)
+    //[DisplayName("获取角色详情")]
+    //public async Task<RoleViewDto> GetDetail([FromQuery] RoleSearchDto input)
     //{
-    //    return new DeptViewDto();
+    //    return new RoleViewDto();
     //}
 
     ///// <summary>
-    ///// 获取部门值
+    ///// 获取角色值
     ///// </summary>
     ///// <param name="code"></param>
     ///// <returns></returns>
@@ -117,7 +117,7 @@ public class DeptService : ServiceBase
     //}
 
     ///// <summary>
-    ///// 更新部门值
+    ///// 更新角色值
     ///// </summary>
     ///// <param name="code"></param>
     ///// <param name="value"></param>
@@ -159,12 +159,12 @@ public class DeptService : ServiceBase
     //}
 
     ///// <summary>
-    ///// 批量更新部门值
+    ///// 批量更新角色值
     ///// </summary>
     ///// <param name="input"></param>
     ///// <returns></returns>
-    //[DisplayName("批量更新部门值")]
-    //public async Task BatchUpdateConfig(List<UpdateDeptDto> input)
+    //[DisplayName("批量更新角色值")]
+    //public async Task BatchUpdateConfig(List<UpdateRoleDto> input)
     //{
 
     //}

@@ -19,5 +19,6 @@ public class ExampleDbContext : MasaDbContext
     {
         modelBuilder.Entity<SysConfigEntity>().ToTable("sys_config");
         modelBuilder.Entity<DeptEntity>().ToTable("msm_dept");
+        modelBuilder.Entity<RoleEntity>().ToTable("msm_role");
     }
 }

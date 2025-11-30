@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LzqNet.Caller.Auth;
+
 public class AuthCaller : HttpClientCallerBase
 {
     protected override string BaseAddress { get; set; }
@@ -24,5 +25,26 @@ public class AuthCaller : HttpClientCallerBase
     {
         var result = await Caller.PostAsync<AdminResult<TokenViewDto>>($"/api/Account/ClientToken", option);
         return result?.Data;
+    }
+
+    public async Task<AdminResult> AssignRoleToUser(UserRoleModel model)
+    {
+        return await Caller.PostAsync<AdminResult>($"/api/Role/AssignRoleToUser", model)
+            ?? AdminResult.Fail("调试接口失败");
+    }
+    public async Task<AdminResult> CreateRole(RoleModel model)
+    {
+        return await Caller.PostAsync<AdminResult>($"/api/Role/Create", model)
+            ?? AdminResult.Fail("调试接口失败");
+    }
+    public async Task<AdminResult> UpdateRole(RoleUpdateModel model)
+    {
+        return await Caller.PostAsync<AdminResult>($"/api/Role/Update", model)
+            ?? AdminResult.Fail("调试接口失败");
+    }
+    public async Task<AdminResult> DeleteRole(List<RoleModel> input)
+    {
+        return await Caller.PostAsync<AdminResult>($"/api/Role/Delete", input)
+            ?? AdminResult.Fail("调试接口失败");
     }
 }
