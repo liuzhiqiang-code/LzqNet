@@ -50,10 +50,6 @@ services:
     restart: unless-stopped
     ports:
       - "28500:8500"  # Web UI端口
-      - "28600:8600"  # DNS端口
-      - "28300:8300"  # Server RPC
-      - "28301:8301"  # Serf LAN
-      - "28302:8302"  # Serf WAN
     volumes:
       - ./dockercompose/consul/data:/consul/data
     command: agent -server -ui -node=consul-server -bootstrap-expect=1 -client=0.0.0.0

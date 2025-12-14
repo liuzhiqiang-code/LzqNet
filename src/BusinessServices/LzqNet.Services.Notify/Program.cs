@@ -18,6 +18,7 @@ var connectionString = builder.Configuration.GetConnectionString("NotifyConnecti
 builder.Services.AddMasaDbContext<ExampleDbContext>(opt =>
 {
     opt.UseSqlite(connectionString);
+    opt.AddInterceptors(new CommandInterceptor());
 });
 builder.AddApplicationServices();
 

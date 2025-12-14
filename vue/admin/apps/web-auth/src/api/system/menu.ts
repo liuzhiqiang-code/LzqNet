@@ -1,6 +1,6 @@
 import type { Recordable } from '@vben/types';
 
-import { requestClient } from '#/api/request';
+import { msmRequestClient } from '#/api/request';
 
 export namespace SystemMenuApi {
   /** 徽标颜色集合 */
@@ -94,8 +94,8 @@ export namespace SystemMenuApi {
  * 获取菜单数据列表
  */
 async function getMenuList() {
-  return requestClient.get<Array<SystemMenuApi.SystemMenu>>(
-    '/system/menu/list',
+  return msmRequestClient.get<Array<SystemMenuApi.SystemMenu>>(
+    '/menu/list',
   );
 }
 
@@ -103,7 +103,7 @@ async function isMenuNameExists(
   name: string,
   id?: SystemMenuApi.SystemMenu['id'],
 ) {
-  return requestClient.get<boolean>('/system/menu/name-exists', {
+  return msmRequestClient.get<boolean>('/menu/name-exists', {
     params: { id, name },
   });
 }
@@ -112,7 +112,7 @@ async function isMenuPathExists(
   path: string,
   id?: SystemMenuApi.SystemMenu['id'],
 ) {
-  return requestClient.get<boolean>('/system/menu/path-exists', {
+  return msmRequestClient.get<boolean>('/menu/path-exists', {
     params: { id, path },
   });
 }
@@ -124,7 +124,7 @@ async function isMenuPathExists(
 async function createMenu(
   data: Omit<SystemMenuApi.SystemMenu, 'children' | 'id'>,
 ) {
-  return requestClient.post('/system/menu', data);
+  return msmRequestClient.post('/menu/create', data);
 }
 
 /**
@@ -134,10 +134,9 @@ async function createMenu(
  * @param data 菜单数据
  */
 async function updateMenu(
-  id: string,
   data: Omit<SystemMenuApi.SystemMenu, 'children' | 'id'>,
 ) {
-  return requestClient.put(`/system/menu/${id}`, data);
+  return msmRequestClient.put(`/menu/update`, data);
 }
 
 /**
@@ -145,7 +144,7 @@ async function updateMenu(
  * @param id 菜单 ID
  */
 async function deleteMenu(id: string) {
-  return requestClient.delete(`/system/menu/${id}`);
+  return msmRequestClient.delete(`/menu/delete/${id}`);
 }
 
 export {

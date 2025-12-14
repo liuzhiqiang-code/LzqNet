@@ -40,8 +40,8 @@
                 "path": "img/hero-image.png"
             }
         ],
-        "version": "1.12.0",
-        "updated": "2025-11-12",
+        "version": "1.14.0",
+        "updated": "2025-12-09",
         "links": [
             {
                 "name": "GitHub",
@@ -64,6 +64,13 @@
         }
     ],
     "extensions": {
+        "exposedComponents": [
+            {
+                "id": "grafana-pyroscope-app/embedded-profiles-exploration/v1",
+                "title": "Embedded Profiles Exploration",
+                "description": "A component that renders a profiles exploration view that can be embedded in other parts of Grafana."
+            }
+        ],
         "extensionPoints": [
             {
                 "id": "grafana-pyroscope-app/investigation/v1"

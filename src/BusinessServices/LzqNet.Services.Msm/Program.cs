@@ -1,10 +1,10 @@
+using LzqNet.DCC;
+using LzqNet.Extensions;
+using LzqNet.Extensions.Serilog;
 using LzqNet.Services.Msm.Infrastructure;
 using Masa.BuildingBlocks.Data.UoW;
 using Masa.BuildingBlocks.Ddd.Domain.Repositories;
 using Masa.BuildingBlocks.Dispatcher.Events;
-using LzqNet.DCC;
-using LzqNet.Extensions;
-using LzqNet.Extensions.Serilog;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +18,7 @@ var connectionString = builder.Configuration.GetConnectionString("MsmConnection"
 builder.Services.AddMasaDbContext<ExampleDbContext>(opt =>
 {
     opt.UseMySQL(connectionString);
+    opt.AddInterceptors(new CommandInterceptor());
 });
 builder.AddApplicationServices();
 
@@ -39,7 +40,8 @@ if (app.Environment.IsDevelopment())
     #region MigrationDb
     using var context = app.Services.CreateScope().ServiceProvider.GetService<ExampleDbContext>();
     {
-        context!.Database.EnsureCreated();
+        //await context!.Database.EnsureCreatedAsync();
+        await context!.Database.MigrateAsync();
         await ExampleDbContextSeed.SeedAsync(context);
     }
     #endregion

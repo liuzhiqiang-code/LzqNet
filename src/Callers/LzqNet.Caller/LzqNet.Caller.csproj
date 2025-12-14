@@ -7,6 +7,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Masa.Utils.Extensions.Enums" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Utils.Models.Config" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.BuildingBlocks.Ddd.Domain" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Utils.Extensions.Validations.FluentValidation" Version="$(MASAFrameworkVersion)" />

@@ -33,7 +33,7 @@ public class AdminResult
     /// <summary>
     /// 1. 返回成功 - 无数据
     /// </summary>
-    public static AdminResult Success(string message = "操作成功")
+    public static AdminResult Success(string message = "")
     {
         return new AdminResult { Code = 0, Message = message };
     }
@@ -41,7 +41,7 @@ public class AdminResult
     /// <summary>
     /// 2. 返回成功 - 带数据 (泛型)
     /// </summary>
-    public static AdminResult<T> Success<T>(T data, string message = "操作成功")
+    public static AdminResult<T> Success<T>(T data, string message = "")
     {
         return new AdminResult<T> { Code = 0, Message = message, Data = data };
     }

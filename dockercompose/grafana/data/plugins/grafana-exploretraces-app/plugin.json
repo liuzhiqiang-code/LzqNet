@@ -34,8 +34,8 @@
                 "path": "img/errors-root-cause.png"
             }
         ],
-        "version": "1.2.0",
-        "updated": "2025-10-13",
+        "version": "1.2.2",
+        "updated": "2025-12-04",
         "links": [
             {
                 "name": "Github",
@@ -115,6 +115,9 @@
         "extensionPoints": [
             {
                 "id": "grafana-exploretraces-app/investigation/v1"
+            },
+            {
+                "id": "grafana-exploretraces-app/get-logs-drilldown-link/v1"
             }
         ]
     },

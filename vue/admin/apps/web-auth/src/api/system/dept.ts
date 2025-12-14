@@ -5,7 +5,7 @@ export namespace SystemDeptApi {
     [key: string]: any;
     children?: SystemDept[];
     id: string;
-    deptName: string;
+    name: string;
     remark?: string;
     status: 0 | 1;
   }

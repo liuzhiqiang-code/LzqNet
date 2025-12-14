@@ -471,9 +471,7 @@ async function onSubmit() {
   if (valid) {
     drawerApi.lock();
     const data =
-      await formApi.getValues<
-        Omit<SystemMenuApi.SystemMenu, 'children' | 'id'>
-      >();
+      await formApi.getValues();
     if (data.type === 'link') {
       data.meta = { ...data.meta, link: data.linkSrc };
     } else if (data.type === 'embedded') {
@@ -482,7 +480,7 @@ async function onSubmit() {
     delete data.linkSrc;
     try {
       await (formData.value?.id
-        ? updateMenu(formData.value.id, data)
+        ? updateMenu({ ...data, id: formData.value.id })
         : createMenu(data));
       drawerApi.close();
       emit('success');

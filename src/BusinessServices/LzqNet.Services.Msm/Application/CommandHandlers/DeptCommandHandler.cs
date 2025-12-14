@@ -12,15 +12,15 @@ public class DeptCommandHandler(IDeptRepository deptRepository)
     [EventHandler]
     public async Task CreateHandleAsync(DeptCreateCommand command)
     {
-        var deptEntity = command.Map<DeptEntity>();
-        await _deptRepository.AddAsync(deptEntity);
+        var entity = command.Map<DeptEntity>();
+        await _deptRepository.AddAsync(entity);
     }
 
     [EventHandler]
     public async Task UpdateHandleAsync(DeptUpdateCommand command)
     {
-        var deptEntity = command.Map<DeptEntity>();
-        await _deptRepository.UpdateAsync(deptEntity);
+        var entity = command.Map<DeptEntity>();
+        await _deptRepository.UpdateAsync(entity);
     }
 
     [EventHandler]

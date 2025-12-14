@@ -96,7 +96,7 @@ public class AccountController : ControllerBase
     /// <summary>
     /// 退出登录（仅用于前端管理）
     /// </summary>
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [HttpPost("Logout")]
     public async Task<IActionResult> Logout()
     {
