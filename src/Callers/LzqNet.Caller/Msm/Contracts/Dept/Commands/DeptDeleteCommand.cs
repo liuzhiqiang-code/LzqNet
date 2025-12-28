@@ -1,11 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
 using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LzqNet.Caller.Msm.Contracts.Dept.Commands;
 

@@ -9,6 +9,7 @@ public record RoleCreateCommand : Command
     public string Name { get; set; }
     public EnableStatusEnum Status { get; set; } = EnableStatusEnum.Enabled;
     public string? Remark { get; set; }
+    public List<long> Permissions { get; set; } = [];
 }
 public class RoleCreateCommandValidator : MasaAbstractValidator<RoleCreateCommand>
 {

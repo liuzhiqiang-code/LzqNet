@@ -14,6 +14,8 @@
 
 		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.3.0" />
 
+		<PackageReference Include="Masa.Contrib.Data.IdGenerator.Snowflake.Distributed.Redis" Version="$(MASAFrameworkVersion)" />
+		<PackageReference Include="Masa.Contrib.Data.IdGenerator.Snowflake" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Caching.Distributed.StackExchangeRedis" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Data.DistributedLock.Local" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Service.Caller.HttpClient" Version="$(MASAFrameworkVersion)" />

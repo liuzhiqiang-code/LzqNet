@@ -6,4 +6,5 @@ public class RoleViewDto
     public string Name { get; set; }
     public EnableStatusEnum Status { get; set; } = EnableStatusEnum.Enabled;
     public string? Remark { get; set; }
+    public List<long> Permissions { get; set; } = [];
 }

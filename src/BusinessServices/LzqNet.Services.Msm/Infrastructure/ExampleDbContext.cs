@@ -1,6 +1,9 @@
-﻿using LzqNet.Caller.Msm.Contracts.Menu;
+﻿using LzqNet.Caller.Common.Contracts;
+using LzqNet.Caller.Msm.Contracts.Menu;
 using LzqNet.Services.Msm.Domain.Entities;
+using Masa.BuildingBlocks.Ddd.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Text.Json;
 
 namespace LzqNet.Services.Msm.Infrastructure;
@@ -17,11 +20,61 @@ public class ExampleDbContext : MasaDbContext
         ConfigEntities(modelBuilder);
     }
 
+    ///   TODO  这个拦截器没生效
+    protected override void OnBeforeSaveChanges()
+    {
+        var now = DateTime.Now;
+        foreach (var entry in ChangeTracker.Entries())
+        {
+            if (entry.Entity is BaseFullEntity entity)
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        SetCreationFields(entity, now);
+                        break;
+
+                    case EntityState.Modified:
+                        SetModificationFields(entity, now);
+                        break;
+
+                    case EntityState.Deleted:
+                        HandleSoftDelete(entry, entity, now);
+                        break;
+                }
+            }
+        }
+        base.OnBeforeSaveChanges();
+    }
+    private void SetCreationFields(BaseFullEntity entity, DateTime now)
+    {
+        // entity.Creator = GetCurrentUserId(); // 根据实际情况获取当前用户
+        entity.CreationTime = now;
+        // entity.Modifier = GetCurrentUserId();
+        entity.ModificationTime = now;
+        entity.IsDeleted = false;
+    }
+
+    private void SetModificationFields(BaseFullEntity entity, DateTime now)
+    {
+        // entity.Modifier = GetCurrentUserId();
+        entity.ModificationTime = now;
+    }
+
+    private void HandleSoftDelete(EntityEntry entry, BaseFullEntity entity, DateTime now)
+    {
+        // 实现软删除
+        SetModificationFields(entity, now);
+        entity.IsDeleted = true;
+        entry.State = EntityState.Modified; // 重要：将删除改为修改
+    }
+
     private static void ConfigEntities(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<SysConfigEntity>().ToTable("sys_config");
-        modelBuilder.Entity<DeptEntity>().ToTable("msm_dept");
-        modelBuilder.Entity<RoleEntity>().ToTable("msm_role");
+        modelBuilder.Entity<SysConfigEntity>();
+        modelBuilder.Entity<DeptEntity>();
+        modelBuilder.Entity<RoleEntity>();
+        modelBuilder.Entity<RoleAuthEntity>();
 
         // 在DbContext中配置菜单实体
         modelBuilder.Entity<MenuEntity>(entity =>
@@ -39,9 +92,6 @@ public class ExampleDbContext : MasaDbContext
             entity.Property(e => e.Type)
                   .HasConversion<string>()
                   .HasMaxLength(50);  // 添加长度限制
-
-            // 表名映射
-            entity.ToTable("msm_menu");
 
             // 建议添加的索引配置（根据实际查询需求）
             entity.HasIndex(e => e.Pid);

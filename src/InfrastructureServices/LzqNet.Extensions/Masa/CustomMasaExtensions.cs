@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
 using Masa.BuildingBlocks.Caching;
 using Masa.BuildingBlocks.Dispatcher.Events;
-using Microsoft.Extensions.Options;
+using Masa.Contrib.Caching.Distributed.StackExchangeRedis;
+using Masa.Contrib.Data.IdGenerator.Snowflake;
 using System.Reflection;
 
 public static class CustomMasaExtensions
@@ -19,6 +20,15 @@ public static class CustomMasaExtensions
         foreach (var assembly in callerAssemblyNames)
             loadedCallerAssemblies.Add(Assembly.Load(assembly));
 
+        // 分布式雪花ID生成器
+        var redisOptions = builder.Configuration.GetSection("RedisConfig").Get<RedisConfigurationOptions>() ?? 
+            throw new MasaException("未找到RedisConfig配置");
+        builder.Services.AddSnowflake(distributedIdGeneratorOptions =>
+        {
+            distributedIdGeneratorOptions.UseRedis(
+                option => option.GetWorkerIdMinInterval = 5000,
+                redisOptions);
+        });
         // 抽象公用的Masa 框架服务注册
         builder.Services
             .AddMapster()

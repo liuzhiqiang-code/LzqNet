@@ -1,7 +1,9 @@
-﻿using Masa.BuildingBlocks.Ddd.Domain.Entities.Full;
+﻿using LzqNet.Caller.Common.Contracts;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LzqNet.Services.Msm.Domain.Entities;
 
-public class SysConfigEntity : FullEntity<long, long>
+[Table("sys_config")]
+public class SysConfigEntity : BaseFullEntity
 {
 }

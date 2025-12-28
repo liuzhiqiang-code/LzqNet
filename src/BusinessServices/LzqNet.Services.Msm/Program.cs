@@ -27,7 +27,7 @@ builder.Services
    .AddDomainEventBus(options =>
    {
        options.UseEventBus();
-       options.UseUoW<ExampleDbContext>();
+       options.UseUoW<ExampleDbContext>();  //以确定事务单元是以事件为节点，一个事件一个事务
        options.UseRepository<ExampleDbContext>();
    });
 

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddApplicationConfiguration();
@@ -105,10 +106,43 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             OnChallenge = context =>
             {
-                context.HandleResponse(); // 阻止默认重定向
-                context.Response.StatusCode = 401;
+                // 检查响应是否已经开始
+                if (context.Response.HasStarted)
+                {
+                    return Task.CompletedTask;
+                }
+
+                context.HandleResponse();
+
+                // 设置响应状态码
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                 context.Response.ContentType = "application/json";
-                return context.Response.WriteAsync("{\"message\": \"Unauthorized\"}");
+
+                var errorResponse = AdminResult.Fail("Unauthorized", 401);
+                return context.Response.WriteAsync(
+                    JsonSerializer.Serialize(errorResponse));
+            },
+            OnAuthenticationFailed = context =>
+            {
+                // 检查响应是否已经开始
+                if (context.Response.HasStarted)
+                {
+                    return Task.CompletedTask;
+                }
+
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                context.Response.ContentType = "application/json";
+
+                // 注意：在 OnAuthenticationFailed 中，响应可能已经部分发送
+                // 所以这里要特别小心
+                if (!context.Response.HasStarted)
+                {
+                    var errorResponse = AdminResult.Fail("Authentication failed", 401);
+                    return context.Response.WriteAsync(
+                        JsonSerializer.Serialize(errorResponse));
+                }
+
+                return Task.CompletedTask;
             }
         };
     });
@@ -136,9 +170,9 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowAll");
 app.UseRouting();
 
-app.UseIdentityServer();
-//app.UseAuthentication();
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseIdentityServer();
 
 app.MapCustomHealthChecks();
 app.MapControllers();

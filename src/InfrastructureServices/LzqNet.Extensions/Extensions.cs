@@ -1,9 +1,11 @@
 ﻿using LzqNet.Extensions.Auth;
 using LzqNet.Extensions.HealthCheck;
+using LzqNet.Extensions.JsonOptions;
 using LzqNet.Extensions.OAuth;
 using LzqNet.Extensions.Serilog;
 using Microsoft.AspNetCore.Authorization;
 using Serilog;
+using System.Text.Json.Serialization;
 
 namespace LzqNet.Extensions;
 
@@ -28,6 +30,14 @@ public static class Extensions
 
         builder.AddCustomAuthentication();
         builder.AddCustomAuthorization();
+
+        // 前后端类型转换  处理日期及long精度丢失问题
+        // 1. 配置 JSON 选项，将所有 long 序列化为 string
+        builder.Services.ConfigureHttpJsonOptions(options =>
+        {
+            options.SerializerOptions.Converters.Add(new LongToStringConverter());
+            options.SerializerOptions.Converters.Add(new LongNullableToStringConverter());
+        });
 
         builder.AddCustomMasa();
     }

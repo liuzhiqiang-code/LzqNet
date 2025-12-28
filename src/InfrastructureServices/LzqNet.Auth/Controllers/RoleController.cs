@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LzqNet.Auth.Controllers;
 
-[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class RoleController : ControllerBase
@@ -90,7 +89,7 @@ public class RoleController : ControllerBase
     public async Task<ActionResult> CreateAsync([FromBody] RoleModel model)
     {
         await _roleManager.CreateAsync(new IdentityRole(model.Name));
-        return Ok();
+        return Ok(AdminResult.Success());
     }
 
     /// <summary>
