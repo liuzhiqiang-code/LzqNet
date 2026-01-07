@@ -1,10 +1,4 @@
 services:
-  lzqnet.healthcheckui:
-    image: lzqnethealthcheckui
-    build:
-      context: .
-      dockerfile: src/InfrastructureServices/LzqNet.HealthCheckUI/Dockerfile
-      
   lzqnet.apigateway:
     image: lzqnetapigateway
     build:
@@ -16,12 +10,6 @@ services:
     build:
       context: .
       dockerfile: src/InfrastructureServices/LzqNet.Auth/Dockerfile
-      
-  lzqnet.swaggerui:
-    image: lzqnetswaggerui
-    build:
-      context: .
-      dockerfile: src/InfrastructureServices/LzqNet.SwaggerUI/Dockerfile
       
   lzqnet.services.msm:
     image: lzqnetservicesmsm
@@ -93,23 +81,23 @@ services:
   #   #   - redis  # 可选，如果使用Redis作为存储
 
 
-  loki:
-    image: grafana/loki:latest
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          memory: 1G  # 硬性内存上限
-          cpus: "0.5" # 可选CPU限制
-        reservations:
-          memory: 512M # 保证最小内存
-    ports:
-      - "23100:3100"
-    volumes:
-      - ./dockercompose/loki/config:/etc/loki
-      - ./dockercompose/loki/data:/loki
-    command: 
-      - --config.file=/etc/loki/loki.yml
+  # loki:
+  #   image: grafana/loki:latest
+  #   restart: unless-stopped
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 1G  # 硬性内存上限
+  #         cpus: "0.5" # 可选CPU限制
+  #       reservations:
+  #         memory: 512M # 保证最小内存
+  #   ports:
+  #     - "23100:3100"
+  #   volumes:
+  #     - ./dockercompose/loki/config:/etc/loki
+  #     - ./dockercompose/loki/data:/loki
+  #   command: 
+  #     - --config.file=/etc/loki/loki.yml
 
 
   # promtail:
@@ -139,21 +127,21 @@ services:
   #     - loki
 
 
-  grafana:   # 镜像占资源1000MB  暂时不用
-    image: grafana/grafana:latest
-    restart: unless-stopped
-    environment:
-      # - GF_INSTALL_PLUGINS=grafana-loki-datasource  # 自动安装Loki插件
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=123456
-      # - GF_AUTH_DISABLE_LOGIN_FORM=false
-    ports:
-      - "23000:3000"
-    volumes:
-      - ./dockercompose/grafana/data:/var/lib/grafana
-    #   - ./dockercompose/grafana/provisioning:/etc/grafana/provisioning
-    depends_on:
-      - loki
+  # grafana:   # 镜像占资源1000MB  暂时不用
+  #   image: grafana/grafana:latest
+  #   restart: unless-stopped
+  #   environment:
+  #     # - GF_INSTALL_PLUGINS=grafana-loki-datasource  # 自动安装Loki插件
+  #     - GF_SECURITY_ADMIN_USER=admin
+  #     - GF_SECURITY_ADMIN_PASSWORD=123456
+  #     # - GF_AUTH_DISABLE_LOGIN_FORM=false
+  #   ports:
+  #     - "23000:3000"
+  #   volumes:
+  #     - ./dockercompose/grafana/data:/var/lib/grafana
+  #   #   - ./dockercompose/grafana/provisioning:/etc/grafana/provisioning
+  #   depends_on:
+  #     - loki
 
 
   # nginx:

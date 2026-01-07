@@ -1,4 +1,4 @@
-﻿using LzqNet.Consul.Register;
+﻿using LzqNet.DCC.Consul;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 

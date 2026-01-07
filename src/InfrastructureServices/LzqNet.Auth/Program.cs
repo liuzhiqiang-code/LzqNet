@@ -60,11 +60,21 @@ services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     .AddDefaultTokenProviders();
 
 // 添加 IdentityServer 服务
-var identityServerBuilder = builder.Services.AddIdentityServer()
-    .AddInMemoryClients(IdentityConfig.Clients)               // 加载客户端配置
-    .AddInMemoryApiScopes(IdentityConfig.ApiScopes)           // 加载 API 范围配置
-    .AddInMemoryApiResources(IdentityConfig.ApiResources)     // 加载 API 资源配置
-    .AddInMemoryIdentityResources(IdentityConfig.IdentityResources);
+var identityServerBuilder = builder.Services.AddIdentityServer(options =>
+{
+    options.Events.RaiseErrorEvents = true;
+    options.Events.RaiseFailureEvents = true;
+    options.Events.RaiseInformationEvents = true;
+    options.Events.RaiseSuccessEvents = true;
+
+    // 关键配置：禁用端点自动跳转
+    options.Authentication.CookieAuthenticationScheme = null; // 禁用 Cookie 重定向
+    options.Authentication.RequireAuthenticatedUserForSignOutMessage = false;
+})
+.AddInMemoryClients(IdentityConfig.Clients)               // 加载客户端配置
+.AddInMemoryApiScopes(IdentityConfig.ApiScopes)           // 加载 API 范围配置
+.AddInMemoryApiResources(IdentityConfig.ApiResources)     // 加载 API 资源配置
+.AddInMemoryIdentityResources(IdentityConfig.IdentityResources);
 
 // 添加自定义验证器
 // 手动注册 ResourceOwnerPasswordValidator 和 ProfileService
@@ -100,51 +110,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             // 如果你想允许所有 API 可访问，可以取消注释以下代码：
             // ValidAudience = "yourapi", // 可以从配置文件中设置 Audience
         };
-
-        // 关键配置：API 直接返回 401 而不是重定向
-        options.Events = new JwtBearerEvents
-        {
-            OnChallenge = context =>
-            {
-                // 检查响应是否已经开始
-                if (context.Response.HasStarted)
-                {
-                    return Task.CompletedTask;
-                }
-
-                context.HandleResponse();
-
-                // 设置响应状态码
-                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                context.Response.ContentType = "application/json";
-
-                var errorResponse = AdminResult.Fail("Unauthorized", 401);
-                return context.Response.WriteAsync(
-                    JsonSerializer.Serialize(errorResponse));
-            },
-            OnAuthenticationFailed = context =>
-            {
-                // 检查响应是否已经开始
-                if (context.Response.HasStarted)
-                {
-                    return Task.CompletedTask;
-                }
-
-                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                context.Response.ContentType = "application/json";
-
-                // 注意：在 OnAuthenticationFailed 中，响应可能已经部分发送
-                // 所以这里要特别小心
-                if (!context.Response.HasStarted)
-                {
-                    var errorResponse = AdminResult.Fail("Authentication failed", 401);
-                    return context.Response.WriteAsync(
-                        JsonSerializer.Serialize(errorResponse));
-                }
-
-                return Task.CompletedTask;
-            }
-        };
     });
 
 services.AddControllers();
@@ -170,9 +135,9 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowAll");
 app.UseRouting();
 
+app.UseIdentityServer();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseIdentityServer();
 
 app.MapCustomHealthChecks();
 app.MapControllers();

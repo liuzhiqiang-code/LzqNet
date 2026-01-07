@@ -80,7 +80,7 @@ public class AccountController : ControllerBase
                 { "grant_type", "password" },
                 { "username", model.UserName },
                 { "password", model.Password },
-                { "scope", "common" }
+                { "scope", "common offline_access" }
             });
 
         var response = await client.PostAsync(tokenEndpoint, requestContent);
@@ -88,7 +88,7 @@ public class AccountController : ControllerBase
         {
             return BadRequest(new { message = "Failed to obtain token from IdentityServer" });
         }
-
+        var esponse = await response.Content.ReadAsStringAsync();
         var tokenResponse = await response.Content.ReadFromJsonAsync<TokenViewModel>();
         return Ok(AdminResult.Success(tokenResponse));
     }
@@ -133,6 +133,40 @@ public class AccountController : ControllerBase
     }
 
     /// <summary>
+    /// 使用RefreshToken刷新访问令牌
+    /// </summary>
+    [HttpPost("RefreshToken")]
+    public async Task<IActionResult> RefreshToken(RefreshTokenModel model)
+    {
+        if (string.IsNullOrEmpty(model.RefreshToken))
+        {
+            return BadRequest(new { message = "RefreshToken不能为空" });
+        }
+
+        var client = _httpClientFactory.CreateClient();
+        client.BaseAddress = new Uri(_jwtOption.Authority);
+        var tokenEndpoint = "/connect/token"; // IdentityServer Token端点
+
+        var requestContent = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            { "client_id", "register.client" },
+            { "client_secret", "secret" },
+            { "grant_type", "refresh_token" },
+            { "refresh_token", model.RefreshToken },
+            { "scope", "common" }
+        });
+
+        var response = await client.PostAsync(tokenEndpoint, requestContent);
+        if (!response.IsSuccessStatusCode)
+        {
+            return BadRequest(new { message = "刷新Token失败" });
+        }
+
+        var tokenResponse = await response.Content.ReadFromJsonAsync<TokenViewModel>();
+        return Ok(AdminResult.Success(tokenResponse));
+    }
+
+    /// <summary>
     /// 获取用户信息
     /// </summary>
     /// <returns></returns>
@@ -148,12 +182,10 @@ public class AccountController : ControllerBase
         var user = await _userManager.FindByIdAsync(userId);
         if (user == null) return NotFound();
 
-        return Ok(AdminResult.Success(new {
-            user.Id,
-            RealName = user.UserName,
-            user.UserName,
-            user.Email,
-            Roles = roles
+        return Ok(AdminResult.Success(new UserModel{
+            UserName = user.UserName,
+            Email = user.Email,
+            Roles = roles.ToList()
         }));
     }
 }

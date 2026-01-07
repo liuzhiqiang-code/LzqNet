@@ -1,11 +1,4 @@
 services:
-  lzqnet.healthcheckui:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8080
-    ports:
-      - "25510:8080"
-      
   lzqnet.apigateway:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -19,13 +12,6 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
     ports:
       - "25513:8080"
-
-  lzqnet.swaggerui:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8080
-    ports:
-      - "25514:8080"
 
   lzqnet.services.msm:
     environment:

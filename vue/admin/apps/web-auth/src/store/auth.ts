@@ -33,8 +33,12 @@ export const useAuthStore = defineStore('auth', () => {
     let userInfo: null | UserInfo = null;
     try {
       loginLoading.value = true;
-      const { access_token } = await loginApi(params);
+      const { access_token ,refreshToken } = await loginApi(params);
 
+      // 如果成功获取到 refreshToken
+      if (access_token) {
+        accessStore.setRefreshToken(refreshToken);
+      }
       // 如果成功获取到 accessToken
       if (access_token) {
         accessStore.setAccessToken(access_token);

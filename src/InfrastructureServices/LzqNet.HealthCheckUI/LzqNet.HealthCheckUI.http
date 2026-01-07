@@ -1,6 +1,0 @@
-@LzqNet.HealthCheckUI_HostAddress = http://localhost:5260
-
-GET {{LzqNet.HealthCheckUI_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

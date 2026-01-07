@@ -1,4 +1,4 @@
-import { baseAuthRequestClient, authRequestClient } from '#/api/request';
+import { baseAuthRequestClient, msmRequestClient } from '#/api/request';
 
 export namespace AuthApi {
   /** 登录接口参数 */
@@ -11,11 +11,16 @@ export namespace AuthApi {
   /** 登录接口返回值 */
   export interface LoginResult {
     access_token: string;
+    refreshToken: string;
   }
 
   export interface RefreshTokenResult {
     data: string;
     status: number;
+  }
+
+  export interface RefreshTokenParams {
+    refreshToken: null | string;
   }
 }
 
@@ -24,23 +29,21 @@ export namespace AuthApi {
  */
 export async function loginApi(data: AuthApi.LoginParams) {
   data.userName = data.username;
-  return await authRequestClient.post<AuthApi.LoginResult>('/Account/Login', data);
+  return await msmRequestClient.post<AuthApi.LoginResult>('/account/login', data);
 }
 
 /**
  * 刷新accessToken
  */
-export async function refreshTokenApi() {
-  return baseAuthRequestClient.post<AuthApi.RefreshTokenResult>('/auth/refresh', {
-    withCredentials: true,
-  });
+export async function refreshTokenApi(data: AuthApi.RefreshTokenParams) {
+  return baseAuthRequestClient.post<AuthApi.LoginResult>('/account/refresh', data);
 }
 
 /**
  * 退出登录
  */
 export async function logoutApi() {
-  return authRequestClient.post('/Account/Logout', {
+  return msmRequestClient.post('/account/logout', {
     withCredentials: true,
   });
 }

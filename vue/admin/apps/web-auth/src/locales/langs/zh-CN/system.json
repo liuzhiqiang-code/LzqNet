@@ -63,5 +63,28 @@
     "operation": "操作",
     "permissions": "权限",
     "setPermissions": "授权"
+  },
+  "modeling": {
+    "list": "modeling",
+    "modelingName": "建模名称",
+    "dataName":"数据名称",
+    "title": "建模管理",
+    "btnOpenTab":"打开标签页",
+
+    "basicInfo": "基本信息",
+    "instanceName": "实例名称",
+    "description":"描述",
+    "isEnable":"启用",
+    "auditInfo": "审计信息",
+
+    "createTime": "创建时间",
+    "createBy": "创建人",
+    "updateTime": "更新时间",
+    "updateBy": "更新人",
+
+    "btnAdd":"新增",
+    "btnCopy":"复制",
+    "btnReset":"重置",
+    "btnSave":"保存"
   }
 }

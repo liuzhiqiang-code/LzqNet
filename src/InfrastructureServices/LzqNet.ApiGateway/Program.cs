@@ -3,7 +3,6 @@ using LzqNet.ApiGateway.Extensions;
 using LzqNet.ApiGateway.Extensions.HealthCheck;
 using LzqNet.DCC;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddApplicationConfiguration();
@@ -13,7 +12,9 @@ builder.Services.AddMapster();
 
 // Add services to the container.
 builder.AddCustomHealthChecks();
+builder.AddCustomHealthChecksUI();
 builder.Services.AddOpenApi();
+builder.AddCustomSwaggerUI();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -26,6 +27,7 @@ builder.Services.AddCors(options =>
 builder.AddCustomRateLimiter("customPolicy");
 builder.AddCustomCarp();
 builder.Services.AddHttpContextAccessor();
+builder.AddCustomMasaRegistrationCaller();
 builder.AddCustomMetrics();// 配置遥测中间件
 builder.AddCustomResponseCaching();// 配置响应缓存中间件
 
@@ -35,6 +37,7 @@ builder.AddCustomResponseCaching();// 配置响应缓存中间件
 var app = builder.Build();
 
 app.MapOpenApi();
+app.MapCustomSwaggerUI();
 app.UseCustomMetrics();// 使用遥测中间件
 
 app.UseCors("AllowAll");
@@ -45,7 +48,7 @@ app.UseRateLimiter();
 //app.UseCustomAuthorization();
 app.UseCustomResponseCaching();// 使用响应缓存中间件
 app.MapCustomHealthChecks();
-
+app.MapCustomHealthChecksUI();
 // 2. 启用YARP中间件
 app.UseCarp(); // 必须放在路由映射之后
 

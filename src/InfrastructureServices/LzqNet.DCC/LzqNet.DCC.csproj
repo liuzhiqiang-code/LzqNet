@@ -23,10 +23,9 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(MicrosoftPackageVersion)" />
-	</ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\LzqNet.Consul\LzqNet.Consul.csproj" />
+		<PackageReference Include="Consul.AspNetCore" Version="1.7.14.9" />
+		<PackageReference Include="Winton.Extensions.Configuration.Consul" Version="3.4.0" />
 	</ItemGroup>
 
 </Project>

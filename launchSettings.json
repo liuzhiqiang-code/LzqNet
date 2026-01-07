@@ -3,13 +3,15 @@
     "Docker Compose": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "lzqnet.services.msm",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/",
       "serviceActions": {
-        "lzqnet.healthcheckui": "StartWithoutDebugging",
-        "lzqnet.apigateway": "StartWithoutDebugging",
+        "lzqnet.apigateway": "StartDebugging",
         "redis": "StartWithoutDebugging",
-        "lzqnet.swaggerui": "StartWithoutDebugging",
         "lzqnet.services.msm": "StartDebugging",
-        "lzqnet.services.notify": "StartDebugging"
+        "consul": "StartWithoutDebugging",
+        "lzqnet.auth": "StartDebugging"
       }
     }
   }

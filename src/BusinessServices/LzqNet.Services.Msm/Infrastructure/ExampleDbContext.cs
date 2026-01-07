@@ -75,6 +75,7 @@ public class ExampleDbContext : MasaDbContext
         modelBuilder.Entity<DeptEntity>();
         modelBuilder.Entity<RoleEntity>();
         modelBuilder.Entity<RoleAuthEntity>();
+        modelBuilder.Entity<UserEntity>();
 
         // 在DbContext中配置菜单实体
         modelBuilder.Entity<MenuEntity>(entity =>

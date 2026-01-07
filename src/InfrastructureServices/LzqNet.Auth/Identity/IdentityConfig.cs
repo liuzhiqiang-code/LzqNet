@@ -60,11 +60,16 @@ public class IdentityConfig
                 ClientId = "register.client",
                 ClientName = "资源所有者",
                 AllowedGrantTypes = GrantTypes.ResourceOwnerPassword, // 用户名密码模式
+                AllowOfflineAccess = true,     // 启用刷新令牌
+                RefreshTokenUsage = TokenUsage.ReUse, // 刷新令牌可重复使用
+                RefreshTokenExpiration = TokenExpiration.Sliding, // 滑动过期
+                AccessTokenLifetime = 3600,    // 访问令牌有效期1小时
+                SlidingRefreshTokenLifetime = 86400, // 刷新令牌有效期24小时
                 ClientSecrets =
                 {
                     new Secret("secret".Sha256()) // 客户端密钥
                 },
-                AllowedScopes = { "common" } // 允许的 API 访问范围
+                AllowedScopes = { "common" }, // 允许的 API 访问范围
             }
         ];
 }

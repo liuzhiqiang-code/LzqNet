@@ -39,6 +39,15 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import('#/views/system/dept/list.vue'),
       },
+      {
+        path: '/system/modeling',
+        name: 'Modeling',
+        meta: {
+          icon: 'charm:organisation',
+          title: $t('system.modeling.title'),
+        },
+        component: () => import('#/views/system/modeling/list.vue'),
+      },
     ],
   },
 ];
