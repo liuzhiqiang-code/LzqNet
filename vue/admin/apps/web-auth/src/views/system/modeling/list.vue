@@ -10,7 +10,9 @@ import {
   message
 } from 'ant-design-vue';
 import { $t } from '#/locales';
-import { useModelingSchema, useSearchSchema } from './data';
+import { useSchema } from './data';
+import { useModelingSchema } from './modelingSchema'
+import { ModelingApiObj } from '#/api/system/modeling';
 
 const props = reactive({
   leftCollapsedWidth: 5,
@@ -27,27 +29,10 @@ const props = reactive({
 onMounted(() => {
 })
 
-
-function getSelectDataValue(dataName: string): any {
-  var data = {
-    instanceName: dataName
-  }
-  return data
-}
-async function modelingNameOnChange() {
-  searchFormApi.setFieldValue("dataName", null)
-}
-async function dataNameOnChange() {
-  //const data = await getSelectDataValue(value)
-  //modelingFormApi.setValues(data)
-}
-const eventManager = {
-  modelingNameOnChange,
-  dataNameOnChange
-}
+const getFormApi = ()=>{return searchFormApi}
 const [SearchForm, searchFormApi] = useVbenForm({
   layout: 'vertical',
-  schema: useSearchSchema(eventManager),
+  schema:useSchema(getFormApi),
   showDefaultActions: false,
   wrapperClass: 'grid-cols-1',
   // 所有表单项共用，可单独在表单内覆盖
@@ -65,12 +50,23 @@ async function handleAdd() {
     message.error('需要先选择建模名称')
     return
   }
-  await addTab({modelingName:searchValues.modelingName,dataName:''})
+  await addTab({
+      modelingName:searchValues.modelingName, 
+      modelingDesc:searchValues.modelingDesc,
+      dataId:'',
+      dataName:'',
+    })
 }
 async function handleCopy() { 
   const activeTab = panes.value.find(pane => pane.key === activeKey.value)
   if(activeTab)
-    await addTab({modelingName:activeTab.modelingName,dataName:activeTab.dataName,isCopy:true})
+    await addTab({
+      modelingName:activeTab.modelingName,
+      modelingDesc:activeTab.modelingDesc,
+      dataId:activeTab.dataId,
+      dataName:activeTab.dataName,
+      isCopy:true
+    })
 }
 function handleReset() { 
   const activeTab = panes.value.find(pane => pane.key === activeKey.value)
@@ -83,22 +79,36 @@ interface TabItem{
   title:string,
   key?: string,
   modelingName: string,
-  dataName: string,
+  modelingDesc:string,
+  dataId: string,
+  dataName:string,
   component: any,
   formApi: any
+}
+interface AddTabDto{
+  modelingName: string,
+  modelingDesc:string,
+  dataId: string,
+  dataName: string,
+  isCopy?: boolean
 }
 const panes = ref<TabItem[]>([]);
 const activeKey = ref('');
 const handleOpenTab = async ()=>{
   const searchValues = await searchFormApi.getValues()
-  if (!searchValues.modelingName || !searchValues.dataName) {
+  if (!searchValues.modelingName || !searchValues.dataId) {
     message.error('请选择建模名称和数据名称')
     return
   }
-  await addTab({modelingName:searchValues.modelingName,dataName:searchValues.dataName})
+  await addTab({
+    modelingName:searchValues.modelingName,
+    modelingDesc:searchValues.modelingDesc,
+    dataId:searchValues.dataId,
+    dataName:searchValues.dataName
+  })
 }
-const addTab = async ({modelingName,dataName,isCopy = false}: {modelingName: string, dataName: string,isCopy?:boolean})=>{
-  var key = modelingName + '-' + dataName
+const addTab = async ({modelingName,modelingDesc,dataId,dataName,isCopy = false}:AddTabDto)=>{
+  var key = modelingDesc + '-' + dataName
   if(isCopy)
     key += '-copy'
   activeKey.value = key
@@ -113,7 +123,7 @@ const addTab = async ({modelingName,dataName,isCopy = false}: {modelingName: str
 
   const [Form, formApi] = useVbenForm({
     layout: 'vertical',
-    schema: useModelingSchema(modelingName),
+    schema: await useModelingSchema(modelingName),
     showDefaultActions: false,
     wrapperClass: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
     commonConfig: {
@@ -122,18 +132,20 @@ const addTab = async ({modelingName,dataName,isCopy = false}: {modelingName: str
       },
     },
   });
-
-  panes.value.push({
+  const tab : TabItem = {
     title: key,
     key: key, 
     modelingName,
+    modelingDesc,
+    dataId,
     dataName,
     component: markRaw(Form),
     formApi: formApi 
-  });
-  if(dataName)
+  }
+  panes.value.push(tab);
+  if(dataId)
   {
-    const data = await getSelectDataValue(dataName)
+    const data = await getSelectDataValue(tab)
     if(data)
     {
       if(isCopy)
@@ -141,6 +153,10 @@ const addTab = async ({modelingName,dataName,isCopy = false}: {modelingName: str
       formApi.setValues(data)
     }
   }
+}
+const getSelectDataValue = async(tab: TabItem) => {
+  const data = await ModelingApiObj.getData({modelingName:tab.modelingName,dataId:tab.dataId})
+  return data
 }
 
 const remove = (targetKey: string) => {

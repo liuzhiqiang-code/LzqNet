@@ -1,11 +1,6 @@
 ﻿using LzqNet.Caller.Common.Contracts;
 using System.ComponentModel.DataAnnotations.Schema;
 
-/*
- * @author : liuzhiqiang
- * @date : 2025-12-21
- * @desc : role_auth
- */
 namespace LzqNet.Services.Msm.Domain.Entities;
 
 [Table("msm_role_auth")]

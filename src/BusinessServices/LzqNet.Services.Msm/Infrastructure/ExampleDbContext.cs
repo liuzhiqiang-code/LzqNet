@@ -1,6 +1,7 @@
 ﻿using LzqNet.Caller.Common.Contracts;
 using LzqNet.Caller.Msm.Contracts.Menu;
 using LzqNet.Services.Msm.Domain.Entities;
+using LzqNet.Services.Msm.Domain.Entities.Modeling;
 using Masa.BuildingBlocks.Ddd.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -98,5 +99,12 @@ public class ExampleDbContext : MasaDbContext
             entity.HasIndex(e => e.Pid);
             entity.HasIndex(e => e.AuthCode).IsUnique();
         });
+
+        modelBuilder.Entity<ModelingEntity>();
+
+        modelBuilder.Entity<DingtalkPushBusinessEntity>();
+        modelBuilder.Entity<DingtalkPushConfigEntity>();
+        modelBuilder.Entity<DingtalkPushRobotEntity>();
+        modelBuilder.Entity<DingtalkPushMessageRecordEntity>();
     }
 }

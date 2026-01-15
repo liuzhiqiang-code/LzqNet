@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Masa.Contrib.Dispatcher.IntegrationEvents" Version="1.2.0-preview.11" />
+	  <PackageReference Include="Masa.Contrib.Dispatcher.IntegrationEvents.EventLogs.EFCore" Version="1.2.0-preview.11" />
+	  <PackageReference Include="RabbitMQ.Client" Version="7.2.0" />
+  </ItemGroup>
+
+</Project>

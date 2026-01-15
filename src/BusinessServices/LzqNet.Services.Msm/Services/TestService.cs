@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using LzqNet.Caller.Msm.Contracts.Test.Commands;
+using Masa.BuildingBlocks.Dispatcher.Events;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace LzqNet.Services.Msm.Services;
 
 public class TestService : ServiceBase
 {
-    private readonly HttpContext _httpContext;
-
-    public TestService()
-    {
-    }
+    private IEventBus EventBus => GetRequiredService<IEventBus>();
+    public TestService() : base("/api/v1/test") { }
 
     [Authorize]
     public IResult GetClaims([FromServices] IHttpContextAccessor httpContextAccessor)
@@ -23,5 +23,13 @@ public class TestService : ServiceBase
             };
         });
         return Results.Ok(claims);
+    }
+
+
+    [Authorize]
+    public async Task<IResult> SendRabbitmqMessage([FromBody] SendRabbitmqMessageEvent @event)
+    {
+        await EventBus.PublishAsync(@event);
+        return Results.Ok();
     }
 }

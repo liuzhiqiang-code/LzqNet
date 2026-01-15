@@ -1,52 +1,37 @@
 import { msmRequestClient } from '#/api/request';
+import type { SelectViewDto } from '#/api/types';
 
 export namespace ModelingApi {
   export interface Modeling {
     [key: string]: any;
-    id: string;
-    name: string;
-    remark?: string;
-    status: 0 | 1;
+    keyword?: string;
+    modelingName?: string;
+    dataId?: string
   }
 }
 
 /**
- * 获取部门列表数据
+ * 获取模型下拉列表
  */
-async function getDeptList() {
-  return msmRequestClient.post<Array<ModelingApi.Modeling>>(
-    '/dept/list',
+async function getModelingSelectList(data: ModelingApi.Modeling) {
+  return msmRequestClient.post<Array<SelectViewDto>>(
+    '/modeling/selectlist',
+    data
   );
 }
 
-/**
- * 创建部门
- * @param data 部门数据
- */
-async function createDept(
-  data: Omit<ModelingApi.Modeling, 'children' | 'id'>,
-) {
-  return msmRequestClient.post('/dept/create', data);
+const ModelingApiObj = {
+  getSelectList: (data: ModelingApi.Modeling) => {
+    return msmRequestClient.post<Array<SelectViewDto>>(
+      `/modeling/${data.modelingName}/selectlist`,
+      data
+    );
+  },
+  getData: (data: ModelingApi.Modeling) => {
+    return msmRequestClient.get<any>(
+      `/modeling/${data.modelingName}/data?id=${data.dataId}`
+    );
+  }
 }
 
-/**
- * 更新部门
- *
- * @param id 部门 ID
- * @param data 部门数据
- */
-async function updateDept(
-  data: Omit<ModelingApi.Modeling, 'children'>,
-) {
-  return msmRequestClient.put(`/dept/update`, data);
-}
-
-/**
- * 删除部门
- * @param id 部门 ID
- */
-async function deleteDept(id: string) {
-  return msmRequestClient.delete(`/dept/delete/${id}`);
-}
-
-export { createDept, deleteDept, getDeptList, updateDept };
+export { getModelingSelectList, ModelingApiObj };

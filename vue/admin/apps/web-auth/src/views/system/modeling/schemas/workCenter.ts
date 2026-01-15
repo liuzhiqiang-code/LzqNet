@@ -6,7 +6,7 @@ import { z } from '#/adapter/form';
 import { $t } from '#/locales';
 import { getAllMenusApi } from '#/api';
 
-export function useWorkCenterSchema(): VbenFormSchema[] {
+export function useSchema(): VbenFormSchema[] {
   let schema: VbenFormSchema[] = [
     {
       component: 'Divider',

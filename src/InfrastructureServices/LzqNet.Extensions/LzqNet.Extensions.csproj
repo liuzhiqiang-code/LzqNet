@@ -39,6 +39,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Callers\LzqNet.Caller\LzqNet.Caller.csproj" />
 	  <ProjectReference Include="..\LzqNet.DCC\LzqNet.DCC.csproj" />
+	  <ProjectReference Include="..\Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq\Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq.csproj" />
 	</ItemGroup>
 
 </Project>

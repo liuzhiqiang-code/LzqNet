@@ -1,0 +1,17 @@
+{
+  "model": {
+    "modelName": "实例名称",
+    "description":"描述",
+    "isEnable":"是否启用",
+
+    "extendSchema":"扩展信息",
+    "tableName":"表名",
+    "isRevision":"是否带版本",
+
+    "auditSchema":"审计信息",
+    "creator":"创建人",
+    "creationTime": "创建时间",
+    "modifier":"最后修改人",
+    "modificationTime": "最后修改时间"
+  }
+}

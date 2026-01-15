@@ -37,12 +37,24 @@ services:
     image: consul:1.15.4
     restart: unless-stopped
     ports:
-      - "28500:8500"  # Web UI端口
+      - "8500:8500"  # Web UI端口
     volumes:
       - ./dockercompose/consul/data:/consul/data
     command: agent -server -ui -node=consul-server -bootstrap-expect=1 -client=0.0.0.0
 
- 
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    restart: unless-stopped
+    ports:
+      - "5672:5672"  # AMQP协议端口
+      - "5673:5673"  # AMQP/SSL端口
+      - "15672:15672" # 管理界面端口
+    volumes:
+      - ./dockercompose/rabbitmq/data:/var/lib/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: 123456
+
   # postgres:
   #   image: postgres:alpine
   #   restart: unless-stopped

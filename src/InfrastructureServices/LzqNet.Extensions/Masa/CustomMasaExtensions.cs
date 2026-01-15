@@ -3,6 +3,7 @@ using Masa.BuildingBlocks.Caching;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Masa.Contrib.Caching.Distributed.StackExchangeRedis;
 using Masa.Contrib.Data.IdGenerator.Snowflake;
+using Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq;
 using System.Reflection;
 
 public static class CustomMasaExtensions
@@ -14,6 +15,7 @@ public static class CustomMasaExtensions
             .AddMapster()
             .AddAutoInject()
             .AddCustomMasaEventBus(builder.Configuration)
+            .AddCustomMasaIntegrationEventBus()
             .AddLocalDistributedLock()
             .AddDistributedCache(distributedCacheOptions =>
             {
@@ -37,6 +39,16 @@ public static class CustomMasaExtensions
             .ToList();
         services.AddValidatorsFromAssemblies(loadedEventBusAssemblies)
             .AddEventBus(loadedEventBusAssemblies, eventBusBuilder => eventBusBuilder.UseMiddleware(typeof(ValidatorEventMiddleware<>)));
+        return services;
+    }
+
+    // 注册RabbitMq集成事件总线
+    private static IServiceCollection AddCustomMasaIntegrationEventBus(this IServiceCollection services)
+    {
+        services.AddIntegrationEventBus(option =>
+        {
+            option.UseRabbitMq();
+        });
         return services;
     }
 
