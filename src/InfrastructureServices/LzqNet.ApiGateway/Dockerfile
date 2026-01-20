@@ -14,10 +14,10 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Directory.Build.props", "."]
 COPY ["src/InfrastructureServices/LzqNet.ApiGateway/LzqNet.ApiGateway.csproj", "src/InfrastructureServices/LzqNet.ApiGateway/"]
+COPY ["src/Callers/LzqNet.Caller/LzqNet.Caller.csproj", "src/Callers/LzqNet.Caller/"]
 COPY ["src/InfrastructureServices/Carp.Gateway-main/Daily.Carp/Daily.Carp.csproj", "src/InfrastructureServices/Carp.Gateway-main/Daily.Carp/"]
 COPY ["src/InfrastructureServices/Carp.Gateway-main/Providers/Daily.Carp.Provider.Consul/Daily.Carp.Provider.Consul.csproj", "src/InfrastructureServices/Carp.Gateway-main/Providers/Daily.Carp.Provider.Consul/"]
 COPY ["src/InfrastructureServices/LzqNet.DCC/LzqNet.DCC.csproj", "src/InfrastructureServices/LzqNet.DCC/"]
-COPY ["src/InfrastructureServices/LzqNet.Consul/LzqNet.Consul.csproj", "src/InfrastructureServices/LzqNet.Consul/"]
 RUN dotnet restore "./src/InfrastructureServices/LzqNet.ApiGateway/LzqNet.ApiGateway.csproj"
 COPY . .
 WORKDIR "/src/src/InfrastructureServices/LzqNet.ApiGateway"

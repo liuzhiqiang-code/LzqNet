@@ -1,4 +1,6 @@
 ﻿
+using LzqNet.Caller.Msm.Contracts.DingtalkPushConfig.Enums;
+
 namespace LzqNet.Caller.Msm.Contracts.DingtalkPushMessageRecord;
 
 public class DingtalkPushMessageRecordSearchDto
@@ -26,7 +28,7 @@ public class DingtalkPushMessageRecordSearchDto
     /// <summary>
     /// 推送类型
     /// </summary>
-    public int? PushConfigType { get; set; }
+    public PushConfigTypeEnum? PushConfigType { get; set; }
 
     /// <summary>
     /// 推送内容

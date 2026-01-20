@@ -4,19 +4,17 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..\..</DockerfileContext>
+		<DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="RabbitMQ.Client" Version="7.2.0" />
-		<PackageReference Include="SqlSugarCore" Version="5.1.4.212-preview02" />
+	  <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\InfrastructureServices\LzqNet.DCC\LzqNet.DCC.csproj" />
 		<ProjectReference Include="..\..\InfrastructureServices\LzqNet.Extensions\LzqNet.Extensions.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Events\" />
 	</ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 ﻿using LzqNet.Caller.Common.Contracts;
-using LzqNet.Caller.Msm.Modeling.Model.Queries;
+using LzqNet.Caller.Msm.Contracts.Modeling.Queries;
 using LzqNet.Services.Msm.Domain.Entities.Modeling;
 using LzqNet.Services.Msm.Domain.Repositories;
 using Masa.Contrib.Dispatcher.Events;

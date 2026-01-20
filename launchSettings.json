@@ -4,14 +4,15 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "composeLaunchAction": "LaunchBrowser",
-      "composeLaunchServiceName": "lzqnet.services.msm",
-      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/",
+      "composeLaunchServiceName": "lzqnet.apigateway",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/health-ui",
       "serviceActions": {
         "lzqnet.apigateway": "StartDebugging",
         "redis": "StartWithoutDebugging",
         "lzqnet.services.msm": "StartDebugging",
         "consul": "StartWithoutDebugging",
-        "lzqnet.auth": "StartDebugging"
+        "lzqnet.auth": "StartDebugging",
+        "lzqnet.queueconsumers.notifications": "StartDebugging"
       }
     }
   }

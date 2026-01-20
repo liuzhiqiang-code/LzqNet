@@ -1,9 +1,9 @@
-﻿using Masa.BuildingBlocks.Ddd.Domain.Repositories;
+﻿using LzqNet.Extensions.SqlSugar.Repository;
 using LzqNet.Services.Msm.Domain.Entities;
 
 namespace LzqNet.Services.Msm.Domain.Repositories;
 
-public interface IDingtalkPushConfigRepository : IRepository<DingtalkPushConfigEntity, long>
+public interface IDingtalkPushConfigRepository : ISqlSugarRepository<DingtalkPushConfigEntity>, ITransientDependency
 {
 
 }

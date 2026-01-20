@@ -22,5 +22,13 @@ public class DingtalkPushBusinessCreateCommandValidator : MasaAbstractValidator<
 {
     public DingtalkPushBusinessCreateCommandValidator()
     {
+        RuleFor(x => x.BusinessName)
+           .NotEmpty().WithMessage("推送业务名不能为空")
+           .MaximumLength(50).WithMessage("推送业务名长度不能超过50个字符");
+
+        RuleFor(x => x.EnableStatus)
+            .NotNull().WithMessage("启用状态不能为空")
+            .IsInEnum().WithMessage("无效的启用状态值");
+
     }
 }

@@ -1,35 +1,38 @@
 ﻿using Masa.BuildingBlocks.Data;
-using Masa.BuildingBlocks.Ddd.Domain.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
+using SqlSugar;
 
 namespace LzqNet.Caller.Common.Contracts;
 
-public class BaseFullEntity: IEntity<long>
+public class BaseFullEntity : IBaseFullEntity
 {
-    [Column("id")]
-    public long Id { get; private set; }
+    [SugarColumn(ColumnName = "id",IsPrimaryKey = true)]
+    public long Id { get; private set; } = IdGeneratorFactory.SnowflakeGenerator.NewId();
 
-    [Column("creator")]
+    [SugarColumn(ColumnName = "creator")]
     public long Creator { get; set; }
 
-    [Column("creation_time")]
+    [SugarColumn(ColumnName = "creation_time")]
     public DateTime CreationTime { get; set; }
 
-    [Column("modifier")]
+    [SugarColumn(ColumnName = "modifier")]
     public long Modifier { get; set; }
 
-    [Column("modification_time")]
+    [SugarColumn(ColumnName = "modification_time")]
     public DateTime ModificationTime { get; set; }
 
-    [Column("is_deleted")]
+    [SugarColumn(ColumnName = "is_deleted")]
     public bool IsDeleted { get; set; }
+}
 
-    public IEnumerable<(string Name, object Value)> GetKeys()
-    {
-        return [(nameof(Id), (object)Id)];
-    }
-    public BaseFullEntity()
-    {
-        Id = IdGeneratorFactory.SnowflakeGenerator.NewId();
-    }
+public interface IBaseFullEntity : IEntity
+{
+    public long Creator { get; set; }
+
+    public DateTime CreationTime { get; set; }
+
+    public long Modifier { get; set; }
+
+    public DateTime ModificationTime { get; set; }
+
+    public bool IsDeleted { get; set; }
 }

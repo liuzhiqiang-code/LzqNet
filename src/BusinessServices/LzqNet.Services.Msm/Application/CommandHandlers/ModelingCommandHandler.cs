@@ -13,7 +13,7 @@ public class ModelingCommandHandler(IModelingRepository modelingRepository)
     public async Task CreateHandleAsync(ModelingCreateCommand command)
     {
         var entity = command.Map<ModelingEntity>();
-        await _modelingRepository.AddAsync(entity);
+        await _modelingRepository.InsertAsync(entity);
     }
 
     [EventHandler]
@@ -26,6 +26,6 @@ public class ModelingCommandHandler(IModelingRepository modelingRepository)
     [EventHandler]
     public async Task DeleteHandleAsync(ModelingDeleteCommand command)
     {
-        await _modelingRepository.RemoveAsync(a => command.Ids.Contains(a.Id));
+        await _modelingRepository.DeleteAsync(a => command.Ids.Contains(a.Id));
     }
 }

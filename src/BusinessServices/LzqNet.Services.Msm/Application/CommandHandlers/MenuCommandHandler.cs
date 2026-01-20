@@ -13,7 +13,7 @@ public class MenuCommandHandler(IMenuRepository MenuRepository)
     public async Task CreateHandleAsync(MenuCreateCommand command)
     {
         var entity = command.Map<MenuEntity>();
-        await _MenuRepository.AddAsync(entity);
+        await _MenuRepository.InsertAsync(entity);
     }
 
     [EventHandler]
@@ -26,6 +26,6 @@ public class MenuCommandHandler(IMenuRepository MenuRepository)
     [EventHandler]
     public async Task DeleteHandleAsync(MenuDeleteCommand command)
     {
-        await _MenuRepository.RemoveAsync(a => command.Ids.Contains(a.Id));
+        await _MenuRepository.DeleteAsync(a => command.Ids.Contains(a.Id));
     }
 }

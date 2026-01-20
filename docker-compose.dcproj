@@ -23,6 +23,7 @@
     <None Include="dockercompose\nginx\conf.d\healthcheckui.conf" />
     <None Include="dockercompose\prometheus\prometheus.yml" />
     <None Include="dockercompose\promtail\promtail.yml" />
+    <None Include="dockercompose\rabbitmq\plugins\rabbitmq_delayed_message_exchange-3.12.0.ez" />
     <None Include="dockercompose\ssl_certs\cert.pem" />
     <None Include="dockercompose\ssl_certs\key.pem" />
   </ItemGroup>

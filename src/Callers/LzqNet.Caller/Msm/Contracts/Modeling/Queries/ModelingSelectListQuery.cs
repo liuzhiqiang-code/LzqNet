@@ -2,7 +2,7 @@
 using LzqNet.Caller.Msm.Contracts.Modeling;
 using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Queries;
 
-namespace LzqNet.Caller.Msm.Modeling.Model.Queries;
+namespace LzqNet.Caller.Msm.Contracts.Modeling.Queries;
 
 public record ModelingSelectListQuery : Query<List<SelectViewDto>>
 {

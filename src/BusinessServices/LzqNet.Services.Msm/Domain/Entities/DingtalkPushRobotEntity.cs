@@ -1,51 +1,51 @@
 ﻿using LzqNet.Caller.Common.Contracts;
-using System.ComponentModel.DataAnnotations.Schema;
+using SqlSugar;
 
 namespace LzqNet.Services.Msm.Domain.Entities;
 
-[Table("msm_dingtalk_push_robot")]
+[SugarTable("msm_dingtalk_push_robot")]
 public class DingtalkPushRobotEntity : BaseFullEntity
 {
     /// <summary>
     /// 机器人名
     /// </summary>
-    [Column("name")]
+    [SugarColumn(ColumnName = "name")]
     public string Name { get; set; }
 
     /// <summary>
     /// 所属钉钉群组
     /// </summary>
-    [Column("dingtalk_group_name")]
+    [SugarColumn(ColumnName = "dingtalk_group_name")]
     public string DingtalkGroupName { get; set; }
 
     /// <summary>
     /// 推送启用状态
     /// </summary>
-    [Column("enable_status")]
+    [SugarColumn(ColumnName = "enable_status")]
     public EnableStatusEnum EnableStatus { get; set; }
 
     /// <summary>
     /// 推送Webhook地址
     /// </summary>
-    [Column("webhook")]
+    [SugarColumn(ColumnName = "webhook")]
     public string Webhook { get; set; }
 
     /// <summary>
     /// 推送关键词
     /// </summary>
-    [Column("push_keywords")]
-    public string PushKeywords { get; set; }
+    [SugarColumn(ColumnName = "push_keywords", IsJson = true)]
+    public List<string> PushKeywords { get; set; }
 
     /// <summary>
     /// 加签
     /// </summary>
-    [Column("sign")]
+    [SugarColumn(ColumnName = "sign")]
     public string Sign { get; set; }
 
     /// <summary>
     /// 推送ip段
     /// </summary>
-    [Column("push_ip_segments")]
-    public string PushIpSegments { get; set; }
+    [SugarColumn(ColumnName = "push_ip_segments", IsJson = true)]
+    public List<string> PushIpSegments { get; set; }
 
 }

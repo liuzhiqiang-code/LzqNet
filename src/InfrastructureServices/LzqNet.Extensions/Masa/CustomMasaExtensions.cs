@@ -4,7 +4,10 @@ using Masa.BuildingBlocks.Dispatcher.Events;
 using Masa.Contrib.Caching.Distributed.StackExchangeRedis;
 using Masa.Contrib.Data.IdGenerator.Snowflake;
 using Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq;
+using Serilog;
 using System.Reflection;
+using System.Text;
+using LzqNet.Extensions.SqlSugar;
 
 public static class CustomMasaExtensions
 {
@@ -38,7 +41,11 @@ public static class CustomMasaExtensions
             .Concat(eventBusAssemblyNames.Select(Assembly.Load))
             .ToList();
         services.AddValidatorsFromAssemblies(loadedEventBusAssemblies)
-            .AddEventBus(loadedEventBusAssemblies, eventBusBuilder => eventBusBuilder.UseMiddleware(typeof(ValidatorEventMiddleware<>)));
+            .AddEventBus(loadedEventBusAssemblies, eventBusBuilder =>
+            {
+                eventBusBuilder.UseMiddleware(typeof(ValidatorEventMiddleware<>));
+                eventBusBuilder.UseMiddleware(typeof(SugarUowEventMiddleware<>));
+            });
         return services;
     }
 
@@ -60,7 +67,7 @@ public static class CustomMasaExtensions
             .Concat(callerAssemblyNames.Select(Assembly.Load))
             .ToList();
         services.AddAutoRegistrationCaller(loadedCallerAssemblies);
-         return services;
+        return services;
     }
     private static IServiceCollection AddCustomMasaSnowflake(this IServiceCollection services, IConfiguration configuration)
     {
@@ -90,11 +97,32 @@ public static class CustomMasaExtensions
             //处理自定义异常
             options.ExceptionHandler = context =>
             {
+                Log.Error(GetFullExceptionMessage(context.Exception), "发生未处理的异常");
+
                 var statusCode = exceptionStatusMap.TryGetValue(context.Exception.GetType(), out var code)
                 ? code
                 : 500;
-                context.ToResult(AdminResult.Fail(context.Exception.Message, statusCode).ToJson(),statusCode);
+                context.ToResult(AdminResult.Fail(context.Exception.Message, statusCode).ToJson(), statusCode);
             };
         });
+    }
+    private static string GetFullExceptionMessage(Exception ex)
+    {
+        var sb = new StringBuilder();
+        var currentEx = ex;
+        var indent = 0;
+
+        while (currentEx != null)
+        {
+            sb.AppendLine($"{new string(' ', indent)}异常类型: {currentEx.GetType().Name}");
+            sb.AppendLine($"{new string(' ', indent)}异常消息: {currentEx.Message}");
+            sb.AppendLine($"{new string(' ', indent)}堆栈跟踪: {currentEx.StackTrace}");
+            sb.AppendLine();
+
+            currentEx = currentEx.InnerException;
+            indent += 2;
+        }
+
+        return sb.ToString();
     }
 }

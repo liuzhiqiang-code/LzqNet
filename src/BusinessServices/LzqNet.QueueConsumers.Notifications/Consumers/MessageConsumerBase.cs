@@ -7,7 +7,6 @@ using System.Text.Json;
 
 namespace LzqNet.QueueConsumers.Notifications.Consumers;
 
-
 /// <summary>
 /// 通用消息消费者基类
 /// </summary>
@@ -22,16 +21,14 @@ public abstract class MessageConsumerBase<TMessage> : BackgroundService where TM
 
     // 配置参数
     protected abstract string TopicName { get; }
-
     // 队列名称
-    protected string MainQueueName => $"{TopicName}_queue";
-    protected string RetryQueueName => $"{TopicName}_retry_queue";
-    protected string DeadLetterQueueName => $"{TopicName}_dead_letter_queue";
-
-    // 交换机名称
     protected string MainExchangeName => TopicName;
-    protected string RetryExchangeName => $"{TopicName}_retry_exchange";
+    protected string MainQueueName => $"{TopicName}_queue";
+    protected string MainRoutingKey => $"{TopicName}_routingKey";
+
     protected string DeadLetterExchangeName => $"{TopicName}_dead_letter_exchange";
+    protected string DeadLetterQueueName => $"{TopicName}_dead_letter_queue";
+    protected string DeadLetterRoutingKey => $"{TopicName}_dead_letter_routingKey";
 
     // 重试配置
     protected virtual int MaxRetryCount => 3;
@@ -94,6 +91,10 @@ public abstract class MessageConsumerBase<TMessage> : BackgroundService where TM
 
             // 创建通道
             _channel = await _connection.CreateChannelAsync();
+            await DeclareExchangeAndQueueAsync(_channel, stoppingToken);
+
+            // 启动死信队列消费者
+            await StartDeadLetterConsumerAsync(stoppingToken);
 
             // 通道事件处理
             _channel.CallbackExceptionAsync += async (sender, args) =>
@@ -115,12 +116,6 @@ public abstract class MessageConsumerBase<TMessage> : BackgroundService where TM
 
             _logger.LogInformation("消息消费者初始化完成，Topic：{TopicName}，队列：{QueueName}",
                 TopicName, MainQueueName);
-
-            // 启动死信队列消费者
-            await StartDeadLetterConsumerAsync(stoppingToken);
-
-            // 启动重试队列消费者
-            await StartRetryConsumerAsync(stoppingToken);
         }
         catch (Exception ex)
         {
@@ -154,31 +149,6 @@ public abstract class MessageConsumerBase<TMessage> : BackgroundService where TM
         }
     }
 
-    private async Task StartRetryConsumerAsync(CancellationToken stoppingToken)
-    {
-        try
-        {
-            var retryConsumer = new AsyncEventingBasicConsumer(_channel);
-
-            retryConsumer.ReceivedAsync += async (sender, eventArgs) =>
-            {
-                await ProcessRetryMessageAsync(eventArgs, stoppingToken);
-            };
-
-            await _channel!.BasicConsumeAsync(
-                queue: RetryQueueName,
-                autoAck: false,
-                consumer: retryConsumer,
-                cancellationToken: stoppingToken);
-
-            _logger.LogInformation("重试队列消费者已启动，队列：{QueueName}", RetryQueueName);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "启动重试队列消费者失败");
-        }
-    }
-
     private async Task ProcessDeadLetterInternalAsync(BasicDeliverEventArgs eventArgs, CancellationToken stoppingToken)
     {
         string messageId = eventArgs.BasicProperties.MessageId ?? Guid.NewGuid().ToString();
@@ -200,64 +170,6 @@ public abstract class MessageConsumerBase<TMessage> : BackgroundService where TM
         {
             _logger.LogError(ex, "处理死信消息失败，消息ID: {MessageId}", messageId);
             // 死信消息处理失败也确认，避免无限循环
-            await _channel!.BasicAckAsync(
-                deliveryTag: eventArgs.DeliveryTag,
-                multiple: false,
-                cancellationToken: stoppingToken);
-        }
-    }
-
-    private async Task ProcessRetryMessageAsync(BasicDeliverEventArgs eventArgs, CancellationToken stoppingToken)
-    {
-        string messageId = eventArgs.BasicProperties.MessageId ?? Guid.NewGuid().ToString();
-
-        try
-        {
-            var body = eventArgs.Body.ToArray();
-            var retryCount = GetRetryCount(eventArgs.BasicProperties.Headers);
-            var newRetryCount = retryCount + 1;
-
-            _logger.LogInformation("处理重试消息，消息ID: {MessageId}，当前重试次数: {RetryCount}",
-                messageId, retryCount);
-
-            var properties = new BasicProperties
-            {
-                Persistent = true,
-                ContentType = "application/json",
-                DeliveryMode = DeliveryModes.Persistent,
-                MessageId = messageId,
-                Headers = new Dictionary<string, object>()
-            };
-
-            if (eventArgs.BasicProperties.Headers != null)
-            {
-                foreach (var header in eventArgs.BasicProperties.Headers)
-                {
-                    properties.Headers[header.Key] = header.Value;
-                }
-            }
-
-            properties.Headers["x-retry-count"] = newRetryCount;
-
-            await _channel!.BasicPublishAsync(
-                exchange: MainExchangeName,
-                routingKey: $"{TopicName}_routingKey",
-                mandatory: false,
-                basicProperties: properties,
-                body: body,
-                cancellationToken: stoppingToken);
-
-            await _channel!.BasicAckAsync(
-                deliveryTag: eventArgs.DeliveryTag,
-                multiple: false,
-                cancellationToken: stoppingToken);
-
-            _logger.LogInformation("重试消息已重新发布到主队列，消息ID: {MessageId}，重试次数: {RetryCount}",
-                messageId, newRetryCount);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "处理重试消息失败，消息ID: {MessageId}", messageId);
             await _channel!.BasicAckAsync(
                 deliveryTag: eventArgs.DeliveryTag,
                 multiple: false,
@@ -370,26 +282,40 @@ public abstract class MessageConsumerBase<TMessage> : BackgroundService where TM
     {
         string messageId = eventArgs.BasicProperties.MessageId ?? Guid.NewGuid().ToString();
 
-        if (retryCount >= MaxRetryCount)
-        {
-            _logger.LogWarning("消息已达到最大重试次数({MaxRetryCount})，转入死信队列，消息ID: {MessageId}，错误: {ErrorMessage}",
-                MaxRetryCount, messageId, errorMessage);
+        // 复制消息体和头信息
+        var bodyCopy = eventArgs.Body.ToArray();
+        var headersCopy = eventArgs.BasicProperties.Headers?.ToDictionary(kv => kv.Key, kv => kv.Value);
 
-            await _channel!.BasicRejectAsync(
-                deliveryTag: eventArgs.DeliveryTag,
-                requeue: false,
-                cancellationToken: CancellationToken.None);
-        }
-        else
+        _logger.LogInformation("处理消息失败，准备处理失败逻辑，消息ID: {MessageId}，当前重试次数: {RetryCount}，最大重试次数: {MaxRetryCount}，错误: {ErrorMessage}",
+            messageId, retryCount, MaxRetryCount, errorMessage);
+
+        try
         {
-            await SendToRetryQueueAsync(eventArgs, retryCount);
+            if (retryCount >= MaxRetryCount)
+            {
+                _logger.LogWarning("消息已达到最大重试次数({MaxRetryCount})，转入死信队列，消息ID: {MessageId}，错误: {ErrorMessage}",
+                    MaxRetryCount, messageId, errorMessage);
+
+                await SendToDeadLetterQueueAsync(bodyCopy, headersCopy, retryCount, messageId);
+            }
+            else
+            {
+                _logger.LogInformation("消息未达到最大重试次数，增加重试次数并重新发布到主队列，消息ID: {MessageId}，当前重试次数: {RetryCount}",
+                    messageId, retryCount);
+                await RetryMessageAsync(bodyCopy, headersCopy, retryCount, messageId);
+            }
+        }
+        finally
+        {
+            await _channel!.BasicAckAsync(
+                deliveryTag: eventArgs.DeliveryTag,
+                multiple: false,
+                cancellationToken: CancellationToken.None);
         }
     }
 
-    private async Task SendToRetryQueueAsync(BasicDeliverEventArgs eventArgs, int currentRetryCount)
+    private async Task RetryMessageAsync(byte[] bodyCopy, Dictionary<string, object?>? headersCopy, int currentRetryCount, string messageId)
     {
-        string messageId = eventArgs.BasicProperties.MessageId ?? Guid.NewGuid().ToString();
-
         try
         {
             var newRetryCount = currentRetryCount + 1;
@@ -399,43 +325,87 @@ public abstract class MessageConsumerBase<TMessage> : BackgroundService where TM
                 Persistent = true,
                 ContentType = "application/json",
                 DeliveryMode = DeliveryModes.Persistent,
+                Timestamp = new AmqpTimestamp(DateTimeOffset.UtcNow.ToUnixTimeSeconds()),
                 MessageId = messageId,
-                Headers = new Dictionary<string, object>()
+                Headers = new Dictionary<string, object>(),
             };
 
-            if (eventArgs.BasicProperties.Headers != null)
+            // 复制原始头信息
+            if (headersCopy != null)
             {
-                foreach (var header in eventArgs.BasicProperties.Headers)
+                foreach (var header in headersCopy)
                 {
                     properties.Headers[header.Key] = header.Value;
                 }
             }
 
+            // 更新重试次数
             properties.Headers["x-retry-count"] = newRetryCount;
 
+            // 3.关键：设置延时时间(单位：毫秒)
+            var retryDelayMs = (int)(RetryDelayMs * Math.Pow(2, newRetryCount));
+            properties.Headers["x-delay"] = retryDelayMs;
+
             await _channel!.BasicPublishAsync(
-                exchange: RetryExchangeName,
-                routingKey: $"{TopicName}_retry_routingKey",
+                exchange: MainExchangeName,
+                routingKey: MainRoutingKey,
                 mandatory: false,
                 basicProperties: properties,
-                body: eventArgs.Body.ToArray(),
+                body: bodyCopy,
                 cancellationToken: CancellationToken.None);
 
-            await _channel!.BasicAckAsync(
-                deliveryTag: eventArgs.DeliveryTag,
-                multiple: false,
-                cancellationToken: CancellationToken.None);
-
-            _logger.LogInformation("消息已发送到重试队列，消息ID: {MessageId}，新的重试次数: {RetryCount}",
-                messageId, newRetryCount);
+            _logger.LogInformation("消息已进入延时交换机，ID: {MessageId}，将在 {Delay}ms 后重试", messageId, retryDelayMs);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "发送消息到重试队列失败，消息ID: {MessageId}", messageId);
-            await _channel!.BasicRejectAsync(
-                deliveryTag: eventArgs.DeliveryTag,
-                requeue: false,
+            _logger.LogError(ex, "重新发布消息到主队列失败，消息ID: {MessageId}", messageId);
+            // 重试发布失败，直接转到死信队列
+            await SendToDeadLetterQueueAsync(bodyCopy, headersCopy, currentRetryCount, messageId);
+        }
+    }
+
+    private async Task SendToDeadLetterQueueAsync(byte[] bodyCopy, Dictionary<string, object?>? headersCopy, int retryCount,string messageId)
+    {
+        try
+        {
+            var properties = new BasicProperties
+            {
+                Persistent = true,
+                ContentType = "application/json",
+                DeliveryMode = DeliveryModes.Persistent,
+                Timestamp = new AmqpTimestamp(DateTimeOffset.UtcNow.ToUnixTimeSeconds()),
+                MessageId = messageId,
+                Headers = new Dictionary<string, object>()
+            };
+
+            // 复制原始头信息
+            if (headersCopy != null)
+            {
+                foreach (var header in headersCopy)
+                {
+                    properties.Headers[header.Key] = header.Value;
+                }
+            }
+
+            // 记录最终的重试次数
+            properties.Headers["x-final-retry-count"] = retryCount;
+            properties.Headers["x-dead-letter-time"] = DateTime.UtcNow.ToString("o");
+
+            await _channel!.BasicPublishAsync(
+                exchange: DeadLetterExchangeName,
+                routingKey: DeadLetterRoutingKey,
+                mandatory: false,
+                basicProperties: properties,
+                body: bodyCopy,
                 cancellationToken: CancellationToken.None);
+
+            _logger.LogInformation("消息已发送到死信队列，消息ID: {MessageId}，最终重试次数: {RetryCount}",
+                messageId, retryCount);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "发送消息到死信队列失败，消息ID: {MessageId}", messageId);
+            // 死信队列也失败，只能记录日志，消息会丢失
         }
     }
 
@@ -451,6 +421,75 @@ public abstract class MessageConsumerBase<TMessage> : BackgroundService where TM
                 return byteCount;
         }
         return 0;
+    }
+
+    private async Task DeclareExchangeAndQueueAsync(IChannel channel, CancellationToken stoppingToken)
+    {
+        // 1. 声明死信交换机
+        await channel.ExchangeDeclareAsync(
+            exchange: DeadLetterExchangeName,
+            type: ExchangeType.Direct,
+            durable: true,
+            autoDelete: false,
+            arguments: null,
+            cancellationToken: stoppingToken);
+
+        // 2. 声明死信队列
+        await channel.QueueDeclareAsync(
+            queue: DeadLetterQueueName,
+            durable: true,
+            exclusive: false,
+            autoDelete: false,
+            arguments: null,
+            cancellationToken: stoppingToken);
+
+        // 3. 绑定死信队列到死信交换机
+        await channel.QueueBindAsync(
+            queue: DeadLetterQueueName,
+            exchange: DeadLetterExchangeName,
+            routingKey: DeadLetterRoutingKey,
+            arguments: null,
+            cancellationToken: stoppingToken);
+
+        // 4. 修改主交换机声明：支持延时插件
+        var exchangeArguments = new Dictionary<string, object>
+        {
+            { "x-delayed-type", "direct" } // 指定实际的路由类型
+        };
+        await channel.ExchangeDeclareAsync(
+            exchange: MainExchangeName,
+            type: "x-delayed-message", // 必须是这个固定类型
+            durable: true,
+            autoDelete: false,
+            arguments: exchangeArguments,
+            cancellationToken: stoppingToken);
+
+        // 5. 声明主队列，设置队列最大长度
+        var mainQueueArguments = new Dictionary<string, object>
+        {
+            // 队列最大长度
+            ["x-max-length"] = 10000,
+            // 队列溢出行为
+            ["x-overflow"] = "reject-publish"
+        };
+
+        await channel.QueueDeclareAsync(
+            queue: MainQueueName,
+            durable: true,
+            exclusive: false,
+            autoDelete: false,
+            arguments: mainQueueArguments,
+            cancellationToken: stoppingToken);
+
+        // 6. 绑定主队列到主交换机
+        await channel.QueueBindAsync(
+            queue: MainQueueName,
+            exchange: MainExchangeName,
+            routingKey: MainRoutingKey,
+            arguments: null,
+            cancellationToken: stoppingToken);
+
+        _logger?.LogDebug("交换机、队列声明完成，Topic: {TopicName}", TopicName);
     }
 
     private async Task CleanupResourcesAsync()

@@ -1,7 +1,7 @@
 ﻿namespace LzqNet.Caller.Msm.Contracts.DingtalkPushMessageRecord.Enums;
 
 /// <summary>
-/// 表示钉钉推送状态的枚举
+/// 钉钉推送状态的枚举
 /// </summary>
 public enum DingtalkPushStatusEnum
 {

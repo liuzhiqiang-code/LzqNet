@@ -15,9 +15,9 @@ WORKDIR /src
 COPY ["Directory.Build.props", "."]
 COPY ["src/BusinessServices/LzqNet.Services.Msm/LzqNet.Services.Msm.csproj", "src/BusinessServices/LzqNet.Services.Msm/"]
 COPY ["src/InfrastructureServices/LzqNet.DCC/LzqNet.DCC.csproj", "src/InfrastructureServices/LzqNet.DCC/"]
-COPY ["src/InfrastructureServices/LzqNet.Consul/LzqNet.Consul.csproj", "src/InfrastructureServices/LzqNet.Consul/"]
 COPY ["src/InfrastructureServices/LzqNet.Extensions/LzqNet.Extensions.csproj", "src/InfrastructureServices/LzqNet.Extensions/"]
 COPY ["src/Callers/LzqNet.Caller/LzqNet.Caller.csproj", "src/Callers/LzqNet.Caller/"]
+COPY ["src/InfrastructureServices/Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq/Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq.csproj", "src/InfrastructureServices/Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq/"]
 RUN dotnet restore "./src/BusinessServices/LzqNet.Services.Msm/LzqNet.Services.Msm.csproj"
 COPY . .
 WORKDIR "/src/src/BusinessServices/LzqNet.Services.Msm"

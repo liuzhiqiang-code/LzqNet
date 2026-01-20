@@ -1,14 +1,15 @@
-﻿using LzqNet.Caller.Msm.Contracts.DingtalkPushMessageRecord.Enums;
+﻿using LzqNet.Caller.Common.Contracts;
+using LzqNet.Caller.Msm.Contracts.DingtalkPushConfig.Enums;
+using LzqNet.Caller.Msm.Contracts.DingtalkPushMessageRecord.Enums;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LzqNet.QueueConsumers.Notifications.Entities;
 
-[SugarTable("msm_dingtalk_push_message_record")]
-public class DingtalkPushMessageRecordEntity
-{
-    public long Id { get; private set; }
 
+[SugarTable("msm_dingtalk_push_message_record")]
+public class DingtalkPushMessageRecordEntity : BaseFullEntity
+{
     /// <summary>
     /// 关联业务名
     /// </summary>
@@ -28,7 +29,7 @@ public class DingtalkPushMessageRecordEntity
     public string PushRobotName { get; set; }
 
     /// <summary>
-    /// 推送群组名
+    /// 推送机器人名
     /// </summary>
     [SugarColumn(ColumnName = "dingtalk_group_name")]
     public string DingtalkGroupName { get; set; }
@@ -37,7 +38,7 @@ public class DingtalkPushMessageRecordEntity
     /// 推送类型
     /// </summary>
     [SugarColumn(ColumnName = "push_config_type")]
-    public int PushConfigType { get; set; }
+    public PushConfigTypeEnum PushConfigType { get; set; }
 
     /// <summary>
     /// 推送内容
@@ -46,7 +47,7 @@ public class DingtalkPushMessageRecordEntity
     public string PushContent { get; set; }
 
     /// <summary>
-    /// 推送状态
+    /// 推送启用状态
     /// </summary>
     [SugarColumn(ColumnName = "push_status")]
     public DingtalkPushStatusEnum PushStatus { get; set; }
@@ -54,8 +55,8 @@ public class DingtalkPushMessageRecordEntity
     /// <summary>
     /// 关联钉钉用户
     /// </summary>
-    [SugarColumn(ColumnName = "dingtalk_user_ids")]
-    public string DingtalkUserIds { get; set; }
+    [SugarColumn(ColumnName = "dingtalk_user_ids", IsJson = true)]
+    public List<string> DingtalkUserIds { get; set; }
 
     /// <summary>
     /// 推送Webhook地址
@@ -66,8 +67,8 @@ public class DingtalkPushMessageRecordEntity
     /// <summary>
     /// 推送关键词
     /// </summary>
-    [SugarColumn(ColumnName = "push_keywords")]
-    public string PushKeywords { get; set; }
+    [SugarColumn(ColumnName = "push_keywords", IsJson = true)]
+    public List<string> PushKeywords { get; set; }
 
     /// <summary>
     /// 加签
@@ -78,21 +79,12 @@ public class DingtalkPushMessageRecordEntity
     /// <summary>
     /// 推送ip段
     /// </summary>
-    [SugarColumn(ColumnName = "push_ip_segments")]
-    public string PushIpSegments { get; set; }
+    [SugarColumn(ColumnName = "push_ip_segments", IsJson = true)]
+    public List<string> PushIpSegments { get; set; }
 
-    [SugarColumn(ColumnName = "creator")]
-    public long Creator { get; set; }
-
-    [SugarColumn(ColumnName = "creation_time")]
-    public DateTime CreationTime { get; set; }
-
-    [SugarColumn(ColumnName = "modifier")]
-    public long Modifier { get; set; }
-
-    [SugarColumn(ColumnName = "modification_time")]
-    public DateTime ModificationTime { get; set; }
-
-    [SugarColumn(ColumnName = "is_deleted")]
-    public bool IsDeleted { get; set; }
+    /// <summary>
+    /// 推送返回结果
+    /// </summary>
+    [SugarColumn(ColumnName = "push_return_message")]
+    public string? PushReturnMessage { get; set; }
 }

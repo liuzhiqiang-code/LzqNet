@@ -30,24 +30,24 @@ public static class SerilogExtensions
             loggerConfig.WriteTo.Console(
                 outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [TraceId:{TraceId}] {Message:lj}{NewLine}{Exception}");
 
-            var lokiUrl = builder.Configuration.GetValue<string>("GrafanaLoki:LokiUrl")
-                ?? throw new InvalidOperationException($"未找到配置项:GrafanaLoki:LokiUrl");
-            var serviceName = builder.Configuration.GetValue<string>("GrafanaLoki:ServiceName");
-
-            loggerConfig.WriteTo.GrafanaLoki(lokiUrl,
-                labels: [new LokiLabel { Key = "service_name", Value = serviceName ?? "unknown_service" }]);
+            // 可添加文件日志
+            loggerConfig.WriteTo.File(
+                path: "Logs/log-.txt",
+                rollingInterval: RollingInterval.Day,
+                restrictedToMinimumLevel: LogEventLevel.Debug,
+                outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] [TraceId:{TraceId}] {Message:lj}{NewLine}{Exception}");
         }
         else
         {
             // 生产环境配置
             loggerConfig.WriteTo.Console(new CompactJsonFormatter());
 
-            // 可添加文件日志
-            loggerConfig.WriteTo.File(
-                path: "Logs/log-.txt",
-                rollingInterval: RollingInterval.Day,
-                restrictedToMinimumLevel: LogEventLevel.Information,
-                outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] [TraceId:{TraceId}] {Message:lj}{NewLine}{Exception}");
+            var lokiUrl = builder.Configuration.GetValue<string>("GrafanaLoki:LokiUrl")
+                ?? throw new InvalidOperationException($"未找到配置项:GrafanaLoki:LokiUrl");
+            var serviceName = builder.Configuration.GetValue<string>("GrafanaLoki:ServiceName");
+
+            loggerConfig.WriteTo.GrafanaLoki(lokiUrl,
+                labels: [new LokiLabel { Key = "service_name", Value = serviceName ?? "unknown_service" }]);
         }
 
         // 创建Logger并注册到DI容器

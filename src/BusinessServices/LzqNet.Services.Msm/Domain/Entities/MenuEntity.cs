@@ -1,28 +1,36 @@
 ﻿using LzqNet.Caller.Common.Contracts;
 using LzqNet.Caller.Msm.Contracts.Menu;
-using System.ComponentModel.DataAnnotations.Schema;
+using SqlSugar;
 
 namespace LzqNet.Services.Msm.Domain.Entities;
 
-[Table("msm_menu")]
+[SugarTable("msm_menu")]
 public class MenuEntity : BaseFullEntity
 {
-    [Column("pid")]
+    [SugarColumn(ColumnName = "pid")]
     public long? Pid { get; set; }
-    [Column("auth_code")]
+
+    [SugarColumn(ColumnName = "auth_code")]
     public string? AuthCode { get; set; }
-    [Column("component")]
+
+    [SugarColumn(ColumnName = "component")]
     public string? Component { get; set; }
-    [Column("meta")]
+
+    [SugarColumn(ColumnName = "meta", IsJson = true)]
     public MenuMeta? Meta { get; set; }
-    [Column("name")]
+
+    [SugarColumn(ColumnName = "name")]
     public string Name { get; set; }
-    [Column("status")]
+
+    [SugarColumn(ColumnName = "status")]
     public EnableStatusEnum Status { get; set; } = EnableStatusEnum.Enabled;
-    [Column("path")]
+
+    [SugarColumn(ColumnName = "path")]
     public string? Path { get; set; }
-    [Column("redirect")]
+
+    [SugarColumn(ColumnName = "redirect")]
     public string? Redirect { get; set; }
-    [Column("type")]
+
+    [SugarColumn(ColumnName = "type")]
     public string Type { get; set; }
 }

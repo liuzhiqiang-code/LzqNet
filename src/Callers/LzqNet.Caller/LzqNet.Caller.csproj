@@ -9,8 +9,9 @@
 	<ItemGroup>
 		<PackageReference Include="Masa.Utils.Extensions.Enums" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Utils.Models.Config" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.BuildingBlocks.Ddd.Domain" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Utils.Extensions.Validations.FluentValidation" Version="$(MASAFrameworkVersion)" />
+		<PackageReference Include="Masa.BuildingBlocks.ReadWriteSplitting.Cqrs" Version="$(MASAFrameworkVersion)" />
+		<PackageReference Include="Masa.BuildingBlocks.Dispatcher.IntegrationEvents" Version="$(MASAFrameworkVersion)" />
 
 		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.3.0" />
 
@@ -20,6 +21,8 @@
 		<PackageReference Include="Masa.Contrib.Data.DistributedLock.Local" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Service.Caller.HttpClient" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftPackageVersion)" />
+
+		<PackageReference Include="SqlSugarCore" Version="5.1.4.212-preview02" />
 	</ItemGroup>
 
 </Project>

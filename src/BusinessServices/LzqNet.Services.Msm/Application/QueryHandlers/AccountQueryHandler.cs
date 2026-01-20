@@ -1,11 +1,7 @@
 ﻿using LzqNet.Caller.Auth;
 using LzqNet.Caller.Msm.Contracts.Account.Queries;
-using LzqNet.Caller.Msm.Contracts.User;
-using LzqNet.Caller.Msm.Contracts.User.Queries;
 using LzqNet.Services.Msm.Domain.Repositories;
-using Masa.BuildingBlocks.Ddd.Domain.Repositories;
 using Masa.Contrib.Dispatcher.Events;
-using Masa.Utils.Models;
 
 /*
  * @author : liuzhiqiang

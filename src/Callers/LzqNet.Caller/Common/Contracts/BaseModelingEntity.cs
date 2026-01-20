@@ -1,10 +1,9 @@
 ﻿using Masa.BuildingBlocks.Data;
-using Masa.BuildingBlocks.Ddd.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LzqNet.Caller.Common.Contracts;
 
-public abstract class BaseModelingEntity : IEntity<long>
+public abstract class BaseModelingEntity : IEntity
 {
     public abstract long Id { get; set; }
     [Column("creator")]

@@ -17,7 +17,7 @@ public class RoleCommandHandler(IRoleRepository roleRepository,IRoleAuthReposito
     public async Task CreateHandleAsync(RoleCreateCommand command)
     {
         var entity = command.Map<RoleEntity>();
-        entity = await _roleRepository.AddAsync(entity);
+        await _roleRepository.InsertAsync(entity);
         var rolePermissions = command.Permissions.Select(permissionId => new RoleAuthEntity
         {
             RoleId = entity.Id,
@@ -25,7 +25,7 @@ public class RoleCommandHandler(IRoleRepository roleRepository,IRoleAuthReposito
         }).ToList();
 
         if (rolePermissions.Count > 0)
-            await _roleAuthRepository.AddRangeAsync(rolePermissions);
+            await _roleAuthRepository.InsertRangeAsync(rolePermissions);
 
         await _authCaller.CreateRole(new RoleModel { 
             Name = entity.Name
@@ -35,7 +35,7 @@ public class RoleCommandHandler(IRoleRepository roleRepository,IRoleAuthReposito
     [EventHandler]
     public async Task UpdateHandleAsync(RoleUpdateCommand command)
     {
-        var entity = await _roleRepository.FindAsync(command.Id);
+        var entity = await _roleRepository.GetByIdAsync(command.Id);
         if (entity == null)
             throw new MasaValidatorException("Role not found");
         command.Map(entity);
@@ -55,7 +55,7 @@ public class RoleCommandHandler(IRoleRepository roleRepository,IRoleAuthReposito
     {
         var list = await _roleRepository.GetListAsync(a => command.Ids.Contains(a.Id));
         await DeleteRolePermissionsAsync(command.Ids);
-        await _roleRepository.RemoveAsync(a => command.Ids.Contains(a.Id));
+        await _roleRepository.DeleteAsync(a => command.Ids.Contains(a.Id));
 
         var deleteRoleModels = list.Select(a => new RoleModel
         {
@@ -83,7 +83,7 @@ public class RoleCommandHandler(IRoleRepository roleRepository,IRoleAuthReposito
 
         if (permissionsToDelete.Any())
         {
-            await _roleAuthRepository.RemoveAsync(a =>
+            await _roleAuthRepository.DeleteAsync(a =>
                 a.RoleId == roleId &&
                 permissionsToDelete.Select(p => p.MenuId).Contains(a.MenuId));
         }
@@ -101,7 +101,7 @@ public class RoleCommandHandler(IRoleRepository roleRepository,IRoleAuthReposito
 
         if (permissionsToAdd.Any())
         {
-            await _roleAuthRepository.AddRangeAsync(permissionsToAdd);
+            await _roleAuthRepository.InsertRangeAsync(permissionsToAdd);
         }
     }
 
@@ -113,6 +113,6 @@ public class RoleCommandHandler(IRoleRepository roleRepository,IRoleAuthReposito
         if (roleIds == null || !roleIds.Any())
             return;
 
-        await _roleAuthRepository.RemoveAsync(a => roleIds.Contains(a.RoleId));
+        await _roleAuthRepository.DeleteAsync(a => roleIds.Contains(a.RoleId));
     }
 }

@@ -1,4 +1,6 @@
 ﻿
+using LzqNet.Caller.Msm.Contracts.DingtalkPushConfig.Enums;
+
 namespace LzqNet.Caller.Msm.Contracts.DingtalkPushMessageRecord;
 
 public class DingtalkPushMessageRecordViewDto
@@ -26,7 +28,7 @@ public class DingtalkPushMessageRecordViewDto
     /// <summary>
     /// 推送类型
     /// </summary>
-    public int? PushConfigType { get; set; }
+    public PushConfigTypeEnum? PushConfigType { get; set; }
 
     /// <summary>
     /// 推送内容
@@ -51,7 +53,7 @@ public class DingtalkPushMessageRecordViewDto
     /// <summary>
     /// 推送关键词
     /// </summary>
-    public string? PushKeywords { get; set; }
+    public List<string>? PushKeywords { get; set; }
 
     /// <summary>
     /// 加签
@@ -61,6 +63,6 @@ public class DingtalkPushMessageRecordViewDto
     /// <summary>
     /// 推送ip段
     /// </summary>
-    public string? PushIpSegments { get; set; }
+    public List<string>? PushIpSegments { get; set; }
 
 }

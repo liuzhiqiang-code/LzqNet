@@ -7,5 +7,13 @@
     //"RedisConnection": "localhost:redis,password=123456,defaultDatabase=0"
     "RedisConnection": "redis,password=123456,defaultDatabase=0",
     "LogConnection": "Server=106.54.42.201;Port=3306;Database=lzqnet_log;Uid=lzqnet_log;Pwd=asRfYFkyCcWFbiGB;"
-  }
+  },
+  "DBConfigs": [
+    {
+      "Tag": "MsmConnection",
+      "DbType": "0",
+      "ConnectionString": "Server=106.54.42.201;Port=3306;Database=lzqnet_msm;Uid=lzqnet_msm;Pwd=MtNSejFLrFNemRZ6;",
+      "CommandTimeOut": "30"
+    }
+  ]
 }

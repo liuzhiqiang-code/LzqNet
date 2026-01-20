@@ -4,18 +4,52 @@ services:
     build:
       context: .
       dockerfile: src/InfrastructureServices/LzqNet.ApiGateway/Dockerfile
+    depends_on:
+      redis:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      consul:
+        condition: service_started
       
   lzqnet.auth:
     image: lzqnetauth
     build:
       context: .
       dockerfile: src/InfrastructureServices/LzqNet.Auth/Dockerfile
+    depends_on:
+      redis:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      consul:
+        condition: service_started
       
   lzqnet.services.msm:
     image: lzqnetservicesmsm
     build:
       context: .
       dockerfile: src/BusinessServices/LzqNet.Services.Msm/Dockerfile
+    depends_on:
+      redis:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      consul:
+        condition: service_started
+      
+  lzqnet.queueconsumers.notifications:
+    image: lzqnetqueueconsumersnotifications
+    build:
+      context: .
+      dockerfile: src/BusinessServices/LzqNet.QueueConsumers.Notifications/Dockerfile
+    depends_on:
+      redis:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      consul:
+        condition: service_started
 
   # lzqnet.services.notify:
   #   image: lzqnetservicesnotify
@@ -46,14 +80,20 @@ services:
     image: rabbitmq:3.12-management
     restart: unless-stopped
     ports:
-      - "5672:5672"  # AMQP协议端口
-      - "5673:5673"  # AMQP/SSL端口
-      - "15672:15672" # 管理界面端口
+      - "5672:5672"
+      - "15672:15672"
     volumes:
       - ./dockercompose/rabbitmq/data:/var/lib/rabbitmq
+      # 必须确保你把 .ez 文件放到了这个目录
+      - ./dockercompose/rabbitmq/plugins:/opt/rabbitmq/plugins/external_plugins
     environment:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: 123456
+      # 重点：通过此环境变量让插件目录生效
+      RABBITMQ_PLUGINS_DIR: "/opt/rabbitmq/plugins:/opt/rabbitmq/plugins/external_plugins"
+    # 使用官方默认入口，不要覆盖 entrypoint，改用这个命令
+    command: >
+      sh -c "rabbitmq-plugins enable --offline rabbitmq_delayed_message_exchange && rabbitmq-server"
 
   # postgres:
   #   image: postgres:alpine
@@ -177,3 +217,4 @@ services:
   # loki_data:  
   # grafana_data:  
   # prometheus_data:
+

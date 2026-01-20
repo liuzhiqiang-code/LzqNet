@@ -15,6 +15,10 @@
         "Uri": "http://lzqnet.services.msm:8080/health"
       },
       {
+        "Name": "notifications-queueconsumers",
+        "Uri": "http://lzqnet.queueconsumers.notifications:8080/health"
+      },
+      {
         "Name": "notify-service",
         "Uri": "http://lzqnet.services.notify:8080/health"
       }

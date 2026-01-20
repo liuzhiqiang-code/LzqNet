@@ -1,17 +1,33 @@
 ﻿using LzqNet.Caller.Common.Contracts;
-using System.ComponentModel.DataAnnotations.Schema;
+using SqlSugar;
 
 namespace LzqNet.Services.Msm.Domain.Entities;
 
-[Table("msm_dept")]
+[SugarTable("msm_dept")]
 public class DeptEntity : BaseFullEntity
 {
-    [Column("pid")]
+    /// <summary>
+    /// Pid
+    /// </summary>
+    [SugarColumn(ColumnName = "pid")]
     public long? Pid { get; set; }
-    [Column("name")]
+
+    /// <summary>
+    /// Name
+    /// </summary>
+    [SugarColumn(ColumnName = "name")]
     public string Name { get; set; }
-    [Column("status")]
-    public EnableStatusEnum Status { get; set; } = EnableStatusEnum.Enabled;
-    [Column("remark")]
+
+    /// <summary>
+    /// Status
+    /// </summary>
+    [SugarColumn(ColumnName = "status")]
+    public EnableStatusEnum Status { get; set; }
+
+    /// <summary>
+    /// Remark
+    /// </summary>
+    [SugarColumn(ColumnName = "remark")]
     public string? Remark { get; set; }
+
 }

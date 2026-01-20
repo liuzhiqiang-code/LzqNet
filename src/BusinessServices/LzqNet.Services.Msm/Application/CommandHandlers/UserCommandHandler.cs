@@ -18,7 +18,7 @@ public class UserCommandHandler(IUserRepository userRepository)
     public async Task CreateHandleAsync(UserCreateCommand command)
     {
         var entity = command.Map<UserEntity>();
-        await _userRepository.AddAsync(entity);
+        await _userRepository.InsertAsync(entity);
     }
 
     [EventHandler]
@@ -31,6 +31,6 @@ public class UserCommandHandler(IUserRepository userRepository)
     [EventHandler]
     public async Task DeleteHandleAsync(UserDeleteCommand command)
     {
-        await _userRepository.RemoveAsync(a => command.Ids.Contains(a.Id));
+        await _userRepository.DeleteAsync(a => command.Ids.Contains(a.Id));
     }
 }

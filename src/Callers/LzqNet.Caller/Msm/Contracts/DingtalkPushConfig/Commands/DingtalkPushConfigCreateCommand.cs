@@ -1,4 +1,6 @@
-﻿using FluentValidation.Validators;
+﻿using FluentValidation;
+using FluentValidation.Validators;
+using LzqNet.Caller.Msm.Contracts.DingtalkPushConfig.Enums;
 using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Commands;
 
 namespace LzqNet.Caller.Msm.Contracts.DingtalkPushConfig.Commands;
@@ -13,7 +15,7 @@ public record DingtalkPushConfigCreateCommand : Command
     /// <summary>
     /// 推送机器人Id
     /// </summary>
-    public long? PushRobotId { get; set; }
+    public List<long> PushRobotIds { get; set; } = new();
 
     /// <summary>
     /// 推送配置名
@@ -23,7 +25,7 @@ public record DingtalkPushConfigCreateCommand : Command
     /// <summary>
     /// 推送类型
     /// </summary>
-    public int PushConfigType { get; set; }
+    public PushConfigTypeEnum PushConfigType { get; set; }
 
     /// <summary>
     /// 推送模板
@@ -38,7 +40,7 @@ public record DingtalkPushConfigCreateCommand : Command
     /// <summary>
     /// 关联钉钉用户
     /// </summary>
-    public string DingtalkUserIds { get; set; }
+    public List<string> DingtalkUserIds { get; set; } = new();
 
 }
 public class DingtalkPushConfigCreateCommandValidator : MasaAbstractValidator<DingtalkPushConfigCreateCommand>

@@ -1,5 +1,5 @@
 ﻿using LzqNet.Caller.Msm.Contracts.Modeling;
-using LzqNet.Caller.Msm.Modeling.Model.Queries;
+using LzqNet.Caller.Msm.Contracts.Modeling.Queries;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;

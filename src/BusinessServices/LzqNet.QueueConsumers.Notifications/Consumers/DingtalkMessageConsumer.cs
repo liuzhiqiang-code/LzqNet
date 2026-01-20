@@ -1,4 +1,6 @@
-﻿using Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq;
+﻿using LzqNet.Caller.Msm.Contracts.Events;
+using LzqNet.QueueConsumers.Notifications.CommandHandlers;
+using Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq;
 using Microsoft.Extensions.Options;
 
 namespace LzqNet.QueueConsumers.Notifications.Consumers;
@@ -6,44 +8,36 @@ namespace LzqNet.QueueConsumers.Notifications.Consumers;
 /// <summary>
 /// 钉钉消息消费者
 /// </summary>
-public class DingtalkMessageConsumer : MessageConsumerBase<DingtalkMessage>
+public class DingtalkMessageConsumer : MessageConsumerBase<DingtalkMessageSendQueueEvent>
 {
+    public readonly DingtalkMessageService _service;
     public DingtalkMessageConsumer(
+        DingtalkMessageService service,
         IOptions<RabbitMqOptions> options,
         ILogger<DingtalkMessageConsumer> logger)
         : base(options, logger)
     {
+        _service = service;
     }
 
     /// <summary>
     /// Topic名称 - 必须与发布者一致
     /// </summary>
-    protected override string TopicName => "dingtalk_message";
+    protected override string TopicName => "dingtalk.sendMessage";
+
 
     /// <summary>
     /// 处理钉钉消息的业务逻辑
     /// </summary>
     protected override async Task<bool> ProcessMessageAsync(
-        DingtalkMessage message,
+        DingtalkMessageSendQueueEvent @event,
         string messageId,
         int retryCount,
         CancellationToken stoppingToken)
     {
         try
         {
-            _logger.LogInformation("处理钉钉消息，消息ID: {MessageId}，接收人: {ToUser}，内容: {Content}",
-                messageId, message.ToUser, message.Content);
-
-            // 调用钉钉服务发送消息
-            //var result = await _dingtalkService.SendMessageAsync(message, stoppingToken);
-
-            //if (!result.Success)
-            //{
-            //    _logger.LogWarning("钉钉消息发送失败，消息ID: {MessageId}，错误: {Error}",
-            //        messageId, result.ErrorMessage);
-            //    return false;
-            //}
-
+            await _service.ProcessHandleAsync(@event);
             return true;
         }
         catch (Exception ex)

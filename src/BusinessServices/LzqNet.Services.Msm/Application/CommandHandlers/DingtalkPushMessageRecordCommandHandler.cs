@@ -3,7 +3,6 @@ using LzqNet.Caller.Msm.Contracts.DingtalkPushMessageRecord.Enums;
 using LzqNet.Caller.Msm.Contracts.Events;
 using LzqNet.Services.Msm.Domain.Entities;
 using LzqNet.Services.Msm.Domain.Repositories;
-using LzqNet.Services.Msm.Infrastructure.Repositories;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Masa.Contrib.Dispatcher.Events;
 
@@ -27,7 +26,7 @@ public class DingtalkPushMessageRecordCommandHandler(
     public async Task CreateHandleAsync(DingtalkPushMessageRecordCreateCommand command)
     {
         var entity = command.Map<DingtalkPushMessageRecordEntity>();
-        await _dingtalkPushMessageRecordRepository.AddAsync(entity);
+        await _dingtalkPushMessageRecordRepository.InsertAsync(entity);
     }
 
     [EventHandler]
@@ -40,19 +39,19 @@ public class DingtalkPushMessageRecordCommandHandler(
     [EventHandler]
     public async Task DeleteHandleAsync(DingtalkPushMessageRecordDeleteCommand command)
     {
-        await _dingtalkPushMessageRecordRepository.RemoveAsync(a => command.Ids.Contains(a.Id));
+        await _dingtalkPushMessageRecordRepository.DeleteAsync(a => command.Ids.Contains(a.Id));
     }
 
     [EventHandler]
     public async Task SendHandleAsync(DingtalkMessageSendCommand command)
     {
-        var pushConfig = await _dingtalkPushConfigRepository.FindAsync(a => a.PushConfigName.Equals(command.PushConfigName));
+        var pushConfig = await _dingtalkPushConfigRepository.GetFirstAsync(a => a.PushConfigName.Equals(command.PushConfigName));
         if (pushConfig == null)
             throw new MasaValidatorException($"PushConfig with name {command.PushConfigName} not found.");
-        var pushRobot = await _dingtalkPushRobotRepository.FindAsync(a => a.Id.Equals(pushConfig.PushRobotId));
-        if (pushRobot == null)
-            throw new MasaValidatorException($"PushRobot with id {pushConfig.PushRobotId} not found.");
-        var pushBusiness = await _dingtalkPushBusinessRepository.FindAsync(a => a.Id.Equals(pushConfig.PushBusinessId));
+        var pushRobots = await _dingtalkPushRobotRepository.GetListAsync(a => pushConfig.PushRobotIds.Contains(a.Id));
+        if (pushRobots == null || !pushRobots.Any())
+            throw new MasaValidatorException($"PushRobot with id {pushConfig.PushRobotIds} not found.");
+        var pushBusiness = await _dingtalkPushBusinessRepository.GetFirstAsync(a => a.Id.Equals(pushConfig.PushBusinessId));
         if (pushBusiness == null)
             throw new MasaValidatorException($"PushBusiness with id {pushConfig.PushBusinessId} not found.");
 
@@ -60,30 +59,41 @@ public class DingtalkPushMessageRecordCommandHandler(
         foreach (var item in command.TemplateParameters)
             messageContent.Replace("{{" + item.Key + "}}", item.Value);
 
-        var pushMessageRecord = new DingtalkPushMessageRecordEntity
+        var pushMessageRecords = new List<DingtalkPushMessageRecordEntity>();
+        foreach (var pushRobot in pushRobots)
         {
-            PushBusinessName = pushBusiness.BusinessName,
-            PushConfigName = pushConfig.PushConfigName,
-            PushRobotName = pushRobot.Name,
-            DingtalkGroupName = pushRobot.DingtalkGroupName,
-            PushConfigType = pushConfig.PushConfigType,
-            PushContent = messageContent,
-            PushStatus = DingtalkPushStatusEnum.Pending,
-            DingtalkUserIds = pushConfig.DingtalkUserIds,
-            Webhook = pushRobot.Webhook,
-            PushKeywords = pushRobot.PushKeywords,
-            Sign = pushRobot.Sign,
-            PushIpSegments = pushRobot.PushIpSegments
-        };
-        await _dingtalkPushMessageRecordRepository.AddAsync(pushMessageRecord);
+            var pushMessageRecord = new DingtalkPushMessageRecordEntity
+            {
+                PushBusinessName = pushBusiness.BusinessName,
+                PushConfigName = pushConfig.PushConfigName,
+                PushRobotName = pushRobot.Name,
+                DingtalkGroupName = pushRobot.DingtalkGroupName,
+                PushConfigType = pushConfig.PushConfigType,
+                PushContent = messageContent,
+                PushStatus = DingtalkPushStatusEnum.Pending,
+                DingtalkUserIds = pushConfig.DingtalkUserIds,
+                Webhook = pushRobot.Webhook,
+                PushKeywords = pushRobot.PushKeywords,
+                Sign = pushRobot.Sign,
+                PushIpSegments = pushRobot.PushIpSegments
+            };
+            pushMessageRecords.Add(pushMessageRecord);
+        }
+        
+        await _dingtalkPushMessageRecordRepository.InsertRangeAsync(pushMessageRecords);
 
-        await EventBus.PublishAsync(new DingtalkMessageSendQueueEvent { PushMessageRecordId = pushMessageRecord.Id });
+        await EventBus.PublishAsync(new DingtalkMessageSendQueueEvent { PushMessageRecordIds = pushMessageRecords.Select(a=>a.Id).ToList() });
+
+        var updateRecords = await _dingtalkPushMessageRecordRepository.GetListAsync(x => pushMessageRecords.Select(a => a.Id).Contains(x.Id));
+        foreach (var item in updateRecords)
+            item.PushStatus = DingtalkPushStatusEnum.Published;
+        await _dingtalkPushMessageRecordRepository.UpdateRangeAsync(updateRecords);
     }
 
     [EventHandler]
     public async Task UpdateStatusHandleAsync(DingtalkPushMessageRecordUpdateStatusCommand command)
     {
-        var entity = await _dingtalkPushMessageRecordRepository.FindAsync(a=>a.Id.Equals(command.Id));
+        var entity = await _dingtalkPushMessageRecordRepository.GetFirstAsync(a=>a.Id.Equals(command.Id));
         if (entity == null)
             throw new MasaValidatorException($"DingtalkPushMessageRecord with id {command.Id} not found.");
         entity.PushStatus = command.PushStatus;

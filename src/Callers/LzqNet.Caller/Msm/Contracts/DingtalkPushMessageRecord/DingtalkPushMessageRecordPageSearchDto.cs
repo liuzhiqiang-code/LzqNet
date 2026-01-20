@@ -1,4 +1,5 @@
-﻿using Masa.Utils.Models;
+﻿using LzqNet.Caller.Msm.Contracts.DingtalkPushConfig.Enums;
+using Masa.Utils.Models;
 
 namespace LzqNet.Caller.Msm.Contracts.DingtalkPushMessageRecord;
 
@@ -27,7 +28,7 @@ public class DingtalkPushMessageRecordPageSearchDto : RequestPageBase
     /// <summary>
     /// 推送类型
     /// </summary>
-    public int? PushConfigType { get; set; }
+    public PushConfigTypeEnum? PushConfigType { get; set; }
 
     /// <summary>
     /// 推送内容

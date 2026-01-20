@@ -1,4 +1,4 @@
-﻿using LzqNet.Caller.Msm.Contracts.Test.Commands;
+﻿using LzqNet.Caller.Msm.Contracts.Test.Events;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

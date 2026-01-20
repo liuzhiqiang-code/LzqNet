@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
+using LzqNet.Caller.Msm.Contracts.DingtalkPushConfig.Enums;
 using LzqNet.Caller.Msm.Contracts.DingtalkPushMessageRecord.Enums;
 using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Commands;
 
@@ -25,7 +26,7 @@ public record DingtalkPushMessageRecordCreateCommand : Command
     /// <summary>
     /// 推送类型
     /// </summary>
-    public int PushConfigType { get; set; }
+    public PushConfigTypeEnum PushConfigType { get; set; }
 
     /// <summary>
     /// 推送内容
@@ -40,7 +41,7 @@ public record DingtalkPushMessageRecordCreateCommand : Command
     /// <summary>
     /// 关联钉钉用户
     /// </summary>
-    public string DingtalkUserIds { get; set; }
+    public List<string> DingtalkUserIds { get; set; }
 
     /// <summary>
     /// 推送Webhook地址
@@ -50,7 +51,7 @@ public record DingtalkPushMessageRecordCreateCommand : Command
     /// <summary>
     /// 推送关键词
     /// </summary>
-    public string PushKeywords { get; set; }
+    public List<string> PushKeywords { get; set; }
 
     /// <summary>
     /// 加签
@@ -60,7 +61,7 @@ public record DingtalkPushMessageRecordCreateCommand : Command
     /// <summary>
     /// 推送ip段
     /// </summary>
-    public string PushIpSegments { get; set; }
+    public List<string> PushIpSegments { get; set; }
 
 }
 public class DingtalkPushMessageRecordCreateCommandValidator : MasaAbstractValidator<DingtalkPushMessageRecordCreateCommand>

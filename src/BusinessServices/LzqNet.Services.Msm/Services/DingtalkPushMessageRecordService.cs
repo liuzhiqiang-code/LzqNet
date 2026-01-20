@@ -54,6 +54,19 @@ public class DingtalkPushMessageRecordService : ServiceBase
     }
 
     /// <summary>
+    /// 发送钉钉推送消息 🔖
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [DisplayName("发送钉钉推送消息")]
+    [RoutePattern(pattern: "send", true)]
+    public async Task<AdminResult> SendAsync([FromBody] DingtalkMessageSendCommand command)
+    {
+        await EventBus.PublishAsync(command);
+        return AdminResult.Success();
+    }
+
+    /// <summary>
     /// 更新钉钉推送消息记录 🔖
     /// </summary>
     /// <param name="input"></param>

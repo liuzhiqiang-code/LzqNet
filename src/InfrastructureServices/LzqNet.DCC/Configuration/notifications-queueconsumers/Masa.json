@@ -1,0 +1,6 @@
+{
+  "Masa": {
+    "EventBusAssemblyNames": [ "LzqNet.Caller" ],
+    "CallerAssemblyNames": [ "LzqNet.Caller" ]
+  }
+}

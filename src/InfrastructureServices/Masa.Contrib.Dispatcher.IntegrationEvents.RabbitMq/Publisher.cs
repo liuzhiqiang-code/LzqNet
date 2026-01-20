@@ -1,8 +1,8 @@
 ﻿using Masa.BuildingBlocks.Dispatcher.IntegrationEvents;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
+using System.Collections.Concurrent;
 using System.Text;
 using System.Text.Json;
 
@@ -17,6 +17,13 @@ public class Publisher : IPublisher
     private readonly ILogger<Publisher> _logger;
     private readonly ConnectionFactory _connectionFactory;
 
+    // 长连接缓存
+    private IConnection? _connection;
+    private readonly SemaphoreSlim _connectionLock = new(1, 1);
+
+    // 缓存声明队列、交换机、绑定关系
+    private readonly ConcurrentDictionary<string, bool> _declaredTopics = new();
+
     public Publisher(IOptions<RabbitMqOptions> options, ILogger<Publisher> logger)
     {
         _options = options.Value;
@@ -28,7 +35,8 @@ public class Publisher : IPublisher
             UserName = _options.UserName,
             Password = _options.Password,
             VirtualHost = _options.VirtualHost,
-            AutomaticRecoveryEnabled = true
+            AutomaticRecoveryEnabled = true,
+            NetworkRecoveryInterval = TimeSpan.FromSeconds(5)
         };
     }
 
@@ -36,7 +44,7 @@ public class Publisher : IPublisher
     {
         try
         {
-            using var connection = await _connectionFactory.CreateConnectionAsync(stoppingToken);//创建连接
+            var connection = await GetConnectionAsync(stoppingToken);
             using var channel = await connection.CreateChannelAsync();//创建通道
             await DeclareExchangeAndQueueAsync(channel, topicName, stoppingToken);//声明交换机、队列、绑定关系
 
@@ -49,28 +57,19 @@ public class Publisher : IPublisher
                 ContentType = "application/json",             // JSON格式
                 DeliveryMode = DeliveryModes.Persistent,      // 持久化投递
                 Timestamp = new AmqpTimestamp(DateTimeOffset.UtcNow.ToUnixTimeSeconds()),
-                //MessageId = Guid.NewGuid().ToString()         // 消息唯一标识
+                MessageId = Guid.NewGuid().ToString()         // 消息唯一标识
             };
 
-            // 发布消息到交换机
-            await channel.BasicPublishAsync(
-                exchange: topicName,
-                routingKey: topicName + "_routingKey",
-                mandatory: false,  // 根据接口定义添加这个参数
-                basicProperties: properties,
-                body: body,
-                cancellationToken: stoppingToken);
-
-            // 注册确认事件处理器
-            channel.BasicAcksAsync += async (sender, args) =>
-            {
-                // 成功确认
-                Console.WriteLine($"Message {args.DeliveryTag} acknowledged");
-                if (args.Multiple)
-                {
-                    _logger.LogDebug($"All messages up to {args.DeliveryTag} acknowledged");
-                }
-            };
+            //// 注册确认事件处理器
+            //channel.BasicAcksAsync += async (sender, args) =>
+            //{
+            //    // 成功确认
+            //    Console.WriteLine($"Message {args.DeliveryTag} acknowledged");
+            //    if (args.Multiple)
+            //    {
+            //        _logger.LogDebug($"All messages up to {args.DeliveryTag} acknowledged");
+            //    }
+            //};
 
             channel.BasicNacksAsync += async (sender, args) =>
             {
@@ -94,6 +93,15 @@ public class Publisher : IPublisher
             {
                 _logger.LogWarning($"Channel shutdown: {args.ReplyText}");
             };
+
+            // 发布消息到交换机
+            await channel.BasicPublishAsync(
+                exchange: topicName,
+                routingKey: topicName + "_routingKey",
+                mandatory: true,  // 根据接口定义添加这个参数
+                basicProperties: properties,
+                body: body,
+                cancellationToken: stoppingToken);
         }
         catch (OperationCanceledException)
         {
@@ -118,11 +126,44 @@ public class Publisher : IPublisher
         }
         try
         {
-            using var connection = await _connectionFactory.CreateConnectionAsync(stoppingToken);//创建连接
+            var connection = await GetConnectionAsync(stoppingToken);
             using var channel = await connection.CreateChannelAsync();//创建通道
             await DeclareExchangeAndQueueAsync(channel, topicName, stoppingToken);//声明交换机、队列、绑定关系
 
-            var publishTasks = new List<ValueTask>();
+            //// 注册确认事件处理器
+            //channel.BasicAcksAsync += async (sender, args) =>
+            //{
+            //    // 成功确认
+            //    Console.WriteLine($"Message {args.DeliveryTag} acknowledged");
+            //    if (args.Multiple)
+            //    {
+            //        _logger.LogDebug($"All messages up to {args.DeliveryTag} acknowledged");
+            //    }
+            //};
+
+            channel.BasicNacksAsync += async (sender, args) =>
+            {
+                // 否定确认（需要重试）
+                _logger.LogError($"Message {args.DeliveryTag} nacked");
+            };
+
+            channel.BasicReturnAsync += async (sender, args) =>
+            {
+                // 消息无法路由（mandatory=true 时触发）
+                _logger.LogError($"Message returned: {args.ReplyText}");
+            };
+
+            // 通道异常处理
+            channel.CallbackExceptionAsync += async (sender, args) =>
+            {
+                _logger.LogError(args.Exception, "Channel callback exception");
+            };
+
+            channel.ChannelShutdownAsync += async (sender, args) =>
+            {
+                _logger.LogWarning($"Channel shutdown: {args.ReplyText}");
+            };
+
             foreach (var (eventItem, _) in events)
             {
                 var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(eventItem));
@@ -137,18 +178,14 @@ public class Publisher : IPublisher
                 };
 
                 // 添加发布任务到列表（并行发布）
-                var publishTask = channel.BasicPublishAsync(
+                await channel.BasicPublishAsync(
                     exchange: topicName,
                     routingKey: topicName + "_routingKey",
-                    mandatory: false,
+                    mandatory: true,
                     basicProperties: properties,
                     body: body,
                     cancellationToken: stoppingToken);
-
-                publishTasks.Add(publishTask);
             }
-            foreach (var publishTask in publishTasks)
-                await publishTask;
 
             _logger?.LogInformation("批量发布成功, Topic: {Topic}, 消息数量: {Count}",
                topicName, events.Count);
@@ -166,8 +203,32 @@ public class Publisher : IPublisher
         }
     }
 
+    /// <summary>
+    /// 获取或创建长连接（线程安全）
+    /// </summary>
+    private async Task<IConnection> GetConnectionAsync(CancellationToken cancellationToken)
+    {
+        if (_connection is { IsOpen: true }) return _connection;
+
+        await _connectionLock.WaitAsync(cancellationToken);
+        try
+        {
+            if (_connection is { IsOpen: true }) return _connection;
+
+            _logger.LogInformation("正在创建 RabbitMQ 长连接...");
+            _connection = await _connectionFactory.CreateConnectionAsync(cancellationToken);
+            return _connection;
+        }
+        finally
+        {
+            _connectionLock.Release();
+        }
+    }
+
     private async Task DeclareExchangeAndQueueAsync(IChannel channel, string topicName, CancellationToken stoppingToken)
     {
+        if (_declaredTopics.ContainsKey(topicName)) return;
+
         // 1. 声明死信交换机
         var deadLetterExchangeName = $"{topicName}_dead_letter_exchange";
         await channel.ExchangeDeclareAsync(
@@ -196,69 +257,26 @@ public class Publisher : IPublisher
             arguments: null,
             cancellationToken: stoppingToken);
 
-        // 4. 声明重试交换机（新增）
-        var retryExchangeName = $"{topicName}_retry_exchange";
-        await channel.ExchangeDeclareAsync(
-            exchange: retryExchangeName,
-            type: ExchangeType.Direct,
-            durable: true,
-            autoDelete: false,
-            arguments: null,
-            cancellationToken: stoppingToken);
-
-        // 5. 声明重试队列（新增）
-        var retryQueueArguments = new Dictionary<string, object>
-        {
-            // 重试队列消息过期后回到主交换机
-            ["x-dead-letter-exchange"] = topicName,
-            // 回到主队列的路由键
-            ["x-dead-letter-routing-key"] = topicName + "_routingKey",
-            // 消息TTL：30秒后重试
-            ["x-message-ttl"] = 30000,
-            // 队列最大长度
-            ["x-max-length"] = 10000,
-            // 队列溢出行为
-            ["x-overflow"] = "reject-publish"
-        };
-
-        var retryQueueName = $"{topicName}_retry_queue";
-        await channel.QueueDeclareAsync(
-            queue: retryQueueName,
-            durable: true,
-            exclusive: false,
-            autoDelete: false,
-            arguments: retryQueueArguments,
-            cancellationToken: stoppingToken);
-
-        // 6. 绑定重试队列到重试交换机（新增）
-        await channel.QueueBindAsync(
-            queue: retryQueueName,
-            exchange: retryExchangeName,
-            routingKey: topicName + "_retry_routingKey",
-            arguments: null,
-            cancellationToken: stoppingToken);
-
         // 7. 声明主交换机
+        var exchangeArguments = new Dictionary<string, object>
+        {
+            { "x-delayed-type", "direct" } // 内部路由逻辑依然是 direct
+        };
         await channel.ExchangeDeclareAsync(
             exchange: topicName,
-            type: ExchangeType.Direct,
+            type: "x-delayed-message",
             durable: true,
             autoDelete: false,
-            arguments: null,
+            arguments: exchangeArguments,
             cancellationToken: stoppingToken);
 
         // 8. 声明主队列，修改死信配置指向重试交换机
         var mainQueueArguments = new Dictionary<string, object>
         {
-            // 主队列失败时转到重试交换机（修改）
-            ["x-dead-letter-exchange"] = retryExchangeName,
-            // 重试的路由键
-            ["x-dead-letter-routing-key"] = topicName + "_retry_routingKey",
             // 队列最大长度
             ["x-max-length"] = 10000,
             // 队列溢出行为
             ["x-overflow"] = "reject-publish"
-            // 移除了 x-message-ttl，因为重试机制现在由重试队列控制
         };
 
         var mainQueueName = topicName + "_queue";
@@ -279,5 +297,6 @@ public class Publisher : IPublisher
             cancellationToken: stoppingToken);
 
         _logger?.LogDebug("交换机、队列声明完成，Topic: {TopicName}", topicName);
+        _declaredTopics.TryAdd(topicName, true);
     }
 }

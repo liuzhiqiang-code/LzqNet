@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LzqNet.Caller.Msm.Contracts.Test.Commands;
+namespace LzqNet.Caller.Msm.Contracts.Test.Events;
 
 public record SendRabbitmqMessageEvent : IntegrationEvent
 {

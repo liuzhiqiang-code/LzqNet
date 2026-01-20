@@ -14,7 +14,6 @@ WORKDIR /src
 COPY ["Directory.Build.props", "."]
 COPY ["src/InfrastructureServices/LzqNet.Auth/LzqNet.Auth.csproj", "src/InfrastructureServices/LzqNet.Auth/"]
 COPY ["src/InfrastructureServices/LzqNet.DCC/LzqNet.DCC.csproj", "src/InfrastructureServices/LzqNet.DCC/"]
-COPY ["src/InfrastructureServices/LzqNet.Consul/LzqNet.Consul.csproj", "src/InfrastructureServices/LzqNet.Consul/"]
 RUN dotnet restore "./src/InfrastructureServices/LzqNet.Auth/LzqNet.Auth.csproj"
 COPY . .
 WORKDIR "/src/src/InfrastructureServices/LzqNet.Auth"

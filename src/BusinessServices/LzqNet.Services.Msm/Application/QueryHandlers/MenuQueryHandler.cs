@@ -2,10 +2,7 @@
 using LzqNet.Caller.Msm.Contracts.Menu.Queries;
 using LzqNet.Services.Msm.Domain.Entities;
 using LzqNet.Services.Msm.Domain.Repositories;
-using Masa.BuildingBlocks.Ddd.Domain.Repositories;
 using Masa.Contrib.Dispatcher.Events;
-using Masa.Utils.Models;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace LzqNet.Services.Msm.Application.QueryHandlers;
@@ -25,7 +22,7 @@ public class MenuQueryHandler(IMenuRepository MenuRepository)
         Expression<Func<MenuEntity, bool>> condition = a => true;
         condition = condition.And(query.Id.HasValue, a => !a.Id.Equals(query.Id));
         condition = condition.And(!query.Name.IsNullOrWhiteSpace(), a => a.Name.Equals(query.Name));
-        var count = await _MenuRepository.GetCountAsync(condition);
+        var count = await _MenuRepository.CountAsync(condition);
         query.Result = count > 0;
     }
 
@@ -40,7 +37,7 @@ public class MenuQueryHandler(IMenuRepository MenuRepository)
         Expression<Func<MenuEntity, bool>> condition = a => true;
         condition = condition.And(query.Id.HasValue, a => !a.Id.Equals(query.Id));
         condition = condition.And(!query.Path.IsNullOrWhiteSpace(), a => a.Path!.Equals(query.Path));
-        var count = await _MenuRepository.GetCountAsync(condition);
+        var count = await _MenuRepository.CountAsync(condition);
         query.Result = count > 0;
     }
 

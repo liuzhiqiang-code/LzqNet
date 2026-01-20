@@ -3,9 +3,9 @@ using LzqNet.Extensions.HealthCheck;
 using LzqNet.Extensions.JsonOptions;
 using LzqNet.Extensions.OAuth;
 using LzqNet.Extensions.Serilog;
+using LzqNet.Extensions.SqlSugar;
 using Microsoft.AspNetCore.Authorization;
 using Serilog;
-using System.Text.Json.Serialization;
 
 namespace LzqNet.Extensions;
 
@@ -39,6 +39,7 @@ public static class Extensions
             options.SerializerOptions.Converters.Add(new LongNullableToStringConverter());
         });
 
+        builder.AddCustomSqlSugar();
         builder.AddCustomMasa();
     }
 

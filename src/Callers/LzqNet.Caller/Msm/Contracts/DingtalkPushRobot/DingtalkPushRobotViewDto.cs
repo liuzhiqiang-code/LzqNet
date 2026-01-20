@@ -30,7 +30,7 @@ public class DingtalkPushRobotViewDto
     /// <summary>
     /// 推送关键词
     /// </summary>
-    public string? PushKeywords { get; set; }
+    public List<string>? PushKeywords { get; set; }
 
     /// <summary>
     /// 加签
@@ -40,6 +40,6 @@ public class DingtalkPushRobotViewDto
     /// <summary>
     /// 推送ip段
     /// </summary>
-    public string? PushIpSegments { get; set; }
+    public List<string>? PushIpSegments { get; set; }
 
 }

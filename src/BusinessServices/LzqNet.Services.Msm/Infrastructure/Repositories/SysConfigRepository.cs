@@ -1,11 +1,11 @@
-﻿using Masa.BuildingBlocks.Data.UoW;
-using Masa.Contrib.Ddd.Domain.Repository.EFCore;
+﻿using LzqNet.Extensions.SqlSugar.Repository;
 using LzqNet.Services.Msm.Domain.Entities;
 using LzqNet.Services.Msm.Domain.Repositories;
 
 namespace LzqNet.Services.Msm.Infrastructure.Repositories;
 
-public class SysConfigRepository(ExampleDbContext context, IUnitOfWork unitOfWork)
-    : Repository<ExampleDbContext, SysConfigEntity, long>(context, unitOfWork), ISysConfigRepository
+public class SysConfigRepository()
+    : SqlSugarRepository<SysConfigEntity>(), ISysConfigRepository
 {
+
 }

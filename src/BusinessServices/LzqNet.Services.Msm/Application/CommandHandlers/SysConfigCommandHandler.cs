@@ -13,7 +13,7 @@ public class SysConfigCommandHandler(ISysConfigRepository sysConfigRepository)
     public async Task CreateHandleAsync(SysConfigCreateCommand command)
     {
         var sysConfigEntity = command.Map<SysConfigEntity>();
-        await _sysConfigRepository.AddAsync(sysConfigEntity);
+        await _sysConfigRepository.InsertAsync(sysConfigEntity);
     }
 
     [EventHandler]
@@ -26,6 +26,6 @@ public class SysConfigCommandHandler(ISysConfigRepository sysConfigRepository)
     [EventHandler]
     public async Task DeleteHandleAsync(SysConfigDeleteCommand command)
     {
-        await _sysConfigRepository.RemoveAsync(a => command.Ids.Contains(a.Id));
+        await _sysConfigRepository.DeleteAsync(a => command.Ids.Contains(a.Id));
     }
 }

@@ -13,7 +13,7 @@ public class DeptCommandHandler(IDeptRepository deptRepository)
     public async Task CreateHandleAsync(DeptCreateCommand command)
     {
         var entity = command.Map<DeptEntity>();
-        await _deptRepository.AddAsync(entity);
+        await _deptRepository.InsertAsync(entity);
     }
 
     [EventHandler]
@@ -26,6 +26,6 @@ public class DeptCommandHandler(IDeptRepository deptRepository)
     [EventHandler]
     public async Task DeleteHandleAsync(DeptDeleteCommand command)
     {
-        await _deptRepository.RemoveAsync(a => command.Ids.Contains(a.Id));
+        await _deptRepository.DeleteAsync(a => command.Ids.Contains(a.Id));
     }
 }

@@ -1,15 +1,18 @@
 ﻿using LzqNet.Caller.Common.Contracts;
+using SqlSugar;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LzqNet.Services.Msm.Domain.Entities;
 
-[Table("msm_role")]
+[SugarTable("msm_role")]
 public class RoleEntity : BaseFullEntity
 {
-    [Column("name")]
+    [SugarColumn(ColumnName = "name")]
     public string Name { get; set; }
-    [Column("status")]
+
+    [SugarColumn(ColumnName = "status")]
     public EnableStatusEnum Status { get; set; } = EnableStatusEnum.Enabled;
-    [Column("remark")]
+
+    [SugarColumn(ColumnName = "remark")]
     public string? Remark { get; set; }
 }
