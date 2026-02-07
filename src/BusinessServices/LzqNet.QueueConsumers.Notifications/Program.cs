@@ -2,7 +2,6 @@ using LzqNet.Extensions;
 using LzqNet.Extensions.DCC;
 using LzqNet.Extensions.DCC.Consul;
 using LzqNet.Extensions.Serilog;
-using LzqNet.QueueConsumers.Notifications.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddApplicationConfiguration().AddCustomConsul();
@@ -10,7 +9,6 @@ builder.AddCustomSerilog();
 
 // Add services to the container.
 builder.AddApplicationServices();
-builder.Services.AddHostedService<DingtalkMessageConsumer>();
 
 var app = builder.Build();
 app.MapApplicationServices();
