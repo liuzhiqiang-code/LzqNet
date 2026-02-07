@@ -1,13 +1,13 @@
-﻿using LzqNet.Caller.Msm.Contracts.DingtalkPushConfig;
-using LzqNet.Caller.Msm.Contracts.DingtalkPushConfig.Commands;
-using LzqNet.Caller.Msm.Contracts.DingtalkPushConfig.Queries;
+﻿using LzqNet.DingtalkMessage.Contracts.DingtalkPushConfig;
+using LzqNet.DingtalkMessage.Contracts.DingtalkPushConfig.Commands;
+using LzqNet.DingtalkMessage.Contracts.DingtalkPushConfig.Queries;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 
-namespace LzqNet.Services.Msm.Services;
+namespace LzqNet.DingtalkMessage.Application.Services;
 
 public class DingtalkPushConfigService : ServiceBase
 {

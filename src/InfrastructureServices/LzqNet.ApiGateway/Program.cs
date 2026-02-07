@@ -15,7 +15,6 @@ builder.Services.AddMapster();
 // Add services to the container.
 builder.AddCustomHealthChecks();
 builder.AddCustomHealthChecksUI();
-builder.Services.AddOpenApi();
 builder.AddCustomSwaggerUI();
 builder.Services.AddCors(options =>
 {
@@ -35,7 +34,7 @@ builder.AddCustomResponseCaching();// 配置响应缓存中间件
 
 var app = builder.Build();
 
-app.MapOpenApi();
+app.UseOpenApi();
 app.MapCustomSwaggerUI();
 app.UseCustomMetrics();// 使用遥测中间件
 

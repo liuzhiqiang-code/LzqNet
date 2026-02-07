@@ -1,9 +1,9 @@
 ﻿using Masa.BuildingBlocks.Ddd.Domain.Repositories;
 using Masa.Contrib.Dispatcher.Events;
 using Masa.Utils.Models;
-using LzqNet.Caller.Msm.Contracts.DingtalkPushRobot;
-using LzqNet.Caller.Msm.Contracts.DingtalkPushRobot.Queries;
 using LzqNet.DingtalkMessage.Domain.IRepositories;
+using LzqNet.DingtalkMessage.Contracts.DingtalkPushRobot.Queries;
+using LzqNet.DingtalkMessage.Contracts.DingtalkPushRobot;
 
 namespace LzqNet.DingtalkMessage.Application.QueryHandlers;
 

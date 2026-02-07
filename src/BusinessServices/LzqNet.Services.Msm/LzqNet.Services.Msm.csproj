@@ -15,11 +15,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\InfrastructureServices\LzqNet.Extensions\LzqNet.Extensions.csproj" />
+	  <Folder Include="Logs\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Logs\" />
+	  <ProjectReference Include="..\..\Modules\DingtalkMessage\LzqNet.DingtalkMessage.Application\LzqNet.DingtalkMessage.Application.csproj" />
+	  <ProjectReference Include="..\..\Modules\System\LzqNet.System.Application\LzqNet.System.Application.csproj" />
 	</ItemGroup>
 
 </Project>

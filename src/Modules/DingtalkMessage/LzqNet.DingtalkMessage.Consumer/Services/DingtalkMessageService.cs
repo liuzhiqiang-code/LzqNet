@@ -1,7 +1,7 @@
-﻿using LzqNet.Caller.Msm.Contracts.DingtalkPushConfig.Enums;
-using LzqNet.Caller.Msm.Contracts.DingtalkPushMessageRecord.Enums;
-using LzqNet.Caller.Msm.Contracts.Events;
-using LzqNet.DingtalkMessage.Consumer.Services.Contracts;
+﻿using LzqNet.DingtalkMessage.Consumer.Services.Contracts;
+using LzqNet.DingtalkMessage.Contracts.DingtalkPushConfig.Enums;
+using LzqNet.DingtalkMessage.Contracts.DingtalkPushMessageRecord.Enums;
+using LzqNet.DingtalkMessage.Contracts.Events;
 using LzqNet.DingtalkMessage.Domain.IRepositories;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Security;

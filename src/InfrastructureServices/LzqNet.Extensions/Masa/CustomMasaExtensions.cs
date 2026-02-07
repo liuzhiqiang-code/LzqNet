@@ -13,11 +13,18 @@ public static class CustomMasaExtensions
 {
     public static void AddCustomMasa(this IHostApplicationBuilder builder)
     {
+        var configuration = builder.Configuration;
         // 抽象公用的Masa 框架服务注册
+        var entryAssembly = Assembly.GetEntryAssembly()!;
+        var assemblyNames = configuration.GetSection("Masa:AssemblyNames").Get<string[]>() ?? [];
+        var loadedAssemblies = new List<Assembly> { entryAssembly }
+            .Concat(assemblyNames.Select(Assembly.Load))
+            .ToList();
+
         builder.Services
             .AddMapster()
-            .AddAutoInject()
-            .AddCustomMasaEventBus(builder.Configuration)
+            .AddAutoInject(loadedAssemblies)
+            .AddCustomMasaEventBus(loadedAssemblies)
             .AddCustomMasaIntegrationEventBus()
             .AddLocalDistributedLock()
             .AddDistributedCache(distributedCacheOptions =>
@@ -25,7 +32,8 @@ public static class CustomMasaExtensions
                 distributedCacheOptions.UseStackExchangeRedisCache();//使用分布式 Redis 缓存，默认使用本地 `RedisConfig` 节点的配置
             })
             .AddCustomMasaSnowflake(builder.Configuration)
-            .AddCustomMasaRegistrationCaller(builder.Configuration)
+            .AddCustomMasaRegistrationCaller(loadedAssemblies)
+            .AddEndpointsApiExplorer()
             .AddMasaMinimalAPIs(options =>
             {
                 options.DisableTrimMethodPrefix = true;//禁用移除方法前缀(上方 `Get`、`Post`、`Put`、`Delete` 请求的前缀)
@@ -33,15 +41,10 @@ public static class CustomMasaExtensions
             });
     }
 
-    private static IServiceCollection AddCustomMasaEventBus(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddCustomMasaEventBus(this IServiceCollection services, List<Assembly> assemblies)
     {
-        var entryAssembly = Assembly.GetEntryAssembly()!;
-        var eventBusAssemblyNames = configuration.GetSection("Masa:EventBusAssemblyNames").Get<string[]>() ?? [];
-        var loadedEventBusAssemblies = new List<Assembly> { entryAssembly }
-            .Concat(eventBusAssemblyNames.Select(Assembly.Load))
-            .ToList();
-        services.AddValidatorsFromAssemblies(loadedEventBusAssemblies)
-            .AddEventBus(loadedEventBusAssemblies, eventBusBuilder =>
+        services.AddValidatorsFromAssemblies(assemblies)
+            .AddEventBus(assemblies, eventBusBuilder =>
             {
                 eventBusBuilder.UseMiddleware(typeof(ValidatorEventMiddleware<>));
                 eventBusBuilder.UseMiddleware(typeof(SugarUowEventMiddleware<>));
@@ -59,14 +62,9 @@ public static class CustomMasaExtensions
         return services;
     }
 
-    private static IServiceCollection AddCustomMasaRegistrationCaller(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddCustomMasaRegistrationCaller(this IServiceCollection services, List<Assembly> assemblies)
     {
-        var entryAssembly = Assembly.GetEntryAssembly()!;
-        var callerAssemblyNames = configuration.GetSection("Masa:CallerAssemblyNames").Get<string[]>() ?? [];
-        var loadedCallerAssemblies = new List<Assembly> { entryAssembly }
-            .Concat(callerAssemblyNames.Select(Assembly.Load))
-            .ToList();
-        services.AddAutoRegistrationCaller(loadedCallerAssemblies);
+        services.AddAutoRegistrationCaller(assemblies);
         return services;
     }
     private static IServiceCollection AddCustomMasaSnowflake(this IServiceCollection services, IConfiguration configuration)

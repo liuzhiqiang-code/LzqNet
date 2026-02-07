@@ -1,4 +1,4 @@
-﻿using LzqNet.Caller.Msm.Contracts.DingtalkPushBusiness.Commands;
+﻿using LzqNet.DingtalkMessage.Contracts.DingtalkPushBusiness.Commands;
 using LzqNet.DingtalkMessage.Domain.Entities;
 using LzqNet.DingtalkMessage.Domain.IRepositories;
 using Masa.Contrib.Dispatcher.Events;

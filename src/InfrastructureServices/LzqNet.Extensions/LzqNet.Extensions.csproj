@@ -29,13 +29,14 @@
 		<!--<PackageReference Include="AspNetCore.HealthChecks.Redis" Version="9.*" />-->
 		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.*" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="$(MicrosoftPackageVersion)" />
 		
 		<PackageReference Include="Serilog" Version="4.3.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
 		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
 		<PackageReference Include="Serilog.Sinks.Grafana.Loki" Version="8.3.1" />
+
+		<PackageReference Include="NSwag.AspNetCore" Version="14.6.3" />
 	</ItemGroup>
 
 	<ItemGroup>

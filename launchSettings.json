@@ -5,7 +5,7 @@
       "commandVersion": "1.0",
       "composeLaunchAction": "LaunchBrowser",
       "composeLaunchServiceName": "lzqnet.apigateway",
-      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/health-ui",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
       "serviceActions": {
         "lzqnet.apigateway": "StartDebugging",
         "redis": "StartWithoutDebugging",

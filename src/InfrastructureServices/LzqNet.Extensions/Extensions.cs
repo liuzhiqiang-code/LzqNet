@@ -15,10 +15,21 @@ public static class Extensions
     {
         Log.Information("Start AddApplicationServices");
 
-        builder.Services.AddAutoInject();
-
         builder.AddCustomHealthChecks();
-        builder.Services.AddOpenApi();
+        builder.Services.AddOpenApiDocument(document =>
+        {
+            document.AddSecurity("JWT", Enumerable.Empty<string>(), new NSwag.OpenApiSecurityScheme
+            {
+                Type = NSwag.OpenApiSecuritySchemeType.ApiKey,
+                Name = "Authorization",
+                In = NSwag.OpenApiSecurityApiKeyLocation.Header,
+                Description = "请输入 Token，格式为: Bearer {your_token}"
+            });
+
+            // 让所有接口默认要求认证（或者根据需要配置）
+            document.OperationProcessors.Add(
+                new NSwag.Generation.Processors.Security.AspNetCoreOperationSecurityScopeProcessor("JWT"));
+        });
 
         builder.Services.AddCors(options =>
         {
@@ -57,7 +68,7 @@ public static class Extensions
 
         app.UseCustomAuthentication();
         app.UseCustomAuthorization();
-        app.MapOpenApi();
+        app.UseOpenApi();
         app.MapCustomHealthChecks();
         app.MapConfigurationApi();
         app.MapMasaMinimalAPIs();

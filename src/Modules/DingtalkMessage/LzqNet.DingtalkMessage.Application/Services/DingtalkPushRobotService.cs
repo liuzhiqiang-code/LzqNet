@@ -1,13 +1,13 @@
-﻿using LzqNet.Caller.Msm.Contracts.DingtalkPushRobot;
-using LzqNet.Caller.Msm.Contracts.DingtalkPushRobot.Commands;
-using LzqNet.Caller.Msm.Contracts.DingtalkPushRobot.Queries;
+﻿using LzqNet.DingtalkMessage.Contracts.DingtalkPushRobot;
+using LzqNet.DingtalkMessage.Contracts.DingtalkPushRobot.Commands;
+using LzqNet.DingtalkMessage.Contracts.DingtalkPushRobot.Queries;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 
-namespace LzqNet.Services.Msm.Services;
+namespace LzqNet.DingtalkMessage.Application.Services;
 
 public class DingtalkPushRobotService : ServiceBase
 {

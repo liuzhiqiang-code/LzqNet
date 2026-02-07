@@ -1,6 +1,10 @@
 {
   "Masa": {
-    "EventBusAssemblyNames": [ "LzqNet.Caller" ],
-    "CallerAssemblyNames": [ "LzqNet.Caller" ]
+    "AssemblyNames": [
+      "LzqNet.Caller",
+      "LzqNet.DingtalkMessage.Consumer",
+      "LzqNet.DingtalkMessage.Domain",
+      "LzqNet.DingtalkMessage.Contracts"
+    ]
   }
 }

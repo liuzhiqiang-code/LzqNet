@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\InfrastructureServices\LzqNet.Extensions\LzqNet.Extensions.csproj" />
+    <ProjectReference Include="..\LzqNet.DingtalkMessage.Contracts\LzqNet.DingtalkMessage.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

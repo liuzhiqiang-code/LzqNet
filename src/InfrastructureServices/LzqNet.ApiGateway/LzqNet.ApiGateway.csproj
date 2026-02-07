@@ -31,8 +31,6 @@
 		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.*" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="9.*" />
 		<PackageReference Include="AspNetCore.HealthChecks.Uris" Version="9.*" />-->
-
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="$(MicrosoftPackageVersion)" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -41,5 +39,7 @@
 		<ProjectReference Include="..\Carp.Gateway-main\Providers\Daily.Carp.Provider.Consul\Daily.Carp.Provider.Consul.csproj" />
 		<ProjectReference Include="..\LzqNet.Extensions\LzqNet.Extensions.csproj" />
 	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties configuration_4swagger_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using Masa.Contrib.Dispatcher.Events;
-using LzqNet.Caller.Msm.Contracts.DingtalkPushRobot.Commands;
 using LzqNet.DingtalkMessage.Domain.IRepositories;
 using LzqNet.DingtalkMessage.Domain.Entities;
+using LzqNet.DingtalkMessage.Contracts.DingtalkPushRobot.Commands;
 
 namespace LzqNet.DingtalkMessage.Application.CommandHandlers;
 

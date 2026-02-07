@@ -1,5 +1,5 @@
-﻿using LzqNet.Caller.Msm.Contracts.Events;
-using LzqNet.DingtalkMessage.Consumer.Services;
+﻿using LzqNet.DingtalkMessage.Consumer.Services;
+using LzqNet.DingtalkMessage.Contracts.Events;
 using LzqNet.Extensions.RabbitMq.Consumer;
 using LzqNet.Extensions.RabbitMq.Publisher;
 using Microsoft.Extensions.Logging;

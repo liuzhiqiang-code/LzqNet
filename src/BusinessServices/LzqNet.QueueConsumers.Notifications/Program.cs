@@ -1,3 +1,4 @@
+using LzqNet.DingtalkMessage.Consumer;
 using LzqNet.Extensions;
 using LzqNet.Extensions.DCC;
 using LzqNet.Extensions.DCC.Consul;
@@ -9,6 +10,7 @@ builder.AddCustomSerilog();
 
 // Add services to the container.
 builder.AddApplicationServices();
+builder.Services.AddHostedService<DingtalkMessageConsumer>();
 
 var app = builder.Build();
 app.MapApplicationServices();

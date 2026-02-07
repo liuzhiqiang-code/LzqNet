@@ -12,15 +12,13 @@
 		<PackageReference Include="Masa.Utils.Extensions.Validations.FluentValidation" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.BuildingBlocks.ReadWriteSplitting.Cqrs" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.BuildingBlocks.Dispatcher.IntegrationEvents" Version="$(MASAFrameworkVersion)" />
-
-		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.3.0" />
-
 		<PackageReference Include="Masa.Contrib.Data.IdGenerator.Snowflake.Distributed.Redis" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Data.IdGenerator.Snowflake" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Caching.Distributed.StackExchangeRedis" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Data.DistributedLock.Local" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Service.Caller.HttpClient" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.3.0" />
 
 		<PackageReference Include="SqlSugarCore" Version="5.1.4.212-preview02" />
 	</ItemGroup>

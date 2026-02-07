@@ -1,6 +1,5 @@
 ﻿using LzqNet.Caller.Auth.Contracts;
 using LzqNet.Caller.Common;
-using LzqNet.Caller.Msm.Contracts.Account;
 using Masa.BuildingBlocks.Service.Caller;
 using Masa.Contrib.Service.Caller.HttpClient;
 using Microsoft.Extensions.Configuration;

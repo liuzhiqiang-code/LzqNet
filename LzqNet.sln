@@ -47,6 +47,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LzqNet.DingtalkMessage.Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LzqNet.DingtalkMessage.Domain", "src\Modules\DingtalkMessage\LzqNet.DingtalkMessage.Domain\LzqNet.DingtalkMessage.Domain.csproj", "{6ACAA394-E8EA-4366-A900-844662754148}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LzqNet.DingtalkMessage.Contracts", "src\Modules\DingtalkMessage\LzqNet.DingtalkMessage.Contracts\LzqNet.DingtalkMessage.Contracts.csproj", "{87F2E3F4-7104-44EE-AC65-E2907482F151}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "System", "System", "{F5AD92F6-4C42-4081-A8AE-06D7A8C4699C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LzqNet.System.Application", "src\Modules\System\LzqNet.System.Application\LzqNet.System.Application.csproj", "{307DF61D-4A26-79E4-E2A1-F199205CE07B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LzqNet.System.Contracts", "src\Modules\System\LzqNet.System.Contracts\LzqNet.System.Contracts.csproj", "{C5B7BF6D-2F26-1EA6-FF3B-B1C2EB7D07B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LzqNet.System.Domain", "src\Modules\System\LzqNet.System.Domain\LzqNet.System.Domain.csproj", "{B9B5B751-2979-D5A1-0764-BAAC2774F468}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +111,22 @@ Global
 		{6ACAA394-E8EA-4366-A900-844662754148}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ACAA394-E8EA-4366-A900-844662754148}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ACAA394-E8EA-4366-A900-844662754148}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87F2E3F4-7104-44EE-AC65-E2907482F151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87F2E3F4-7104-44EE-AC65-E2907482F151}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87F2E3F4-7104-44EE-AC65-E2907482F151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87F2E3F4-7104-44EE-AC65-E2907482F151}.Release|Any CPU.Build.0 = Release|Any CPU
+		{307DF61D-4A26-79E4-E2A1-F199205CE07B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{307DF61D-4A26-79E4-E2A1-F199205CE07B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{307DF61D-4A26-79E4-E2A1-F199205CE07B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{307DF61D-4A26-79E4-E2A1-F199205CE07B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5B7BF6D-2F26-1EA6-FF3B-B1C2EB7D07B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5B7BF6D-2F26-1EA6-FF3B-B1C2EB7D07B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5B7BF6D-2F26-1EA6-FF3B-B1C2EB7D07B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5B7BF6D-2F26-1EA6-FF3B-B1C2EB7D07B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9B5B751-2979-D5A1-0764-BAAC2774F468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9B5B751-2979-D5A1-0764-BAAC2774F468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9B5B751-2979-D5A1-0764-BAAC2774F468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9B5B751-2979-D5A1-0764-BAAC2774F468}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +148,11 @@ Global
 		{E6B71827-B04D-A34B-5F1A-E61436578CD9} = {87BEDF1D-B445-439C-ACA3-DA600AC45D30}
 		{B9853D08-C88F-49E5-8C99-CFC8AD59BD24} = {87BEDF1D-B445-439C-ACA3-DA600AC45D30}
 		{6ACAA394-E8EA-4366-A900-844662754148} = {87BEDF1D-B445-439C-ACA3-DA600AC45D30}
+		{87F2E3F4-7104-44EE-AC65-E2907482F151} = {87BEDF1D-B445-439C-ACA3-DA600AC45D30}
+		{F5AD92F6-4C42-4081-A8AE-06D7A8C4699C} = {3C63A7BD-B05E-48CB-9FD7-E1DD4A2C1D5A}
+		{307DF61D-4A26-79E4-E2A1-F199205CE07B} = {F5AD92F6-4C42-4081-A8AE-06D7A8C4699C}
+		{C5B7BF6D-2F26-1EA6-FF3B-B1C2EB7D07B9} = {F5AD92F6-4C42-4081-A8AE-06D7A8C4699C}
+		{B9B5B751-2979-D5A1-0764-BAAC2774F468} = {F5AD92F6-4C42-4081-A8AE-06D7A8C4699C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3A788B6-BA6D-4FCE-835C-169B24583E18}
