@@ -15,11 +15,7 @@ public static class HealthCheckExtensions
 
         services.AddHealthChecks()
             .AddCheck("self", () => HealthCheckResult.Healthy("服务运行正常"))
-            .AddCheck<MemoryHealthCheck>("内存检查")
-            .AddRedis(configuration.GetConnectionString("RedisConnection") ?? throw new InvalidOperationException("未找到Redis连接配置"),
-                name: "redis");
-            //.AddNpgSql(configuration.GetConnectionString("PostgresConnection") ?? throw new InvalidOperationException("未找到数据库连接配置"),
-            //    name:"postgres");
+            .AddCheck<MemoryHealthCheck>("内存检查");
     }
 
     public static void MapCustomHealthChecks(this WebApplication app)

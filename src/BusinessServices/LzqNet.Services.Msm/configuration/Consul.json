@@ -1,0 +1,10 @@
+﻿{
+  "Consul": {
+    "IP": "lzqnet.services.msm",
+    "Port": 8080,
+    "ServiceName": "msm-service",
+    "ConsulIP": "consul",
+    "ConsulPort": 8500,
+    "Weight": null
+  }
+}

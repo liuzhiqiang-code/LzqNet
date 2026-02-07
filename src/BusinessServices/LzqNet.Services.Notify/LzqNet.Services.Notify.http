@@ -1,6 +1,0 @@
-@LzqNet.Services.Notify_HostAddress = http://localhost:5154
-
-GET {{LzqNet.Services.Notify_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

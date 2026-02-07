@@ -1,11 +1,13 @@
 using Daily.Carp.Extension;
 using LzqNet.ApiGateway.Extensions;
-using LzqNet.ApiGateway.Extensions.HealthCheck;
-using LzqNet.DCC;
+using LzqNet.Extensions.DCC;
+using LzqNet.Extensions.DCC.Consul;
+using LzqNet.Extensions.HealthCheck;
+using LzqNet.Extensions.Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddApplicationConfiguration();
+builder.AddApplicationConfiguration().AddCustomConsul();
 builder.AddCustomSerilog();
 
 builder.Services.AddMapster();
@@ -27,12 +29,9 @@ builder.Services.AddCors(options =>
 builder.AddCustomRateLimiter("customPolicy");
 builder.AddCustomCarp();
 builder.Services.AddHttpContextAccessor();
-builder.AddCustomMasaRegistrationCaller();
+builder.AddCustomMasa();
 builder.AddCustomMetrics();// 配置遥测中间件
 builder.AddCustomResponseCaching();// 配置响应缓存中间件
-
-//builder.AddCustomAuthentication();
-//builder.AddCustomAuthorization();
 
 var app = builder.Build();
 

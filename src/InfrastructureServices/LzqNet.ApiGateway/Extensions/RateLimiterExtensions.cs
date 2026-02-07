@@ -40,6 +40,6 @@ public static class RateLimiterExtensions
                     if (rateLimiterOption.QueueLimit.HasValue)
                         options.QueueLimit = rateLimiterOption.QueueLimit.Value;  //队列最大长度，超过则拒绝请求
                 });
-            });
+        });
     }
 }

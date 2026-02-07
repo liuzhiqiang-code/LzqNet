@@ -1,0 +1,10 @@
+﻿{
+  "Consul": {
+    "IP": "lzqnet.auth",
+    "Port": 8080,
+    "ServiceName": "auth",
+    "ConsulIP": "consul",
+    "ConsulPort": 8500,
+    "Weight": null
+  }
+}

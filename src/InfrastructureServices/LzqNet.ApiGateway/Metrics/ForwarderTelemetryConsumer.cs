@@ -1,4 +1,3 @@
-using System;
 using Yarp.ReverseProxy.Forwarder;
 using Yarp.Telemetry.Consumption;
 

@@ -1,4 +1,3 @@
-using System;
 using Yarp.Telemetry.Consumption;
 
 namespace LzqNet.ApiGateway.Metrics;

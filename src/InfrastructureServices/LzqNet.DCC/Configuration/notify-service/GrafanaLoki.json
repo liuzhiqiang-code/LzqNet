@@ -1,6 +1,0 @@
-{
-  "GrafanaLoki": {
-    "LokiUrl": "http://loki:3100",
-    "ServiceName": "notify-service"
-  }
-}

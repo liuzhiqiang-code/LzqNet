@@ -1,6 +1,7 @@
 ﻿using LzqNet.Caller.Msm.Contracts.Events;
+using LzqNet.Extensions.RabbitMq.Consumer;
+using LzqNet.Extensions.RabbitMq.Publisher;
 using LzqNet.QueueConsumers.Notifications.CommandHandlers;
-using Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq;
 using Microsoft.Extensions.Options;
 
 namespace LzqNet.QueueConsumers.Notifications.Consumers;

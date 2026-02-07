@@ -259,3 +259,6 @@ __pycache__/
 # =================================
 
 MigrationBackup/
+
+dockercompose/consul
+dockercompose/rabbitmq

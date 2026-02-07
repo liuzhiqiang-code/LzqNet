@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Serilog;
-using Serilog.Core;
 
 namespace LzqNet.ApiGateway.Extensions;
 

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>765c9c2e-d2a6-4721-96c3-13ee66ac9ab7</UserSecretsId>
@@ -15,8 +15,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\InfrastructureServices\LzqNet.DCC\LzqNet.DCC.csproj" />
 		<ProjectReference Include="..\..\InfrastructureServices\LzqNet.Extensions\LzqNet.Extensions.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Logs\" />
 	</ItemGroup>
 
 </Project>

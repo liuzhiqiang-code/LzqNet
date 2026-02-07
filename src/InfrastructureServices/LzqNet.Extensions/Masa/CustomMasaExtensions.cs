@@ -3,11 +3,11 @@ using Masa.BuildingBlocks.Caching;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Masa.Contrib.Caching.Distributed.StackExchangeRedis;
 using Masa.Contrib.Data.IdGenerator.Snowflake;
-using Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq;
 using Serilog;
 using System.Reflection;
 using System.Text;
 using LzqNet.Extensions.SqlSugar;
+using LzqNet.Extensions.RabbitMq.Publisher;
 
 public static class CustomMasaExtensions
 {
@@ -72,14 +72,16 @@ public static class CustomMasaExtensions
     private static IServiceCollection AddCustomMasaSnowflake(this IServiceCollection services, IConfiguration configuration)
     {
         // 分布式雪花ID生成器
-        var redisOptions = configuration.GetSection("RedisConfig").Get<RedisConfigurationOptions>() ??
-            throw new MasaException("未找到RedisConfig配置");
-        services.AddSnowflake(distributedIdGeneratorOptions =>
+        var redisOptions = configuration.GetSection("RedisConfig").Get<RedisConfigurationOptions>();
+        if (redisOptions != null)
         {
-            distributedIdGeneratorOptions.UseRedis(
-                option => option.GetWorkerIdMinInterval = 5000,
-                redisOptions);
-        });
+            services.AddSnowflake(distributedIdGeneratorOptions =>
+            {
+                distributedIdGeneratorOptions.UseRedis(
+                    option => option.GetWorkerIdMinInterval = 5000,
+                    redisOptions);
+            });
+        }
         return services;
     }
 

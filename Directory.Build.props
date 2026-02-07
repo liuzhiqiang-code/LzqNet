@@ -1,7 +1,6 @@
 <Project>
 	<PropertyGroup>
 		<MASAFrameworkVersion>1.2.0-preview.10</MASAFrameworkVersion>
-		<MASABlazorVersion>1.0.2</MASABlazorVersion>
-		<MicrosoftPackageVersion>9.*</MicrosoftPackageVersion>
+		<MicrosoftPackageVersion>10.*</MicrosoftPackageVersion>
 	</PropertyGroup>
 </Project>

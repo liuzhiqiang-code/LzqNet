@@ -51,12 +51,6 @@ services:
       consul:
         condition: service_started
 
-  # lzqnet.services.notify:
-  #   image: lzqnetservicesnotify
-  #   build:
-  #     context: .
-  #     dockerfile: src/BusinessServices/LzqNet.Services.Notify/Dockerfile
-
 
   redis:
     image: redis:alpine

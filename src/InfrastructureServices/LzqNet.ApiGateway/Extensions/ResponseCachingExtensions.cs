@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-
-namespace LzqNet.ApiGateway.Extensions;
+﻿namespace LzqNet.ApiGateway.Extensions;
 
 public static class ResponseCachingExtensions
 {

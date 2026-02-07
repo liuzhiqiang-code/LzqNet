@@ -1,9 +1,3 @@
-using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-
 namespace LzqNet.ApiGateway.Metrics;
 
 /// <summary>
@@ -31,6 +25,6 @@ public class PerRequestYarpMetricCollectionMiddleware
 
         // 在其他中间件步骤完成后调用
         // 通过ILogger将信息写入控制台。在你可能想要的生产场景中将结果直接写入遥测系统
-        _logger.LogInformation("PerRequestMetrics: "+ metrics.ToJson());
+        _logger.LogInformation("PerRequestMetrics: " + metrics.ToJson());
     }
 }

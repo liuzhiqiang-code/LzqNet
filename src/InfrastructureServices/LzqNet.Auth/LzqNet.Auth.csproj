@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>67a99d79-73d4-49cd-9cc8-79966b8e60ca</UserSecretsId>
@@ -10,13 +10,11 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="$(MicrosoftPackageVersion)" />
-		
 		<PackageReference Include="Duende.IdentityServer.EntityFramework" Version="7.3.2" />
 		
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+		
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="$(MicrosoftPackageVersion)" />
@@ -25,11 +23,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\LzqNet.DCC\LzqNet.DCC.csproj" />
+	  <Folder Include="data\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="data\" />
+	  <ProjectReference Include="..\LzqNet.Extensions\LzqNet.Extensions.csproj" />
 	</ItemGroup>
 
 </Project>

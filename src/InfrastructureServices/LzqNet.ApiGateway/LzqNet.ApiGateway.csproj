@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>f9643538-8638-4462-930b-8f0ded9c5221</UserSecretsId>
@@ -11,26 +11,26 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Masa.Contrib.Data.Mapping.Mapster" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.BuildingBlocks.Data.MappingExtensions" Version="$(MASAFrameworkVersion)" />
+		<!--<PackageReference Include="Masa.Contrib.Data.Mapping.Mapster" Version="$(MASAFrameworkVersion)" />
+		<PackageReference Include="Masa.BuildingBlocks.Data.MappingExtensions" Version="$(MASAFrameworkVersion)" />-->
 
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="$(MicrosoftPackageVersion)" />
+		
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
 		
 		<PackageReference Include="Yarp.ReverseProxy" Version="2.3.0" />
 		<PackageReference Include="Yarp.Telemetry.Consumption" Version="2.3.0" />
 
-		<PackageReference Include="Serilog" Version="4.3.0" />
+		<!--<PackageReference Include="Serilog" Version="4.3.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
 		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
-		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />-->
 
-		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="AspNetCore.HealthChecks.UI" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="AspNetCore.HealthChecks.Uris" Version="$(MicrosoftPackageVersion)" />
+		<!--<PackageReference Include="AspNetCore.HealthChecks.UI" Version="9.*" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.*" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="9.*" />
+		<PackageReference Include="AspNetCore.HealthChecks.Uris" Version="9.*" />-->
 
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="$(MicrosoftPackageVersion)" />
 	</ItemGroup>
@@ -39,7 +39,7 @@
 		<ProjectReference Include="..\..\Callers\LzqNet.Caller\LzqNet.Caller.csproj" />
 		<ProjectReference Include="..\Carp.Gateway-main\Daily.Carp\Daily.Carp.csproj" />
 		<ProjectReference Include="..\Carp.Gateway-main\Providers\Daily.Carp.Provider.Consul\Daily.Carp.Provider.Consul.csproj" />
-		<ProjectReference Include="..\LzqNet.DCC\LzqNet.DCC.csproj" />
+		<ProjectReference Include="..\LzqNet.Extensions\LzqNet.Extensions.csproj" />
 	</ItemGroup>
 
 </Project>

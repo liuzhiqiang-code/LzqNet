@@ -1,12 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Consul.AspNetCore" Version="1.7.14.10" />
+		<PackageReference Include="RabbitMQ.Client" Version="7.2.0" />
+		<PackageReference Include="Winton.Extensions.Configuration.Consul" Version="3.4.0" />
 
 		<PackageReference Include="Masa.Utils.Extensions.DependencyInjection" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Caching.Distributed.StackExchangeRedis" Version="$(MASAFrameworkVersion)" />
@@ -17,15 +20,14 @@
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.0" />
 		<PackageReference Include="Masa.Contrib.Dispatcher.Events" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Dispatcher.Events.FluentValidation" Version="$(MASAFrameworkVersion)" />
-
-
+		<PackageReference Include="Masa.Contrib.Dispatcher.IntegrationEvents" Version="$(MASAFrameworkVersion)" />
+						  
 		<PackageReference Include="Masa.Contrib.Service.MinimalAPIs" Version="$(MASAFrameworkVersion)" />
 
 		<PackageReference Include="Masa.Contrib.Exceptions" Version="$(MASAFrameworkVersion)" />
 		<!--<PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="$(MicrosoftPackageVersion)" />-->
-		<PackageReference Include="AspNetCore.HealthChecks.Redis" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(MicrosoftPackageVersion)" />
+		<!--<PackageReference Include="AspNetCore.HealthChecks.Redis" Version="9.*" />-->
+		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.*" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="$(MicrosoftPackageVersion)" />
 		
@@ -38,8 +40,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Callers\LzqNet.Caller\LzqNet.Caller.csproj" />
-	  <ProjectReference Include="..\LzqNet.DCC\LzqNet.DCC.csproj" />
-	  <ProjectReference Include="..\Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq\Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,18 +1,18 @@
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Validation;
-using LzqNet.Auth.Extensions.HealthCheck;
+using LzqNet.Extensions.HealthCheck;
 using LzqNet.Auth.Identity;
 using LzqNet.Auth.Infrastructure;
-using LzqNet.DCC;
+using LzqNet.Extensions.DCC;
+using LzqNet.Extensions.DCC.Consul;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using System.Text.Json;
+using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.AddApplicationConfiguration();
+builder.AddApplicationConfiguration().AddCustomConsul();
 builder.Services.AddOptions<JwtOption>().BindConfiguration("Jwt")
     .Validate(setting =>
         !string.IsNullOrWhiteSpace(setting.Audience) &&

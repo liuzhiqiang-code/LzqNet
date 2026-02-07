@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-using System;
-using System.Net.Http;
 using Yarp.Telemetry.Consumption;
 
 namespace LzqNet.ApiGateway.Metrics;

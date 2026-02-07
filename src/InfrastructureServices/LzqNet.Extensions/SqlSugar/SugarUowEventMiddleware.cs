@@ -18,15 +18,15 @@ public class SugarUowEventMiddleware<TEvent> : EventMiddleware<TEvent>
         var typeName = @event.GetType().FullName;
         try
         {
-            await SqlSugarHelper.Client.BeginTranAsync();
+            await SqlSugarHelper.Client.AsTenant().BeginTranAsync();
             _logger?.LogDebug("----- BeginTranAsync {CommandType}", typeName);
             await next();
-            await SqlSugarHelper.Client.CommitTranAsync();
+            await SqlSugarHelper.Client.AsTenant().CommitTranAsync();
             _logger?.LogDebug("----- CommitTranAsync {CommandType}", typeName);
         }
         catch (MasaException ex)
         {
-            await SqlSugarHelper.Client.RollbackTranAsync();
+            await SqlSugarHelper.Client.AsTenant().RollbackTranAsync();
             _logger?.LogError("----- RollbackTranAsync {CommandType}", typeName);
             throw;
         }

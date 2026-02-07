@@ -27,8 +27,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LzqNet.ApiGateway", "src\In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LzqNet.Auth", "src\InfrastructureServices\LzqNet.Auth\LzqNet.Auth.csproj", "{60D4C07B-5DE5-DA7B-BFF0-00E6F4DFA9E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LzqNet.DCC", "src\InfrastructureServices\LzqNet.DCC\LzqNet.DCC.csproj", "{95418F65-F249-5BEB-03F1-AEAFE565D953}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LzqNet.Extensions", "src\InfrastructureServices\LzqNet.Extensions\LzqNet.Extensions.csproj", "{3C401660-1D15-4F7A-9808-8D2F973C2F40}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
@@ -36,10 +34,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daily.Carp", "src\InfrastructureServices\Carp.Gateway-main\Daily.Carp\Daily.Carp.csproj", "{F2837999-0254-E57B-1610-6F7DAD29C08D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daily.Carp.Provider.Consul", "src\InfrastructureServices\Carp.Gateway-main\Providers\Daily.Carp.Provider.Consul\Daily.Carp.Provider.Consul.csproj", "{1A7298C5-CB9F-25BA-A422-34EF4C9AFA0C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LzqNet.Services.Notify", "src\BusinessServices\LzqNet.Services.Notify\LzqNet.Services.Notify.csproj", "{5479B1DC-D6DC-F2DA-B6CC-B797BAE8C54A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq", "src\InfrastructureServices\Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq\Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq.csproj", "{F4416F5C-53CA-4322-AD02-FE703ED7BDC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LzqNet.QueueConsumers.Notifications", "src\BusinessServices\LzqNet.QueueConsumers.Notifications\LzqNet.QueueConsumers.Notifications.csproj", "{11FE6697-9FCB-4025-BD18-BF319F43BAE3}"
 EndProject
@@ -65,10 +59,6 @@ Global
 		{60D4C07B-5DE5-DA7B-BFF0-00E6F4DFA9E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60D4C07B-5DE5-DA7B-BFF0-00E6F4DFA9E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60D4C07B-5DE5-DA7B-BFF0-00E6F4DFA9E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{95418F65-F249-5BEB-03F1-AEAFE565D953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{95418F65-F249-5BEB-03F1-AEAFE565D953}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{95418F65-F249-5BEB-03F1-AEAFE565D953}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{95418F65-F249-5BEB-03F1-AEAFE565D953}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3C401660-1D15-4F7A-9808-8D2F973C2F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3C401660-1D15-4F7A-9808-8D2F973C2F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C401660-1D15-4F7A-9808-8D2F973C2F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -85,14 +75,6 @@ Global
 		{1A7298C5-CB9F-25BA-A422-34EF4C9AFA0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A7298C5-CB9F-25BA-A422-34EF4C9AFA0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A7298C5-CB9F-25BA-A422-34EF4C9AFA0C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5479B1DC-D6DC-F2DA-B6CC-B797BAE8C54A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5479B1DC-D6DC-F2DA-B6CC-B797BAE8C54A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5479B1DC-D6DC-F2DA-B6CC-B797BAE8C54A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5479B1DC-D6DC-F2DA-B6CC-B797BAE8C54A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F4416F5C-53CA-4322-AD02-FE703ED7BDC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4416F5C-53CA-4322-AD02-FE703ED7BDC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F4416F5C-53CA-4322-AD02-FE703ED7BDC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4416F5C-53CA-4322-AD02-FE703ED7BDC3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{11FE6697-9FCB-4025-BD18-BF319F43BAE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11FE6697-9FCB-4025-BD18-BF319F43BAE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11FE6697-9FCB-4025-BD18-BF319F43BAE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -109,12 +91,9 @@ Global
 		{E3D20702-6526-80F5-1B91-876DF8450A59} = {78A65F07-ED6A-4205-8F38-0187A8ED28BF}
 		{E8239D3C-202A-6A7A-02C5-6DF8A3DEFB06} = {FBC4FA9D-9D66-4CB4-9E53-88829A6DE22E}
 		{60D4C07B-5DE5-DA7B-BFF0-00E6F4DFA9E9} = {FBC4FA9D-9D66-4CB4-9E53-88829A6DE22E}
-		{95418F65-F249-5BEB-03F1-AEAFE565D953} = {FBC4FA9D-9D66-4CB4-9E53-88829A6DE22E}
 		{3C401660-1D15-4F7A-9808-8D2F973C2F40} = {FBC4FA9D-9D66-4CB4-9E53-88829A6DE22E}
 		{F2837999-0254-E57B-1610-6F7DAD29C08D} = {FBC4FA9D-9D66-4CB4-9E53-88829A6DE22E}
 		{1A7298C5-CB9F-25BA-A422-34EF4C9AFA0C} = {FBC4FA9D-9D66-4CB4-9E53-88829A6DE22E}
-		{5479B1DC-D6DC-F2DA-B6CC-B797BAE8C54A} = {A1346CEA-55B0-4E51-AF43-332220B0F321}
-		{F4416F5C-53CA-4322-AD02-FE703ED7BDC3} = {FBC4FA9D-9D66-4CB4-9E53-88829A6DE22E}
 		{11FE6697-9FCB-4025-BD18-BF319F43BAE3} = {A1346CEA-55B0-4E51-AF43-332220B0F321}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

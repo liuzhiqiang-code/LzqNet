@@ -1,0 +1,10 @@
+﻿{
+  "Consul": {
+    "IP": "lzqnet.queueconsumers.notifications",
+    "Port": 8080,
+    "ServiceName": "notifications-queueconsumers",
+    "ConsulIP": "consul",
+    "ConsulPort": 8500,
+    "Weight": null
+  }
+}

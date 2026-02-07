@@ -1,6 +1,4 @@
 ﻿using LzqNet.ApiGateway.Metrics;
-using Microsoft.AspNetCore.Authorization;
-using Yarp.Telemetry.Consumption;
 
 namespace LzqNet.ApiGateway.Extensions;
 

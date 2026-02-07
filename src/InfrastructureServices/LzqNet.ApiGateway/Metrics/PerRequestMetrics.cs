@@ -1,7 +1,5 @@
-using System;
-using System.Threading;
-using Yarp.ReverseProxy.Forwarder;
 using System.Text.Json;
+using Yarp.ReverseProxy.Forwarder;
 
 namespace LzqNet.ApiGateway.Metrics;
 

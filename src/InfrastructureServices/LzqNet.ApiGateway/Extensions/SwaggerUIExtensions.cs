@@ -1,8 +1,7 @@
 ﻿using LzqNet.Caller.Auth;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Serilog;
-using Swashbuckle.AspNetCore.Swagger;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
@@ -24,6 +23,33 @@ public static class SwaggerUIExtensions
             {
                 c.SwaggerDoc(doc.Key, new OpenApiInfo { Title = doc.Title, Version = doc.Version });
             }
+
+            c.DocInclusionPredicate((docName, description) => true);
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+            {
+                Description = "请输入正确的Token格式： Bearer xxx",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey,
+                BearerFormat = "JWT",
+                Scheme = "Bearer"
+            });
+            //// 安全要求
+            //c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            //{
+            //    {
+            //        new OpenApiSecurityScheme
+            //        {
+            //            Reference = new OpenApiReference()
+            //            {
+            //                Type = ReferenceType.SecurityScheme,
+            //                Id = "Bearer"
+            //            }
+            //        },
+            //        new string[]{}
+
+            //    }
+            //});
         });
         // 添加Swagger的CORS支持
         builder.Services.ConfigureSwaggerGen(c =>
@@ -32,7 +58,7 @@ public static class SwaggerUIExtensions
         });
     }
 
-    public static void MapCustomSwaggerUI(this WebApplication app) 
+    public static void MapCustomSwaggerUI(this WebApplication app)
     {
         var swaggerOptions = app.Configuration.GetSection("Swagger").Get<SwaggerOption>() ??
             throw new InvalidOperationException($"未找到配置项:Swagger");
