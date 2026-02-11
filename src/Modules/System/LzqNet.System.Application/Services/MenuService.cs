@@ -5,6 +5,7 @@ using Masa.BuildingBlocks.Dispatcher.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 using System.ComponentModel;
 
 namespace LzqNet.System.Application.Services;
@@ -14,11 +15,7 @@ public class MenuService : ServiceBase
     public MenuService() : base("/api/v1/menu") { }
     private IEventBus EventBus => GetRequiredService<IEventBus>();
 
-    /// <summary>
-    /// 菜单名称是否存在 🔖
-    /// </summary>
-    /// <returns></returns>
-    [DisplayName("菜单名称是否存在")]
+    [OpenApiTag("Menu", Description = "菜单名称是否存在")]
     [RoutePattern(pattern: "name-exists", true, HttpMethod="GET")]
     public async Task<IResult> NameExistsAsync([FromQuery] long? id, string? path)
     {
@@ -27,11 +24,7 @@ public class MenuService : ServiceBase
         return Results.Ok(AdminResult.Success(query.Result));
     }
 
-    /// <summary>
-    /// 菜单路由是否存在 🔖
-    /// </summary>
-    /// <returns></returns>
-    [DisplayName("菜单路由是否存在")]
+    [OpenApiTag("Menu", Description = "菜单路由是否存在")]
     [RoutePattern(pattern: "path-exists", true, HttpMethod = "GET")]
     public async Task<IResult> PathExistsAsync(long? id, string? path)
     {
@@ -40,25 +33,15 @@ public class MenuService : ServiceBase
         return Results.Ok(AdminResult.Success(query.Result));
     }
 
-    /// <summary>
-    /// 获取菜单列表 🔖
-    /// </summary>
-    /// <returns></returns>
-    [DisplayName("获取菜单列表")]
+    [OpenApiTag("Menu", Description = "获取菜单列表")]
     [RoutePattern(pattern: "list", true, HttpMethod = "GET")]
-    public async Task<IResult> ListAsync([FromBody] MenuSearchDto? input)
+    public async Task<IResult> ListAsync([FromBody] MenuListQuery query)
     {
-        var query = new MenuGetListQuery(input);
         await EventBus.PublishAsync(query);
         return Results.Ok(AdminResult.Success(query.Result));
     }
 
-    /// <summary>
-    /// 新增菜单 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("新增菜单")]
+    [OpenApiTag("Menu", Description = "新增菜单")]
     [RoutePattern(pattern: "create", true)]
     public async Task<AdminResult> CreateAsync([FromBody] MenuCreateCommand command)
     {
@@ -66,12 +49,7 @@ public class MenuService : ServiceBase
         return AdminResult.Success();
     }
 
-    /// <summary>
-    /// 更新菜单 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("更新菜单")]
+    [OpenApiTag("Menu", Description = "更新菜单")]
     [RoutePattern(pattern: "update", true)]
     public async Task<AdminResult> UpdateAsync([FromBody] MenuUpdateCommand command)
     {
@@ -79,12 +57,7 @@ public class MenuService : ServiceBase
         return AdminResult.Success();
     }
 
-    /// <summary>
-    /// 删除菜单 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("删除菜单")]
+    [OpenApiTag("Menu", Description = "删除菜单")]
     [RoutePattern(pattern: "delete/{id}", true)]
     public async Task<AdminResult> DeleteAsync(long id)
     {
@@ -93,12 +66,7 @@ public class MenuService : ServiceBase
         return AdminResult.Success();
     }
 
-    /// <summary>
-    /// 批量删除菜单 🔖
-    /// </summary>
-    /// <param name="ids"></param>
-    /// <returns></returns>
-    [DisplayName("批量删除菜单")]
+    [OpenApiTag("Menu", Description = "批量删除菜单")]
     [RoutePattern(pattern: "batchDelete", true, HttpMethod = "Delete")]
     public async Task<AdminResult> BatchDeleteAsync([FromBody] List<long> ids)
     {

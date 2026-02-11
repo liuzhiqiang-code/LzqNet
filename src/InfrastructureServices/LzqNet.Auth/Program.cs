@@ -56,8 +56,8 @@ services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     options.Password.RequireNonAlphanumeric = false; // 需要特殊字符
     options.Password.RequiredUniqueChars = 1; // 唯一字符数
 })
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
 
 // 添加 IdentityServer 服务
 var identityServerBuilder = builder.Services.AddIdentityServer(options =>

@@ -1,7 +1,11 @@
 ﻿using LzqNet.Caller.Auth;
+using LzqNet.Caller.Auth.Contracts;
+using LzqNet.Extensions.Global;
+using LzqNet.Extensions.Jwt;
 using LzqNet.System.Contracts.Account.Queries;
 using LzqNet.System.Domain.IRepositories;
 using Masa.Contrib.Dispatcher.Events;
+using Microsoft.Extensions.Options;
 
 /*
  * @author : liuzhiqiang
@@ -10,15 +14,23 @@ using Masa.Contrib.Dispatcher.Events;
  */
 namespace LzqNet.System.Application.QueryHandlers;
 
-public class AccountQueryHandler(IUserRepository userRepository,AuthCaller authCaller)
+public class AccountQueryHandler(IUserRepository userRepository,AuthCaller authCaller, AuthAppService authAppService,IOptions<GlobalConfig> options)
 {
     private readonly IUserRepository _userRepository = userRepository;
     private readonly AuthCaller _authCaller = authCaller;
+    private readonly AuthAppService _authAppService = authAppService;
+    private readonly GlobalConfig globalConfig = options.Value;
 
     [EventHandler]
     public async Task GetUserInfoHandleAsync(UserInfoQuery query)
     {
-        var result = await _authCaller.UserInfo();
+        UserInfoViewDto? result;
+        if (globalConfig.UseAuth)//微服务
+            result = await _authCaller.UserInfo();
+        else
+        {
+            result = _authAppService.GetCurrentUser();
+        }
         if (result == null)
             throw new MasaException("获取用户信息失败");
         // 这里可以根据token得到的用户名信息查更多用户信息

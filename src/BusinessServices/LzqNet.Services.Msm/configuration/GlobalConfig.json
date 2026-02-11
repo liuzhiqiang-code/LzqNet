@@ -1,0 +1,5 @@
+﻿{
+  "GlobalConfig": {
+    "UseAuth": "false" //true用LzqNet.Auth授权，false使用单体jwt授权
+  }
+}

@@ -1,4 +1,5 @@
 ﻿using LzqNet.Extensions.Auth;
+using LzqNet.Extensions.Global;
 using LzqNet.Extensions.HealthCheck;
 using LzqNet.Extensions.JsonOptions;
 using LzqNet.Extensions.OAuth;
@@ -14,6 +15,8 @@ public static class Extensions
     public static void AddApplicationServices(this WebApplicationBuilder builder)
     {
         Log.Information("Start AddApplicationServices");
+
+        builder.Services.AddOptions<GlobalConfig>().BindConfiguration("GlobalConfig");
 
         builder.AddCustomHealthChecks();
         builder.Services.AddOpenApiDocument(document =>

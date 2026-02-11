@@ -1,11 +1,11 @@
-﻿using LzqNet.System.Contracts.User;
-using LzqNet.System.Contracts.User.Commands;
+﻿using LzqNet.System.Contracts.User.Commands;
 using LzqNet.System.Contracts.User.Queries;
 using Masa.BuildingBlocks.Dispatcher.Events;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
+using NSwag.Annotations;
 
 /*
  * @author : liuzhiqiang
@@ -20,52 +20,32 @@ public class UserService : ServiceBase
 
     private IEventBus EventBus => GetRequiredService<IEventBus>();
 
-    /// <summary>
-    /// 获取用户分页列表 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("获取用户分页列表")]
+    [OpenApiTag("User", Description = "获取用户分页列表")]
     [RoutePattern(pattern: "page", true)]
-    public async Task<IResult> PageAsync([FromBody] UserPageSearchDto input)
+    public async Task<IResult> PageAsync([FromBody] UserPageQuery query)
     {
-        var query = new UserPageQuery(input);
         await EventBus.PublishAsync(query);
         return Results.Ok(AdminResult.Success(query.Result));
     }
 
-    /// <summary>
-    /// 获取用户列表 🔖
-    /// </summary>
-    /// <returns></returns>
-    [DisplayName("获取用户列表")]
+    [OpenApiTag("User", Description = "获取用户列表")]
     [RoutePattern(pattern: "list", true)]
-    public async Task<IResult> ListAsync([FromBody] UserSearchDto? input)
+    public async Task<IResult> ListAsync([FromBody] UserListQuery query)
     {
-        var query = new UserGetListQuery(input);
         await EventBus.PublishAsync(query);
         return Results.Ok(AdminResult.Success(query.Result));
     }
 
-    /// <summary>
-    /// 增加用户 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("增加用户")]
+    [OpenApiTag("User", Description = "增加用户")]
     [RoutePattern(pattern: "create", true)]
+    [AllowAnonymous]
     public async Task<AdminResult> CreateAsync([FromBody] UserCreateCommand command)
     {
         await EventBus.PublishAsync(command);
         return AdminResult.Success();
     }
 
-    /// <summary>
-    /// 更新用户 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("更新用户")]
+    [OpenApiTag("User", Description = "更新用户")]
     [RoutePattern(pattern: "update", true)]
     public async Task<AdminResult> UpdateAsync([FromBody] UserUpdateCommand command)
     {
@@ -73,12 +53,7 @@ public class UserService : ServiceBase
         return AdminResult.Success();
     }
 
-    /// <summary>
-    /// 删除用户 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("删除用户")]
+    [OpenApiTag("User", Description = "删除用户")]
     [RoutePattern(pattern: "delete/{id}", true)]
     public async Task<AdminResult> DeleteAsync(long id)
     {
@@ -87,12 +62,7 @@ public class UserService : ServiceBase
         return AdminResult.Success();
     }
 
-    /// <summary>
-    /// 批量删除用户 🔖
-    /// </summary>
-    /// <param name="ids"></param>
-    /// <returns></returns>
-    [DisplayName("批量删除用户")]
+    [OpenApiTag("User", Description = "批量删除用户")]
     [RoutePattern(pattern: "batchDelete", true, HttpMethod = "Delete")]
     public async Task<AdminResult> BatchDeleteAsync([FromBody] List<long> ids)
     {

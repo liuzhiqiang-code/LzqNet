@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LzqNet.System.Contracts.SysConfig;
-public class SysConfigViewDto : SysConfigDto
+﻿namespace LzqNet.System.Contracts.SysConfig;
+public class SysConfigViewDto
 {
 }

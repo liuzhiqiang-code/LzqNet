@@ -1,5 +1,4 @@
-﻿using LzqNet.DingtalkMessage.Contracts.DingtalkPushBusiness;
-using LzqNet.DingtalkMessage.Contracts.DingtalkPushBusiness.Commands;
+﻿using LzqNet.DingtalkMessage.Contracts.DingtalkPushBusiness.Commands;
 using LzqNet.DingtalkMessage.Contracts.DingtalkPushBusiness.Queries;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Microsoft.AspNetCore.Builder;
@@ -15,25 +14,23 @@ public class DingtalkPushBusinessService : ServiceBase
 
     private IEventBus EventBus => GetRequiredService<IEventBus>();
 
-    [OpenApiTag("钉钉推送", Description = "获取分页列表")]
+    [OpenApiTag("DingtalkPushBusiness", Description = "获取分页列表")]
     [RoutePattern(pattern: "page", true)]
-    public async Task<IResult> PageAsync([FromBody] DingtalkPushBusinessPageSearchDto input)
+    public async Task<IResult> PageAsync([FromBody] DingtalkPushBusinessPageQuery query)
     {
-        var query = new DingtalkPushBusinessPageQuery(input);
         await EventBus.PublishAsync(query);
         return Results.Ok(AdminResult.Success(query.Result));
     }
 
-    [OpenApiTag("钉钉推送", Description = "获取列表")]
+    [OpenApiTag("DingtalkPushBusiness", Description = "获取列表")]
     [RoutePattern(pattern: "list", true)]
-    public async Task<IResult> ListAsync([FromBody] DingtalkPushBusinessSearchDto? input)
+    public async Task<IResult> ListAsync([FromBody] DingtalkPushBusinessListQuery query)
     {
-        var query = new DingtalkPushBusinessListQuery(input);
         await EventBus.PublishAsync(query);
         return Results.Ok(AdminResult.Success(query.Result));
     }
 
-    [OpenApiTag("钉钉推送", Description = "增加")]
+    [OpenApiTag("DingtalkPushBusiness", Description = "增加")]
     [RoutePattern(pattern: "create", true)]
     public async Task<AdminResult> CreateAsync([FromBody] DingtalkPushBusinessCreateCommand command)
     {
@@ -41,7 +38,7 @@ public class DingtalkPushBusinessService : ServiceBase
         return AdminResult.Success();
     }
 
-    [OpenApiTag("钉钉推送", Description = "更新")]
+    [OpenApiTag("DingtalkPushBusiness", Description = "更新")]
     [RoutePattern(pattern: "update", true)]
     public async Task<AdminResult> UpdateAsync([FromBody] DingtalkPushBusinessUpdateCommand command)
     {
@@ -49,7 +46,7 @@ public class DingtalkPushBusinessService : ServiceBase
         return AdminResult.Success();
     }
 
-    [OpenApiTag("钉钉推送", Description = "删除")]
+    [OpenApiTag("DingtalkPushBusiness", Description = "删除")]
     [RoutePattern(pattern: "delete/{id}", true)]
     public async Task<AdminResult> DeleteAsync(long id)
     {
@@ -58,7 +55,7 @@ public class DingtalkPushBusinessService : ServiceBase
         return AdminResult.Success();
     }
 
-    [OpenApiTag("钉钉推送", Description = "批量删除")]
+    [OpenApiTag("DingtalkPushBusiness", Description = "批量删除")]
     [RoutePattern(pattern: "batchDelete", true, HttpMethod = "Delete")]
     public async Task<AdminResult> BatchDeleteAsync([FromBody] List<long> ids)
     {

@@ -12,7 +12,7 @@ public class DeptQueryHandler(IDeptRepository deptRepository)
     private readonly IDeptRepository _deptRepository = deptRepository;
 
     [EventHandler]
-    public async Task GetListHandleAsync(DeptGetListQuery query)
+    public async Task GetListHandleAsync(DeptListQuery query)
     {
         // 获取所有部门数据
         var allDepts = (await _deptRepository.GetListAsync())
@@ -45,8 +45,8 @@ public class DeptQueryHandler(IDeptRepository deptRepository)
     public async Task GetPageHandleAsync(DeptPageQuery query)
     {
         PaginatedOptions paginatedOptions = new() {
-            Page =  query.SearchDto.Page,
-            PageSize = query.SearchDto.PageSize
+            Page =  query.Page,
+            PageSize = query.PageSize
         };
         var pageList = await _deptRepository.GetPaginatedListAsync(paginatedOptions);
         query.Result = new PaginatedListBase<DeptViewDto>

@@ -29,4 +29,9 @@
     /// 权重
     /// </summary>
     public int? Weight { get; set; }
+
+    /// <summary>
+    /// 配置key列表
+    /// </summary>
+    public List<string> ConfigurationKeys { get; set; } = [];
 }

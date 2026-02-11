@@ -1,14 +1,20 @@
-﻿using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Queries;
+﻿using LzqNet.Caller.Common.Contracts;
 using Masa.Utils.Models;
 
 namespace LzqNet.System.Contracts.Role.Queries;
 
-public record RolePageQuery : Query<PaginatedListBase<RoleViewDto>>
+public record RolePageQuery : PageQuery<RoleViewDto>
 {
-    public RolePageSearchDto SearchDto { get; set; }
+    public long? Id { get; set; }
+
+    public string? Name { get; set; }
+
+    public int? Status { get; set; }
+
+    public string? Remark { get; set; }
+
     public override PaginatedListBase<RoleViewDto> Result { get; set; }
-    public RolePageQuery(RolePageSearchDto searchDto)
+    public RolePageQuery()
     {
-        SearchDto = searchDto;
     }
 }

@@ -5,6 +5,7 @@
     "ServiceName": "msm-service",
     "ConsulIP": "consul",
     "ConsulPort": 8500,
-    "Weight": null
+    "Weight": null,
+    "ConfigurationKeys": [ "common", "msm-service" ]
   }
 }

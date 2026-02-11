@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\InfrastructureServices\LzqNet.Extensions\LzqNet.Extensions.csproj" />
+    <ProjectReference Include="..\LzqNet.Template.Contracts\LzqNet.Template.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="IRepositories\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
+</Project>

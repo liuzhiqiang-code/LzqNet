@@ -1,6 +1,7 @@
 {
   "Masa": {
     "AssemblyNames": [
+      "LzqNet.Extensions",
       "LzqNet.Caller",
       "LzqNet.DingtalkMessage.Application",
       "LzqNet.DingtalkMessage.Domain",

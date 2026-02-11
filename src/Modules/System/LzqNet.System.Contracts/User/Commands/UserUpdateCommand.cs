@@ -64,7 +64,7 @@ public record UserUpdateCommand : Command
     /// <summary>
     /// 所属角色
     /// </summary>
-    public string? Roles { get; set; }
+    public List<string> Roles { get; set; } = [];
 
 }
 public class UserUpdateCommandValidator : MasaAbstractValidator<UserUpdateCommand>

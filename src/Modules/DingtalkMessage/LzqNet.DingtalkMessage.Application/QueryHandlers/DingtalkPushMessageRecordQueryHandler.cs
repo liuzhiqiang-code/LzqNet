@@ -21,11 +21,10 @@ public class DingtalkPushMessageRecordQueryHandler(IDingtalkPushMessageRecordRep
     [EventHandler]
     public async Task GetPageHandleAsync(DingtalkPushMessageRecordPageQuery query)
     {
-        var searchDto = query.SearchDto;
         var paginatedOptions = new PaginatedOptions
         {
-            Page = searchDto.Page,
-            PageSize = searchDto.PageSize
+            Page = query.Page,
+            PageSize = query.PageSize
         };
         var pageList = await _dingtalkPushMessageRecordRepository.GetPaginatedListAsync(paginatedOptions);
         var result = pageList.Result.Map<List<DingtalkPushMessageRecordViewDto>>();

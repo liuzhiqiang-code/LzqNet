@@ -1,11 +1,10 @@
-﻿using LzqNet.DingtalkMessage.Contracts.DingtalkPushRobot;
-using LzqNet.DingtalkMessage.Contracts.DingtalkPushRobot.Commands;
+﻿using LzqNet.DingtalkMessage.Contracts.DingtalkPushRobot.Commands;
 using LzqNet.DingtalkMessage.Contracts.DingtalkPushRobot.Queries;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
+using NSwag.Annotations;
 
 namespace LzqNet.DingtalkMessage.Application.Services;
 
@@ -15,39 +14,23 @@ public class DingtalkPushRobotService : ServiceBase
 
     private IEventBus EventBus => GetRequiredService<IEventBus>();
 
-    /// <summary>
-    /// 获取钉钉推送机器人分页列表 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("获取钉钉推送机器人分页列表")]
+    [OpenApiTag("DingtalkPushRobot", Description = "获取分页列表")]
     [RoutePattern(pattern: "page", true)]
-    public async Task<IResult> PageAsync([FromBody] DingtalkPushRobotPageSearchDto input)
+    public async Task<IResult> PageAsync([FromBody] DingtalkPushRobotPageQuery query)
     {
-        var query = new DingtalkPushRobotPageQuery(input);
         await EventBus.PublishAsync(query);
         return Results.Ok(AdminResult.Success(query.Result));
     }
 
-    /// <summary>
-    /// 获取钉钉推送机器人列表 🔖
-    /// </summary>
-    /// <returns></returns>
-    [DisplayName("获取钉钉推送机器人列表")]
+    [OpenApiTag("DingtalkPushRobot", Description = "获取钉钉推送机器人列表")]
     [RoutePattern(pattern: "list", true)]
-    public async Task<IResult> ListAsync([FromBody] DingtalkPushRobotSearchDto? input)
+    public async Task<IResult> ListAsync([FromBody] DingtalkPushRobotListQuery query)
     {
-        var query = new DingtalkPushRobotListQuery(input);
         await EventBus.PublishAsync(query);
         return Results.Ok(AdminResult.Success(query.Result));
     }
 
-    /// <summary>
-    /// 增加钉钉推送机器人 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("增加钉钉推送机器人")]
+    [OpenApiTag("DingtalkPushRobot", Description = "增加钉钉推送机器人")]
     [RoutePattern(pattern: "create", true)]
     public async Task<AdminResult> CreateAsync([FromBody] DingtalkPushRobotCreateCommand command)
     {
@@ -55,12 +38,7 @@ public class DingtalkPushRobotService : ServiceBase
         return AdminResult.Success();
     }
 
-    /// <summary>
-    /// 更新钉钉推送机器人 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("更新钉钉推送机器人")]
+    [OpenApiTag("DingtalkPushRobot", Description = "更新钉钉推送机器人")]
     [RoutePattern(pattern: "update", true)]
     public async Task<AdminResult> UpdateAsync([FromBody] DingtalkPushRobotUpdateCommand command)
     {
@@ -68,12 +46,7 @@ public class DingtalkPushRobotService : ServiceBase
         return AdminResult.Success();
     }
 
-    /// <summary>
-    /// 删除钉钉推送机器人 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("删除钉钉推送机器人")]
+    [OpenApiTag("DingtalkPushRobot", Description = "删除钉钉推送机器人")]
     [RoutePattern(pattern: "delete/{id}", true)]
     public async Task<AdminResult> DeleteAsync(long id)
     {
@@ -82,12 +55,7 @@ public class DingtalkPushRobotService : ServiceBase
         return AdminResult.Success();
     }
 
-    /// <summary>
-    /// 批量删除钉钉推送机器人 🔖
-    /// </summary>
-    /// <param name="ids"></param>
-    /// <returns></returns>
-    [DisplayName("批量删除钉钉推送机器人")]
+    [OpenApiTag("DingtalkPushRobot", Description = "批量删除钉钉推送机器人")]
     [RoutePattern(pattern: "batchDelete", true, HttpMethod = "Delete")]
     public async Task<AdminResult> BatchDeleteAsync([FromBody] List<long> ids)
     {

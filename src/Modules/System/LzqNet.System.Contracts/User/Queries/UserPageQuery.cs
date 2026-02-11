@@ -1,4 +1,4 @@
-﻿using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Queries;
+﻿using LzqNet.Caller.Common.Contracts;
 using Masa.Utils.Models;
 
 /*
@@ -8,12 +8,32 @@ using Masa.Utils.Models;
  */
 namespace LzqNet.System.Contracts.User.Queries;
 
-public record UserPageQuery : Query<PaginatedListBase<UserViewDto>>
+public record UserPageQuery : PageQuery<UserViewDto>
 {
-    public UserPageSearchDto SearchDto { get; set; }
+    public long? Id { get; set; }
+
+    public string? UserName { get; set; }
+
+    public string? Surname { get; set; }
+
+    public string? GivenName { get; set; }
+
+    public string? Email { get; set; }
+
+    public string? Phone { get; set; }
+
+    public int? Age { get; set; }
+
+    public int? Sex { get; set; }
+
+    public string? Remark { get; set; }
+
+    public long? DeptId { get; set; }
+
+    public List<string> Roles { get; set; } = [];
+
     public override PaginatedListBase<UserViewDto> Result { get; set; }
-    public UserPageQuery(UserPageSearchDto searchDto)
+    public UserPageQuery()
     {
-        SearchDto = searchDto;
     }
 }

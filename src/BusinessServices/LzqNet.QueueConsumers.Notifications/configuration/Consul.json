@@ -5,6 +5,7 @@
     "ServiceName": "notifications-queueconsumers",
     "ConsulIP": "consul",
     "ConsulPort": 8500,
-    "Weight": null
+    "Weight": null,
+    "ConfigurationKeys": [ "common", "notifications-queueconsumers" ]
   }
 }

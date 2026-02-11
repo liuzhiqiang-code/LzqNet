@@ -43,7 +43,7 @@ public class MenuQueryHandler(IMenuRepository MenuRepository)
 
 
     [EventHandler]
-    public async Task GetListHandleAsync(MenuGetListQuery query)
+    public async Task GetListHandleAsync(MenuListQuery query)
     {
         // 获取所有菜单数据
         var allMenus = (await _MenuRepository.GetListAsync())

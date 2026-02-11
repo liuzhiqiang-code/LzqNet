@@ -9,8 +9,26 @@ public class UserEntity : BaseFullEntity
     /// <summary>
     /// 姓名
     /// </summary>
-    [SugarColumn(ColumnName = "name")]
-    public string? Name { get; set; }
+    [SugarColumn(ColumnName = "user_name")]
+    public string UserName { get; set; }
+
+    /// <summary>
+    /// 密码
+    /// </summary>
+    [SugarColumn(ColumnName = "password")]
+    public string Password { get; set; }
+
+    /// <summary>
+    /// 姓
+    /// </summary>
+    [SugarColumn(ColumnName = "surname")]
+    public string? Surname { get; set; }
+
+    /// <summary>
+    /// 名
+    /// </summary>
+    [SugarColumn(ColumnName = "given_name")]
+    public string? GivenName { get; set; }
 
     /// <summary>
     /// 邮箱

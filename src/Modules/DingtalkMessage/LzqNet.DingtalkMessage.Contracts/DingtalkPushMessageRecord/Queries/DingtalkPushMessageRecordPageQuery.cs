@@ -1,14 +1,82 @@
-﻿using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Queries;
+﻿using LzqNet.Caller.Common.Contracts;
 using Masa.Utils.Models;
 
 namespace LzqNet.DingtalkMessage.Contracts.DingtalkPushMessageRecord.Queries;
 
-public record DingtalkPushMessageRecordPageQuery : Query<PaginatedListBase<DingtalkPushMessageRecordViewDto>>
+public record DingtalkPushMessageRecordPageQuery : PageQuery<DingtalkPushMessageRecordViewDto>
 {
-    public DingtalkPushMessageRecordPageSearchDto SearchDto { get; set; }
+    /// <summary>
+    /// Id
+    /// </summary>
+    public long? Id { get; set; }
+
+    /// <summary>
+    /// 关联业务名
+    /// </summary>
+    public string? PushBusinessName { get; set; }
+
+    /// <summary>
+    /// 推送配置名
+    /// </summary>
+    public string? PushConfigName { get; set; }
+
+    /// <summary>
+    /// 推送机器人名
+    /// </summary>
+    public string? PushRobotName { get; set; }
+
+    /// <summary>
+    /// 推送机器人名
+    /// </summary>
+    public string? DingtalkGroupName { get; set; }
+
+    /// <summary>
+    /// 推送类型
+    /// </summary>
+    public int? PushConfigType { get; set; }
+
+    /// <summary>
+    /// 推送内容
+    /// </summary>
+    public string? PushContent { get; set; }
+
+    /// <summary>
+    /// 推送启用状态
+    /// </summary>
+    public int? PushStatus { get; set; }
+
+    /// <summary>
+    /// 关联钉钉用户
+    /// </summary>
+    public string? DingtalkUserIds { get; set; }
+
+    /// <summary>
+    /// 推送Webhook地址
+    /// </summary>
+    public string? Webhook { get; set; }
+
+    /// <summary>
+    /// 推送关键词
+    /// </summary>
+    public string? PushKeywords { get; set; }
+
+    /// <summary>
+    /// 加签
+    /// </summary>
+    public string? Sign { get; set; }
+
+    /// <summary>
+    /// 推送ip段
+    /// </summary>
+    public string? PushIpSegments { get; set; }
+
+    /// <summary>
+    /// 推送返回结果
+    /// </summary>
+    public string? PushReturnMessage { get; set; }
+
     public override PaginatedListBase<DingtalkPushMessageRecordViewDto> Result { get; set; }
-    public DingtalkPushMessageRecordPageQuery(DingtalkPushMessageRecordPageSearchDto searchDto)
+    public DingtalkPushMessageRecordPageQuery()
     {
-        SearchDto = searchDto;
     }
 }

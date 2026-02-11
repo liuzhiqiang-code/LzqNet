@@ -60,6 +60,6 @@ public class UserViewDto
     /// <summary>
     /// 所属角色
     /// </summary>
-    public List<long>? Roles { get; set; }
+    public List<string> Roles { get; set; } = [];
 
 }

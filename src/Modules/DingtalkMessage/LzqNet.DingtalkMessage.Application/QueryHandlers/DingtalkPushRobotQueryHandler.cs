@@ -21,11 +21,10 @@ public class DingtalkPushRobotQueryHandler(IDingtalkPushRobotRepository dingtalk
     [EventHandler]
     public async Task GetPageHandleAsync(DingtalkPushRobotPageQuery query)
     {
-        var searchDto = query.SearchDto;
         var paginatedOptions = new PaginatedOptions
         {
-            Page = searchDto.Page,
-            PageSize = searchDto.PageSize
+            Page = query.Page,
+            PageSize = query.PageSize
         };
         var pageList = await _dingtalkPushRobotRepository.GetPaginatedListAsync(paginatedOptions);
         var result = pageList.Result.Map<List<DingtalkPushRobotViewDto>>();

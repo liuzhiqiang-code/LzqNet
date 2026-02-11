@@ -5,6 +5,7 @@ using Masa.BuildingBlocks.Dispatcher.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 using System.ComponentModel;
 
 namespace LzqNet.DingtalkMessage.Application.Services;
@@ -15,39 +16,23 @@ public class DingtalkPushConfigService : ServiceBase
 
     private IEventBus EventBus => GetRequiredService<IEventBus>();
 
-    /// <summary>
-    /// 获取钉钉推送配置分页列表 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("获取钉钉推送配置分页列表")]
+    [OpenApiTag("DingtalkPushConfig", Description = "获取分页列表")]
     [RoutePattern(pattern: "page", true)]
-    public async Task<IResult> PageAsync([FromBody] DingtalkPushConfigPageSearchDto input)
+    public async Task<IResult> PageAsync([FromBody] DingtalkPushConfigPageQuery query)
     {
-        var query = new DingtalkPushConfigPageQuery(input);
         await EventBus.PublishAsync(query);
         return Results.Ok(AdminResult.Success(query.Result));
     }
 
-    /// <summary>
-    /// 获取钉钉推送配置列表 🔖
-    /// </summary>
-    /// <returns></returns>
-    [DisplayName("获取钉钉推送配置列表")]
+    [OpenApiTag("DingtalkPushConfig", Description = "获取钉钉推送配置列表")]
     [RoutePattern(pattern: "list", true)]
-    public async Task<IResult> ListAsync([FromBody] DingtalkPushConfigSearchDto? input)
+    public async Task<IResult> ListAsync([FromBody] DingtalkPushConfigListQuery query)
     {
-        var query = new DingtalkPushConfigListQuery(input);
         await EventBus.PublishAsync(query);
         return Results.Ok(AdminResult.Success(query.Result));
     }
 
-    /// <summary>
-    /// 增加钉钉推送配置 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("增加钉钉推送配置")]
+    [OpenApiTag("DingtalkPushConfig", Description = "增加钉钉推送配置")]
     [RoutePattern(pattern: "create", true)]
     public async Task<AdminResult> CreateAsync([FromBody] DingtalkPushConfigCreateCommand command)
     {
@@ -55,12 +40,7 @@ public class DingtalkPushConfigService : ServiceBase
         return AdminResult.Success();
     }
 
-    /// <summary>
-    /// 更新钉钉推送配置 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("更新钉钉推送配置")]
+    [OpenApiTag("DingtalkPushConfig", Description = "更新钉钉推送配置")]
     [RoutePattern(pattern: "update", true)]
     public async Task<AdminResult> UpdateAsync([FromBody] DingtalkPushConfigUpdateCommand command)
     {
@@ -68,12 +48,7 @@ public class DingtalkPushConfigService : ServiceBase
         return AdminResult.Success();
     }
 
-    /// <summary>
-    /// 删除钉钉推送配置 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("删除钉钉推送配置")]
+    [OpenApiTag("DingtalkPushConfig", Description = "删除钉钉推送配置")]
     [RoutePattern(pattern: "delete/{id}", true)]
     public async Task<AdminResult> DeleteAsync(long id)
     {
@@ -82,12 +57,7 @@ public class DingtalkPushConfigService : ServiceBase
         return AdminResult.Success();
     }
 
-    /// <summary>
-    /// 批量删除钉钉推送配置 🔖
-    /// </summary>
-    /// <param name="ids"></param>
-    /// <returns></returns>
-    [DisplayName("批量删除钉钉推送配置")]
+    [OpenApiTag("DingtalkPushConfig", Description = "批量删除钉钉推送配置")]
     [RoutePattern(pattern: "batchDelete", true, HttpMethod = "Delete")]
     public async Task<AdminResult> BatchDeleteAsync([FromBody] List<long> ids)
     {

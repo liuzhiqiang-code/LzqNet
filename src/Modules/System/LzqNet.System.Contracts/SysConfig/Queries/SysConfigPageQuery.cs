@@ -1,20 +1,14 @@
-﻿using LzqNet.System.Contracts.SysConfig;
-using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Queries;
+﻿using LzqNet.Caller.Common.Contracts;
 using Masa.Utils.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LzqNet.System.Contracts.SysConfig.Queries;
 
-public record SysConfigPageQuery : Query<PaginatedListBase<SysConfigViewDto>>
+public record SysConfigPageQuery : PageQuery<SysConfigViewDto>
 {
-    public SysConfigSearchDto SearchDto { get; set; }
+    public long? Id { get; set; }
+
     public override PaginatedListBase<SysConfigViewDto> Result { get; set; }
-    public SysConfigPageQuery(SysConfigSearchDto searchDto)
+    public SysConfigPageQuery()
     {
-        SearchDto = searchDto;
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 using System.ComponentModel;
 
 /*
@@ -20,12 +21,7 @@ public class AccountService : ServiceBase
 
     private IEventBus EventBus => GetRequiredService<IEventBus>();
 
-    /// <summary>
-    /// 登录 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("登录")]
+    [OpenApiTag("Account", Description = "登录")]
     [RoutePattern(pattern: "login", true)]
     [AllowAnonymous]
     public async Task<IResult> LoginAsync([FromBody] LoginCommand command)
@@ -34,12 +30,7 @@ public class AccountService : ServiceBase
         return Results.Ok(AdminResult.Success(command.Result));
     }
 
-    /// <summary>
-    /// 登出 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("登出")]
+    [OpenApiTag("Account", Description = "登出")]
     [RoutePattern(pattern: "logout", true)]
     [AllowAnonymous]
     public async Task<AdminResult> LogoutAsync()
@@ -48,12 +39,7 @@ public class AccountService : ServiceBase
         return AdminResult.Success();
     }
 
-    /// <summary>
-    /// 获取用户信息 🔖
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [DisplayName("获取用户信息")]
+    [OpenApiTag("Account", Description = "获取用户信息")]
     [RoutePattern(pattern: "userInfo", true, HttpMethod="Get")]
     public async Task<IResult> UserInfoAsync()
     {

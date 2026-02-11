@@ -13,7 +13,7 @@ public class RoleQueryHandler(IRoleRepository roleRepository, IRoleAuthRepositor
     private readonly IRoleAuthRepository _roleAuthRepository = roleAuthRepository;
 
     [EventHandler]
-    public async Task GetListHandleAsync(RoleGetListQuery query)
+    public async Task GetListHandleAsync(RoleListQuery query)
     {
         var list = (await _roleRepository.GetListAsync()).ToList();
         query.Result = list.Map<List<RoleViewDto>>();
@@ -22,11 +22,10 @@ public class RoleQueryHandler(IRoleRepository roleRepository, IRoleAuthRepositor
     [EventHandler]
     public async Task GetPageHandleAsync(RolePageQuery query)
     {
-        var searchDto = query.SearchDto;
         var paginatedOptions = new PaginatedOptions
         {
-            Page = searchDto.Page,
-            PageSize = searchDto.PageSize
+            Page = query.Page,
+            PageSize = query.PageSize
         };
         var pageList = await _roleRepository.GetPaginatedListAsync(paginatedOptions);
         var roleIds = pageList.Result.Select(r => r.Id).ToList();

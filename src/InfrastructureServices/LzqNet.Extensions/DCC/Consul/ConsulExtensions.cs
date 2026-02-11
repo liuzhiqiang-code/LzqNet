@@ -8,8 +8,7 @@ public static class ConsulExtensions
 {
     public static void AddCustomConsul(this IHostApplicationBuilder builder)
     {
-        var configurationKeys = builder.Configuration.GetSection("ConfigurationKeys").Get<List<string>>() ?? [];
-        builder.AddConsulConfiguration(configurationKeys);
+        builder.AddConsulConfiguration();
         builder.AddConsulRegister();
     }
 
@@ -20,7 +19,7 @@ public static class ConsulExtensions
         var consulAddress = $"{consulOptions.ConsulIP}:{consulOptions.ConsulPort}";
         if (!consulAddress.StartsWith("http://") && !consulAddress.StartsWith("https://"))
             consulAddress = "http://" + consulAddress; // 默认使用 HTTP 协议
-        foreach (var configurationKey in configurationKeys)
+        foreach (var configurationKey in consulOptions.ConfigurationKeys)
         {
             //默认是使用Json配置文件格式，要使用其他常量格式，需要放在不同的Key里面
             builder.Configuration.AddConsul(configurationKey, options =>

@@ -17,7 +17,7 @@ public class UserQueryHandler(IUserRepository userRepository)
     private readonly IUserRepository _userRepository = userRepository;
 
     [EventHandler]
-    public async Task GetListHandleAsync(UserGetListQuery query)
+    public async Task GetListHandleAsync(UserListQuery query)
     {
         var list = (await _userRepository.GetListAsync()).ToList();
         query.Result = list.Map<List<UserViewDto>>();
@@ -26,11 +26,10 @@ public class UserQueryHandler(IUserRepository userRepository)
     [EventHandler]
     public async Task GetPageHandleAsync(UserPageQuery query)
     {
-        var searchDto = query.SearchDto;
         var paginatedOptions = new PaginatedOptions
         {
-            Page = searchDto.Page,
-            PageSize = searchDto.PageSize
+            Page = query.Page,
+            PageSize = query.PageSize
         };
         var pageList = await _userRepository.GetPaginatedListAsync(paginatedOptions);
         var result = pageList.Result.Map<List<UserViewDto>>();

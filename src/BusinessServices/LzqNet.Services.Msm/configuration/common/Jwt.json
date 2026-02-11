@@ -1,7 +1,18 @@
 {
+  // 微服务配置
+  //"Jwt": {
+  //  "Authority": "http://lzqnet.auth:8080",
+  //  "Audience": "common", //公用业务服务客户端标识
+  //  "RequireHttpsMetadata": false
+  //}
+  // 单体配置
   "Jwt": {
-    "Authority": "http://lzqnet.auth:8080",
+    "Authority": "Issuer",
     "Audience": "common", //公用业务服务客户端标识
-    "RequireHttpsMetadata": false
+    "RequireHttpsMetadata": false,
+    "Issuer": "Issuer",
+    "AccessExpiration": "7200",
+    "Secret": "your-very-long-secret-key-that-is-32-characters-minimum-here LzqNet Secret 123numberSecret",
+    "RefreshSecret": "your-very-long-secret-key-that-is-32-characters-minimum-here LzqNet RefreshSecret 123numberSecret"
   }
 }

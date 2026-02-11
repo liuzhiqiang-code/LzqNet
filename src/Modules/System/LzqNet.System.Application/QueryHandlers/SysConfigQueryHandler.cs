@@ -12,7 +12,7 @@ public class SysConfigQueryHandler(ISysConfigRepository orderRepository)
     private readonly ISysConfigRepository _orderRepository = orderRepository;
 
     [EventHandler]
-    public async Task GetListHandleAsync(SysConfigGetListQuery query)
+    public async Task GetListHandleAsync(SysConfigListQuery query)
     {
         query.Result = (await _orderRepository.GetListAsync()).ToList().Map<List<SysConfigViewDto>>();
     }
@@ -21,8 +21,8 @@ public class SysConfigQueryHandler(ISysConfigRepository orderRepository)
     public async Task GetPageHandleAsync(SysConfigPageQuery query)
     {
         PaginatedOptions paginatedOptions = new() {
-            Page =  query.SearchDto.Page,
-            PageSize = query.SearchDto.PageSize
+            Page =  query.Page,
+            PageSize = query.PageSize
         };
         var pageList = await _orderRepository.GetPaginatedListAsync(paginatedOptions);
         query.Result = new PaginatedListBase<SysConfigViewDto>

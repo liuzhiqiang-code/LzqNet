@@ -5,7 +5,7 @@ using LzqNet.Extensions.Serilog;
 using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.AddApplicationConfiguration().AddCustomConsul();
+builder.AddApplicationConfiguration();//.AddCustomConsul();
 builder.AddCustomSerilog();
 
 builder.AddApplicationServices();

@@ -1,17 +1,20 @@
 ﻿using LzqNet.Caller.Auth;
 using LzqNet.Caller.Auth.Contracts;
+using LzqNet.Extensions.Global;
 using LzqNet.System.Contracts.Role.Commands;
 using LzqNet.System.Domain.Entities;
 using LzqNet.System.Domain.IRepositories;
 using Masa.Contrib.Dispatcher.Events;
+using Microsoft.Extensions.Options;
 
 namespace LzqNet.System.Application.CommandHandlers;
 
-public class RoleCommandHandler(IRoleRepository roleRepository,IRoleAuthRepository roleAuthRepository, AuthCaller authCaller)
+public class RoleCommandHandler(IRoleRepository roleRepository,IRoleAuthRepository roleAuthRepository, AuthCaller authCaller, IOptions<GlobalConfig> options)
 {
     private readonly IRoleRepository _roleRepository = roleRepository;
     private readonly IRoleAuthRepository _roleAuthRepository = roleAuthRepository;
     private readonly AuthCaller _authCaller = authCaller;
+    private readonly GlobalConfig globalConfig = options.Value;
 
     [EventHandler]
     public async Task CreateHandleAsync(RoleCreateCommand command)
@@ -27,9 +30,13 @@ public class RoleCommandHandler(IRoleRepository roleRepository,IRoleAuthReposito
         if (rolePermissions.Count > 0)
             await _roleAuthRepository.InsertRangeAsync(rolePermissions);
 
-        await _authCaller.CreateRole(new RoleModel { 
-            Name = entity.Name
-        });
+        if (globalConfig.UseAuth)//微服务
+        {
+            await _authCaller.CreateRole(new RoleModel
+            {
+                Name = entity.Name
+            });
+        }
     }
 
     [EventHandler]
@@ -47,7 +54,9 @@ public class RoleCommandHandler(IRoleRepository roleRepository,IRoleAuthReposito
             Name = entity.Name,
             NewRoleName = command.Name
         };
-        await _authCaller.UpdateRole(roleUpdateModel);
+
+        if (globalConfig.UseAuth)//微服务
+            await _authCaller.UpdateRole(roleUpdateModel);
     }
 
     [EventHandler]
@@ -61,7 +70,9 @@ public class RoleCommandHandler(IRoleRepository roleRepository,IRoleAuthReposito
         {
             Name = a.Name
         }).ToList();
-        await _authCaller.DeleteRole(deleteRoleModels);
+
+        if (globalConfig.UseAuth)//微服务
+            await _authCaller.DeleteRole(deleteRoleModels);
     }
 
     /// <summary>
