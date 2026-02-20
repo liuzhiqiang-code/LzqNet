@@ -1,7 +1,7 @@
 ﻿using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Queries;
 using Masa.Utils.Models;
 
-namespace LzqNet.Caller.Common.Contracts;
+namespace LzqNet.Common.Contracts;
 
 public abstract record PageQuery<TResult> : Query<PaginatedListBase<TResult>> where TResult : class
 {

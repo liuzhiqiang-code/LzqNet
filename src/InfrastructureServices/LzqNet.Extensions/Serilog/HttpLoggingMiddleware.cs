@@ -28,7 +28,7 @@ public class HttpLoggingMiddleware
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "HTTP {Method} {Path} failed",
+            _logger.LogInformation("HTTP {Method} {Path} failed",
                 context.Request.Method,
                 context.Request.Path);
             throw;

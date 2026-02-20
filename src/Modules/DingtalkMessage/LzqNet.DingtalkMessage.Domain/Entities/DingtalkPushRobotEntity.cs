@@ -1,4 +1,4 @@
-﻿using LzqNet.Caller.Common.Contracts;
+﻿using LzqNet.Common.Contracts;
 using SqlSugar;
 
 namespace LzqNet.DingtalkMessage.Domain.Entities;

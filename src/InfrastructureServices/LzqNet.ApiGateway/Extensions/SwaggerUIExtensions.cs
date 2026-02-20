@@ -1,6 +1,5 @@
-﻿using LzqNet.Caller.Auth;
+﻿using LzqNet.Common.Callers.Auth;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi;
 using NSwag.AspNetCore;
 using Serilog;
 using System.Net.Http.Headers;

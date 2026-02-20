@@ -89,9 +89,9 @@ public static class CustomMasaExtensions
         {
             var exceptionStatusMap = new Dictionary<Type, int>
             {
-                [typeof(ArgumentNullException)] = 299,
+                [typeof(UserFriendlyException)] = 200,
                 [typeof(MasaArgumentException)] = 400,
-                [typeof(MasaValidatorException)] = 400,
+                [typeof(MasaValidatorException)] = 298,
                 // 可继续添加其他异常类型
             };
             //处理自定义异常

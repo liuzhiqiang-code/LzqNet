@@ -1,4 +1,4 @@
-﻿namespace LzqNet.Caller.Common.Contracts;
+﻿namespace LzqNet.Common.Contracts;
 
 public interface IEntity
 {

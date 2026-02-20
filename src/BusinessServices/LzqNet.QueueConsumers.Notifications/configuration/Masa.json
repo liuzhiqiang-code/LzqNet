@@ -1,7 +1,7 @@
 {
   "Masa": {
     "AssemblyNames": [
-      "LzqNet.Caller",
+      "LzqNet.Common",
       "LzqNet.DingtalkMessage.Consumer",
       "LzqNet.DingtalkMessage.Domain",
       "LzqNet.DingtalkMessage.Contracts"

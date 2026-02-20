@@ -1,5 +1,6 @@
 ﻿{
   "GlobalConfig": {
-    "UseAuth": "false" //true用LzqNet.Auth授权，false使用单体jwt授权
+    "UseAuth": false, //true用LzqNet.Auth授权，false使用单体jwt授权
+    "UseSwagger": true //是否启用Swagger
   }
 }

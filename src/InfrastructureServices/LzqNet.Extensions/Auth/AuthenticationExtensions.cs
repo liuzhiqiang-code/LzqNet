@@ -76,7 +76,7 @@ public static class AuthenticationExtensions
         });
     }
 
-    public static void UseCustomAuthentication(this WebApplication app)
+    public static void UseCustomAuthentication(this IApplicationBuilder app)
     {
         Log.Information("Start UseCustomAuthentication");
         app.UseAuthentication();

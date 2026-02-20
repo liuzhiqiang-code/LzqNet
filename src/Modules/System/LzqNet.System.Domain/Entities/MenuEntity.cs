@@ -1,4 +1,4 @@
-﻿using LzqNet.Caller.Common.Contracts;
+﻿using LzqNet.Common.Contracts;
 using LzqNet.System.Contracts.Menu;
 using SqlSugar;
 

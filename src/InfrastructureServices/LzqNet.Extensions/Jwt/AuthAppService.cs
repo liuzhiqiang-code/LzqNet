@@ -1,5 +1,5 @@
 ﻿using Google.Protobuf.WellKnownTypes;
-using LzqNet.Caller.Auth.Contracts;
+using LzqNet.Common.Callers.Auth.Contracts;
 using LzqNet.Extensions.Jwt.Contracts;
 using LzqNet.Extensions.Tools;
 using Microsoft.Extensions.Options;

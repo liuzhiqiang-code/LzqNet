@@ -7,7 +7,7 @@
   </PropertyGroup>
 	
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\Callers\LzqNet.Caller\LzqNet.Caller.csproj" />
+	  <ProjectReference Include="..\..\..\InfrastructureServices\LzqNet.Common\LzqNet.Common.csproj" />
 	</ItemGroup>
 
 </Project>

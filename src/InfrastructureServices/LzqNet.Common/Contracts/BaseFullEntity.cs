@@ -1,12 +1,12 @@
 ﻿using Masa.BuildingBlocks.Data;
 using SqlSugar;
 
-namespace LzqNet.Caller.Common.Contracts;
+namespace LzqNet.Common.Contracts;
 
 public class BaseFullEntity : IBaseFullEntity
 {
     [SugarColumn(ColumnName = "id",IsPrimaryKey = true)]
-    public long Id { get; private set; } = IdGeneratorFactory.SnowflakeGenerator.NewId();
+    public long Id { get; set; } = IdGeneratorFactory.SnowflakeGenerator.NewId();
 
     [SugarColumn(ColumnName = "creator")]
     public long Creator { get; set; }

@@ -58,9 +58,9 @@ public class AdminResult
     /// 4. 返回失败 - 带特定泛型类型 (为了满足接口返回值类型要求)
     /// 例如：接口定义返回 AdminResult<User>，但发生了错误，需要返回同类型对象
     /// </summary>
-    public static AdminResult<T> Fail<T>(string message, int code = 1)
+    public static AdminResult<T> Fail<T>(string message, int code = 1,T? data = default)
     {
-        return new AdminResult<T> { Code = code, Message = message, Data = default };
+        return new AdminResult<T> { Code = code, Message = message, Data = data };
     }
 }
 
@@ -75,5 +75,5 @@ public class AdminResult<T> : AdminResult
     /// 这里是唯一的 Data 定义，没有任何隐藏或重写，干净纯粹
     /// </summary>
     [JsonPropertyName("data")]
-    public T Data { get; set; }
+    public T? Data { get; set; }
 }

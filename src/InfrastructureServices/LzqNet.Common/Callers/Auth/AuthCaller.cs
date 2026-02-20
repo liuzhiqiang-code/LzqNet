@@ -1,11 +1,11 @@
-﻿using LzqNet.Caller.Auth.Contracts;
-using LzqNet.Caller.Common;
+﻿using LzqNet.Common.Callers.Auth.Contracts;
+using LzqNet.Common.Services;
 using Masa.BuildingBlocks.Service.Caller;
 using Masa.Contrib.Service.Caller.HttpClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LzqNet.Caller.Auth;
+namespace LzqNet.Common.Callers.Auth;
 
 public class AuthCaller : HttpClientCallerBase
 {

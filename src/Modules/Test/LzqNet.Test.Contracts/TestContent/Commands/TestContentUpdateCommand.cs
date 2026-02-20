@@ -9,7 +9,7 @@ public record TestContentUpdateCommand : Command
     /// <summary>
     /// Id
     /// </summary>
-    public long Id { get; set; }
+    public long? Id { get; set; }
 
     /// <summary>
     /// Name
@@ -26,8 +26,8 @@ public class TestContentUpdateCommandValidator : MasaAbstractValidator<TestConte
 {
     public TestContentUpdateCommandValidator()
     {
-        RuleFor(x => x.Id)
-            .GreaterThan(0)
-            .WithMessage("ID必须大于0");
+        //RuleFor(x => x.Id)
+        //    .GreaterThan(0)
+        //    .WithMessage("ID必须大于0");
     }
 }

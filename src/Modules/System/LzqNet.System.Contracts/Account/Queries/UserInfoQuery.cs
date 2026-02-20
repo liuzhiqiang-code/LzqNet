@@ -1,4 +1,4 @@
-﻿using LzqNet.Caller.Auth.Contracts;
+﻿using LzqNet.Common.Callers.Auth.Contracts;
 using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Queries;
 
 namespace LzqNet.System.Contracts.Account.Queries;

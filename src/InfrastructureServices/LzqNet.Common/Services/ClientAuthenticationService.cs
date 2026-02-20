@@ -1,4 +1,4 @@
-﻿using LzqNet.Caller.Auth;
+﻿using LzqNet.Common.Callers.Auth;
 using Masa.BuildingBlocks.Caching;
 using Masa.BuildingBlocks.Data;
 using Masa.BuildingBlocks.Service.Caller;
@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
 
-namespace LzqNet.Caller.Common;
+namespace LzqNet.Common.Services;
 public class ClientAuthenticationService : IAuthenticationService
 {
     private readonly IDistributedLock _distributedLock;

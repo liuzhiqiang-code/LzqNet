@@ -1,9 +1,9 @@
-﻿using LzqNet.Caller.Common.Contracts;
+﻿using LzqNet.Common.Contracts;
 using SqlSugar;
 
 namespace LzqNet.Test.Domain.Entities;
 
-[SugarTable("test_content")]
+[Tenant("MsmConnection"), SugarTable("test_content")]
 public class TestContentEntity : BaseFullEntity
 {
     /// <summary>

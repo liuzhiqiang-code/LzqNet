@@ -1,4 +1,4 @@
-﻿using LzqNet.Caller.Common.Contracts;
+﻿using LzqNet.Common.Contracts;
 using Masa.Utils.Models;
 
 namespace LzqNet.System.Contracts.Dept.Queries;

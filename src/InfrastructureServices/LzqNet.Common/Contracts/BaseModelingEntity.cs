@@ -1,7 +1,7 @@
 ﻿using Masa.BuildingBlocks.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LzqNet.Caller.Common.Contracts;
+namespace LzqNet.Common.Contracts;
 
 public abstract class BaseModelingEntity : IEntity
 {

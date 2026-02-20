@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http.Headers;
 
-namespace LzqNet.Caller.Common;
+namespace LzqNet.Common.Services;
 public class ApiAuthenticationService : IAuthenticationService
 {
     private readonly HttpContext? _httpContext;

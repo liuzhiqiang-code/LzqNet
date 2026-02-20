@@ -27,7 +27,7 @@ public static class AuthorizationExtensions
         });
     }
 
-    public static void UseCustomAuthorization(this WebApplication app)
+    public static void UseCustomAuthorization(this IApplicationBuilder app)
     {
         Log.Information("Start UseCustomAuthorization");
         app.UseAuthorization();

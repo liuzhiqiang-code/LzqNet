@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-using FluentValidation.Validators;
-using LzqNet.Caller.Auth.Contracts;
+﻿using FluentValidation.Validators;
 using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Commands;
 
 /*

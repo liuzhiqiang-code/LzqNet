@@ -13,13 +13,7 @@ public class SqlSugarRepository<TEntity> : SimpleClient<TEntity>, ISqlSugarRepos
 {
     public SqlSugarRepository()
     {
-        base.Context = SqlSugarHelper.Client;
-        //通过特性拿到ConfigId
-        var configId = typeof(TEntity).GetCustomAttribute<TenantAttribute>()?.configId;
-        if (configId != null)
-        {
-            base.Context = base.AsTenant().GetConnection(configId);
-        }
+        base.Context = SqlSugarHelper.Client.AsTenant().GetConnectionScopeWithAttr<TEntity>();
     }
 
     public async Task<PaginatedListBase<TEntity>> GetPaginatedListAsync(PaginatedOptions paginatedOptions)

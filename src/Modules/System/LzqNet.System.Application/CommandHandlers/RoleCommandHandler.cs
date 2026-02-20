@@ -1,5 +1,5 @@
-﻿using LzqNet.Caller.Auth;
-using LzqNet.Caller.Auth.Contracts;
+﻿using LzqNet.Common.Callers.Auth;
+using LzqNet.Common.Callers.Auth.Contracts;
 using LzqNet.Extensions.Global;
 using LzqNet.System.Contracts.Role.Commands;
 using LzqNet.System.Domain.Entities;

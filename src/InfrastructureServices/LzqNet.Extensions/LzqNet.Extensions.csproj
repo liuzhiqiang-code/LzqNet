@@ -40,7 +40,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Callers\LzqNet.Caller\LzqNet.Caller.csproj" />
+	  <ProjectReference Include="..\LzqNet.Common\LzqNet.Common.csproj" />
 	</ItemGroup>
 
 </Project>

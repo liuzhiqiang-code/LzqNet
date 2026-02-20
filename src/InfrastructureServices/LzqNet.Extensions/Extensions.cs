@@ -6,6 +6,7 @@ using LzqNet.Extensions.OAuth;
 using LzqNet.Extensions.Serilog;
 using LzqNet.Extensions.SqlSugar;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
 using Serilog;
 
 namespace LzqNet.Extensions;
@@ -69,9 +70,20 @@ public static class Extensions
 
         app.UseMiddleware<HttpLoggingMiddleware>();
 
-        app.UseCustomAuthentication();
-        app.UseCustomAuthorization();
-        app.UseOpenApi();
+        GlobalConfig globalConfig = app.Services.GetRequiredService<IOptions<GlobalConfig>>().Value;
+        if (globalConfig.UseSwagger)
+        {
+            app.UseOpenApi();
+            app.UseSwaggerUi();
+            app.UseCustomAuthentication();
+            app.UseCustomAuthorization();
+        }
+        else {
+            app.UseCustomAuthentication();
+            app.UseCustomAuthorization();
+            app.UseOpenApi();// 仍然启用 OpenAPI 中间件，但不启用 Swagger UI,OpenAPI的json需要授权，只有网关能访问到，外部无法访问到json接口
+        }
+       
         app.MapCustomHealthChecks();
         app.MapConfigurationApi();
         app.MapMasaMinimalAPIs();

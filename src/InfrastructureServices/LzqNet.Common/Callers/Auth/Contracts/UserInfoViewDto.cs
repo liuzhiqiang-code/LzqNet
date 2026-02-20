@@ -1,4 +1,4 @@
-﻿namespace LzqNet.Caller.Auth.Contracts;
+﻿namespace LzqNet.Common.Callers.Auth.Contracts;
 
 public class UserInfoViewDto
 {
