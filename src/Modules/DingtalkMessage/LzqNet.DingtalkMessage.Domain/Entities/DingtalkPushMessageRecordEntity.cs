@@ -5,31 +5,31 @@ using SqlSugar;
 
 namespace LzqNet.DingtalkMessage.Domain.Entities;
 
-[SugarTable("msm_dingtalk_push_message_record")]
+[Tenant("MsmConnection"), SugarTable("msm_dingtalk_push_message_record")]
 public class DingtalkPushMessageRecordEntity : BaseFullEntity
 {
     /// <summary>
     /// 关联业务名
     /// </summary>
-    [SugarColumn(ColumnName = "push_business_name")]
+    [SugarColumn(ColumnName = "push_business_name", Length = 100)]
     public string PushBusinessName { get; set; }
 
     /// <summary>
     /// 推送配置名
     /// </summary>
-    [SugarColumn(ColumnName = "push_config_name")]
+    [SugarColumn(ColumnName = "push_config_name", Length = 100)]
     public string PushConfigName { get; set; }
 
     /// <summary>
     /// 推送机器人名
     /// </summary>
-    [SugarColumn(ColumnName = "push_robot_name")]
+    [SugarColumn(ColumnName = "push_robot_name", Length = 100)]
     public string PushRobotName { get; set; }
 
     /// <summary>
     /// 推送机器人名
     /// </summary>
-    [SugarColumn(ColumnName = "dingtalk_group_name")]
+    [SugarColumn(ColumnName = "dingtalk_group_name", Length = 100)]
     public string DingtalkGroupName { get; set; }
 
     /// <summary>
@@ -41,7 +41,7 @@ public class DingtalkPushMessageRecordEntity : BaseFullEntity
     /// <summary>
     /// 推送内容
     /// </summary>
-    [SugarColumn(ColumnName = "push_content")]
+    [SugarColumn(ColumnName = "push_content", Length = 2000)]
     public string PushContent { get; set; }
 
     /// <summary>
@@ -59,7 +59,7 @@ public class DingtalkPushMessageRecordEntity : BaseFullEntity
     /// <summary>
     /// 推送Webhook地址
     /// </summary>
-    [SugarColumn(ColumnName = "webhook")]
+    [SugarColumn(ColumnName = "webhook", Length = 500)]
     public string Webhook { get; set; }
 
     /// <summary>
@@ -71,7 +71,7 @@ public class DingtalkPushMessageRecordEntity : BaseFullEntity
     /// <summary>
     /// 加签
     /// </summary>
-    [SugarColumn(ColumnName = "sign")]
+    [SugarColumn(ColumnName = "sign", Length = 500)]
     public string Sign { get; set; }
 
     /// <summary>
@@ -83,6 +83,6 @@ public class DingtalkPushMessageRecordEntity : BaseFullEntity
     /// <summary>
     /// 推送返回结果
     /// </summary>
-    [SugarColumn(ColumnName = "push_return_message")]
+    [SugarColumn(ColumnName = "push_return_message", Length = 1000)]
     public string? PushReturnMessage { get; set; }
 }

@@ -3,7 +3,7 @@ using SqlSugar;
 
 namespace LzqNet.System.Domain.Entities;
 
-[SugarTable("msm_dept")]
+[Tenant("MsmConnection"), SugarTable("msm_dept")]
 public class DeptEntity : BaseFullEntity
 {
     /// <summary>
@@ -15,7 +15,7 @@ public class DeptEntity : BaseFullEntity
     /// <summary>
     /// Name
     /// </summary>
-    [SugarColumn(ColumnName = "name")]
+    [SugarColumn(ColumnName = "name", Length = 100)]
     public string Name { get; set; }
 
     /// <summary>
@@ -27,7 +27,7 @@ public class DeptEntity : BaseFullEntity
     /// <summary>
     /// Remark
     /// </summary>
-    [SugarColumn(ColumnName = "remark")]
+    [SugarColumn(ColumnName = "remark", Length = 2000)]
     public string? Remark { get; set; }
 
 }

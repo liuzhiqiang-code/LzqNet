@@ -3,13 +3,13 @@ using SqlSugar;
 
 namespace LzqNet.DingtalkMessage.Domain.Entities;
 
-[SugarTable("msm_dingtalk_push_business")]
+[Tenant("MsmConnection"), SugarTable("msm_dingtalk_push_business")]
 public class DingtalkPushBusinessEntity : BaseFullEntity
 {
     /// <summary>
     /// 推送业务名
     /// </summary>
-    [SugarColumn(ColumnName = "business_name")]
+    [SugarColumn(ColumnName = "business_name", Length = 100)]
     public string BusinessName { get; set; }
 
     /// <summary>

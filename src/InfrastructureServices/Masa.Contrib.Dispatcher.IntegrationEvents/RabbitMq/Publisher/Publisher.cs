@@ -6,7 +6,7 @@ using System.Collections.Concurrent;
 using System.Text;
 using System.Text.Json;
 
-namespace LzqNet.Extensions.RabbitMq.Publisher;
+namespace Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq.Publisher;
 
 /// <summary>
 /// RabbitMq消息发布器
@@ -40,7 +40,7 @@ public class Publisher : IPublisher
         };
     }
 
-    public async Task PublishAsync<T>(string topicName, T @event, IntegrationEventExpand? eventMessageExpand, CancellationToken stoppingToken = default)
+    public async Task PublishAsync<T>(string topicName, T @event, CancellationToken stoppingToken = default)
     {
         try
         {
@@ -116,7 +116,7 @@ public class Publisher : IPublisher
         }
     }
 
-    public async Task BulkPublishAsync<T>(string topicName, List<(T @event, IntegrationEventExpand? eventMessageExpand)> events, CancellationToken stoppingToken = default)
+    public async Task BulkPublishAsync<T>(string topicName, List<T> events, CancellationToken stoppingToken = default)
     {
         // 参数验证
         if (events == null || events.Count == 0)
@@ -164,7 +164,7 @@ public class Publisher : IPublisher
                 _logger.LogWarning($"Channel shutdown: {args.ReplyText}");
             };
 
-            foreach (var (eventItem, _) in events)
+            foreach (var eventItem in events)
             {
                 var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(eventItem));
 

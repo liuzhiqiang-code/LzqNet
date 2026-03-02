@@ -26,11 +26,12 @@ public static class SqlSugarCollectionServiceExtensions
         {
             foreach (var item in connectionConfigs)
             {
-                new SqlSugarAopService().Init(db.GetConnection(item.ConfigId));
+                db.GetConnection(item.ConfigId).UseSqlLog().UseAuditedField().UseQueryFilter();
             }
         });
+        sqlSugar.UseCodeFirst().UseSeedData();
 
-        SqlSugarHelper.Init(sqlSugar);
+        builder.Services.AddSingleton<ISqlSugarClient>(sqlSugar);
         builder.Services.AddTransient(typeof(ISqlSugarRepository<>), typeof(SqlSugarRepository<>));
 
         return builder;

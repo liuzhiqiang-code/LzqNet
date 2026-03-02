@@ -13,13 +13,13 @@ public class SugarOption
     public DBConfig DBConfig { get; set; }
     public SugarAopOption SugarAopOption { get; set; }
     public Action<QueryFilterProvider> QueryFilter { get; set; }
-    public Action<SqlSugarProvider> CustomerAction { get; set; }
+    public Action<global::SqlSugar.SqlSugarProvider> CustomerAction { get; set; }
 }
 
 public class SugarAopOption
 {
-    public Action<SqlSugarProvider, string, SugarParameter[]> OnLogExecuting { get; set; }
-    public Action<SqlSugarProvider, string, SugarParameter[]> OnLogExecuted { get; set; }
-    public Action<SqlSugarProvider, SqlSugarException> OnError { get; set; }
-    public Action<SqlSugarProvider, object, DataFilterModel> DataExecuting { get; set; }
+    public Action<global::SqlSugar.SqlSugarProvider, string, SugarParameter[]> OnLogExecuting { get; set; }
+    public Action<global::SqlSugar.SqlSugarProvider, string, SugarParameter[]> OnLogExecuted { get; set; }
+    public Action<global::SqlSugar.SqlSugarProvider, SqlSugarException> OnError { get; set; }
+    public Action<global::SqlSugar.SqlSugarProvider, object, DataFilterModel> DataExecuting { get; set; }
 }

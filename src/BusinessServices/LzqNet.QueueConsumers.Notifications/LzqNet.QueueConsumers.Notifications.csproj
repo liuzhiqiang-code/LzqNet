@@ -10,10 +10,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Folder Include="Logs\" />
+		<Folder Include="Logs\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Modules\DingtalkMessage\LzqNet.DingtalkMessage.Consumer\LzqNet.DingtalkMessage.Consumer.csproj" />
+		<ProjectReference Include="..\..\Modules\DingtalkMessage\LzqNet.DingtalkMessage.Consumer\LzqNet.DingtalkMessage.Consumer.csproj" />
 	</ItemGroup>
 </Project>

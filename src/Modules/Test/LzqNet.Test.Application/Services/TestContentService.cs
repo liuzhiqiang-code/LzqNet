@@ -1,19 +1,15 @@
-﻿using LzqNet.Extensions.SqlSugar;
-using LzqNet.Test.Application.CommandHandlers;
-using LzqNet.Test.Contracts.TestContent.Commands;
+﻿using LzqNet.Test.Contracts.TestContent.Commands;
 using LzqNet.Test.Contracts.TestContent.Queries;
 using LzqNet.Test.Contracts.TestContentLog.Commands;
-using LzqNet.Test.Domain.IRepositories;
-using LzqNet.Test.Domain.Repositories;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
+using SqlSugar;
 using System.Collections.Concurrent;
 using System.Diagnostics;
-using System.Reflection.Metadata;
 
 namespace LzqNet.Test.Application.Services;
 
@@ -25,6 +21,7 @@ public class TestContentService : ServiceBase
     public TestContentService() : base("/api/v1/testContent") { }
 
     private IEventBus EventBus => GetRequiredService<IEventBus>();
+    private ISqlSugarClient SqlSugarClient => GetRequiredService<ISqlSugarClient>();
 
 
     [OpenApiTag("TestContent", Description = "测试授权")]
@@ -225,7 +222,7 @@ public class TestContentService : ServiceBase
             tasks.Add(Task.Run(async () =>
             {
                 var result = new ThreadResult { ThreadId = threadId };
-                var dbResult = await SqlSugarHelper.Client.UseTranAsync(async () =>
+                var dbResult = await SqlSugarClient.AsTenant().UseTranAsync(async () =>
                 {
                     // 创建新的命令实例
                     var threadCommand = new TestContentCreateCommand
@@ -434,7 +431,7 @@ public class TestContentService : ServiceBase
                 var result = new ThreadResult { ThreadId = threadId };
                 try
                 {
-                    await SqlSugarHelper.Client.BeginTranAsync();
+                    await SqlSugarClient.AsTenant().BeginTranAsync();
 
                     // 创建新的命令实例
                     var threadCommand = new TestContentCreateCommand
@@ -461,11 +458,11 @@ public class TestContentService : ServiceBase
                     result.IsSuccess = true;
                     result.Message = "执行成功";
 
-                    await SqlSugarHelper.Client.CommitTranAsync();
+                    await SqlSugarClient.AsTenant().CommitTranAsync();
                 }
                 catch (Exception ex)
                 {
-                    await SqlSugarHelper.Client.RollbackTranAsync();
+                    await SqlSugarClient.AsTenant().RollbackTranAsync();
                     result.IsSuccess = false;
                     result.Message = "执行失败";
                     result.Error = ex.Message;

@@ -7,11 +7,12 @@ using Serilog;
 using System.Reflection;
 using System.Text;
 using LzqNet.Extensions.SqlSugar;
-using LzqNet.Extensions.RabbitMq.Publisher;
+using Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq.Publisher;
+using Masa.BuildingBlocks.Data;
 
 public static class CustomMasaExtensions
 {
-    public static void AddCustomMasa(this IHostApplicationBuilder builder)
+    public static void AddCustomMasaAssembly(this IHostApplicationBuilder builder)
     {
         var configuration = builder.Configuration;
         // 抽象公用的Masa 框架服务注册
@@ -20,6 +21,11 @@ public static class CustomMasaExtensions
         var loadedAssemblies = new List<Assembly> { entryAssembly }
             .Concat(assemblyNames.Select(Assembly.Load))
             .ToList();
+        MasaApp.TryAddAssemblies(loadedAssemblies);
+    }
+    public static void AddCustomMasa(this IHostApplicationBuilder builder)
+    {
+        var loadedAssemblies = MasaApp.GetAssemblies().ToList();
 
         builder.Services
             .AddMapster()
@@ -31,7 +37,6 @@ public static class CustomMasaExtensions
             {
                 distributedCacheOptions.UseStackExchangeRedisCache();//使用分布式 Redis 缓存，默认使用本地 `RedisConfig` 节点的配置
             })
-            .AddCustomMasaSnowflake(builder.Configuration)
             .AddCustomMasaRegistrationCaller(loadedAssemblies)
             .AddEndpointsApiExplorer()
             .AddMasaMinimalAPIs(options =>
@@ -57,7 +62,7 @@ public static class CustomMasaExtensions
     {
         services.AddIntegrationEventBus(option =>
         {
-            option.UseRabbitMq();
+            option.UseRabbitMq().UseEventLog();
         });
         return services;
     }
@@ -67,7 +72,7 @@ public static class CustomMasaExtensions
         services.AddAutoRegistrationCaller(assemblies);
         return services;
     }
-    private static IServiceCollection AddCustomMasaSnowflake(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddCustomMasaSnowflake(this IServiceCollection services, IConfiguration configuration)
     {
         // 分布式雪花ID生成器
         var redisOptions = configuration.GetSection("RedisConfig").Get<RedisConfigurationOptions>();

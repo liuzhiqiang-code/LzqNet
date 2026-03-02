@@ -3,19 +3,19 @@ using SqlSugar;
 
 namespace LzqNet.DingtalkMessage.Domain.Entities;
 
-[SugarTable("msm_dingtalk_push_robot")]
+[Tenant("MsmConnection"), SugarTable("msm_dingtalk_push_robot")]
 public class DingtalkPushRobotEntity : BaseFullEntity
 {
     /// <summary>
     /// 机器人名
     /// </summary>
-    [SugarColumn(ColumnName = "name")]
+    [SugarColumn(ColumnName = "name", Length = 100)]
     public string Name { get; set; }
 
     /// <summary>
     /// 所属钉钉群组
     /// </summary>
-    [SugarColumn(ColumnName = "dingtalk_group_name")]
+    [SugarColumn(ColumnName = "dingtalk_group_name", Length = 100)]
     public string DingtalkGroupName { get; set; }
 
     /// <summary>
@@ -27,7 +27,7 @@ public class DingtalkPushRobotEntity : BaseFullEntity
     /// <summary>
     /// 推送Webhook地址
     /// </summary>
-    [SugarColumn(ColumnName = "webhook")]
+    [SugarColumn(ColumnName = "webhook", Length = 500)]
     public string Webhook { get; set; }
 
     /// <summary>
@@ -39,7 +39,7 @@ public class DingtalkPushRobotEntity : BaseFullEntity
     /// <summary>
     /// 加签
     /// </summary>
-    [SugarColumn(ColumnName = "sign")]
+    [SugarColumn(ColumnName = "sign",Length = 500)]
     public string Sign { get; set; }
 
     /// <summary>

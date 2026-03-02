@@ -1,4 +1,4 @@
-﻿namespace LzqNet.Extensions.RabbitMq.Publisher;
+﻿namespace Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq.Publisher;
 
 public class RabbitMqOptions
 {

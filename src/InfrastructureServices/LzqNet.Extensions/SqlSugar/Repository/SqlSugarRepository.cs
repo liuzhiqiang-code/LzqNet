@@ -1,4 +1,5 @@
-﻿using Masa.BuildingBlocks.Ddd.Domain.Repositories;
+﻿using Masa.BuildingBlocks.Data;
+using Masa.BuildingBlocks.Ddd.Domain.Repositories;
 using Masa.Utils.Models;
 using SqlSugar;
 using System.Reflection;
@@ -13,7 +14,7 @@ public class SqlSugarRepository<TEntity> : SimpleClient<TEntity>, ISqlSugarRepos
 {
     public SqlSugarRepository()
     {
-        base.Context = SqlSugarHelper.Client.AsTenant().GetConnectionScopeWithAttr<TEntity>();
+        base.Context = MasaApp.GetRequiredService<ISqlSugarClient>();
     }
 
     public async Task<PaginatedListBase<TEntity>> GetPaginatedListAsync(PaginatedOptions paginatedOptions)

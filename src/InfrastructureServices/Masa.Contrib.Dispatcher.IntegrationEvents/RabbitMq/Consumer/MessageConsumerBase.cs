@@ -1,11 +1,11 @@
-﻿using LzqNet.Extensions.RabbitMq.Publisher;
+﻿using Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq.Publisher;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 using System.Text.Json;
 
-namespace LzqNet.Extensions.RabbitMq.Consumer;
+namespace Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq.Consumer;
 
 /// <summary>
 /// 通用消息消费者基类

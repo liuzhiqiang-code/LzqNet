@@ -11,13 +11,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Folder Include="Logs\" />
+		<Folder Include="Logs\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Modules\DingtalkMessage\LzqNet.DingtalkMessage.Application\LzqNet.DingtalkMessage.Application.csproj" />
-	  <ProjectReference Include="..\..\Modules\System\LzqNet.System.Application\LzqNet.System.Application.csproj" />
-	  <ProjectReference Include="..\..\Modules\Test\LzqNet.Test.Application\LzqNet.Test.Application.csproj" />
+		<ProjectReference Include="..\..\Modules\DingtalkMessage\LzqNet.DingtalkMessage.Application\LzqNet.DingtalkMessage.Application.csproj" />
+		<ProjectReference Include="..\..\Modules\System\LzqNet.System.Application\LzqNet.System.Application.csproj" />
+		<ProjectReference Include="..\..\Modules\Test\LzqNet.Test.Application\LzqNet.Test.Application.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using SqlSugar;
 
 namespace LzqNet.Common.Contracts;
 
-public class BaseFullEntity : IBaseFullEntity
+public abstract class BaseFullEntity : IBaseFullEntity
 {
     [SugarColumn(ColumnName = "id",IsPrimaryKey = true)]
     public long Id { get; set; } = IdGeneratorFactory.SnowflakeGenerator.NewId();

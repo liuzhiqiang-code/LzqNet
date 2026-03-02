@@ -54,6 +54,8 @@ public static class Extensions
             options.SerializerOptions.Converters.Add(new LongNullableToStringConverter());
         });
 
+        builder.AddCustomMasaAssembly();
+        builder.Services.AddCustomMasaSnowflake(builder.Configuration);
         builder.AddCustomSqlSugar();
         builder.AddCustomMasa();
     }

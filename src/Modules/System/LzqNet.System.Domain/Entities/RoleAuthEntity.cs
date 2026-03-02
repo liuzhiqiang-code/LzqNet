@@ -3,7 +3,7 @@ using SqlSugar;
 
 namespace LzqNet.System.Domain.Entities;
 
-[SugarTable("msm_role_auth")]
+[Tenant("MsmConnection"), SugarTable("msm_role_auth")]
 public class RoleAuthEntity : BaseFullEntity
 {
     /// <summary>

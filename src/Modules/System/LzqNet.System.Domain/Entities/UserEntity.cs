@@ -3,43 +3,43 @@ using SqlSugar;
 
 namespace LzqNet.System.Domain.Entities;
 
-[SugarTable("msm_user")]
+[Tenant("MsmConnection"), SugarTable("msm_user")]
 public class UserEntity : BaseFullEntity
 {
     /// <summary>
     /// 姓名
     /// </summary>
-    [SugarColumn(ColumnName = "user_name")]
+    [SugarColumn(ColumnName = "user_name", Length = 100)]
     public string UserName { get; set; }
 
     /// <summary>
     /// 密码
     /// </summary>
-    [SugarColumn(ColumnName = "password")]
+    [SugarColumn(ColumnName = "password", Length = 2000)]
     public string Password { get; set; }
 
     /// <summary>
     /// 姓
     /// </summary>
-    [SugarColumn(ColumnName = "surname")]
+    [SugarColumn(ColumnName = "surname", Length = 100)]
     public string? Surname { get; set; }
 
     /// <summary>
     /// 名
     /// </summary>
-    [SugarColumn(ColumnName = "given_name")]
+    [SugarColumn(ColumnName = "given_name", Length = 100)]
     public string? GivenName { get; set; }
 
     /// <summary>
     /// 邮箱
     /// </summary>
-    [SugarColumn(ColumnName = "email")]
+    [SugarColumn(ColumnName = "email", Length = 200)]
     public string? Email { get; set; }
 
     /// <summary>
     /// 手机号
     /// </summary>
-    [SugarColumn(ColumnName = "phone")]
+    [SugarColumn(ColumnName = "phone", Length = 100)]
     public string? Phone { get; set; }
 
     /// <summary>
@@ -57,7 +57,7 @@ public class UserEntity : BaseFullEntity
     /// <summary>
     /// 备注
     /// </summary>
-    [SugarColumn(ColumnName = "remark")]
+    [SugarColumn(ColumnName = "remark", Length = 2000)]
     public string? Remark { get; set; }
 
     /// <summary>
@@ -69,7 +69,7 @@ public class UserEntity : BaseFullEntity
     /// <summary>
     /// 所属角色
     /// </summary>
-    [SugarColumn(ColumnName = "roles",IsJson = true)]
+    [SugarColumn(ColumnName = "roles", IsJson = true)]
     public List<string>? Roles { get; set; }
 
 }
