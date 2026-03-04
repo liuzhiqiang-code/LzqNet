@@ -1,46 +1,107 @@
-展示微服务各个组件之间最佳拆分实践+最简+标准
+# LzqNet 微服务框架
 
-# 第一步
-## docker-compose
-应用程序的镜像化部署 + postgres，redis，redis-commander，jaeger，loki，promtail，prometheus，grafana,nginx等
-用了nginx所有内部服务全部用http协议，nginx用https协议
+## 📁 项目结构
 
-## 微服务公用技术栈项目
-src/InfrastructureServices
-LzqNet.ApiGateway     网关    yarp+RateLimiter限流
+``` text
+Solution Items/          # 脚本及框架配置文件
+src/
+├── BusinessServices/    # 启动程序项目
+│   └── LzqNet.Services.Msm/  # 主启动程序（引用模块Application程序集+配置）
+├── InfrastructureServices/   # 框架相关项目
+│   ├── Daily.Carp/           # YARP二次封装的网关核心
+│   ├── Daily.Carp.Provider.Consul/  # Consul服务发现
+│   ├── LzqNet.ApiGateway/    # 网关（YARP+Consul+限流+遥测+Swagger集成）
+│   ├── LzqNet.Auth/          # 授权中心（基于Duende.IdentityServer）
+│   ├── LzqNet.Common/        # 公用基础库（工具库+基础微服务SDK）
+│   ├── LzqNet.Extensions/     # 扩展库（启动程序中间件配置）
+│   ├── Masa.BuildingBlocks.Dispatcher.IntegrationEvents/  # 事件总线抽象
+│   └── Masa.Contrib.Dispatcher.IntegrationEvents/         # 事件总线实现（RabbitMQ+发件箱模式）
+├── Modules/             # 业务模块
+│   └── Template/        # 示例模块
+│       ├── LzqNet.Template.Application/  # 应用层（API请求+业务逻辑+CQRS）
+│       ├── LzqNet.Template.Consumer/     # 消费者层（队列消费）
+│       ├── LzqNet.Template.Contracts/    # 契约层（输入/输出报文+服务SDK）
+│       └── LzqNet.Template.Domain/       # 领域层（实体+仓储）
+└── docker-compose/      # Docker编排配置（Nginx+Redis+RabbitMQ+应用程序）
+```
 
-LzqNet.SwaggerUI   SwaggerUI统一入口
-SwaggerUI 内部代理方式内网取到  各服务OpenApiJson，集中展示接口文档
-各服务OpenApiJson都不暴露外网+授权访问OpenApiJson
+## 🚀 启动方式
 
-LzqNet.Identity   认证服务器  
-各服务认证 + 单点登录  + jwt
+### 1️⃣ 微服务模式（默认）
 
-LzqNet.DCC    配置中心    现在主要是当个SDK使用，后面看情况切入consul或其他配置中心
-所有项目配置文件统一放在这里管理     
-统一AddJsonFile引入     测试环境，业务可在自己appsettings里覆盖配置
+**设置**：将 `docker-compose` 设为启动项目
 
-LzqNet.Extensions    公用扩展类库
-封装 HealthCheck+配置中心+日志+认证授权+可观测性等一些 业务服务公用的中间件
+**配置修改**：
 
-LzqNet.HealthCheckUI    健康检查UI界面     https协议
-基础资源检查   postgres，redis，redis-commander，jaeger，loki等云资源
-服务状态检查   验证各服务是否正常运行
+``` csharp
+// Program.cs
+builder.AddApplicationConfiguration().AddCustomConsul();  // 保留Consul配置读取
+```
 
-src/Contracts 各业务服务接口请求/响应报文  类库
-src/Callers  各项目相互调用的SDK库，各业务服务之间相互调用的服务都通过Caller抽象出来，避免业务服务内部重复维护
-src/BusinessServices   各业务服务，如订单，库存，采购等   http+内网+授权访问+相互访问不走网关+token穿透  保证安全性及响应效率
+**appsettings.json 配置**：
 
-# 第二步
-引入授权模块 LzqNet.Auth  前后端一起，标准OAuth2.0授权码模式，微信登录等方式
-rambbitmq，kafka等消息队列
-分布式事务  Saga模式
+``` json
+{
+  "GlobalConfig": {
+    "UseAuth": true,        // true: 使用LzqNet.Auth授权中心
+    "UseSwagger": false     // false: 生成OpenAPI文档供网关集成
+  },
+  "Jwt": {
+    "Audience": "common",
+    "Authority": "http://lzqnet.auth:8080",  // 授权中心地址
+    "RequireHttpsMetadata": false
+  }
+}
+```
 
-# 第三步
-引入支付模块 LzqNet.Payment
-支付成功事件通过RabbitMQ/Kafka通知订单服务
-使用事务性消息保证数据一致性
-幂等性处理（防止重复支付）
-分布式事务（Saga模式）
-支付渠道的适配器模式
-对账补偿机制
+### 2️⃣ 单体模式
+
+**配置修改**：
+
+``` csharp
+// Program.cs
+builder.AddApplicationConfiguration();  // 注释 AddCustomConsul()
+```
+
+**appsettings.json 配置**：
+
+``` json
+{
+  "GlobalConfig": {
+    "UseAuth": false,       // false: 使用单体JWT授权
+    "UseSwagger": true      // 直接启用Swagger
+  },
+  "Jwt": {
+    "Authority": "Issuer",
+    "Audience": "common",
+    "RequireHttpsMetadata": false,
+    "Issuer": "Issuer",
+    "AccessExpiration": "7200",
+    "Secret": "your-very-long-secret-key-that-is-32-characters-minimum-here LzqNet Secret 123numberSecret",
+    "RefreshSecret": "your-very-long-secret-key-that-is-32-characters-minimum-here LzqNet RefreshSecret 123numberSecret"
+  }
+}
+```
+
+## ✨ 核心特性
+
+- **API网关**：基于YARP，集成Consul服务发现、限流、遥测
+- **授权认证**：支持Duende IdentityServer集中授权或单体JWT
+- **配置中心**：支持Consul配置中心（微服务模式）
+- **事件总线**：基于MasaFramework，支持RabbitMQ+发件箱模式
+- **监控集成**：集成健康检查、Serilog日志、遥测
+- **模块化设计**：清晰的DDD分层架构
+
+## 🛠 技术栈
+
+- .NET 6/8/10
+- YARP + Consul
+- Duende IdentityServer
+- SqlSugar ORM
+- MasaFramework
+- Serilog
+- Docker + Docker Compose
+
+---
+
+> 📌 **文档地址**：[https://liuzhiqiang-code.github.io/LzqNet/#/](https://liuzhiqiang-code.github.io/LzqNet/#/)

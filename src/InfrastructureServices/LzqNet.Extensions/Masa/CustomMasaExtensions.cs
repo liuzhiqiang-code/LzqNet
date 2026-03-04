@@ -49,7 +49,7 @@ public static class CustomMasaExtensions
     private static IServiceCollection AddCustomMasaEventBus(this IServiceCollection services, List<Assembly> assemblies)
     {
         services.AddValidatorsFromAssemblies(assemblies)
-            .AddEventBus(assemblies, eventBusBuilder =>
+            .AddEventBus(assemblies, ServiceLifetime.Transient, eventBusBuilder =>
             {
                 eventBusBuilder.UseMiddleware(typeof(ValidatorEventMiddleware<>));
                 eventBusBuilder.UseMiddleware(typeof(SugarUowEventMiddleware<>));

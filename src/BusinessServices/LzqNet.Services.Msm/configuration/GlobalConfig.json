@@ -1,6 +1,6 @@
 ﻿{
   "GlobalConfig": {
     "UseAuth": false, //true用LzqNet.Auth授权，false使用单体jwt授权
-    "UseSwagger": true //是否启用Swagger
+    "UseSwagger": true //是否启用Swagger，false直接生成openapi文档供网关集成SwaggerUI平台
   }
 }

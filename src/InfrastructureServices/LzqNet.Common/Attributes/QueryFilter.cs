@@ -1,6 +1,6 @@
 ﻿using SqlSugar;
 
-namespace LzqNet.Extensions.SqlSugar.Attributes;
+namespace LzqNet.Common.Attributes;
 
 /// <summary>
 /// 公用分页查询过滤特性

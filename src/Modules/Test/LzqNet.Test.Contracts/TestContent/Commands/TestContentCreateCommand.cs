@@ -1,8 +1,11 @@
 ﻿using FluentValidation.Validators;
+using LzqNet.Common.Attributes;
 using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Commands;
+using System.Transactions;
 
 namespace LzqNet.Test.Contracts.TestContent.Commands;
 
+[UnitOfWork]
 public record TestContentCreateCommand : Command
 {
     /// <summary>

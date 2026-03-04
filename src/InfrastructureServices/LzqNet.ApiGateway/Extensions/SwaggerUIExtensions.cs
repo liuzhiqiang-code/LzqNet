@@ -26,34 +26,6 @@ public static class SwaggerUIExtensions
             document.OperationProcessors.Add(
                 new NSwag.Generation.Processors.Security.AspNetCoreOperationSecurityScopeProcessor("JWT"));
         });
-
-        //var swaggerOptions = builder.Configuration.GetSection("Swagger").Get<SwaggerOption>() ??
-        //    throw new InvalidOperationException($"未找到配置项:Swagger");
-        //// 添加Swagger服务
-        //builder.Services.AddEndpointsApiExplorer();
-        //builder.Services.AddSwaggerGen(c =>
-        //{
-        //    foreach (var doc in swaggerOptions.Endpoints)
-        //    {
-        //        c.SwaggerDoc(doc.Key, new OpenApiInfo { Title = doc.Title, Version = doc.Version });
-        //    }
-
-        //    c.DocInclusionPredicate((docName, description) => true);
-        //    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
-        //    {
-        //        Description = "请输入正确的Token格式： Bearer xxx",
-        //        Name = "Authorization",
-        //        In = ParameterLocation.Header,
-        //        Type = SecuritySchemeType.ApiKey,
-        //        BearerFormat = "JWT",
-        //        Scheme = "Bearer"
-        //    });
-        //});
-        //// 添加Swagger的CORS支持
-        //builder.Services.ConfigureSwaggerGen(c =>
-        //{
-        //    c.CustomSchemaIds(type => type.FullName);
-        //});
     }
 
     public static void MapCustomSwaggerUI(this WebApplication app)

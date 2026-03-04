@@ -1,6 +1,5 @@
 using LzqNet.Extensions;
 using LzqNet.Extensions.DCC;
-using LzqNet.Extensions.DCC.Consul;
 using LzqNet.Extensions.Serilog;
 using Microsoft.AspNetCore.Authorization;
 

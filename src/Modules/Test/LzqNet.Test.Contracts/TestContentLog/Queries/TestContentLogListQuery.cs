@@ -1,5 +1,4 @@
-﻿using LzqNet.Test.Contracts.TestContentLog;
-using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Queries;
+﻿using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Queries;
 
 namespace LzqNet.Test.Contracts.TestContentLog.Queries;
 

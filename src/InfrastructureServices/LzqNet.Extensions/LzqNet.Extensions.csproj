@@ -16,8 +16,6 @@
 		<PackageReference Include="Masa.Contrib.Dispatcher.Events.FluentValidation" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Service.MinimalAPIs" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Exceptions" Version="$(MASAFrameworkVersion)" />
-		<!--<PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="$(MicrosoftPackageVersion)" />-->
-		<!--<PackageReference Include="AspNetCore.HealthChecks.Redis" Version="9.*" />-->
 		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.*" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(MicrosoftPackageVersion)" />
 
