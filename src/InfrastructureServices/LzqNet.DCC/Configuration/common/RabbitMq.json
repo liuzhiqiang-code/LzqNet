@@ -1,8 +1,0 @@
-﻿{
-  "RabbitMq": {
-    "UserName": "admin",
-    "Password": "123456",
-    "HostName": "rabbitmq",
-    "Port": 5672
-  }
-}

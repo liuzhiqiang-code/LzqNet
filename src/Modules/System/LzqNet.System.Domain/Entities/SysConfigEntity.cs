@@ -1,4 +1,4 @@
-﻿using LzqNet.Common.Contracts;
+﻿using LzqNet.Extensions.SqlSugar.Entities;
 using SqlSugar;
 
 namespace LzqNet.System.Domain.Entities;

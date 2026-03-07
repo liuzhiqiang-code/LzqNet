@@ -1,5 +1,4 @@
 ﻿using LzqNet.Common.Contracts;
-using Masa.Utils.Models;
 
 namespace LzqNet.DingtalkMessage.Contracts.DingtalkPushMessageRecord.Queries;
 
@@ -75,7 +74,7 @@ public record DingtalkPushMessageRecordPageQuery : PageQuery<DingtalkPushMessage
     /// </summary>
     public string? PushReturnMessage { get; set; }
 
-    public override PaginatedListBase<DingtalkPushMessageRecordViewDto> Result { get; set; }
+    public override PageList<DingtalkPushMessageRecordViewDto> Result { get; set; }
     public DingtalkPushMessageRecordPageQuery()
     {
     }

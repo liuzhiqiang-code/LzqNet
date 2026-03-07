@@ -5,9 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-	
-	<ItemGroup>
-	  <ProjectReference Include="..\..\..\InfrastructureServices\LzqNet.Common\LzqNet.Common.csproj" />
-	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\ExtensionModules\LzqNet.Extensions.Masa\LzqNet.Extensions.Masa.csproj" />
+  </ItemGroup>
 
 </Project>

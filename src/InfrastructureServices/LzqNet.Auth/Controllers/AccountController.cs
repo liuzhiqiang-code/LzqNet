@@ -1,5 +1,6 @@
 ﻿using LzqNet.Auth.Infrastructure;
 using LzqNet.Auth.Models;
+using LzqNet.Extensions.Jwt.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

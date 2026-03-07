@@ -1,22 +1,16 @@
-﻿using Consul;
-using Google.Protobuf;
-using LzqNet.AI.Interfaces;
+﻿using LzqNet.AI.Interfaces;
+using LzqNet.Test.Contracts.TestAI.Commands;
 using LzqNet.Test.Contracts.TestContent.Commands;
 using LzqNet.Test.Domain.Consts;
-using MapsterMapper;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Microsoft.Agents.AI;
 using Microsoft.Agents.AI.Workflows;
-using Microsoft.Agents.AI.Workflows.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.AI;
 using NSwag.Annotations;
-using Pipelines.Sockets.Unofficial.Arenas;
 using System.Text;
 using System.Text.Json;
-using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace LzqNet.Test.Application.Services;
 

@@ -1,5 +1,4 @@
 ﻿using LzqNet.Common.Contracts;
-using Masa.Utils.Models;
 
 namespace LzqNet.DingtalkMessage.Contracts.DingtalkPushRobot.Queries;
 
@@ -45,7 +44,7 @@ public record DingtalkPushRobotPageQuery : PageQuery<DingtalkPushRobotViewDto>
     /// </summary>
     public string? PushIpSegments { get; set; }
 
-    public override PaginatedListBase<DingtalkPushRobotViewDto> Result { get; set; }
+    public override PageList<DingtalkPushRobotViewDto> Result { get; set; }
     public DingtalkPushRobotPageQuery()
     {
     }

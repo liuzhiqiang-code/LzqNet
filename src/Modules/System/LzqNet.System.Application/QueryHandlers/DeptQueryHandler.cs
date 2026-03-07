@@ -1,9 +1,9 @@
-﻿using Masa.BuildingBlocks.Ddd.Domain.Repositories;
-using Masa.Contrib.Dispatcher.Events;
-using Masa.Utils.Models;
-using LzqNet.System.Contracts.Dept.Queries;
+﻿using LzqNet.Common.Contracts;
 using LzqNet.System.Contracts.Dept;
+using LzqNet.System.Contracts.Dept.Queries;
 using LzqNet.System.Domain.IRepositories;
+using Masa.Contrib.Dispatcher.Events;
+using SqlSugar;
 
 namespace LzqNet.System.Application.QueryHandlers;
 
@@ -44,16 +44,9 @@ public class DeptQueryHandler(IDeptRepository deptRepository)
     [EventHandler]
     public async Task GetPageHandleAsync(DeptPageQuery query)
     {
-        PaginatedOptions paginatedOptions = new() {
-            Page =  query.Page,
-            PageSize = query.PageSize
-        };
-        var pageList = await _deptRepository.GetPaginatedListAsync(paginatedOptions);
-        query.Result = new PaginatedListBase<DeptViewDto>
-        {
-            Result = pageList.Result.Map<List<DeptViewDto>>(),
-            Total = pageList.Total,
-            TotalPages = pageList.TotalPages,
-        };
+        RefAsync<int> total = 0;
+        var pageList = await _deptRepository.AsQueryable().ToPageListAsync(query.Page, query.PageSize, total);
+        var result = pageList.Map<List<DeptViewDto>>();
+        query.Result = new PageList<DeptViewDto>(result, total);
     }
 }

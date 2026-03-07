@@ -1,4 +1,5 @@
-﻿using LzqNet.Common.Callers.Auth;
+﻿using LzqNet.Extensions.Jwt.Callers;
+using LzqNet.Extensions.Jwt.Options;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.AspNetCore;
 using Serilog;

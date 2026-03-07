@@ -24,7 +24,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\LzqNet.Extensions\LzqNet.Extensions.csproj" />
+	  <ProjectReference Include="..\..\ExtensionModules\LzqNet.Common\LzqNet.Common.csproj" />
+	  <ProjectReference Include="..\..\ExtensionModules\LzqNet.Extensions.DCC\LzqNet.Extensions.DCC.csproj" />
+	  <ProjectReference Include="..\..\ExtensionModules\LzqNet.Extensions.HealthCheck\LzqNet.Extensions.HealthCheck.csproj" />
+	  <ProjectReference Include="..\..\ExtensionModules\LzqNet.Extensions.Jwt\LzqNet.Extensions.Jwt.csproj" />
 	</ItemGroup>
 
 </Project>

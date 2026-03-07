@@ -1,7 +1,0 @@
-{
-  "Jwt": {
-    "Authority": "http://lzqnet.auth:8080",
-    "Audience": "common", //公用业务服务客户端标识
-    "RequireHttpsMetadata": false
-  }
-}

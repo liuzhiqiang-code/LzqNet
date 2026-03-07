@@ -1,5 +1,4 @@
 ﻿using LzqNet.Common.Contracts;
-using Masa.Utils.Models;
 
 namespace LzqNet.System.Contracts.Role.Queries;
 
@@ -13,7 +12,7 @@ public record RolePageQuery : PageQuery<RoleViewDto>
 
     public string? Remark { get; set; }
 
-    public override PaginatedListBase<RoleViewDto> Result { get; set; }
+    public override PageList<RoleViewDto> Result { get; set; }
     public RolePageQuery()
     {
     }

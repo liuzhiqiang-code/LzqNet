@@ -6,5 +6,4 @@ namespace LzqNet.DingtalkMessage.Domain.IRepositories;
 
 public interface IDingtalkPushBusinessRepository : ISqlSugarRepository<DingtalkPushBusinessEntity>, ITransientDependency
 {
-
 }

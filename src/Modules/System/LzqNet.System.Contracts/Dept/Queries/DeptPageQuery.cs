@@ -1,5 +1,4 @@
 ﻿using LzqNet.Common.Contracts;
-using Masa.Utils.Models;
 
 namespace LzqNet.System.Contracts.Dept.Queries;
 
@@ -30,7 +29,7 @@ public record DeptPageQuery : PageQuery<DeptViewDto>
     /// </summary>
     public string? Remark { get; set; }
 
-    public override PaginatedListBase<DeptViewDto> Result { get; set; }
+    public override PageList<DeptViewDto> Result { get; set; }
     public DeptPageQuery()
     {
     }

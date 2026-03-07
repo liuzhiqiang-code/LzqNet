@@ -1,9 +1,9 @@
-﻿using Masa.BuildingBlocks.Ddd.Domain.Repositories;
-using Masa.Contrib.Dispatcher.Events;
-using Masa.Utils.Models;
-using LzqNet.System.Contracts.SysConfig.Queries;
+﻿using LzqNet.Common.Contracts;
 using LzqNet.System.Contracts.SysConfig;
+using LzqNet.System.Contracts.SysConfig.Queries;
 using LzqNet.System.Domain.IRepositories;
+using Masa.Contrib.Dispatcher.Events;
+using SqlSugar;
 
 namespace LzqNet.System.Application.QueryHandlers;
 
@@ -20,16 +20,9 @@ public class SysConfigQueryHandler(ISysConfigRepository orderRepository)
     [EventHandler]
     public async Task GetPageHandleAsync(SysConfigPageQuery query)
     {
-        PaginatedOptions paginatedOptions = new() {
-            Page =  query.Page,
-            PageSize = query.PageSize
-        };
-        var pageList = await _orderRepository.GetPaginatedListAsync(paginatedOptions);
-        query.Result = new PaginatedListBase<SysConfigViewDto>
-        {
-            Result = pageList.Result.Map<List<SysConfigViewDto>>(),
-            Total = pageList.Total,
-            TotalPages = pageList.TotalPages,
-        };
+        RefAsync<int> total = 0;
+        var pageList = await _orderRepository.AsQueryable().ToPageListAsync(query.Page, query.PageSize, total);
+        var result = pageList.Map<List<SysConfigViewDto>>();
+        query.Result = new PageList<SysConfigViewDto>(result, total);
     }
 }

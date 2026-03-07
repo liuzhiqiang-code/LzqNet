@@ -11,28 +11,19 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<!--<PackageReference Include="Masa.Contrib.Data.Mapping.Mapster" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.BuildingBlocks.Data.MappingExtensions" Version="$(MASAFrameworkVersion)" />-->
-
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Yarp.ReverseProxy" Version="2.3.0" />
 		<PackageReference Include="Yarp.Telemetry.Consumption" Version="2.3.0" />
-
-		<!--<PackageReference Include="Serilog" Version="4.3.0" />
-		<PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
-		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
-		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />-->
-
-		<!--<PackageReference Include="AspNetCore.HealthChecks.UI" Version="9.*" />
-		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.*" />
-		<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="9.*" />
-		<PackageReference Include="AspNetCore.HealthChecks.Uris" Version="9.*" />-->
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Carp.Gateway-main\Providers\Daily.Carp.Provider.Consul\Daily.Carp.Provider.Consul.csproj" />
-		<ProjectReference Include="..\LzqNet.Extensions\LzqNet.Extensions.csproj" />
+	  <ProjectReference Include="..\..\ExtensionModules\LzqNet.Extensions.DCC\LzqNet.Extensions.DCC.csproj" />
+	  <ProjectReference Include="..\..\ExtensionModules\LzqNet.Extensions.HealthCheck\LzqNet.Extensions.HealthCheck.csproj" />
+	  <ProjectReference Include="..\..\ExtensionModules\LzqNet.Extensions.Jwt\LzqNet.Extensions.Jwt.csproj" />
+	  <ProjectReference Include="..\..\ExtensionModules\LzqNet.Extensions.Masa\LzqNet.Extensions.Masa.csproj" />
+	  <ProjectReference Include="..\..\ExtensionModules\LzqNet.Extensions.NSwag\LzqNet.Extensions.NSwag.csproj" />
+	  <ProjectReference Include="..\..\ExtensionModules\LzqNet.Extensions.Serilog\LzqNet.Extensions.Serilog.csproj" />
 	</ItemGroup>
 
 	<ProjectExtensions>

@@ -1,7 +1,7 @@
-﻿using LzqNet.Template.Consumer.Services;
+﻿using LzqNet.Extensions.RabbitMq.Consumer;
+using LzqNet.Extensions.RabbitMq.Publisher;
+using LzqNet.Template.Consumer.Services;
 using LzqNet.Template.Contracts.Events;
-using Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq.Consumer;
-using Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq.Publisher;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 

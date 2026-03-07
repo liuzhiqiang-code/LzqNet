@@ -1,9 +1,9 @@
-﻿using LzqNet.Test.Contracts.TestContentLog;
+﻿using LzqNet.Common.Contracts;
+using LzqNet.Test.Contracts.TestContentLog;
 using LzqNet.Test.Contracts.TestContentLog.Queries;
 using LzqNet.Test.Domain.IRepositories;
-using Masa.BuildingBlocks.Ddd.Domain.Repositories;
 using Masa.Contrib.Dispatcher.Events;
-using Masa.Utils.Models;
+using SqlSugar;
 
 namespace LzqNet.Test.Application.QueryHandlers;
 
@@ -21,18 +21,9 @@ public class TestContentLogQueryHandler(ITestContentLogRepository testContentLog
     [EventHandler]
     public async Task GetPageHandleAsync(TestContentLogPageQuery query)
     {
-        var paginatedOptions = new PaginatedOptions
-        {
-            Page = query.Page,
-            PageSize = query.PageSize
-        };
-        var pageList = await _testContentLogRepository.GetPaginatedListAsync(paginatedOptions);
-        var result = pageList.Result.Map<List<TestContentLogViewDto>>();
-        query.Result = new PaginatedListBase<TestContentLogViewDto>
-        {
-            Result = result,
-            Total = pageList.Total,
-            TotalPages = pageList.TotalPages,
-        };
+        RefAsync<int> total = 0;
+        var pageList = await _testContentLogRepository.AsQueryable().ToPageListAsync(query.Page, query.PageSize, total);
+        var result = pageList.Map<List<TestContentLogViewDto>>();
+        query.Result = new PageList<TestContentLogViewDto>(result, total);
     }
 }

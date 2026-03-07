@@ -1,5 +1,4 @@
 ﻿using LzqNet.Common.Contracts;
-using Masa.Utils.Models;
 
 namespace LzqNet.Test.Contracts.TestContent.Queries;
 
@@ -20,7 +19,7 @@ public record TestContentPageQuery : PageQuery<TestContentViewDto>
     /// </summary>
     public string? Remark { get; set; }
 
-    public override PaginatedListBase<TestContentViewDto> Result { get; set; }
+    public override PageList<TestContentViewDto> Result { get; set; }
 
     public TestContentPageQuery()
     {

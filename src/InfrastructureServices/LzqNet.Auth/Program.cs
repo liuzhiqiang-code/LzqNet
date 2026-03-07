@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
+using LzqNet.Extensions.Jwt.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddApplicationConfiguration().AddCustomConsul();

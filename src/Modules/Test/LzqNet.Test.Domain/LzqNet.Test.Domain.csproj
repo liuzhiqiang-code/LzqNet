@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\InfrastructureServices\LzqNet.Extensions\LzqNet.Extensions.csproj" />
+    <ProjectReference Include="..\..\..\ExtensionModules\LzqNet.Extensions.AI\LzqNet.Extensions.AI.csproj" />
     <ProjectReference Include="..\LzqNet.Test.Contracts\LzqNet.Test.Contracts.csproj" />
   </ItemGroup>
 

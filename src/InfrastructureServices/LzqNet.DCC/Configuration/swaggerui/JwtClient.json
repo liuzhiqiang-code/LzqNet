@@ -1,6 +1,0 @@
-{
-  "JwtClient": {
-    "ClientId": "swaggerui",
-    "ClientSecret": "secret"
-  }
-}

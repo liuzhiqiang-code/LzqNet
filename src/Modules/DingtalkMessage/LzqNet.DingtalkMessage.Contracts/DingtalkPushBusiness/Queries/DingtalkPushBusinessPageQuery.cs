@@ -1,5 +1,4 @@
 ﻿using LzqNet.Common.Contracts;
-using Masa.Utils.Models;
 
 namespace LzqNet.DingtalkMessage.Contracts.DingtalkPushBusiness.Queries;
 
@@ -20,7 +19,7 @@ public record DingtalkPushBusinessPageQuery : PageQuery<DingtalkPushBusinessView
     /// </summary>
     public int? EnableStatus { get; set; }
 
-    public override PaginatedListBase<DingtalkPushBusinessViewDto> Result { get; set; }
+    public override PageList<DingtalkPushBusinessViewDto> Result { get; set; }
     public DingtalkPushBusinessPageQuery()
     {
     }

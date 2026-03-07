@@ -1,9 +1,9 @@
-﻿using Masa.BuildingBlocks.Ddd.Domain.Repositories;
-using Masa.Contrib.Dispatcher.Events;
-using Masa.Utils.Models;
-using LzqNet.DingtalkMessage.Domain.IRepositories;
-using LzqNet.DingtalkMessage.Contracts.DingtalkPushConfig.Queries;
+﻿using LzqNet.Common.Contracts;
 using LzqNet.DingtalkMessage.Contracts.DingtalkPushConfig;
+using LzqNet.DingtalkMessage.Contracts.DingtalkPushConfig.Queries;
+using LzqNet.DingtalkMessage.Domain.IRepositories;
+using Masa.Contrib.Dispatcher.Events;
+using SqlSugar;
 
 namespace LzqNet.DingtalkMessage.Application.QueryHandlers;
 
@@ -21,18 +21,9 @@ public class DingtalkPushConfigQueryHandler(IDingtalkPushConfigRepository dingta
     [EventHandler]
     public async Task GetPageHandleAsync(DingtalkPushConfigPageQuery query)
     {
-        var paginatedOptions = new PaginatedOptions
-        {
-            Page = query.Page,
-            PageSize = query.PageSize
-        };
-        var pageList = await _dingtalkPushConfigRepository.GetPaginatedListAsync(paginatedOptions);
-        var result = pageList.Result.Map<List<DingtalkPushConfigViewDto>>();
-        query.Result = new PaginatedListBase<DingtalkPushConfigViewDto>
-        {
-            Result = result,
-            Total = pageList.Total,
-            TotalPages = pageList.TotalPages,
-        };
+        RefAsync<int> total = 0;
+        var pageList = await _dingtalkPushConfigRepository.AsQueryable().ToPageListAsync(query.Page, query.PageSize, total);
+        var result = pageList.Map<List<DingtalkPushConfigViewDto>>();
+        query.Result = new PageList<DingtalkPushConfigViewDto>(result, total);
     }
 }

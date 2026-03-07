@@ -1,6 +1,6 @@
-﻿using LzqNet.Common.Callers.Auth;
-using LzqNet.Common.Callers.Auth.Contracts;
-using LzqNet.Extensions.Global;
+﻿using LzqNet.Common.Options;
+using LzqNet.Extensions.Jwt.Callers;
+using LzqNet.Extensions.Jwt.Callers.Contracts;
 using LzqNet.System.Contracts.Role.Commands;
 using LzqNet.System.Domain.Entities;
 using LzqNet.System.Domain.IRepositories;

@@ -1,5 +1,4 @@
 ﻿using LzqNet.Common.Contracts;
-using Masa.Utils.Models;
 
 /*
  * @author : liuzhiqiang
@@ -32,7 +31,7 @@ public record UserPageQuery : PageQuery<UserViewDto>
 
     public List<string> Roles { get; set; } = [];
 
-    public override PaginatedListBase<UserViewDto> Result { get; set; }
+    public override PageList<UserViewDto> Result { get; set; }
     public UserPageQuery()
     {
     }

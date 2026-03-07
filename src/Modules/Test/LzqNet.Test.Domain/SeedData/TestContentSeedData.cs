@@ -1,4 +1,4 @@
-﻿using LzqNet.Common.Contracts;
+﻿using LzqNet.Extensions.SqlSugar.Entities;
 using LzqNet.Test.Domain.Entities;
 
 namespace LzqNet.Test.Domain.SeedData;

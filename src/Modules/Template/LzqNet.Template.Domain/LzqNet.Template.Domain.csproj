@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\InfrastructureServices\LzqNet.Extensions\LzqNet.Extensions.csproj" />
     <ProjectReference Include="..\LzqNet.Template.Contracts\LzqNet.Template.Contracts.csproj" />
   </ItemGroup>
 

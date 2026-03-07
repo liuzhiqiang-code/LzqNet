@@ -1,9 +1,9 @@
-﻿using LzqNet.System.Contracts.Role;
+﻿using LzqNet.Common.Contracts;
+using LzqNet.System.Contracts.Role;
 using LzqNet.System.Contracts.Role.Queries;
 using LzqNet.System.Domain.IRepositories;
-using Masa.BuildingBlocks.Ddd.Domain.Repositories;
 using Masa.Contrib.Dispatcher.Events;
-using Masa.Utils.Models;
+using SqlSugar;
 
 namespace LzqNet.System.Application.QueryHandlers;
 
@@ -22,15 +22,11 @@ public class RoleQueryHandler(IRoleRepository roleRepository, IRoleAuthRepositor
     [EventHandler]
     public async Task GetPageHandleAsync(RolePageQuery query)
     {
-        var paginatedOptions = new PaginatedOptions
-        {
-            Page = query.Page,
-            PageSize = query.PageSize
-        };
-        var pageList = await _roleRepository.GetPaginatedListAsync(paginatedOptions);
-        var roleIds = pageList.Result.Select(r => r.Id).ToList();
+        RefAsync<int> total = 0;
+        var pageList = await _roleRepository.AsQueryable().ToPageListAsync(query.Page, query.PageSize, total);
+        var roleIds = pageList.Select(r => r.Id).ToList();
         var rolePermissionsDict = await GetRolePermissionsDictionaryAsync(roleIds);
-        var result = pageList.Result.Select(role =>
+        var result = pageList.Select(role =>
         {
             var roleDto = role.Map<RoleViewDto>();
             if (rolePermissionsDict.TryGetValue(role.Id, out var permissions))
@@ -39,12 +35,8 @@ public class RoleQueryHandler(IRoleRepository roleRepository, IRoleAuthRepositor
                 roleDto.Permissions = [];
             return roleDto;
         }).ToList();
-        query.Result = new PaginatedListBase<RoleViewDto>
-        {
-            Result = result,
-            Total = pageList.Total,
-            TotalPages = pageList.TotalPages,
-        };
+
+        query.Result = new PageList<RoleViewDto>(result, total);
     }
 
     private async Task<Dictionary<long, List<long>>> GetRolePermissionsDictionaryAsync(List<long> roleIds)

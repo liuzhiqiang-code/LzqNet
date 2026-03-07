@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\ExtensionModules\LzqNet.Extensions.NSwag\LzqNet.Extensions.NSwag.csproj" />
     <ProjectReference Include="..\LzqNet.Template.Domain\LzqNet.Template.Domain.csproj" />
   </ItemGroup>
 

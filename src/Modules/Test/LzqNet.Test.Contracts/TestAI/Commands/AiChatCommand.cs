@@ -2,7 +2,7 @@
 using LzqNet.Common.Attributes;
 using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Commands;
 
-namespace LzqNet.Test.Contracts.TestContent.Commands;
+namespace LzqNet.Test.Contracts.TestAI.Commands;
 
 [UnitOfWork]
 public record AiChatCommand : Command

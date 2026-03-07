@@ -1,5 +1,4 @@
 ﻿using LzqNet.Common.Contracts;
-using Masa.Utils.Models;
 
 namespace LzqNet.DingtalkMessage.Contracts.DingtalkPushConfig.Queries;
 
@@ -45,7 +44,7 @@ public record DingtalkPushConfigPageQuery : PageQuery<DingtalkPushConfigViewDto>
     /// </summary>
     public string? DingtalkUserIds { get; set; }
 
-    public override PaginatedListBase<DingtalkPushConfigViewDto> Result { get; set; }
+    public override PageList<DingtalkPushConfigViewDto> Result { get; set; }
     public DingtalkPushConfigPageQuery()
     {
     }

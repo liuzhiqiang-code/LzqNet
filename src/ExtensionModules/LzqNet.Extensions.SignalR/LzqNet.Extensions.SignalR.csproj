@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="9.0.11" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\LzqNet.Extensions.Jwt\LzqNet.Extensions.Jwt.csproj" />
+	  <ProjectReference Include="..\LzqNet.Extensions.Masa\LzqNet.Extensions.Masa.csproj" />
+	</ItemGroup>
+
+</Project>

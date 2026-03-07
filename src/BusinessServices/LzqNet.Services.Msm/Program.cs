@@ -1,9 +1,10 @@
-using LzqNet.Extensions;
 using LzqNet.Extensions.DCC;
 using LzqNet.Extensions.Serilog;
+using LzqNet.Services.Msm.Extensions;
 using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.AddApplicationConfiguration();//.AddCustomConsul();
 builder.AddCustomSerilog();
 
