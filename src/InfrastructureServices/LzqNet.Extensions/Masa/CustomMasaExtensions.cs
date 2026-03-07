@@ -1,14 +1,15 @@
 ﻿using FluentValidation;
+using LzqNet.Extensions.Masa;
 using Masa.BuildingBlocks.Caching;
+using Masa.BuildingBlocks.Data;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Masa.Contrib.Caching.Distributed.StackExchangeRedis;
 using Masa.Contrib.Data.IdGenerator.Snowflake;
+using Masa.Contrib.Dispatcher.IntegrationEvents.Extensions;
+using Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq.Publisher;
 using Serilog;
 using System.Reflection;
 using System.Text;
-using LzqNet.Extensions.SqlSugar;
-using Masa.Contrib.Dispatcher.IntegrationEvents.RabbitMq.Publisher;
-using Masa.BuildingBlocks.Data;
 
 public static class CustomMasaExtensions
 {
@@ -27,9 +28,18 @@ public static class CustomMasaExtensions
     {
         var loadedAssemblies = MasaApp.GetAssemblies().ToList();
 
+        JwtOption jwtOption = builder.Configuration.GetSection("Jwt")
+            .Get<JwtOption>() ?? throw new InvalidOperationException($"未找到配置项:Jwt");
+
         builder.Services
             .AddMapster()
             .AddAutoInject(loadedAssemblies)
+            .AddJwt(option =>
+            {
+                option.Issuer = jwtOption.Issuer;
+                option.Audience = jwtOption.Audience;
+                option.SecurityKey = jwtOption.SecurityKey;
+            })
             .AddCustomMasaEventBus(loadedAssemblies)
             .AddCustomMasaIntegrationEventBus()
             .AddLocalDistributedLock()

@@ -2,7 +2,7 @@
 using Serilog;
 using Serilog.Core;
 
-namespace LzqNet.Extensions.OAuth;
+namespace LzqNet.Extensions.Auth;
 
 public static class AuthorizationExtensions
 {

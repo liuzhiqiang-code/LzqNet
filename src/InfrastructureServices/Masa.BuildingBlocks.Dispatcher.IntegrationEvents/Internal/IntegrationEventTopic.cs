@@ -3,7 +3,7 @@
 
 // ReSharper disable once CheckNamespace
 
-namespace Masa.BuildingBlocks.Dispatcher.IntegrationEvents;
+namespace Masa.BuildingBlocks.Dispatcher.IntegrationEvents.Internal;
 
 /// <summary>
 /// Only used to get Topic

@@ -3,7 +3,7 @@
 
 // ReSharper disable once CheckNamespace
 
-namespace Masa.Contrib.Dispatcher.IntegrationEvents;
+namespace Masa.Contrib.Dispatcher.IntegrationEvents.Internal;
 
 internal class LocalQueueProcessor
 {

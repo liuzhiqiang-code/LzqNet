@@ -29,6 +29,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\LzqNet.AI\LzqNet.AI.csproj" />
 		<ProjectReference Include="..\LzqNet.Common\LzqNet.Common.csproj" />
 		<ProjectReference Include="..\Masa.Contrib.Dispatcher.IntegrationEvents\Masa.Contrib.Dispatcher.IntegrationEvents.csproj" />
 	</ItemGroup>

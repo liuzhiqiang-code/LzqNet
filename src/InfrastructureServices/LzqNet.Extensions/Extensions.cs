@@ -1,8 +1,8 @@
-﻿using LzqNet.Extensions.Auth;
+﻿using LzqNet.AI;
+using LzqNet.Extensions.Auth;
 using LzqNet.Extensions.Global;
 using LzqNet.Extensions.HealthCheck;
 using LzqNet.Extensions.JsonOptions;
-using LzqNet.Extensions.OAuth;
 using LzqNet.Extensions.Serilog;
 using LzqNet.Extensions.SqlSugar;
 using Microsoft.AspNetCore.Authorization;
@@ -54,6 +54,7 @@ public static class Extensions
             options.SerializerOptions.Converters.Add(new LongNullableToStringConverter());
         });
 
+        builder.AddAIAgentClient();
         builder.AddCustomMasaAssembly();
         builder.Services.AddCustomMasaSnowflake(builder.Configuration);
         builder.AddCustomSqlSugar();

@@ -17,7 +17,7 @@
     /// <summary>
     /// 
     /// </summary>
-    public string Secret { get; set; } = "";
+    public string SecurityKey { get; set; } = "";
     public string RefreshSecret { get; set; } = "";
     /// <summary>
     /// token过期时间，单位分钟，7200s

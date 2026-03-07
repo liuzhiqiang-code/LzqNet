@@ -5,7 +5,7 @@ using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Commands;
 namespace LzqNet.Test.Contracts.TestContent.Commands;
 
 [UnitOfWork]
-public record TestContentWithTranCreateCommand : Command
+public record AiChatCommand : Command
 {
     /// <summary>
     /// Name
@@ -18,9 +18,9 @@ public record TestContentWithTranCreateCommand : Command
     public string? Remark { get; set; }
 
 }
-public class TestContentWithTranCreateCommandValidator : MasaAbstractValidator<TestContentWithTranCreateCommand>
+public class AiChatCommandValidator : MasaAbstractValidator<AiChatCommand>
 {
-    public TestContentWithTranCreateCommandValidator()
+    public AiChatCommandValidator()
     {
     }
 }

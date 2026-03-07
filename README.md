@@ -105,3 +105,4 @@ builder.AddApplicationConfiguration();  // 注释 AddCustomConsul()
 ---
 
 > 📌 **文档地址**：[https://liuzhiqiang-code.github.io/LzqNet/#/](https://liuzhiqiang-code.github.io/LzqNet/#/)
+> 📌 **微软AI文档地址**：[https://learn.microsoft.com/zh-cn/agent-framework/overview/?pivots=programming-language-csharp](https://learn.microsoft.com/zh-cn/agent-framework/overview/?pivots=programming-language-csharp)

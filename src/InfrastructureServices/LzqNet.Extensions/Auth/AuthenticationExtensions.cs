@@ -1,8 +1,6 @@
-﻿using LzqNet.Extensions.Tools;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
-using System.Security.Claims;
 using System.Text;
 
 namespace LzqNet.Extensions.Auth;
@@ -55,7 +53,7 @@ public static class AuthenticationExtensions
                 // 验证签名密钥
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(AesEncryption.AesEncrypt(jwtOption.Secret, "jwt"))),
+                    Encoding.UTF8.GetBytes(jwtOption.SecurityKey)),
 
                 // 允许的时钟偏差（避免时间不同步问题）
                 ClockSkew = TimeSpan.FromMinutes(5),

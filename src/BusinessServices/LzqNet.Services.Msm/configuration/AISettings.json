@@ -1,0 +1,16 @@
+﻿{
+  "AISettings": [
+    {
+      "ConfigId": "DeepSeekChat",
+      "Url": "https://api.deepseek.com/v1",
+      "KeySecret": "sk-66d85ea245c34a9eb8688a4d11615722",
+      "Model": "deepseek-chat"
+    },
+    {
+      "ConfigId": "DeepSeekReasoner",
+      "Url": "https://api.deepseek.com/v1",
+      "KeySecret": "sk-66d85ea245c34a9eb8688a4d11615722",
+      "Model": "deepseek-reasoner"
+    }
+  ]
+}

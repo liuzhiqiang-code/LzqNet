@@ -1,7 +1,6 @@
 ﻿using LzqNet.Test.Contracts.TestContent.Commands;
 using LzqNet.Test.Domain.Entities;
 using LzqNet.Test.Domain.IRepositories;
-using LzqNet.Test.Domain.Repositories;
 using Masa.Contrib.Dispatcher.Events;
 using Serilog;
 
@@ -15,13 +14,12 @@ public class TestContentCommandHandler(ITestContentRepository testContentReposit
     [EventHandler]
     public async Task CreateHandleAsync(TestContentCreateCommand command)
     {
-        ITestContentRepository testContentRepository1 = new TestContentRepository();
         var entity = command.Map<TestContentEntity>();
         var random = new Random(Guid.NewGuid().GetHashCode());
         // 1.新增数据    1/100 概率失败
         if (random.Next(1, 100) != 1)
         {
-            await testContentRepository1.InsertAsync(entity);
+            await _testContentRepository.InsertAsync(entity);
             Log.Information("随机新增成功，命令：{@Command}", command);
         }
         else {
@@ -47,14 +45,12 @@ public class TestContentCommandHandler(ITestContentRepository testContentReposit
     [EventHandler]
     public async Task CreateWithTranHandleAsync(TestContentWithTranCreateCommand command)
     {
-        ITestContentRepository testContentRepository1 = new TestContentRepository();
-        ITestContentLogRepository testContentLogRepository1 = new TestContentLogRepository();
         var entity = command.Map<TestContentEntity>();
         var random = new Random(Guid.NewGuid().GetHashCode());
         // 1.新增数据    1/100 概率失败
         if (random.Next(1, 100) != 1)
         {
-            await testContentRepository1.InsertAsync(entity);
+            await _testContentRepository.InsertAsync(entity);
             Log.Information("随机新增成功，命令：{@Command}", command);
         }
         else
@@ -69,7 +65,7 @@ public class TestContentCommandHandler(ITestContentRepository testContentReposit
         {
             var entity2 = command.Map<TestContentLogEntity>();
             entity.Remark += "_log";
-            await testContentLogRepository1.InsertAsync(entity2);
+            await _testContentLogRepository.InsertAsync(entity2);
             Log.Information("随机新增log成功，命令：{@Command}", command);
         }
         else
@@ -83,8 +79,6 @@ public class TestContentCommandHandler(ITestContentRepository testContentReposit
     [EventHandler]
     public async Task UpdateHandleAsync(TestContentUpdateCommand command)
     {
-        ITestContentRepository testContentRepository1 = new TestContentRepository();
-        ITestContentLogRepository testContentLogRepository1 = new TestContentLogRepository();
         var random = new Random(Guid.NewGuid().GetHashCode());
         // 1.新增数据    1/100 概率失败
         if (random.Next(1, 100) != 1)

@@ -12,7 +12,7 @@
     "RequireHttpsMetadata": false,
     "Issuer": "Issuer",
     "AccessExpiration": "7200",
-    "Secret": "your-very-long-secret-key-that-is-32-characters-minimum-here LzqNet Secret 123numberSecret",
+    "SecurityKey": "your-very-long-secret-key-that-is-32-characters-minimum-here LzqNet Secret 123numberSecret",
     "RefreshSecret": "your-very-long-secret-key-that-is-32-characters-minimum-here LzqNet RefreshSecret 123numberSecret"
   }
 }

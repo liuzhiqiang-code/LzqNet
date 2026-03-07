@@ -3,7 +3,10 @@
 
 // ReSharper disable once CheckNamespace
 
-namespace Microsoft.Extensions.DependencyInjection;
+using Masa.Contrib.Dispatcher.IntegrationEvents.BackgroundServices;
+using Masa.Contrib.Dispatcher.IntegrationEvents.Internal;
+
+namespace Masa.Contrib.Dispatcher.IntegrationEvents.Extensions;
 
 public static class ServiceCollectionExtensions
 {

@@ -7,7 +7,8 @@
 - **集成事件**：默认采用发件箱模式 + RabbitMQ，事件信息持久化到 `integration_event_log` 表，通过发件箱确保最终一致性
   参考：[MASA Stack - 集成事件](https://docs.masastack.com/framework/building-blocks/dispatcher/integration-event)
 
- **⚠️ 注意事项**：EventBus默认Scoped声明周期,一个请求中有多线程发布命令，可能导致`Repository`共享DB上下文实例,导致事务不完整,如果有这种场景可以将EventBus注入周期改为`Transient`
+ **⚠️ 注意事项**：EventBus默认Scoped声明周期,一个请求中有多线程发布命令，
+ 多线程共用一个CommandHandler对象执行事件，可能导致`Repository`共享DB上下文实例,导致事务不完整,如果有这种场景可以将EventBus注入周期改为`Transient`
 ``` csharp
 services.AddValidatorsFromAssemblies(assemblies)
     .AddEventBus(assemblies, ServiceLifetime.Transient, eventBusBuilder =>
