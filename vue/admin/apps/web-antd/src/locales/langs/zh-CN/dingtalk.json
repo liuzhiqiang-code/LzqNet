@@ -1,0 +1,25 @@
+{
+  "title": "钉钉管理",
+  "dingtalkPushRobot": {
+    "title": "钉钉机器人",
+    "list": "部门列表",
+    "operation":"操作",
+    "name":"机器人名",
+    "dingtalkGroupName":"所属钉钉群组",
+    "enableStatus":"推送启用状态",
+    "webhook":"推送Webhook地址",
+    "pushKeywords":"推送关键词",
+    "sign":"加签",
+    "pushIpSegments":"推送ip段",
+    "isDeleted":"是否删除"
+  },
+  "dingtalkPushBusiness": {
+    "title": "钉钉业务类型",
+    "list": "部门列表",
+    "operation":"操作",
+    "name":"推送业务名",
+    "businessName":"推送业务名",
+    "enableStatus":"推送启用状态",
+    "isDeleted":"是否删除"
+  }
+}

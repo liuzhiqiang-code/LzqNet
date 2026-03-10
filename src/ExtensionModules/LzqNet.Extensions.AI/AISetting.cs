@@ -1,4 +1,4 @@
-﻿namespace LzqNet.AI
+﻿namespace LzqNet.Extensions.AI
 {
     public class AISetting
     {  

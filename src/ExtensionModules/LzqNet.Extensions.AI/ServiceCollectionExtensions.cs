@@ -1,13 +1,13 @@
-﻿using LzqNet.AI.Interfaces;
-using LzqNet.AI.Provider;
-using LzqNet.AI.Services;
+﻿using LzqNet.Extensions.AI.Interfaces;
+using LzqNet.Extensions.AI.Provider;
+using LzqNet.Extensions.AI.Services;
 using Microsoft.Agents.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.VectorData;
 using Microsoft.SemanticKernel.Connectors.InMemory;
 
-namespace LzqNet.AI
+namespace LzqNet.Extensions.AI
 {
     public static class ServiceCollectionExtensions
     {

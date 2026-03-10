@@ -8,8 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\ExtensionModules\LzqNet.Extensions.RabbitMq\LzqNet.Extensions.RabbitMq.csproj" />
-    <ProjectReference Include="..\..\..\ExtensionModules\LzqNet.Extensions.RabbitMq\LzqNet.Extensions.RabbitMq.csproj" />
-    <ProjectReference Include="..\LzqNet.DingtalkMessage.Domain\LzqNet.DingtalkMessage.Domain.csproj" />
+	  <ProjectReference Include="..\LzqNet.DingtalkMessage.Contracts\LzqNet.DingtalkMessage.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

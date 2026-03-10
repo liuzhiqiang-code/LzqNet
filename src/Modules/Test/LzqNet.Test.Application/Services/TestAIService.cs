@@ -1,4 +1,4 @@
-﻿using LzqNet.AI.Interfaces;
+﻿using LzqNet.Extensions.AI.Interfaces;
 using LzqNet.Test.Contracts.TestAI.Commands;
 using LzqNet.Test.Contracts.TestContent.Commands;
 using LzqNet.Test.Domain.Consts;
@@ -53,12 +53,12 @@ public class TestAIService : ServiceBase
     public async Task<AdminResult> ChatStreamAsync([FromBody] TestContentCreateCommand command)
     {
         var agentB = AIAgentService.CreateAIAgent(ChatClientConst.DeepSeekChat, AIAgentConst.FY_EN);
-        var textB = await AIAgentService.RunStreamingAsync(agentB, "你是什么智能体", (text) =>
+        var textB = await AIAgentService.RunStreamingAsync(agentB, "你是什么智能体", async (text) =>
         {
             Console.WriteLine(text);
         });
 
-        var (agentD, textD) = await AIAgentService.CreateAIAgentAndRunStreamingAsync(ChatClientConst.DeepSeekChat, AIAgentConst.WLXJ, "你是什么智能体", (text) =>
+        var (agentD, textD) = await AIAgentService.CreateAIAgentAndRunStreamingAsync(ChatClientConst.DeepSeekChat, AIAgentConst.WLXJ, "你是什么智能体", async (text) =>
         {
             Console.WriteLine(text);
         });

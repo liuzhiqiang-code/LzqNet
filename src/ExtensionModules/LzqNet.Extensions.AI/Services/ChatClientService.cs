@@ -1,11 +1,11 @@
-﻿using LzqNet.AI.Interfaces;
+﻿using LzqNet.Extensions.AI.Interfaces;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Options;
 using OpenAI;
 using System.ClientModel;
 using System.Collections.Concurrent;
 
-namespace LzqNet.AI.Services;
+namespace LzqNet.Extensions.AI.Services;
 
 public class ChatClientService: IChatClientService
 {

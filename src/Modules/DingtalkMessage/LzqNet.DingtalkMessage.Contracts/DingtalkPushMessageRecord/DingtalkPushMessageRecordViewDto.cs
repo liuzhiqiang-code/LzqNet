@@ -1,4 +1,4 @@
-﻿using LzqNet.DingtalkMessage.Contracts.DingtalkPushConfig.Enums;
+﻿using LzqNet.DingtalkMessage.Domain.Enums;
 
 namespace LzqNet.DingtalkMessage.Contracts.DingtalkPushMessageRecord;
 

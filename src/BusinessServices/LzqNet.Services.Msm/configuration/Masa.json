@@ -12,7 +12,10 @@
       "LzqNet.System.Contracts",
       "LzqNet.Test.Application",
       "LzqNet.Test.Domain",
-      "LzqNet.Test.Contracts"
+      "LzqNet.Test.Contracts",
+      "LzqNet.AI.Application",
+      "LzqNet.AI.Domain",
+      "LzqNet.AI.Contracts"
     ]
   }
 }

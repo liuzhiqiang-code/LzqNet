@@ -18,6 +18,7 @@
 		<ProjectReference Include="..\..\ExtensionModules\LzqNet.Extensions.DCC\LzqNet.Extensions.DCC.csproj" />
 		<ProjectReference Include="..\..\ExtensionModules\LzqNet.Extensions.HealthCheck\LzqNet.Extensions.HealthCheck.csproj" />
 		<ProjectReference Include="..\..\ExtensionModules\LzqNet.Extensions.Jwt\LzqNet.Extensions.Jwt.csproj" />
+		<ProjectReference Include="..\..\Modules\AI\LzqNet.AI.Application\LzqNet.AI.Application.csproj" />
 		<ProjectReference Include="..\..\Modules\DingtalkMessage\LzqNet.DingtalkMessage.Application\LzqNet.DingtalkMessage.Application.csproj" />
 		<ProjectReference Include="..\..\Modules\System\LzqNet.System.Application\LzqNet.System.Application.csproj" />
 		<ProjectReference Include="..\..\Modules\Test\LzqNet.Test.Application\LzqNet.Test.Application.csproj" />

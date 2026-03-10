@@ -1,12 +1,12 @@
-﻿using LzqNet.AI.Consts;
-using LzqNet.AI.Interfaces;
+﻿using LzqNet.Extensions.AI.Consts;
+using LzqNet.Extensions.AI.Interfaces;
 using Microsoft.Agents.AI;
 using Microsoft.Extensions.AI;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace LzqNet.AI.Tool
+namespace LzqNet.Extensions.AI.Tool
 {
 
     public class HttpClientFunction(IAIAgentService aIAgentService)

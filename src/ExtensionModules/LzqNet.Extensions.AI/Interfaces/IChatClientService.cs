@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.AI;
+﻿using LzqNet.Extensions.AI;
+using Microsoft.Extensions.AI;
 
-namespace LzqNet.AI.Interfaces;
+namespace LzqNet.Extensions.AI.Interfaces;
 
 /// <summary>
 /// AI聊天客户端服务接口

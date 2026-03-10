@@ -10,11 +10,11 @@ namespace LzqNet.Extensions.SignalR.Service
     {
         private readonly IHubContext<MySignalRHub> _messageHub;
 
-        private readonly SignalRRedisSetting _config;
+        private readonly SignalRRedisSettings _config;
         public ICurrentUser _currentUser { get; set; }
 
         private readonly IDistributedCacheClient _distributedCacheClient;
-        public SignalRMsgService(IHubContext<MySignalRHub> messageHub, IOptionsMonitor<SignalRRedisSetting> config, IDistributedCacheClient distributedCacheClient, ICurrentUser currentUser)
+        public SignalRMsgService(IHubContext<MySignalRHub> messageHub, IOptionsMonitor<SignalRRedisSettings> config, IDistributedCacheClient distributedCacheClient, ICurrentUser currentUser)
         {
             _messageHub = messageHub;
             _config = config.CurrentValue;

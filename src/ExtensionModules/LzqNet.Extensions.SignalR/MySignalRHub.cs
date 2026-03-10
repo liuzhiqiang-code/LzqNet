@@ -21,9 +21,9 @@ namespace LzqNet.Extensions.SignalR
        
         public  IHttpContextAccessor _httpContextAccessor { get; set; }
 
-        private readonly SignalRRedisSetting _config;
+        private readonly SignalRRedisSettings _config;
 
-        public MySignalRHub(IOptionsMonitor<SignalRRedisSetting> config, IHttpContextAccessor httpContextAccessor, IServiceProvider serviceProvider)
+        public MySignalRHub(IOptionsMonitor<SignalRRedisSettings> config, IHttpContextAccessor httpContextAccessor, IServiceProvider serviceProvider)
         {
             if (serviceProvider != default)
             {

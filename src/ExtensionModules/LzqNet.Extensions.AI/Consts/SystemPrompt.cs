@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LzqNet.AI.Consts
+namespace LzqNet.Extensions.AI.Consts
 {
     public static class SystemPrompt
     {

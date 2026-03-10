@@ -1,4 +1,7 @@
-﻿using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text.Json;
+using LzqNet.Common.Utils;
 using Microsoft.AspNetCore.Http;
 
 namespace LzqNet.Extensions.Jwt;
@@ -21,34 +24,34 @@ public class CurrentUser : ICurrentUser
 
     private ClaimsPrincipal? User => _user ??= _httpContextAccessor?.HttpContext?.User;
 
-    private string? FindClaimValue(string claimType)
+    private string? FindClaimStringValue(string claimType)
     {
         // 如果有 ClaimsPrincipal，从中获取
         if (User != null)
         {
             return User.FindFirst(claimType)?.Value;
         }
-
-        // 否则从手动设置的属性返回
-        return claimType switch
-        {
-            ClaimTypes.NameIdentifier => _userId,
-            ClaimTypes.Name => _userName,
-            ClaimTypes.Email => _email,
-            "sex" => _sex,
-            "sid" => _sid,
-            "tenant_id" => _tenantId,
-            _ => null
-        };
+        return null;
     }
 
-    private List<string>? FindRoleValues()
+    private T? FindClaimObjValue<T>(string claimType)
     {
+        // 如果有 ClaimsPrincipal，从中获取
         if (User != null)
         {
-            return User.FindAll(ClaimTypes.Role).Select(c => c.Value).ToList();
+            return JsonSerializer.Deserialize<T>(User.FindFirst(claimType)?.Value);
         }
-        return _roles;
+        return default;
+    }
+
+    private DateTime? FindClaimDateTimeValue(string claimType)
+    {
+        // 如果有 ClaimsPrincipal，从中获取
+        if (User != null)
+        {
+            return User.FindFirst(claimType)?.Value.ToDateTime();
+        }
+        return default;
     }
 
     // 手动设置的字段
@@ -61,13 +64,14 @@ public class CurrentUser : ICurrentUser
     private string _tenantId = string.Empty;
 
     // 属性 - 优先从 ClaimsPrincipal 获取，否则返回手动设置的值
-    public string UserId => FindClaimValue(ClaimTypes.NameIdentifier) ?? _userId ?? string.Empty;
-    public string? UserName => FindClaimValue(ClaimTypes.Name) ?? _userName;
-    public List<string>? Roles => FindRoleValues() ?? _roles;
-    public string? Email => FindClaimValue(ClaimTypes.Email) ?? _email;
-    public string Sex => FindClaimValue("sex") ?? _sex ?? "Unknown";
-    public string Sid => FindClaimValue("sid") ?? _sid ?? string.Empty;
-    public string TenantId => FindClaimValue("tenant_id") ?? _tenantId ?? string.Empty;
+    public string UserId => FindClaimStringValue("UserId") ?? _userId ?? string.Empty;
+    public string? UserName => FindClaimStringValue("UserName") ?? _userName;
+    public List<string>? Roles => FindClaimObjValue<List<string>?>("Roles") ?? _roles;
+    public string? Email => FindClaimStringValue("Email") ?? _email;
+    public string Sex => FindClaimStringValue("Sex") ?? _sex ?? "Unknown";
+    public string Sid => FindClaimStringValue(JwtRegisteredClaimNames.Sid) ?? _sid ?? string.Empty;
+    public string TenantId => FindClaimStringValue("TenantId") ?? _tenantId ?? string.Empty;
+    public DateTime? datetime => FindClaimDateTimeValue("datetime");
 
     // 手动设置值的方法
     public CurrentUser SetUserId(string userId)

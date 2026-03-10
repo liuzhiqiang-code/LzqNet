@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\ExtensionModules\LzqNet.Extensions.Masa\LzqNet.Extensions.Masa.csproj" />
-    <ProjectReference Include="..\LzqNet.DingtalkMessage.Contracts\LzqNet.DingtalkMessage.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

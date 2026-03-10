@@ -1,7 +1,7 @@
 ﻿using LzqNet.DingtalkMessage.Contracts.DingtalkPushMessageRecord.Commands;
-using LzqNet.DingtalkMessage.Contracts.DingtalkPushMessageRecord.Enums;
 using LzqNet.DingtalkMessage.Contracts.Events;
 using LzqNet.DingtalkMessage.Domain.Entities;
+using LzqNet.DingtalkMessage.Domain.Enums;
 using LzqNet.DingtalkMessage.Domain.IRepositories;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Masa.Contrib.Dispatcher.Events;

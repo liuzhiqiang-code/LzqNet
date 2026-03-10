@@ -1,4 +1,4 @@
-﻿using LzqNet.DingtalkMessage.Contracts.DingtalkPushConfig.Enums;
+﻿using LzqNet.DingtalkMessage.Domain.Enums;
 using LzqNet.Extensions.SqlSugar.Entities;
 using SqlSugar;
 

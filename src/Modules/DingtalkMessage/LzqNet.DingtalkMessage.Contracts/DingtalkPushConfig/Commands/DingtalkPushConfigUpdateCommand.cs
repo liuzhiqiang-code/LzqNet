@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
-using LzqNet.DingtalkMessage.Contracts.DingtalkPushConfig.Enums;
+using LzqNet.DingtalkMessage.Domain.Enums;
 using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Commands;
 
 namespace LzqNet.DingtalkMessage.Contracts.DingtalkPushConfig.Commands;

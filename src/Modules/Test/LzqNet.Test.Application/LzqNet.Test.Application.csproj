@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\ExtensionModules\LzqNet.Extensions.NSwag\LzqNet.Extensions.NSwag.csproj" />
+    <ProjectReference Include="..\..\..\ExtensionModules\LzqNet.Extensions.SignalR\LzqNet.Extensions.SignalR.csproj" />
     <ProjectReference Include="..\LzqNet.Test.Domain\LzqNet.Test.Domain.csproj" />
   </ItemGroup>
 

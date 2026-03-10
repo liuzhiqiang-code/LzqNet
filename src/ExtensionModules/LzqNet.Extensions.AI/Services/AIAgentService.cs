@@ -1,11 +1,11 @@
-﻿using LzqNet.AI.Interfaces;
+﻿using LzqNet.Extensions.AI.Interfaces;
 using Microsoft.Agents.AI;
 using Microsoft.Agents.AI.Workflows;
 using Microsoft.Extensions.AI;
 using ModelContextProtocol.Server;
 using OpenAI.Chat;
 
-namespace LzqNet.AI.Services
+namespace LzqNet.Extensions.AI.Services
 {
     /// <summary>
     /// AI服务
@@ -51,14 +51,14 @@ namespace LzqNet.AI.Services
             return reslut.Text;
         }
 
-        public async Task<string> RunStreamingAsync(AIAgent aiAgent, string message, Action<string> streameCallback)
+        public async Task<string> RunStreamingAsync(AIAgent aiAgent, string message, Func<string,Task> streameCallbackAsync)
         {
             var resultText = string.Empty;
             await foreach (AgentResponseUpdate update in aiAgent.RunStreamingAsync(message))
             {
                 if (!string.IsNullOrEmpty(update.Text))
                 {
-                    streameCallback.Invoke(update.Text);
+                    await streameCallbackAsync.Invoke(update.Text);
                     resultText += update.Text;
                 }
             }
@@ -73,11 +73,11 @@ namespace LzqNet.AI.Services
             return (aiAgent, reslut);
         }
 
-        public async Task<(AIAgent, string)> CreateAIAgentAndRunStreamingAsync(string chatClientModel, AIAgentModel aIAgentModel, string message, Action<string> streameCallback)
+        public async Task<(AIAgent, string)> CreateAIAgentAndRunStreamingAsync(string chatClientModel, AIAgentModel aIAgentModel, string message, Func<string,Task> streameCallbackAsync)
         {
             var chatClient = GetChatClient(chatClientModel);
             var aiAgent = CreateAIAgent(chatClient, aIAgentModel);
-            var resultText = await RunStreamingAsync(aiAgent, message, streameCallback);
+            var resultText = await RunStreamingAsync(aiAgent, message, streameCallbackAsync);
             return (aiAgent, resultText);
         }
 
@@ -90,6 +90,11 @@ namespace LzqNet.AI.Services
         public McpServerTool AIAgentAsMcpServerTool(AIAgent aIAgent)
         {
             return McpServerTool.Create(aIAgent.AsAIFunction());
+        }
+
+        public Task<string> RunStreamingAsync(AIAgent aiAgent, string message, Action<string> streameCallback)
+        {
+            throw new NotImplementedException();
         }
     }
 }

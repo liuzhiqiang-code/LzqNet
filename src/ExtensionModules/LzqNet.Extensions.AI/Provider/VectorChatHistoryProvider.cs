@@ -3,7 +3,7 @@ using Microsoft.Extensions.AI;
 using Microsoft.Extensions.VectorData;
 using System.Text.Json;
 
-namespace LzqNet.AI.Provider;
+namespace LzqNet.Extensions.AI.Provider;
 
 /// <summary>
 /// A sample implementation of <see cref="ChatHistoryProvider"/> that stores chat history in a vector store.

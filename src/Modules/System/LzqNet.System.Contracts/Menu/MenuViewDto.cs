@@ -1,4 +1,6 @@
-﻿namespace LzqNet.System.Contracts.Menu;
+﻿using LzqNet.System.Domain.Expands;
+
+namespace LzqNet.System.Contracts.Menu;
 public class MenuViewDto
 {
     public long Id { get; set; }

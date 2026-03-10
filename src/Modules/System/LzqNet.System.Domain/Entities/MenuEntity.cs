@@ -1,5 +1,5 @@
 ﻿using LzqNet.Extensions.SqlSugar.Entities;
-using LzqNet.System.Contracts.Menu;
+using LzqNet.System.Domain.Expands;
 using SqlSugar;
 
 namespace LzqNet.System.Domain.Entities;

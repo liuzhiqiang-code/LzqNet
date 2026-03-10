@@ -1,9 +1,11 @@
-﻿using LzqNet.AI;
-using LzqNet.Common.Options;
+﻿using LzqNet.Common.Options;
+using LzqNet.Extensions.AI;
 using LzqNet.Extensions.HealthCheck;
 using LzqNet.Extensions.Jwt;
 using LzqNet.Extensions.NSwag;
 using LzqNet.Extensions.Serilog;
+using LzqNet.Extensions.SignalR;
+using LzqNet.Extensions.SignalR.Models;
 using LzqNet.Extensions.SqlSugar;
 using Microsoft.AspNetCore.Authorization;
 using Serilog;
@@ -43,6 +45,19 @@ public static class ProgramExtensions
         builder.AddCustomMasaAssembly();
         builder.AddCustomMasaSnowflake();
         builder.AddCustomSqlSugar();
+
+        builder.AddCustomSignalRRedis(options =>
+        {
+            var newoptions = builder.Configuration.GetRequiredSection("SignalRRedisSettings").Get<SignalRRedisSettings>();
+            options.url = newoptions.url;
+            options.password = newoptions.password;
+            options.port = newoptions.port;
+            options.defaultDatabase = newoptions.defaultDatabase;
+            options.configurationChannel = newoptions.configurationChannel;
+            options.hostname = newoptions.hostname;
+            options.cacheMySignalRKeyName = newoptions.cacheMySignalRKeyName;
+        });
+
         builder.AddCustomMasa();
     }
 
@@ -60,11 +75,26 @@ public static class ProgramExtensions
 
         app.UseCustomNSwag();
 
+        app.UseRouting();
+
         app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapCustomHealthChecks();
         app.MapConfigurationApi();
+
+        app.UseCustomRedisSignalR(options =>
+        {
+            var newoptions = app.Configuration.GetRequiredSection("SignalRRedisSettings").Get<SignalRRedisSettings>();
+            options.url = newoptions.url;
+            options.password = newoptions.password;
+            options.port = newoptions.port;
+            options.defaultDatabase = newoptions.defaultDatabase;
+            options.configurationChannel = newoptions.configurationChannel;
+            options.hostname = newoptions.hostname;
+            options.cacheMySignalRKeyName = newoptions.cacheMySignalRKeyName;
+        });
+
         app.MapMasaMinimalAPIs();
     }
 

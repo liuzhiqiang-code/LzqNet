@@ -1,4 +1,4 @@
-﻿namespace LzqNet.AI.Consts;
+﻿namespace LzqNet.Extensions.AI.Consts;
 
 public class ChatClientConst
 {

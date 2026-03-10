@@ -2,7 +2,7 @@
 using Microsoft.Extensions.AI;
 using ModelContextProtocol.Server;
 
-namespace LzqNet.AI.Interfaces
+namespace LzqNet.Extensions.AI.Interfaces
 {
     public interface IAIAgentService
     {
@@ -14,11 +14,11 @@ namespace LzqNet.AI.Interfaces
 
         Task<string> RunAsync(AIAgent aiAgent, string message, AgentSession? agentSession = null);
 
-        Task<string> RunStreamingAsync(AIAgent aiAgent, string message, Action<string> streameCallback);
+        Task<string> RunStreamingAsync(AIAgent aiAgent, string message, Func<string,Task> streameCallbackAsync);
 
         Task<(AIAgent, string)> CreateAIAgentAndRunAsync(string chatClientModel, AIAgentModel aIAgentModel, string message);
 
-        Task<(AIAgent, string)> CreateAIAgentAndRunStreamingAsync(string chatClientModel, AIAgentModel aIAgentModel, string message, Action<string> streameCallback);
+        Task<(AIAgent, string)> CreateAIAgentAndRunStreamingAsync(string chatClientModel, AIAgentModel aIAgentModel, string message, Func<string,Task> streameCallbackAsync);
 
         McpServerTool AIAgentAsMcpServerTool(AIAgent aIAgent);
     }

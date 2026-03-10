@@ -7,10 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ExtensionModules\LzqNet.Extensions.Jwt\LzqNet.Extensions.Jwt.csproj" />
-    <ProjectReference Include="..\..\..\ExtensionModules\LzqNet.Extensions.Masa\LzqNet.Extensions.Masa.csproj" />
     <ProjectReference Include="..\..\..\ExtensionModules\LzqNet.Extensions.NSwag\LzqNet.Extensions.NSwag.csproj" />
-    <ProjectReference Include="..\LzqNet.System.Domain\LzqNet.System.Domain.csproj" />
+    <ProjectReference Include="..\LzqNet.System.Contracts\LzqNet.System.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

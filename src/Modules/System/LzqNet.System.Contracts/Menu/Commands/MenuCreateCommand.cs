@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
+using LzqNet.System.Domain.Expands;
 using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Commands;
 
 namespace LzqNet.System.Contracts.Menu.Commands;

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SqlSugar;
+using System.Reflection;
 
 namespace LzqNet.Extensions.SqlSugar;
 
@@ -46,9 +47,8 @@ public static class ServiceCollectionExtensions
              //注意:  这儿AOP设置不能少   Nullable类型自动数据库变可空类型
              EntityService = (type, column) =>
              {
-                 // int?  decimal?这种 isnullable=true
-                 if (type.PropertyType.IsGenericType &&
-                    type.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                 if (column.IsPrimarykey == false && new NullabilityInfoContext()
+                    .Create(type).WriteState is NullabilityState.Nullable)
                  {
                      column.IsNullable = true;
                  }
