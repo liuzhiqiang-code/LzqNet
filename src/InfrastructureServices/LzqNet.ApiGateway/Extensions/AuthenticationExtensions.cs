@@ -11,9 +11,9 @@ public static class AuthenticationExtensions
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="policyName"></param>
-    public static void AddCustomAuthentication(this IHostApplicationBuilder builder)
+    public static void AddLzqAuthentication(this IHostApplicationBuilder builder)
     {
-        Log.Information("Start AddCustomAuthentication");
+        Log.Information("Start AddLzqAuthentication");
 
         JwtOption jwtOption = builder.Configuration.GetSection("Jwt")
             .Get<JwtOption>() ?? throw new InvalidOperationException($"未找到配置项:Jwt");
@@ -31,9 +31,9 @@ public static class AuthenticationExtensions
         });
     }
 
-    public static void UseCustomAuthentication(this WebApplication app)
+    public static void UseLzqAuthentication(this WebApplication app)
     {
-        Log.Information("Start UseCustomAuthentication");
+        Log.Information("Start UseLzqAuthentication");
         app.UseAuthentication();
     }
 }

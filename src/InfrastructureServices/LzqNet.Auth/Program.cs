@@ -13,7 +13,7 @@ using Microsoft.OpenApi;
 using LzqNet.Extensions.Jwt.Options;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.AddApplicationConfiguration().AddCustomConsul();
+builder.AddApplicationConfiguration().AddLzqConsul();
 builder.Services.AddOptions<JwtOption>().BindConfiguration("Jwt")
     .Validate(setting =>
         !string.IsNullOrWhiteSpace(setting.Audience) &&
@@ -23,7 +23,7 @@ builder.Services.AddOptions<JwtOption>().BindConfiguration("Jwt")
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-builder.AddCustomHealthChecks();
+builder.AddLzqHealthChecks();
 
 // 添加Swagger服务
 services.AddSwaggerGen(c =>
@@ -140,7 +140,7 @@ app.UseIdentityServer();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapCustomHealthChecks();
+app.MapLzqHealthChecks();
 app.MapControllers();
 
 app.Run();

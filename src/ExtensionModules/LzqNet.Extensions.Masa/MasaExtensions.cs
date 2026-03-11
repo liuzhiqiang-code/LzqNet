@@ -15,9 +15,9 @@ using Serilog;
 using System.Reflection;
 using System.Text;
 
-public static class ServiceCollectionExtensions
+public static class MasaExtensions
 {
-    public static void AddCustomMasaAssembly(this IHostApplicationBuilder builder)
+    public static void AddLzqMasaAssembly(this IHostApplicationBuilder builder)
     {
         var configuration = builder.Configuration;
         // 抽象公用的Masa 框架服务注册
@@ -28,21 +28,21 @@ public static class ServiceCollectionExtensions
             .ToList();
         MasaApp.TryAddAssemblies(loadedAssemblies);
     }
-    public static void AddCustomMasa(this IHostApplicationBuilder builder)
+    public static void AddLzqMasa(this IHostApplicationBuilder builder)
     {
         var loadedAssemblies = MasaApp.GetAssemblies().ToList();
 
         builder.Services
             .AddMapster()
             .AddAutoInject(loadedAssemblies)
-            .AddCustomMasaEventBus(loadedAssemblies)
-            .AddCustomMasaIntegrationEventBus()
+            .AddLzqMasaEventBus(loadedAssemblies)
+            .AddLzqMasaIntegrationEventBus()
             .AddLocalDistributedLock()
             .AddDistributedCache(distributedCacheOptions =>
             {
                 distributedCacheOptions.UseStackExchangeRedisCache();//使用分布式 Redis 缓存，默认使用本地 `RedisConfig` 节点的配置
             })
-            .AddCustomMasaRegistrationCaller(loadedAssemblies)
+            .AddLzqMasaRegistrationCaller(loadedAssemblies)
             .AddEndpointsApiExplorer()
             .AddMasaMinimalAPIs(options =>
             {
@@ -51,7 +51,7 @@ public static class ServiceCollectionExtensions
             });
     }
 
-    private static IServiceCollection AddCustomMasaEventBus(this IServiceCollection services, List<Assembly> assemblies)
+    private static IServiceCollection AddLzqMasaEventBus(this IServiceCollection services, List<Assembly> assemblies)
     {
         services.AddValidatorsFromAssemblies(assemblies)
             .AddEventBus(assemblies, ServiceLifetime.Transient, eventBusBuilder =>
@@ -63,7 +63,7 @@ public static class ServiceCollectionExtensions
     }
 
     // 注册RabbitMq集成事件总线
-    private static IServiceCollection AddCustomMasaIntegrationEventBus(this IServiceCollection services)
+    private static IServiceCollection AddLzqMasaIntegrationEventBus(this IServiceCollection services)
     {
         services.AddIntegrationEventBus(option =>
         {
@@ -72,13 +72,13 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    private static IServiceCollection AddCustomMasaRegistrationCaller(this IServiceCollection services, List<Assembly> assemblies)
+    private static IServiceCollection AddLzqMasaRegistrationCaller(this IServiceCollection services, List<Assembly> assemblies)
     {
         services.AddAutoRegistrationCaller(assemblies);
         return services;
     }
 
-    public static IHostApplicationBuilder AddCustomMasaSnowflake(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddLzqMasaSnowflake(this IHostApplicationBuilder builder)
     {
         // 分布式雪花ID生成器
         var redisOptions = builder.Configuration.GetSection("RedisConfig").Get<RedisConfigurationOptions>();
@@ -94,7 +94,7 @@ public static class ServiceCollectionExtensions
         return builder;
     }
 
-    public static void UseCustomMasaExceptionHandler(this WebApplication app)
+    public static void UseLzqMasaExceptionHandler(this WebApplication app)
     {
         app.UseMasaExceptionHandler(options =>
         {

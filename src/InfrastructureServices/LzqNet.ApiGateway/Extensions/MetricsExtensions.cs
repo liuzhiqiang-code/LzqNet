@@ -9,7 +9,7 @@ public static class MetricsExtensions
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="policyName"></param>
-    public static void AddCustomMetrics(this IHostApplicationBuilder builder)
+    public static void AddLzqMetrics(this IHostApplicationBuilder builder)
     {
         var services = builder.Services;
 
@@ -26,7 +26,7 @@ public static class MetricsExtensions
 
     }
 
-    public static void UseCustomMetrics(this WebApplication app)
+    public static void UseLzqMetrics(this WebApplication app)
     {
         // 收集和报告代理度量的自定义中间件
         // 放置在开头，因此它是每个请求运行的第一件也是最后一件事

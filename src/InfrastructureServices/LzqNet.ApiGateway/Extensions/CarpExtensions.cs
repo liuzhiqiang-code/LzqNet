@@ -6,7 +6,7 @@ namespace LzqNet.ApiGateway.Extensions;
 
 public static class CarpExtensions
 {
-    public static void AddCustomCarp(this IHostApplicationBuilder builder)
+    public static void AddLzqCarp(this IHostApplicationBuilder builder)
     {
         CarpApp.Configuration = builder.Configuration;
         // 1. 添加YARP服务

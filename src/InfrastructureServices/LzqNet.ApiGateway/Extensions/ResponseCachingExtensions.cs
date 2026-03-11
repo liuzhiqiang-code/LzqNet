@@ -7,7 +7,7 @@ public static class ResponseCachingExtensions
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="policyName"></param>
-    public static void AddCustomResponseCaching(this IHostApplicationBuilder builder)
+    public static void AddLzqResponseCaching(this IHostApplicationBuilder builder)
     {
         builder.Services.AddResponseCaching(options =>
         {
@@ -16,7 +16,7 @@ public static class ResponseCachingExtensions
         });
     }
 
-    public static void UseCustomResponseCaching(this WebApplication app)
+    public static void UseLzqResponseCaching(this WebApplication app)
     {
         // 拦截请求并判断 请求头中是否包含 CacheControl 标头，如果没有则加上缓存标头
         app.Use(async (context, next) =>

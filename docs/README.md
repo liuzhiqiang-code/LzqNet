@@ -1,4 +1,4 @@
-# LzqNet 微服务框架
+# LzqNet 服务框架
 
 ## 📁 项目结构
 
@@ -7,54 +7,40 @@ Solution Items/          # 脚本及框架配置文件
 src/
 ├── BusinessServices/    # 启动程序项目
 │   └── LzqNet.Services.Msm/  # 主启动程序（引用模块Application程序集+配置）
-├── InfrastructureServices/   # 框架相关项目
+├── ExtensionModules/   # 框架相关扩展模块
 │   ├── Daily.Carp/           # YARP二次封装的网关核心
 │   ├── Daily.Carp.Provider.Consul/  # Consul服务发现
-│   ├── LzqNet.ApiGateway/    # 网关（YARP+Consul+限流+遥测+Swagger集成）
-│   ├── LzqNet.Auth/          # 授权中心（基于Duende.IdentityServer）
-│   ├── LzqNet.Common/        # 公用基础库（工具库+基础微服务SDK）
-│   ├── LzqNet.Extensions/     # 扩展库（启动程序中间件配置）
+│   ├── LzqNet.Common/        # 公用基础库
+│   ├── LzqNet.Extensions.AI/        # AI扩展
+│   ├── LzqNet.Extensions.DCC/       # 配置扩展
+│   ├── LzqNet.Extensions.HealthCheck/       # 健康检查扩展
+│   ├── LzqNet.Extensions.Jwt/       # Jwt扩展
+│   ├── LzqNet.Extensions.Masa       # MasaFramework 一些组件 扩展
+│   ├── LzqNet.Extensions.NSwag      # NSwag 扩展  OpenApi文档+SwaggerUI
+│   ├── LzqNet.Extensions.RabbitMq   # MasaFramework集成事件RabbitMq扩展
+│   ├── LzqNet.Extensions.Serilog    # Serilog扩展
+│   ├── LzqNet.Extensions.SignalR    # SignalR扩展
+│   ├── LzqNet.Extensions.SqlSugar   # SqlSugar扩展
 │   ├── Masa.BuildingBlocks.Dispatcher.IntegrationEvents/  # 事件总线抽象
 │   └── Masa.Contrib.Dispatcher.IntegrationEvents/         # 事件总线实现（RabbitMQ+发件箱模式）
+├── InfrastructureServices/   # 微服务启动程序服务
+│   ├── LzqNet.ApiGateway/    # 网关（YARP+Consul+限流+遥测+Swagger集成）
+│   ├── LzqNet.Auth/          # 授权中心（基于Duende.IdentityServer）
 ├── Modules/             # 业务模块
-│   └── Template/        # 示例模块
+│   ├── Template/        # 示例模块
 │       ├── LzqNet.Template.Application/  # 应用层（API请求+业务逻辑+CQRS）
 │       ├── LzqNet.Template.Consumer/     # 消费者层（队列消费）
 │       ├── LzqNet.Template.Contracts/    # 契约层（输入/输出报文+服务SDK）
 │       └── LzqNet.Template.Domain/       # 领域层（实体+仓储）
+│   ├── AI/        # AI模块相关服务
+│   ├── Test/      # 一些数据测试的模块
 └── docker-compose/      # Docker编排配置（Nginx+Redis+RabbitMQ+应用程序）
 ```
 
 ## 🚀 启动方式
 
-### 1️⃣ 微服务模式（默认）
 
-**设置**：将 `docker-compose` 设为启动项目
-
-**配置修改**：
-
-``` csharp
-// Program.cs
-builder.AddApplicationConfiguration().AddCustomConsul();  // 保留Consul配置读取
-```
-
-**appsettings.json 配置**：
-
-``` json
-{
-  "GlobalConfig": {
-    "UseAuth": true,        // true: 使用LzqNet.Auth授权中心
-    "UseSwagger": false     // false: 生成OpenAPI文档供网关集成
-  },
-  "Jwt": {
-    "Audience": "common",
-    "Authority": "http://lzqnet.auth:8080",  // 授权中心地址
-    "RequireHttpsMetadata": false
-  }
-}
-```
-
-### 2️⃣ 单体模式
+### 1️⃣ 单体模式（默认）
 
 **配置修改**：
 
@@ -83,6 +69,33 @@ builder.AddApplicationConfiguration();  // 注释 AddCustomConsul()
 }
 ```
 
+### 2️⃣ 微服务模式
+
+**设置**：将 `docker-compose` 设为启动项目
+
+**配置修改**：
+
+``` csharp
+// Program.cs
+builder.AddApplicationConfiguration().AddCustomConsul();  // 保留Consul配置读取
+```
+
+**appsettings.json 配置**：
+
+``` json
+{
+  "GlobalConfig": {
+    "UseAuth": true,        // true: 使用LzqNet.Auth授权中心
+    "UseSwagger": false     // false: 生成OpenAPI文档供网关集成
+  },
+  "Jwt": {
+    "Audience": "common",
+    "Authority": "http://lzqnet.auth:8080",  // 授权中心地址
+    "RequireHttpsMetadata": false
+  }
+}
+```
+
 ## ✨ 核心特性
 
 - **API网关**：基于YARP，集成Consul服务发现、限流、遥测
@@ -105,3 +118,4 @@ builder.AddApplicationConfiguration();  // 注释 AddCustomConsul()
 ---
 
 > 📌 **文档地址**：[https://liuzhiqiang-code.github.io/LzqNet/#/](https://liuzhiqiang-code.github.io/LzqNet/#/)
+> 📌 **演示地址**：[http://106.54.42.201:5777/](http://106.54.42.201:5777/)

@@ -2,7 +2,7 @@
 
 public static class HealthChecksUIExtensions
 {
-    public static void AddCustomHealthChecksUI(this IHostApplicationBuilder builder)
+    public static void AddLzqHealthChecksUI(this IHostApplicationBuilder builder)
     {
         //Log.Information("Start AddCustomHealthChecksUI");
 
@@ -29,7 +29,7 @@ public static class HealthChecksUIExtensions
         //.AddInMemoryStorage(); // 使用内存存储
     }
 
-    public static void MapCustomHealthChecksUI(this WebApplication app)
+    public static void MapLzqHealthChecksUI(this WebApplication app)
     {
         //// 配置 HealthChecks UI 仪表板
         //app.MapHealthChecksUI(options =>

@@ -9,7 +9,7 @@ namespace LzqNet.Extensions.DCC.Consul;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddCustomConsul(this IHostApplicationBuilder builder)
+    public static void AddLzqConsul(this IHostApplicationBuilder builder)
     {
         builder.AddConsulConfiguration();
         builder.AddConsulRegister();

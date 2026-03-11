@@ -3,8 +3,8 @@ using LzqNet.Extensions.DCC;
 using LzqNet.Extensions.Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.AddApplicationConfiguration();//.AddCustomConsul();
-builder.AddCustomSerilog();
+builder.AddApplicationConfiguration();//.AddLzqConsul();
+builder.AddLzqSerilog();
 
 // Add services to the container.
 builder.Services.AddHostedService<DingtalkMessageConsumer>();

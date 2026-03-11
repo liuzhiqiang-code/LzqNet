@@ -1,6 +1,7 @@
 ﻿using LzqNet.Extensions.AI.Interfaces;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Options;
+using OllamaSharp;
 using OpenAI;
 using System.ClientModel;
 using System.Collections.Concurrent;
@@ -59,17 +60,24 @@ public class ChatClientService: IChatClientService
 
         try
         {
-            var openAIClientOptions = new OpenAIClientOptions
+            if (aiSetting.ConfigId.StartsWith("Ollama"))
             {
-                Endpoint = new Uri(aiSetting.Url)
-            };
+                return new OllamaApiClient(aiSetting.Url);
+            }
+            else
+            {
+                var openAIClientOptions = new OpenAIClientOptions
+                {
+                    Endpoint = new Uri(aiSetting.Url)
+                };
 
-            var openAIClient = new OpenAIClient(
-                new ApiKeyCredential(aiSetting.KeySecret),
-                openAIClientOptions);
+                var openAIClient = new OpenAIClient(
+                    new ApiKeyCredential(aiSetting.KeySecret),
+                    openAIClientOptions);
 
-            var chatClient = openAIClient.GetChatClient(aiSetting.Model);
-            return chatClient.AsIChatClient();
+                var chatClient = openAIClient.GetChatClient(aiSetting.Model);
+                return chatClient.AsIChatClient();
+            }
         }
         catch (UriFormatException ex)
         {

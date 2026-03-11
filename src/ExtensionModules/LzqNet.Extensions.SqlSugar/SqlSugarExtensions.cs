@@ -8,9 +8,9 @@ using System.Reflection;
 
 namespace LzqNet.Extensions.SqlSugar;
 
-public static class ServiceCollectionExtensions
+public static class SqlSugarExtensions
 {
-    public static WebApplicationBuilder AddCustomSqlSugar(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder AddLzqSqlSugar(this WebApplicationBuilder builder)
     {
         var dBConfigs = builder.Configuration.GetSection("DBConfigs").Get<List<DBConfig>>()
             ?? throw new MasaArgumentException("没有配置DBConfigs");

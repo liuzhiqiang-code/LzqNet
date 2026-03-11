@@ -7,3 +7,5 @@
 
 * 功能块
   * [事务](docs/transaction.md)
+  * [AI](docs/ai.md)
+  * [AI对话补全](docs/aiChats.md)

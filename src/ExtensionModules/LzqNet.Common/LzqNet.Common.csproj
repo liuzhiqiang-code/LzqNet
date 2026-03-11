@@ -7,20 +7,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Masa.BuildingBlocks.Exceptions" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Utils.Extensions.DependencyInjection" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.Utils.Security.Cryptography" Version="$(MASAFrameworkVersion)" />
+		<PackageReference Include="Masa.Utils.Security.Token" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Utils.Extensions.Enums" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Utils.Extensions.Validations.FluentValidation" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.BuildingBlocks.ReadWriteSplitting.Cqrs" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.Contrib.Data.IdGenerator.Snowflake.Distributed.Redis" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.Contrib.Data.IdGenerator.Snowflake" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.Contrib.Caching.Distributed.StackExchangeRedis" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.Contrib.Data.DistributedLock.Local" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Masa.Contrib.Service.Caller.HttpClient" Version="$(MASAFrameworkVersion)" />
+		<PackageReference Include="Masa.Utils.Security.Cryptography" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.Contrib.Data.Mapping.Mapster" Version="$(MASAFrameworkVersion)" />
 		<PackageReference Include="Masa.BuildingBlocks.Data.MappingExtensions" Version="$(MASAFrameworkVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>

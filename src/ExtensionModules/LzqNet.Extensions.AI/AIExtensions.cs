@@ -9,17 +9,20 @@ using Microsoft.SemanticKernel.Connectors.InMemory;
 
 namespace LzqNet.Extensions.AI
 {
-    public static class ServiceCollectionExtensions
+    public static class AIExtensions
     {
-        public static void AddAIAgentClient(this IHostApplicationBuilder builder)
+        public static IHostApplicationBuilder AddLzqAI(this IHostApplicationBuilder builder)
         {
-            builder.Services.AddOptions<List<AISetting>>().BindConfiguration("AISettings");
+            builder.Services.AddOptions<List<AISetting>>().BindConfiguration("AISettings")
+                .Validate(settings => settings.Count > 0, "AISettings 列表不能为空")
+                .ValidateOnStart();
 
             // 注入消息持久化
             builder.Services.AddSingleton<VectorStore>(new InMemoryVectorStore());
             builder.Services.AddSingleton<ChatHistoryProvider, VectorChatHistoryProvider>();
             builder.Services.AddSingleton<IChatClientService, ChatClientService>();
             builder.Services.AddTransient<IAIAgentService, AIAgentService>();
+            return builder;
         }
     }
 }

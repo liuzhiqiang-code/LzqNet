@@ -7,15 +7,15 @@ using LzqNet.Extensions.Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddApplicationConfiguration().AddCustomConsul();
-builder.AddCustomSerilog();
+builder.AddApplicationConfiguration().AddLzqConsul();
+builder.AddLzqSerilog();
 
 builder.Services.AddMapster();
 
 // Add services to the container.
-builder.AddCustomHealthChecks();
-builder.AddCustomHealthChecksUI();
-builder.AddCustomSwaggerUI();
+builder.AddLzqHealthChecks();
+builder.AddLzqHealthChecksUI();
+builder.AddLzqSwaggerUI();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -25,18 +25,18 @@ builder.Services.AddCors(options =>
 });
 
 // 全局限流中间件配置
-builder.AddCustomRateLimiter("customPolicy");
-builder.AddCustomCarp();
+builder.AddLzqRateLimiter("customPolicy");
+builder.AddLzqCarp();
 builder.Services.AddHttpContextAccessor();
-builder.AddCustomMasa();
-builder.AddCustomMetrics();// 配置遥测中间件
-builder.AddCustomResponseCaching();// 配置响应缓存中间件
+builder.AddLzqMasa();
+builder.AddLzqMetrics();// 配置遥测中间件
+builder.AddLzqResponseCaching();// 配置响应缓存中间件
 
 var app = builder.Build();
 
 app.UseOpenApi();
-app.MapCustomSwaggerUI();
-app.UseCustomMetrics();// 使用遥测中间件
+app.MapLzqSwaggerUI();
+app.UseLzqMetrics();// 使用遥测中间件
 
 app.UseCors("AllowAll");
 app.UseRouting();
@@ -44,9 +44,9 @@ app.UseRouting();
 app.UseRateLimiter();
 //app.UseCustomAuthentication();
 //app.UseCustomAuthorization();
-app.UseCustomResponseCaching();// 使用响应缓存中间件
-app.MapCustomHealthChecks();
-app.MapCustomHealthChecksUI();
+app.UseLzqResponseCaching();// 使用响应缓存中间件
+app.MapLzqHealthChecks();
+app.MapLzqHealthChecksUI();
 // 2. 启用YARP中间件
 app.UseCarp(); // 必须放在路由映射之后
 

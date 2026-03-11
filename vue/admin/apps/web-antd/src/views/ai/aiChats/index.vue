@@ -256,7 +256,7 @@ const sendMessage = async () => {
                 </div>
 
                 <div v-if="msg.role === 'ai'" class="mt-2 px-1">
-                  <span class="text-[9px] text-gray-600 font-bold uppercase tracking-widest">Gemini Engine</span>
+                  <span class="text-[9px] text-gray-600 font-bold uppercase tracking-widest">{{ selectedModel }}</span>
                 </div>
               </div>
             </div>

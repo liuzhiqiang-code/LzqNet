@@ -9,10 +9,11 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Masa.Utils.Security.Token" Version="$(MASAFrameworkVersion)" />
+		<PackageReference Include="Masa.Contrib.Service.Caller.HttpClient" Version="$(MASAFrameworkVersion)" />
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <ProjectReference Include="..\LzqNet.Common\LzqNet.Common.csproj" />
+	  <ProjectReference Include="..\LzqNet.Extensions.Masa\LzqNet.Extensions.Masa.csproj" />
 	  <ProjectReference Include="..\LzqNet.Extensions.Serilog\LzqNet.Extensions.Serilog.csproj" />
 	</ItemGroup>
 </Project>

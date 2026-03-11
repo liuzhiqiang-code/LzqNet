@@ -5,7 +5,7 @@ namespace LzqNet.ApiGateway.Extensions;
 
 public static class RateLimiterExtensions
 {
-    public static void AddCustomRateLimiter(this IHostApplicationBuilder builder, string policyName)
+    public static void AddLzqRateLimiter(this IHostApplicationBuilder builder, string policyName)
     {
         var rateLimiterOptions = builder.Configuration.GetSection("RateLimiter").Get<List<RateLimiterOption>>();
         if (rateLimiterOptions == null)

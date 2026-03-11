@@ -91,10 +91,5 @@ namespace LzqNet.Extensions.AI.Services
         {
             return McpServerTool.Create(aIAgent.AsAIFunction());
         }
-
-        public Task<string> RunStreamingAsync(AIAgent aiAgent, string message, Action<string> streameCallback)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

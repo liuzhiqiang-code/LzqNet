@@ -7,9 +7,9 @@ using Microsoft.Extensions.Logging;
 
 namespace LzqNet.Extensions.SignalR;
 
-public static class ServiceCollectionExtensions
+public static class SignalRExtensions
 {
-    public static void AddCustomSignalRRedis(this WebApplicationBuilder builder, Action<SignalRRedisSettings> action)
+    public static void AddLzqSignalRRedis(this WebApplicationBuilder builder, Action<SignalRRedisSettings> action)
     {
         var services = builder.Services;
         services.Configure(action);
@@ -34,7 +34,7 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<ISignalRMsgService, SignalRMsgService>();
     }
 
-    public static void UseCustomRedisSignalR(this IApplicationBuilder app, Action<SignalRRedisSettings> action)
+    public static void UseLzqRedisSignalR(this IApplicationBuilder app, Action<SignalRRedisSettings> action)
     {
         var setting = new SignalRRedisSettings();
         action.Invoke(setting);

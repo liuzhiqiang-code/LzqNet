@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddApplicationConfiguration();//.AddCustomConsul();
-builder.AddCustomSerilog();
+builder.AddApplicationConfiguration();//.AddLzqConsul();
+builder.AddLzqSerilog();
 
 builder.AddApplicationServices();
 

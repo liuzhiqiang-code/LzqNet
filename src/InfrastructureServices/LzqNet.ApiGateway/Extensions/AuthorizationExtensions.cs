@@ -10,9 +10,9 @@ public static class AuthorizationExtensions
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="policyName"></param>
-    public static void AddCustomAuthorization(this IHostApplicationBuilder builder, string policyName = "default")
+    public static void AddLzqAuthorization(this IHostApplicationBuilder builder, string policyName = "default")
     {
-        Log.Information("Start AddCustomAuthorization");
+        Log.Information("Start AddLzqAuthorization");
 
         // 网关一般的授权策略是只过滤掉不合法身份认证的请求，更详细的授权在服务中认证
         builder.Services.AddAuthorization(options =>
@@ -26,9 +26,9 @@ public static class AuthorizationExtensions
         });
     }
 
-    public static void UseCustomAuthorization(this WebApplication app)
+    public static void UseLzqAuthorization(this WebApplication app)
     {
-        Log.Information("Start UseCustomAuthorization");
+        Log.Information("Start UseLzqAuthorization");
         app.UseAuthorization();
     }
 }

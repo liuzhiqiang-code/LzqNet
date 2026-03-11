@@ -10,9 +10,9 @@ namespace LzqNet.ApiGateway.Extensions;
 
 public static class SwaggerUIExtensions
 {
-    public static void AddCustomSwaggerUI(this IHostApplicationBuilder builder)
+    public static void AddLzqSwaggerUI(this IHostApplicationBuilder builder)
     {
-        Log.Information("Start AddCustomSwaggerUI");
+        Log.Information("Start AddLzqSwaggerUI");
         builder.Services.AddOpenApiDocument(document =>
         {
             document.AddSecurity("JWT", Enumerable.Empty<string>(), new NSwag.OpenApiSecurityScheme
@@ -29,7 +29,7 @@ public static class SwaggerUIExtensions
         });
     }
 
-    public static void MapCustomSwaggerUI(this WebApplication app)
+    public static void MapLzqSwaggerUI(this WebApplication app)
     {
         var swaggerOptions = app.Configuration.GetSection("Swagger").Get<SwaggerOption>() ??
             throw new InvalidOperationException($"未找到配置项:Swagger");

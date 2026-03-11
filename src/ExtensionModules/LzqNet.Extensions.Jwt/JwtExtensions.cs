@@ -11,11 +11,11 @@ using System.Text;
 
 namespace LzqNet.Extensions.Jwt;
 
-public static class ServiceCollectionExtensions
+public static class JwtExtensions
 {
-    public static void AddCustomJwt(this IHostApplicationBuilder builder)
+    public static void AddLzqJwt(this IHostApplicationBuilder builder)
     {
-        Log.Information("Start AddCustomHealthChecks");
+        Log.Information("Start AddLzqJwt");
 
         JwtOption jwtOption = builder.Configuration.GetSection("Jwt")
             .Get<JwtOption>() ?? throw new InvalidOperationException($"未找到配置项:Jwt");

@@ -7,15 +7,9 @@ using NSwag.Generation.Processors.Security;
 
 namespace LzqNet.Extensions.NSwag;
 
-public static class ServiceCollectionExtensions
+public static class NSwagExtensions
 {
-    public static WebApplicationBuilder AddCustomOpenApi(this WebApplicationBuilder builder)
-    {
-
-        return builder;
-    }
-
-    public static WebApplicationBuilder AddCustomOpenApiDocument(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder AddLzqNSwag(this WebApplicationBuilder builder)
     {
         builder.Services.AddOpenApiDocument(document =>
         {
@@ -34,7 +28,7 @@ public static class ServiceCollectionExtensions
         return builder;
     }
 
-    public static void UseCustomNSwag(this IApplicationBuilder app)
+    public static void UseLzqNSwag(this IApplicationBuilder app)
     {
         GlobalConfig globalConfig = app.ApplicationServices.GetRequiredService<IOptions<GlobalConfig>>().Value;
         if (globalConfig.UseSwagger)

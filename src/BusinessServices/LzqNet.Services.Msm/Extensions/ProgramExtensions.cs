@@ -20,8 +20,8 @@ public static class ProgramExtensions
 
         builder.Services.AddOptions<GlobalConfig>().BindConfiguration("GlobalConfig");
 
-        builder.AddCustomHealthChecks();
-        builder.AddCustomOpenApiDocument();
+        builder.AddLzqHealthChecks();
+        builder.AddLzqNSwag();
 
         builder.Services.AddCors(options =>
         {
@@ -31,7 +31,7 @@ public static class ProgramExtensions
                       .AllowAnyHeader());
         });
 
-        builder.AddCustomJwt();
+        builder.AddLzqJwt();
 
         // 前后端类型转换  处理日期及long精度丢失问题
         // 1. 配置 JSON 选项，将所有 long 序列化为 string
@@ -41,12 +41,12 @@ public static class ProgramExtensions
             options.SerializerOptions.Converters.Add(new LongNullableToStringConverter());
         });
 
-        builder.AddAIAgentClient();
-        builder.AddCustomMasaAssembly();
-        builder.AddCustomMasaSnowflake();
-        builder.AddCustomSqlSugar();
+        builder.AddLzqAI();
+        builder.AddLzqMasaAssembly();
+        builder.AddLzqMasaSnowflake();
+        builder.AddLzqSqlSugar();
 
-        builder.AddCustomSignalRRedis(options =>
+        builder.AddLzqSignalRRedis(options =>
         {
             var newoptions = builder.Configuration.GetRequiredSection("SignalRRedisSettings").Get<SignalRRedisSettings>();
             options.url = newoptions.url;
@@ -58,7 +58,7 @@ public static class ProgramExtensions
             options.cacheMySignalRKeyName = newoptions.cacheMySignalRKeyName;
         });
 
-        builder.AddCustomMasa();
+        builder.AddLzqMasa();
     }
 
     public static void MapApplicationServices(this WebApplication app)
@@ -69,21 +69,21 @@ public static class ProgramExtensions
 
         app.UseCors("AllowAll");
 
-        app.UseCustomMasaExceptionHandler();
+        app.UseLzqMasaExceptionHandler();
 
         app.UseMiddleware<HttpLoggingMiddleware>();
 
-        app.UseCustomNSwag();
+        app.UseLzqNSwag();
 
         app.UseRouting();
 
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.MapCustomHealthChecks();
+        app.MapLzqHealthChecks();
         app.MapConfigurationApi();
 
-        app.UseCustomRedisSignalR(options =>
+        app.UseLzqRedisSignalR(options =>
         {
             var newoptions = app.Configuration.GetRequiredSection("SignalRRedisSettings").Get<SignalRRedisSettings>();
             options.url = newoptions.url;

@@ -9,6 +9,7 @@
 		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Masa.BuildingBlocks.Exceptions" Version="$(MASAFrameworkVersion)" />
+		<PackageReference Include="Masa.BuildingBlocks.Configuration" Version="$(MASAFrameworkVersion)" />
 	</ItemGroup>
 
 	<ItemGroup>

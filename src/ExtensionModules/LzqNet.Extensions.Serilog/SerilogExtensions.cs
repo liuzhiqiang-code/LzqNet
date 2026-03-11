@@ -9,14 +9,14 @@ using Serilog.Sinks.Grafana.Loki;
 
 namespace LzqNet.Extensions.Serilog;
 
-public static class ServiceCollectionExtensions
+public static class SerilogExtensions
 {
     /// <summary>
     /// Serilog作为日志组件
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="policyName"></param>
-    public static void AddCustomSerilog(this IHostApplicationBuilder builder)
+    public static void AddLzqSerilog(this IHostApplicationBuilder builder)
     {
         // 从配置中读取日志配置
         var loggerConfig = new LoggerConfiguration()

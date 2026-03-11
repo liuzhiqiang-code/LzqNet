@@ -3,7 +3,7 @@
 namespace LzqNet.Test.Domain.Consts;
 
 /// <summary>
-/// AI调用工具函数服务
+/// AI调用工具函数服务  静态工具函数
 /// </summary>
 public class AIFunctionTools
 {
